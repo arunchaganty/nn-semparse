@@ -1,6 +1,12 @@
-# Project name
+# Neural Network Semantic Parsing
 
-## Subsection
+## Organization
+Many classes here are based on 
+[SEMPRE](https://github.com/percyliang/sempre),
+although the internals are obviously quite different.
+
+Nonetheless, we reuse SEMPRE's concepts of
+a Learner, Example, Dataset, etc.
 
 Bullets: 
 - One
