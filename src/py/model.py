@@ -7,27 +7,10 @@ from theano.ifelse import ifelse
 from theano import tensor as T
 import os
 
-# Imports from parent directory
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from neural import NeuralModel
 from vocabulary import Vocabulary
-import sdf
 
 CLIP_THRESH = 3.0  # Clip gradient if norm is larger than this
-
-# Different ways to train the model
-# Subsection: Optimizing log likelihood of y
-# Use variational bound, sample from alignment distribution where
-# all writes are forced to be from y
-SEQ_VARIATIONAL = 'seq_variational'
-
-# Subsection: Optimizing character-level log-likelihoood
-# Consistent but biased estimates of gradient of objective
-CHAR_IMPORTANCE_SAMPLING = 'char_importance_sampling'
-# Get unbiased estimates of gradient of variational bound on objective
-CHAR_VARIATIONAL = 'char_variational_approx'
-
-TRAIN_MODES = [SEQ_VARIATIONAL, CHAR_IMPORTANCE_SAMPLING, CHAR_VARIATIONAL]
 
 class IRWModel(NeuralModel):
   """Abstract class for an interspersed read-write neural network.
@@ -46,71 +29,6 @@ class IRWModel(NeuralModel):
   - self.get_objective_and_gradients(x_inds, y_inds):
         get (estimate of) (objective, gradients w.r.t. params)
   """
-  def __init__(self, spec, float_type=numpy.float64):
-    """Initialize.
-
-    Args:
-      spec: IRWSpec object.
-      float_type: Floating point type (default 64-bit/double precision)
-
-    Convention used by this class:
-      nh: dimension of hidden layer
-      nw: number of words in the vocabulary
-      de: dimension of word embeddings
-    """
-    self.spec = spec
-    self.float_type = float_type
-
-    self.in_vocabulary = spec.in_vocabulary
-    self.de_in = spec.de_in
-    self.nw_in = spec.nw_in
-
-    self.out_vocabulary = spec.out_vocabulary
-    self.de_out = spec.de_out
-    self.nw_out = spec.nw_out
-
-    self.de_total = spec.de_total
-    self.nh = spec.nh
-    self.params = spec.get_params()
-    self.all_shared = spec.get_all_shared()
-
-    self.setup_map()
-    self.setup_step()
-    self.setup_regularization()
-    self.setup()
-    print >> sys.stderr, 'Setup complete.'
-
-  def setup(self):
-    raise NotImplementedError
-
-  def get_objective_and_gradients(self, x, y, **kwargs):
-    """Get objective and gradients.
-
-    Returns: tuple (objective, gradients) where
-      objective: the current objective value
-      gradients: map from parameter to gradient
-    """
-    raise NotImplementedError
-
-  def train_batch(self, examples, eta, do_update=True):
-    objective = 0
-    gradients = {}
-    for ex in examples:
-      x_inds, y_inds, kwargs = ex
-      print 'x: %s' % self.in_vocabulary.indices_to_sentence(x_inds)
-      print 'y: %s' % self.out_vocabulary.indices_to_sentence(y_inds)
-      cur_objective, cur_gradients = self.get_objective_and_gradients(
-          x_inds, y_inds, total_examples=len(examples), **kwargs)
-      objective += cur_objective
-      for p in self.params:
-        if p in gradients:
-          gradients[p] += cur_gradients[p] / len(examples)
-        else:
-          gradients[p] = cur_gradients[p] / len(examples)
-    if do_update:
-      for p in self.params:
-        self.perform_gd_step(p, gradients[p], eta)
-    return objective
 
   def get_score(self, x_inds, y_inds):
     # TODO: this
