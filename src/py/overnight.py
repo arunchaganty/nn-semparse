@@ -64,6 +64,13 @@ def process(filename, all_groups):
       u, c = ex
       print >> f, '%s\t%s' % (u, c)
 
+def create_all_train():
+  with open(os.path.join(OUT_DIR, 'all_train.tsv'), 'w') as f_out:
+    for filename in sorted(glob.glob(os.path.join(OUT_DIR, '*_train.tsv'))):
+      if filename == 'all_train.tsv': continue
+      with open(filename) as f_in:
+        f_out.write(''.join(f_in))
+
 def main():
   all_groups = {}
   for filename in sorted(glob.glob(os.path.join(GROUPS_DIR, '*.groups'))):
@@ -71,6 +78,9 @@ def main():
     all_groups[domain] = read_groups(filename)
   for filename in sorted(glob.glob(os.path.join(IN_DIR, '*.sdf'))):
     process(filename, all_groups)
+
+  # Create an all_train.tsv file
+  create_all_train()
 
 if __name__ == '__main__':
   main()
