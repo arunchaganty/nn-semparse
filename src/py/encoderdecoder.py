@@ -1,71 +1,92 @@
-"""An IRW model with a fixed alignment."""
+"""A basic encoder-decoder model."""
 import itertools
 import numpy
 import theano
-from theano.ifelse import ifelse
 from theano import tensor as T
 
-from seqvariational import SeqVariationalIRWModel
+from neural import NeuralModel
+from vocabulary import Vocabulary
 
-class EncoderDecoderModel(SeqVariationalIRWModel):
-  """Encoder-decoder based on the same code as IRW.
+class EncoderDecoderModel(NeuralModel):
+  """An encoder-decoder RNN model."""
+  def setup(self):
+    self.setup_encoder()
+    self.setup_decoder_step()
+    self.setup_decoder_write()
+    self.setup_backprop()
 
-  We re-use code extensively from SeqVariationalIRWModel,
-  but we don't need to sample because we know the order of
-  read and write operations ahead of time.
-  """
-  def smoothed_f_p_read(self, h_t, epsilon):
-    """Don't do any smoothing."""
-    return self.spec.f_p_read(h_t)
+  def setup_encoder(self):
+    """Run the encoder.  Used at test time."""
+    x = T.lvector('x_for_enc')
+    def recurrence(x_t, h_prev, *params):
+      return self.spec.f_enc(x_t, h_prev)
+    results, _ = theano.scan(recurrence,
+                             sequences=[x],
+                             outputs_info=[self.spec.get_init_state()],
+                             non_sequences=self.spec.get_all_shared())
+    h_last = results[-1]
+    self._encode = theano.function(inputs=[x], outputs=h_last)
 
-  def get_enc_dec_alignment(self, x, y):
-    r = x + ([-1] * len(y))
-    w = ([-1] * len(x)) + y
-    return r, w
+  def setup_decoder_step(self):
+    """Advance the decoder by one step.  Used at test time."""
+    y_t = T.lscalar('y_t_for_dec')
+    h_prev = T.vector('h_prev_for_dec')
+    h_t = self.spec.f_dec(y_t, h_prev)
+    self._decoder_step = theano.function(inputs=[y_t, h_prev], outputs=h_t)
+
+  def setup_decoder_write(self):
+    """Get the write distribution of the decoder.  Used at test time."""
+    h_prev = T.vector('h_prev_for_write')
+    write_dist = self.spec.f_write(h_prev)
+    self._decoder_write = theano.function(inputs=[h_prev], outputs=write_dist)
+
+  def setup_backprop(self):
+    x = T.lvector('x_for_backprop')
+    y = T.lvector('y_for_backprop')
+    def enc_recurrence(x_t, h_prev, *params):
+      return self.spec.f_enc(x_t, h_prev)
+    enc_results, _ = theano.scan(fn=enc_recurrence,
+                                 sequences=[x],
+                                 outputs_info=[self.spec.get_init_state()],
+                                 non_sequences=self.spec.get_all_shared())
+    h_last = enc_results[-1]
+    
+    def decoder_recurrence(y_t, h_prev, *params):
+      write_dist = self.spec.f_write(h_prev)
+      p_y_t = write_dist[y_t]
+      h_t = self.spec.f_dec(y_t, h_prev)
+      return (h_t, p_y_t)
+    dec_results, _ = theano.scan(fn=decoder_recurrence,
+                              sequences=[y],
+                              outputs_info=[h_last, None],
+                              non_sequences=self.spec.get_all_shared())
+    p_y_seq = dec_results[1]
+    log_p_y = T.sum(T.log(p_y_seq))
+    gradients = T.grad(log_p_y, self.params)
+    self._backprop = theano.function(
+        inputs=[x, y], outputs=[p_y_seq, log_p_y] + [-g for g in gradients])
 
   def get_objective_and_gradients(self, x, y, **kwargs):
-    # Note: we ignore all kwargs such as num_samples, actions, etc.
-    r, w = self.get_enc_dec_alignment(x, y)
-    print 'r = %s, w = %s' % (r, w)
-    info = self._get_enc_dec_info(r, w, x, y, 0.0)
-    log_q = info[0]
+    info = self._backprop(x, y)
+    p_y_seq = info[0]
     log_p_y = info[1]
-    p_y_seq = info[2]
-    gradients_list = info[3:]
+    gradients_list = info[2:]
     objective = -log_p_y
     gradients = dict(itertools.izip(self.params, gradients_list))
-    print 'P(y_i): %s' % p_y_seq[len(x):]
+    print 'P(y_i): %s' % p_y_seq
     return (objective, gradients)
 
-  def setup_map(self):
-    """Override setup_map to enforce encoder-decoder ordering."""
-    # Index (in vocabulary) of input and output words
-    x = T.lvector('x_for_map')
-    output_len = T.lscalar('output_len_for_map')
-
-    # Compute (greedy, approximate) MAP, for decoding
-    def recurrence_map(i, r_t, w_t, h_t, next_read):
-      # Force reads as long as there are more words to read
-      do_read = T.lt(next_read, x.shape[0])
-
-      # Choose a word to write
-      p_dist_w = self.spec.f_dist_write(h_t)
-      write_candidate = T.argmax(p_dist_w)
-      p_w = p_dist_w[write_candidate]
-
-      r_next = ifelse(do_read, x[next_read], numpy.int64(-1))
-      w_next = ifelse(do_read, numpy.int64(-1), T.argmax(p_dist_w))
-      h_next = self.spec.f_rnn(r_next, w_next, h_t)
-      p = ifelse(do_read, self.float_type(1.0), p_w)
-      read_index = ifelse(do_read, next_read + 1, next_read)
-
-      return (r_next, w_next, h_next, p, read_index)
-
-    results, _ = theano.scan(
-        fn=recurrence_map,
-        sequences=T.arange(x.shape[0] + output_len),
-        outputs_info=[numpy.int64(-1), numpy.int64(-1), self.spec.h0, None, numpy.int64(0)])
-    r = results[0]
-    w = results[1]
-    self._get_map = theano.function(inputs=[x, output_len], outputs=[r, w])
-
+  def decode_greedy(self, x, max_len=100):
+    h_t = self._encode(x)
+    y_seq = []
+    p_y_seq = []  # Should be handy for error analysis
+    while True:
+      write_dist = self._decoder_write(h_t)
+      y_t = numpy.argmax(write_dist)
+      p_y_t = write_dist[y_t]
+      y_seq.append(y_t)
+      p_y_seq.append(p_y_t)
+      if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
+        break
+      h_t = self._decoder_step(y_t, h_t)
+    return y_seq

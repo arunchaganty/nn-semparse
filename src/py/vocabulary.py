@@ -97,7 +97,7 @@ class RawVocabulary(Vocabulary):
         value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.size(), emb_size)).astype(theano.config.floatX))
 
   def get_theano_embedding(self, i):
-    return ifelse(T.ge(i, 0), self.emb_mat[i], numpy.zeros(self.emb_size, dtype=self.float_type))
+    return self.emb_mat[i]
 
   def get_theano_params(self):
     return [self.emb_mat]
@@ -162,12 +162,10 @@ class GloveVocabulary(Vocabulary):
     print >> sys.stderr, 'Finished reading GloVe vectors.'
 
   def get_theano_embedding(self, i):
-    return ifelse(T.ge(i, 0),
-                  ifelse(T.lt(i, self.NUM_SPECIAL_SYMBOLS), 
-                         ifelse(T.eq(i, self.END_OF_SENTENCE_INDEX),
+    return ifelse(T.lt(i, self.NUM_SPECIAL_SYMBOLS),
+                  ifelse(T.eq(i, self.END_OF_SENTENCE_INDEX),
                                 self.eos_vec, self.unk_vec),
-                         self.glove_mat[i]),
-                  numpy.zeros(self.emb_size, dtype=self.float_type))
+                  self.glove_mat[i])
 
   def get_theano_params(self):
     params = [self.eos_vec, self.unk_vec]

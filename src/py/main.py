@@ -11,21 +11,17 @@ import os
 
 # IRW imports
 from encoderdecoder import EncoderDecoderModel
-from gru import GRUIRWSpec
-from lstm import LSTMIRWSpec
-from spec import IRWSpec
-from stateless import StatelessIRWSpec
-from vanillarnn import RNNIRWSpec
+from encdecspec import VanillaEncDecSpec, GRUEncDecSpec, LSTMEncDecSpec
+import spec as specutil
 
 # Imports from parent directory
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from vocabulary import GloveVocabulary, RawVocabulary, Vocabulary
-import toydata
 
 CONTINUOUS_MODELS = collections.OrderedDict([
-    ('rnn', RNNIRWSpec),
-    ('gru', GRUIRWSpec),
-    ('lstm', LSTMIRWSpec),
+    ('rnn', VanillaEncDecSpec),
+    ('gru', GRUEncDecSpec),
+    ('lstm', LSTMEncDecSpec),
 ])
 
 MODELS = collections.OrderedDict([
@@ -180,10 +176,6 @@ def preprocess_data(in_vocabulary, out_vocabulary, raw):
     y_inds = out_vocabulary.sentence_to_indices(y, add_eos=eos_on_output)
     if OPTIONS.reverse_input:
       x_inds = x_inds[::-1]
-    if OPTIONS.sequence_tagging and 'actions' not in kwargs:
-      # Don't override actions specified by the dataset
-      kwargs['actions'] = get_sequence_tagging_alignment(
-          len(x_inds), len(y_inds), OPTIONS.lookahead)
     data.append((x_inds, y_inds, kwargs))
   return data
 
@@ -277,19 +269,12 @@ def evaluate(model, in_vocabulary, out_vocabulary, dataset):
     y_inds_all = [y[0] for y in y_all]
     y_words_all = [y[1] for y in y_all]
     kwargs = x_to_kwargs[x_words]
-    r_pred, w_pred = decode(model, x_inds)
 
     print 'Example %d' % example_num
     print '  x      = "%s"' % x_words
     print '  y      = "%s"' % y_words_all[0]
 
-    if OPTIONS.sequence_tagging:
-      # Only pay attention to the first len(x_inds) - 1 writes
-      write_inds = [i for i in range(len(w_pred)) if w_pred[i] >= 0]
-      last_write_ind = write_inds[len(x_inds) - 1]
-      r_pred = r_pred[:last_write_ind]
-      w_pred = w_pred[:last_write_ind]
-    y_pred = [i for i in w_pred if i>= 0]
+    y_pred = decode(model, x_inds)
     y_pred_words = out_vocabulary.indices_to_sentence(y_pred)
 
     # Compute accuracy metrics
@@ -316,7 +301,7 @@ def run():
   train_raw = load_dataset(OPTIONS.train_data)
   if OPTIONS.load_file:
     print >> sys.stderr, 'Loading saved params from %s' % OPTIONS.load_file
-    spec = IRWSpec.load(OPTIONS.load_file)
+    spec = specutil.load(OPTIONS.load_file)
     in_vocabulary = spec.in_vocabulary
     out_vocabulary = spec.out_vocabulary
   else:
