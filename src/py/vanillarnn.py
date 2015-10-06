@@ -10,11 +10,15 @@ from rnnlayer import RNNLayer
 
 class VanillaRNNLayer(RNNLayer):
   """A standard vanilla RNN layer."""
-  def create_vars(self):
+  def create_vars(self, create_init_state, create_output_layer):
     # Initial state
-    self.h0 = theano.shared(
-        name='h0', 
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, self.nh).astype(theano.config.floatX))
+    if create_init_state:
+      self.h0 = theano.shared(
+          name='h0', 
+          value=0.2 * numpy.random.uniform(-1.0, 1.0, self.nh).astype(theano.config.floatX))
+      init_state_params = [self.h0]
+    else:
+      init_state_params = []
 
     # Recurrent layer
     self.u_x = theano.shared(
@@ -23,14 +27,19 @@ class VanillaRNNLayer(RNNLayer):
     self.u_h = theano.shared(
         name='u_h',
         value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+    recurrence_params = [self.u_x, self.u_h]
 
     # Output layer
-    self.w_out = theano.shared(
-        name='w_out', 
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nw_out)).astype(theano.config.floatX))
+    if create_output_layer:
+      self.w_out = theano.shared(
+          name='w_out', 
+          value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nw_out)).astype(theano.config.floatX))
+      output_params = [self.w_out]
+    else:
+      output_params = []
 
     # Params
-    self.params = [self.h0, self.u_x, self.u_h, self.w_out]
+    self.params = init_state_params + recurrence_params + output_params
 
   def get_init_state(self):
     return self.h0

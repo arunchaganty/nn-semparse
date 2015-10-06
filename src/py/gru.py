@@ -13,11 +13,15 @@ class GRULayer(RNNLayer):
 
   Parameter names follow convention in Richard Socher's CS224D slides.
   """
-  def create_vars(self):
+  def create_vars(self, create_init_state, create_output_layer):
     # Initial state
-    self.h0 = theano.shared(
-        name='h0', 
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, self.nh).astype(theano.config.floatX))
+    if create_init_state:
+      self.h0 = theano.shared(
+          name='h0', 
+          value=0.2 * numpy.random.uniform(-1.0, 1.0, self.nh).astype(theano.config.floatX))
+      init_state_params = [self.h0]
+    else:
+      init_state_params = []
 
     # Encoder hidden state updates
     self.wz = theano.shared(
@@ -38,18 +42,19 @@ class GRULayer(RNNLayer):
     self.u = theano.shared(
         name='u',
         value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+    recurrence_params = [self.wz, self.uz, self.wr, self.ur, self.w, self.u]
 
     # Output layer
-    self.w_out = theano.shared(
-        name='w_out', 
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nw_out)).astype(theano.config.floatX))
+    if self.create_output_layer:
+      self.w_out = theano.shared(
+          name='w_out', 
+          value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nw_out)).astype(theano.config.floatX))
+      output_params = [self.w_out]
+    else:
+      output_params = []
 
     # Params
-    self.params = [
-        self.h0,
-        self.wz, self.uz, self.wr, self.ur, self.w, self.u,
-        self.w_out,
-    ]
+    self.params = init_state_params + recurrence_params + output_params
 
   def get_init_state(self):
     return self.h0
