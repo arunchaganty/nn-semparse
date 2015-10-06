@@ -64,10 +64,10 @@ def process(filename, all_groups):
       u, c = ex
       print >> f, '%s\t%s' % (u, c)
 
-def create_all_train():
-  with open(os.path.join(OUT_DIR, 'all_train.tsv'), 'w') as f_out:
-    for filename in sorted(glob.glob(os.path.join(OUT_DIR, '*_train.tsv'))):
-      if filename == 'all_train.tsv': continue
+def concat_all(stage):
+  with open(os.path.join(OUT_DIR, 'all_%s.tsv' % stage), 'w') as f_out:
+    for filename in sorted(glob.glob(os.path.join(OUT_DIR, '*_%s.tsv' % stage))):
+      if filename == 'all_%s.tsv' % stage: continue
       with open(filename) as f_in:
         f_out.write(''.join(f_in))
 
@@ -79,8 +79,9 @@ def main():
   for filename in sorted(glob.glob(os.path.join(IN_DIR, '*.sdf'))):
     process(filename, all_groups)
 
-  # Create an all_train.tsv file
-  create_all_train()
+  # Create an all_train.tsv and all_dev.tsv file
+  concat_all('train')
+  concat_all('dev')
 
 if __name__ == '__main__':
   main()
