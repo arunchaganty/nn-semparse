@@ -298,29 +298,35 @@ def evaluate(model, in_vocabulary, out_vocabulary, dataset):
 
 def run():
   configure_theano()
-  train_raw = load_dataset(OPTIONS.train_data)
+  if OPTIONS.train_data:
+    train_raw = load_dataset(OPTIONS.train_data)
   if OPTIONS.load_file:
     print >> sys.stderr, 'Loading saved params from %s' % OPTIONS.load_file
     spec = specutil.load(OPTIONS.load_file)
     in_vocabulary = spec.in_vocabulary
     out_vocabulary = spec.out_vocabulary
-  else:
+  elif OPTIONS.train_data:
     print >> sys.stderr, 'Initializing parameters...'
     in_vocabulary = get_input_vocabulary(train_raw)
     out_vocabulary = get_output_vocabulary(train_raw)
     spec = get_continuous_spec(in_vocabulary, out_vocabulary)
+  else:
+    raise Exception('Must either provide parameters to load or training data.')
 
-  train_data = preprocess_data(in_vocabulary, out_vocabulary, train_raw)
   model = get_model(spec)
-  model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate,
-              batch_size=OPTIONS.batch_size)
+
+  if OPTIONS.train_data:
+    train_data = preprocess_data(in_vocabulary, out_vocabulary, train_raw)
+    model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate,
+                batch_size=OPTIONS.batch_size)
 
   if OPTIONS.save_file:
     print >> sys.stderr, 'Saving parameters...'
     spec.save(OPTIONS.save_file)
 
-  print 'Training data:'
-  evaluate(model, in_vocabulary, out_vocabulary, train_data)
+  if OPTIONS.train_data:
+    print 'Training data:'
+    evaluate(model, in_vocabulary, out_vocabulary, train_data)
 
   if OPTIONS.dev_data:
     dev_raw = load_dataset(OPTIONS.dev_data)
