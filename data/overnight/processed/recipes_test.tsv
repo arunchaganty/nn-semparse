@@ -1,0 +1,467 @@
+show me all recipes from 2004	recipe whose posting date is 2004 and whose posting date is 2004
+show me all recipes from 2004	recipe whose posting date is 2004
+show me recipes not for lunch	recipe that not is for lunch
+on average how long does the recipe take to cook	average cooking time of recipe
+which recipe has a lesser preparation time than that of rice pudding	recipe whose preparation time is smaller than preparation time of rice pudding
+which recipe  that uses milk for its preparation was posted in 2004	recipe whose posting date is 2004 and that requires milk
+which recipe  that uses milk for its preparation was posted in 2004	recipe that requires milk and whose posting date is 2004
+on average how long is the prep time of the recipe	average preparation time of recipe
+what recipes are for for two or more meals	recipe that is for more than two meal
+show me total number of meals	number of meal
+show me total number of meals	number of ingredient
+what recipe takes longer to prep than rice pudding takes to cook	recipe whose preparation time is larger than cooking time of rice pudding
+which recipes prep time is the same as the cook time of rice pudding	recipe whose preparation time is cooking time of rice pudding
+what recipe requires no more cooking time than rice pudding	recipe whose cooking time is at most preparation time of rice pudding
+what is the preparation time of rice pudding	preparation time of rice pudding
+which recipes serve more than two meals	recipe that is for more than two meal
+recipe need two ingredients	recipe that requires two ingredient
+what recipe is designed for the most number of meals	recipe that is for the most number of meal
+what recipe is designed for the most number of meals	recipe that is for the least number of meal
+what recipe is designed for the most number of meals	recipe that has the most number of cuisine
+what recipe is designed for the most number of meals	recipe that requires the most number of ingredient
+what recipe is designed for the most number of meals	recipe that is for at most two meal
+what recipe is designed for the most number of meals	recipe that is for less than two meal
+what recipe is designed for the most number of meals	recipe that requires the least number of ingredient
+what recipe is designed for the most number of meals	recipe that is for lunch or dinner
+a recipe which posted either in 2004 or 2010	recipe whose posting date is 2004 or 2010
+a recipe which posted either in 2004 or 2010	recipe whose posting date is 2004
+a recipe which posted either in 2004 or 2010	recipe whose posting date is 2004 and whose posting date is 2004
+what recipe calls for the same ingredients as rice pudding	recipe that requires ingredient that rice pudding requires
+what recipe calls for the same ingredients as rice pudding	recipe that requires milk
+what recipe calls for the same ingredients as rice pudding	recipe that requires milk and that requires milk
+show me recipes with preparation time less than cooking time for rice pudding	recipe whose preparation time is smaller than cooking time of rice pudding
+show me all recipes require milk	recipe that requires milk and that requires milk
+show me all recipes require milk	recipe that requires milk
+what recipe has the least posting date	recipe that has the smallest posting date
+what meal has the least recipes available	meal that the least number of recipe is for
+what meal has the least recipes available	meal that at least two recipe is for
+what meal has the least recipes available	meal that recipe that requires milk is for
+what meal has the least recipes available	meal that the most number of recipe is for
+what meal has the least recipes available	lunch or dinner
+show me recipes for more than two cuisines	recipe that has more than two cuisine
+recipe with largest posting date	recipe that has the largest posting date
+show me recipes that could be used for one or two meals	recipe that is for at most two meal
+show me recipes that could be used for one or two meals	recipe that is for lunch or dinner
+which recipes are for less than two meals	recipe that is for less than two meal
+which recipes are for less than two meals	recipe that is for at most two meal
+which recipes are for less than two meals	recipe that has less than two cuisine
+which recipes are for less than two meals	recipe that requires less than two ingredient
+which recipes are for less than two meals	recipe whose posting date is smaller than 2004 or 2010
+which recipes are for less than two meals	recipe that is for lunch or dinner
+show me recipes posted in 2004 or in 2010	recipe whose posting date is 2004 or 2010
+show me recipes posted in 2004 or in 2010	recipe whose posting date is 2004
+show me recipes posted in 2004 or in 2010	recipe whose posting date is 2004 and whose posting date is 2004
+which recipe has milk as its ingredient for lunch	recipe that requires milk and that is for lunch
+which recipe has milk as its ingredient for lunch	recipe that is for lunch and that requires milk
+what meal has a recipe requiring milk	meal that recipe that requires milk is for
+what meal has a recipe requiring milk	lunch or dinner
+show me recipes with preparation time equal to or less than cooking time for rice pudding	recipe whose preparation time is at most cooking time of rice pudding
+which recipes has more than two cuisines	recipe that has more than two cuisine
+what recipe has the most cuisine	recipe that has the most number of cuisine
+what recipe has the most cuisine	recipe that has at most two cuisine
+what recipe has the most cuisine	recipe that has less than two cuisine
+what recipe has the most cuisine	recipe that requires the most number of ingredient
+what recipe has the most cuisine	recipe that is for the most number of meal
+what recipes posting date is the same as rice pudding	recipe whose posting date is posting date of rice pudding
+what recipes posting date is the same as rice pudding	recipe whose posting date is 2004
+what recipes posting date is the same as rice pudding	recipe whose posting date is 2004 and whose posting date is 2004
+show me recipes for the fewest cuisines	recipe that has the least number of cuisine
+show me recipes for the fewest cuisines	recipe that has less than two cuisine
+what recipe has no greater than two cuisines	recipe that has more than two cuisine
+show me recipes with the most cooking time	recipe that has the largest cooking time
+show me recipes that require milk or spinach	recipe that requires milk or spinach
+show me recipes that require milk or spinach	recipe that requires at most two ingredient
+show me recipes that require milk or spinach	recipe that is for lunch or dinner
+show the recipes with smallest preparation time	recipe that has the smallest preparation time
+recipes posted in 2004 that require milk	recipe that requires milk and whose posting date is 2004
+recipes posted in 2004 that require milk	recipe whose posting date is 2004 and that requires milk
+show me recipes with cooking times shorter than cooking time of rice pudding	recipe whose cooking time is smaller than cooking time of rice pudding
+what recipe was posted after the date  rice pudding	recipe whose posting date is larger than posting date of rice pudding
+what recipe was posted after the date  rice pudding	recipe whose posting date is larger than 2004
+what recipe was posted after the date  rice pudding	recipe whose posting date is larger than 2004 or 2010
+which recipe belongs to more than two cuisines	recipe that has more than two cuisine
+what recipe takes the same time to cook as rice pudding takes to prep	recipe whose cooking time is preparation time of rice pudding
+show me recipes for meals for two	recipe that is for at most two meal
+show me recipes for meals for two	recipe that is for the least number of meal
+show me recipes for meals for two	recipe that is for the most number of meal
+show me recipes for meals for two	recipe that is for lunch or dinner
+what meal did that recipe i used for lunch go with	meal that recipe that is for lunch is for
+what meal did that recipe i used for lunch go with	meal that rice pudding is for
+what meal did that recipe i used for lunch go with	meal that rice pudding is for and that rice pudding is for
+what recipe makes the same type of cuisine as rice pudding	recipe whose cuisine is cuisine of rice pudding
+which recipes take at most as long to cook as rice pudding	recipe whose cooking time is at most cooking time of rice pudding
+what recipe is fastest prepared	recipe that has the smallest preparation time
+which ingredient is used for at most two recipes	ingredient that at most two recipe requires
+which recipes take longer to cook than rice pudding does to prepare	recipe whose cooking time is larger than preparation time of rice pudding
+what recipes are for lunch	recipe that is for lunch and that is for lunch
+what recipes are for lunch	recipe that is for lunch
+what is an ingredient found in the fewest recipes	ingredient that the least number of recipe requires
+what is an ingredient found in the fewest recipes	ingredient that recipe that requires milk requires
+what is an ingredient found in the fewest recipes	ingredient that rice pudding requires
+what is an ingredient found in the fewest recipes	ingredient that rice pudding requires and that rice pudding requires
+what ingredient is called for in the same recipe as milk	ingredient that recipe that requires milk requires
+what ingredient is called for in the same recipe as milk	ingredient that the least number of recipe requires
+what ingredient is called for in the same recipe as milk	ingredient that rice pudding requires
+what ingredient is called for in the same recipe as milk	ingredient that rice pudding requires and that rice pudding requires
+what meal has the most recipes for it	meal that the most number of recipe is for
+what meal has the most recipes for it	meal that recipe that requires milk is for
+what meal has the most recipes for it	lunch or dinner
+what recipe is for more than two meals	recipe that is for more than two meal
+which recipe needs the shortest cooking time	recipe that has the smallest cooking time
+the receipe posting date is 2004	recipe whose posting date is 2004 and whose posting date is 2004
+the receipe posting date is 2004	recipe whose posting date is 2004
+the receipe posting date is 2004	recipe whose posting date is 2004 or 2010
+a recipe which posted after 2004	recipe whose posting date is 2004
+a recipe which posted after 2004	recipe whose posting date is 2004 or 2010
+a recipe which posted after 2004	recipe whose posting date is 2004 and whose posting date is 2004
+a recipe which posted after 2004	recipe whose posting date is posting date of rice pudding
+what recipes take less time to cook than rice pudding	recipe whose cooking time is smaller than cooking time of rice pudding
+what is the total prep time of the recipe	total preparation time of recipe
+what is a recipe for a meal with rice pudding	recipe that is for meal that rice pudding is for
+what is a recipe for a meal with rice pudding	recipe that is for lunch
+what is a recipe for a meal with rice pudding	recipe that is for lunch and that is for lunch
+show me recipes with a preparation time that is longer than rice puddings cooking time	recipe whose preparation time is larger than cooking time of rice pudding
+what recipe can be prepped in the same time as rice pudding can be cooked	recipe whose preparation time is cooking time of rice pudding
+recipes posted after posting rice pudding recipe	recipe whose posting date is larger than posting date of rice pudding
+recipes posted after posting rice pudding recipe	recipe whose posting date is larger than 2004
+recipes posted after posting rice pudding recipe	recipe whose posting date is larger than 2004 or 2010
+which recipe requires the longest cooking time	recipe that has the largest cooking time
+find me all recipes requires milk or spinach	recipe that requires milk or spinach
+find me all recipes requires milk or spinach	recipe that requires at most two ingredient
+find me all recipes requires milk or spinach	recipe that is for at most two meal
+find me all recipes requires milk or spinach	recipe that is for lunch or dinner
+what recipes cooking time is at most that of rice puddings preparation time	recipe whose cooking time is at most preparation time of rice pudding
+what is the average cooking time of this recipe	average cooking time of recipe
+what recipes have a common ingredient in rice pudding	recipe that requires ingredient that rice pudding requires
+what recipes have a common ingredient in rice pudding	recipe that requires milk
+what recipes have a common ingredient in rice pudding	recipe that requires milk and that requires milk
+recipe with posting date same as rice pudding	recipe whose posting date is posting date of rice pudding
+recipe with posting date same as rice pudding	recipe whose posting date is 2004
+recipe with posting date same as rice pudding	recipe whose posting date is 2004 or 2010
+recipe with posting date same as rice pudding	recipe whose posting date is 2004 and whose posting date is 2004
+which recipe posted in 2004 requires milk	recipe whose posting date is 2004 and that requires milk
+which recipe posted in 2004 requires milk	recipe that requires milk and whose posting date is 2004
+show me recipes with preparation time less than rice pudding	recipe whose preparation time is smaller than preparation time of rice pudding
+what cuisine is rice pudding	cuisine of rice pudding
+what recipe calling for milk makes something for lunch	recipe that requires milk and that is for lunch
+what recipe calling for milk makes something for lunch	recipe that is for lunch and that requires milk
+what recipe has a prep time at least as long as the cooking time of rice pudding	recipe whose preparation time is at least cooking time of rice pudding
+what recipe posted before 2004 or 2010	recipe whose posting date is smaller than 2004 or 2010
+what recipe posted before 2004 or 2010	recipe whose posting date is at most 2004 or 2010
+what recipe posted before 2004 or 2010	recipe that has at most two cuisine
+what recipe posted before 2004 or 2010	recipe that requires at most two ingredient
+what recipe posted before 2004 or 2010	recipe that is for at most two meal
+what recipe posted before 2004 or 2010	recipe that requires milk or spinach
+what recipe posted before 2004 or 2010	recipe that is for lunch or dinner
+what meal has more than two recipes for it	meal that more than two recipe is for
+what meal has more than two recipes for it	meal that the most number of recipe is for
+what meal has more than two recipes for it	lunch or dinner
+what is the meal of a recipe posted in 2004	meal that recipe whose posting date is 2004 is for
+what is the meal of a recipe posted in 2004	meal that recipe that requires milk is for
+what is the meal of a recipe posted in 2004	lunch or dinner
+what recipe has the longest preparation time	recipe that has the largest preparation time
+which meal has the most number of recipes	meal that the most number of recipe is for
+which meal has the most number of recipes	meal that the least number of recipe is for
+which meal has the most number of recipes	meal that at least two recipe is for
+which meal has the most number of recipes	lunch or dinner
+which meal has the most number of recipes	meal that the least number of recipe is for
+which meal has the most number of recipes	meal that at least two recipe is for
+which meal has the most number of recipes	lunch or dinner
+what recipe is for a dish that takes longer to cook than does rice pudding	recipe whose cooking time is larger than cooking time of rice pudding
+how many recipes are there	number of recipe
+recipe of one cuisine	recipe that has less than two cuisine
+recipe of one cuisine	recipe that has at most two cuisine
+recipe of one cuisine	recipe that has the most number of cuisine
+recipe of one cuisine	recipe that has the least number of cuisine
+which ingredients are used in more than two recipes	ingredient that more than two recipe requires
+which ingredients are used in more than two recipes	ingredient that at least two recipe requires
+which ingredients are used in more than two recipes	milk or spinach
+which meal recipe requires milk for preparation	meal that recipe that requires milk is for
+which meal recipe requires milk for preparation	lunch or dinner
+in which meal rice pudding cannot be used as part	meal that rice pudding not is for
+which recipe is found in many cuisines	recipe that has the most number of cuisine
+which recipe is found in many cuisines	recipe that has the least number of cuisine
+which recipe is found in many cuisines	recipe that has at most two cuisine
+which recipe is found in many cuisines	recipe that has less than two cuisine
+which recipe is found in many cuisines	recipe that requires the least number of ingredient
+which recipe is found in many cuisines	recipe that requires the most number of ingredient
+which recipe is found in many cuisines	recipe that is for the least number of meal
+which recipe is found in many cuisines	recipe that is for the most number of meal
+which recipe is found in many cuisines	recipe that requires milk or spinach
+show me recipes with longer preparation times than rice pudding	recipe whose preparation time is larger than preparation time of rice pudding
+show me recipes that take longer to cook than rice pudding	recipe whose preparation time is larger than preparation time of rice pudding
+what meal is the rice pudding recipe	recipe that is for meal that rice pudding is for
+what meal is the rice pudding recipe	recipe that is for lunch
+what meal is the rice pudding recipe	recipe that is for lunch and that is for lunch
+what recipe has the longest cooking time	recipe that has the largest cooking time
+what recipe can be used for a lunch or dinner meal	recipe that is for lunch or dinner
+what recipe can be used for a lunch or dinner meal	recipe that is for at most two meal
+what recipe can be used for a lunch or dinner meal	recipe that has at most two cuisine
+what recipe can be used for a lunch or dinner meal	recipe that requires milk or spinach
+what recipe can be used for a lunch or dinner meal	recipe that requires the least number of ingredient
+what recipes posting date is in 2004 and requires milk	recipe that requires milk and whose posting date is 2004
+what recipes posting date is in 2004 and requires milk	recipe whose posting date is 2004 and that requires milk
+find a recipe for a small meal	recipe that is for the least number of meal
+find a recipe for a small meal	recipe that is for at most two meal
+find a recipe for a small meal	recipe that is for less than two meal
+find a recipe for a small meal	recipe that is for lunch or dinner
+find a recipe for a small meal	recipe that is for the most number of meal
+find a recipe for a small meal	recipe that has at most two cuisine
+find a recipe for a small meal	recipe that has less than two cuisine
+find a recipe for a small meal	recipe that has the most number of cuisine
+find a recipe for a small meal	recipe that has the least number of cuisine
+find a recipe for a small meal	recipe whose posting date is smaller than 2004 or 2010
+recipe cooked in preparation time of rice pudding or less	recipe whose cooking time is at most preparation time of rice pudding
+which recipes were not posted in 2004	recipe whose posting date is not 2004
+what ingredient is called for in two recipes	ingredient that two recipe requires
+which recipe does not need milk	recipe that not requires milk
+recipe with more preparation time than rice pudding	recipe whose preparation time is larger than cooking time of rice pudding
+what ingredient is used by the least number of recipes	ingredient that the least number of recipe requires
+what ingredient is used by the least number of recipes	ingredient that recipe that requires milk requires
+what ingredient is used by the least number of recipes	ingredient that rice pudding requires
+what ingredient is used by the least number of recipes	ingredient that rice pudding requires and that rice pudding requires
+which recipe follows one cuisine	recipe that has less than two cuisine
+which recipe follows one cuisine	recipe that has at most two cuisine
+which recipe follows one cuisine	recipe that has the most number of cuisine
+which recipe follows one cuisine	recipe that has the least number of cuisine
+recipe for at least two meal	recipe that is for at least two meal
+recipes that require greater time to prepare than rice pudding	recipe whose preparation time is larger than preparation time of rice pudding
+what recipes need the most ingrediants	recipe that requires the most number of ingredient
+what recipes need the most ingrediants	recipe that requires at most two ingredient
+what recipes need the most ingrediants	recipe that has the most number of cuisine
+what recipes need the most ingrediants	recipe that has at most two cuisine
+what recipes need the most ingrediants	recipe that requires the least number of ingredient
+what recipes need the most ingrediants	recipe that requires less than two ingredient
+which are non lunch recipes	recipe that not is for lunch
+what ingredient is needed for more than two recipes	ingredient that more than two recipe requires
+what ingredient is needed for more than two recipes	ingredient that at least two recipe requires
+what ingredient is needed for more than two recipes	ingredient that recipe that is for lunch requires
+what ingredient is needed for more than two recipes	milk or spinach
+what meals have at least two recipes	meal that at least two recipe is for
+what meals have at least two recipes	meal that the least number of recipe is for
+what meals have at least two recipes	lunch or dinner
+what is the total cooking time summed across all recipes	total cooking time of recipe
+what ingredients does both recipes share	ingredient that at least two recipe requires
+what ingredients does both recipes share	ingredient that more than two recipe requires
+what ingredients does both recipes share	milk or spinach
+show me all recipes posted in 2004	recipe whose posting date is 2004 and whose posting date is 2004
+show me all recipes posted in 2004	recipe whose posting date is 2004
+show me all recipes posted in 2004	recipe whose posting date is 2004 or 2010
+show me all recipes posted in 2004	recipe whose posting date is posting date of rice pudding
+what is a recipe requiring milk	meal that recipe that requires milk is for
+what is a recipe requiring milk	lunch or dinner
+what recipe requires two ingredients	recipe that requires two ingredient
+which recipes were posted by 2004	recipe whose posting date is at least 2004
+which recipes were posted by 2004	recipe whose posting date is at least 2004 or 2010
+which recipes were posted by 2004	recipe whose posting date is at least posting date of rice pudding
+which recipe needs a longer preparation time than rice pudding	recipe whose cooking time is larger than cooking time of rice pudding
+show me lunch recipes that use milk	recipe that requires milk and that is for lunch
+show me lunch recipes that use milk	recipe that is for lunch and that requires milk
+what recipe requires a cooking time at least as long as rice pudding	recipe whose cooking time is at least preparation time of rice pudding
+what ingredients does rice pudding or quiche need	ingredient that rice pudding or quiche requires
+what ingredients does rice pudding or quiche need	ingredient that at least two recipe requires
+what ingredients does rice pudding or quiche need	milk or spinach
+show me cooking time of rice pudding	cooking time of rice pudding
+what meal has the most number of recipes	meal that the most number of recipe is for
+what meal has the most number of recipes	meal that the least number of recipe is for
+what meal has the most number of recipes	meal that recipe that requires milk is for
+what meal has the most number of recipes	meal that at least two recipe is for
+what meal has the most number of recipes	meal that more than two recipe is for
+what meal has the most number of recipes	lunch or dinner
+what recipes are required by two recipes or less	ingredient that at most two recipe requires
+what recipe has a posting date of 2004 and is lunch	recipe whose posting date is 2004 and that is for lunch
+what recipe has a posting date of 2004 and is lunch	recipe that is for lunch and whose posting date is 2004
+show me recipes posted on the same day as rice pudding	recipe whose posting date is posting date of rice pudding
+show me recipes posted on the same day as rice pudding	recipe whose posting date is 2004
+show me recipes posted on the same day as rice pudding	recipe whose posting date is 2004 or 2010
+show me recipes posted on the same day as rice pudding	recipe whose posting date is 2004 and whose posting date is 2004
+what is the average cooking time across all recipes	average cooking time of recipe
+which recipes take less time to cook than to prepare rice pudding	recipe whose cooking time is smaller than preparation time of rice pudding
+what is the total time taken to prepare the dish	total preparation time of recipe
+which ingredient is used for less than two recipes	ingredient that less than two recipe requires
+show me recipes that take as long to cook as it takes to prepare rice pudding or quicker	recipe whose cooking time is at most preparation time of rice pudding
+what recipe is for most meals	recipe that is for the most number of meal
+what recipe is for most meals	recipe that is for at most two meal
+what recipe is for most meals	recipe that is for less than two meal
+what recipe is for most meals	recipe that is for the least number of meal
+what recipe is for most meals	recipe that is for lunch or dinner
+which meal has the least number of recipes	meal that the least number of recipe is for
+which meal has the least number of recipes	meal that the most number of recipe is for
+which meal has the least number of recipes	meal that at least two recipe is for
+which meal has the least number of recipes	meal that recipe that requires milk is for
+which meal has the least number of recipes	lunch or dinner
+how many meals are there	number of meal
+how many meals are there	number of ingredient
+recipe that needs milk	recipe that requires milk
+recipe that needs milk	recipe that requires milk and that requires milk
+recipe for more than two meals	recipe that is for more than two meal
+show me recipes that are the same cuisine as rice pudding	recipe whose cuisine is cuisine of rice pudding
+recipe that with smallest preparation time	recipe that has the smallest preparation time
+recipes prepare in same or less time for cooking rice pudding	recipe whose preparation time is at most cooking time of rice pudding
+what recipe was posted later than rice pudding	recipe whose posting date is larger than posting date of rice pudding
+what recipe was posted later than rice pudding	recipe whose posting date is larger than 2004
+what recipes preparation time is the greatest	recipe that has the largest preparation time
+recipe for lunch	recipe that is for lunch
+recipe for lunch	recipe that is for lunch and that is for lunch
+how long does rice pudding take to prepare	preparation time of rice pudding
+show me recipes with cooking time equal to or less than the preparation time for rice pudding	recipe whose cooking time is at most preparation time of rice pudding
+which recipe needs milk for  its preparation	ingredient that recipe that requires milk requires
+which recipe needs milk for  its preparation	ingredient that the least number of recipe requires
+which recipe needs milk for  its preparation	ingredient that rice pudding requires
+which recipe needs milk for  its preparation	ingredient that rice pudding requires and that rice pudding requires
+which recipe is for two meals	recipe that is for two meal
+which recipes take less time to prepare than rice pudding	recipe whose preparation time is smaller than preparation time of rice pudding
+show me recipes designed for two meals or less	recipe that is for at most two meal
+show me recipes designed for two meals or less	recipe that has at most two cuisine
+show me recipes designed for two meals or less	recipe that requires at most two ingredient
+show me recipes designed for two meals or less	recipe that is for lunch or dinner
+what recipe has two cuisine	recipe that has two cuisine
+show me recipes that fall under at least two cuisines	recipe that has less than two cuisine
+show me recipes that fall under at least two cuisines	recipe that has at most two cuisine
+which recipe takes longer to prepare rice pudding	recipe whose preparation time is larger than preparation time of rice pudding
+show me recipes posted in 2004 or later	recipe whose posting date is at least 2004
+show me recipes posted in 2004 or later	recipe whose posting date is at least 2004 or 2010
+show me recipes posted in 2004 or later	recipe whose posting date is at least posting date of rice pudding
+which recipes take less time to cook than rice pudding	recipe whose cooking time is smaller than cooking time of rice pudding
+what ingredient is required by the least recipes	ingredient that the least number of recipe requires
+what ingredient is required by the least recipes	ingredient that recipe that requires milk requires
+what ingredient is required by the least recipes	ingredient that rice pudding requires
+what ingredient is required by the least recipes	ingredient that rice pudding requires and that rice pudding requires
+which meal has the most recipes for it	meal that the most number of recipe is for
+which meal has the most recipes for it	meal that recipe that requires milk is for
+which meal has the most recipes for it	lunch or dinner
+show me recipes that require a maximum cooking time as rice pudding	recipe whose cooking time is at most cooking time of rice pudding
+recipe posted on the same date of posting of rice pudding	recipe whose posting date is posting date of rice pudding
+recipe posted on the same date of posting of rice pudding	recipe whose posting date is 2004
+recipe posted on the same date of posting of rice pudding	recipe whose posting date is 2004 and whose posting date is 2004
+which recipes dont need milk	recipe that not requires milk
+what recipes preparation time is the same as rice puddings cooking time	recipe whose preparation time is cooking time of rice pudding
+meal that rice pudding and quiche can be used	meal that rice pudding or quiche is for
+meal that rice pudding and quiche can be used	meal that rice pudding is for
+meal that rice pudding and quiche can be used	meal that rice pudding is for and that rice pudding is for
+what are ingredients of rice pudding	recipe that requires ingredient that rice pudding requires
+what are ingredients of rice pudding	recipe that requires milk
+what are ingredients of rice pudding	recipe that requires milk and that requires milk
+which recipe needs less time to cook than rice pudding	recipe whose preparation time is smaller than cooking time of rice pudding
+what is the number of recipes	number of recipe
+what recipe requires two or more ingredients	recipe that requires at least two ingredient
+recipe with preparation time not less than that of rice pudding	recipe whose cooking time is at least preparation time of rice pudding
+what recipe was posted during or before 2010	recipe whose posting date is at most 2004 or 2010
+what recipe was posted during or before 2010	recipe whose posting date is smaller than 2004 or 2010
+what recipe was posted during or before 2010	recipe that is for at most two meal
+what recipe was posted during or before 2010	recipe that requires at most two ingredient
+what recipe was posted during or before 2010	recipe that requires milk or spinach
+what recipe was posted during or before 2010	recipe that is for lunch or dinner
+what recipes prep time is longer than the cook time for rice pudding	recipe whose preparation time is larger than cooking time of rice pudding
+what is the cooking time for this recipe	total cooking time of recipe
+show me the recipe that takes the least time to prepare	recipe that has the smallest cooking time
+show me lunch recipes posted in 2004	recipe whose posting date is 2004 and that is for lunch
+show me lunch recipes posted in 2004	recipe that is for lunch and whose posting date is 2004
+what recipes takes as long to cook as rice pudding	recipe whose preparation time is at most cooking time of rice pudding
+how many total meals are there	number of meal
+how many total meals are there	number of ingredient
+what recipe can make two or more meals	recipe that is for at least two meal
+which recipes require only a single ingredient	recipe that requires less than two ingredient
+which recipes require only a single ingredient	recipe that requires at most two ingredient
+which recipes require only a single ingredient	recipe that requires the least number of ingredient
+which recipes require only a single ingredient	recipe that requires the most number of ingredient
+which recipes require only a single ingredient	recipe that requires milk or spinach
+show me recipes with two cuisines	recipe that has two cuisine
+a recipe for a lunch meal	recipe that is for lunch
+a recipe for a lunch meal	recipe that is for lunch and that is for lunch
+what recipes posting date is at least in 2004	recipe whose posting date is at least 2004
+what recipes posting date is at least in 2004	recipe whose posting date is at least 2004 or 2010
+what is a recipe of two different cuisines	recipe that has two cuisine
+what meal is rice pudding or quiche intended for	meal that rice pudding or quiche is for
+what meal is rice pudding or quiche intended for	meal that rice pudding is for
+what meal is rice pudding or quiche intended for	meal that rice pudding is for and that rice pudding is for
+what ingredient is used by less than two recipes	ingredient that less than two recipe requires
+recipe posted in 2004	recipe whose posting date is 2004
+recipe posted in 2004	recipe whose posting date is 2004 and whose posting date is 2004
+name a recipe for lunch or dinner	recipe that is for lunch or dinner
+name a recipe for lunch or dinner	recipe that has at most two cuisine
+name a recipe for lunch or dinner	recipe that is for at most two meal
+name a recipe for lunch or dinner	recipe that requires milk or spinach
+name a recipe for lunch or dinner	recipe that requires at most two ingredient
+name a recipe for lunch or dinner	recipe that has the least number of cuisine
+name a recipe for lunch or dinner	recipe that is for less than two meal
+name a recipe for lunch or dinner	recipe that requires the least number of ingredient
+what recipes were posted at or before rice pudding	recipe whose posting date is at most posting date of rice pudding
+what recipes were posted at or before rice pudding	recipe whose posting date is at most 2004
+how long does it take to prepare the recipe	average preparation time of recipe
+what recipe takes the longest to prepare	recipe that has the largest preparation time
+when was the rice pudding recipe posted	posting date of rice pudding
+show me ingredients for rice pudding or quiche	ingredient that rice pudding or quiche requires
+show me ingredients for rice pudding or quiche	ingredient that at least two recipe requires
+show me ingredients for rice pudding or quiche	milk or spinach
+a recipe which posted in 2004 or later	recipe whose posting date is at least 2004
+a recipe which posted in 2004 or later	recipe whose posting date is at least 2004 or 2010
+a recipe which posted in 2004 or later	recipe whose posting date is at least posting date of rice pudding
+how many ingredients are in this recipe	number of ingredient
+how many ingredients are in this recipe	number of meal
+what is a recipe for rice pudding or quiche	rice pudding or quiche
+what is the number of ingredients in total	number of ingredient
+what is the number of ingredients in total	number of meal
+which recipe belongs to two cuisines	recipe that has at most two cuisine
+which recipe belongs to two cuisines	recipe that has less than two cuisine
+which recipe belongs to two cuisines	recipe that has the most number of cuisine
+which recipe belongs to two cuisines	recipe that has the least number of cuisine
+which recipe was posted first	recipe that has the smallest posting date
+which meals is rice pudding not intended for	meal that rice pudding not is for
+what recipe calls for the most ingredients	recipe that requires the most number of ingredient
+what recipe calls for the most ingredients	recipe that requires at most two ingredient
+what recipe calls for the most ingredients	recipe that requires less than two ingredient
+what recipe calls for the most ingredients	recipe that requires the least number of ingredient
+what recipe calls for the most ingredients	recipe that has the most number of cuisine
+what recipe calls for the most ingredients	recipe that is for the most number of meal
+what recipe calls for the most ingredients	recipe that is for lunch or dinner
+what recipe calls for the most ingredients	recipe that requires milk or spinach
+what is the cooking time of rice pudding	cooking time of rice pudding
+what ingredient is called for by a lunch recipe	ingredient that recipe that is for lunch requires
+what ingredient is called for by a lunch recipe	ingredient that at least two recipe requires
+what ingredient is called for by a lunch recipe	ingredient that more than two recipe requires
+what ingredient is called for by a lunch recipe	ingredient that rice pudding or quiche requires
+what ingredient is called for by a lunch recipe	milk or spinach
+what meals are at most two recipes for	meal that at most two recipe is for
+recipe not posted in 2004	recipe whose posting date is not 2004
+which recipe was posted in 2004 and is for lunch	recipe whose posting date is 2004 and that is for lunch
+which recipe was posted in 2004 and is for lunch	recipe that is for lunch and whose posting date is 2004
+what recipes preparation time is greater than the cooking time for rice pudding	recipe whose preparation time is larger than cooking time of rice pudding
+for what meal is rice pudding or quiche used for	meal that rice pudding or quiche is for
+for what meal is rice pudding or quiche used for	meal that rice pudding is for
+for what meal is rice pudding or quiche used for	meal that rice pudding is for and that rice pudding is for
+what recipes preparation time is no lesser than the cooking time for rice pudding	recipe whose preparation time is at least cooking time of rice pudding
+recipe whose posting date is after that of rice pudding	recipe whose posting date is larger than posting date of rice pudding
+recipe whose posting date is after that of rice pudding	recipe whose posting date is larger than 2004
+recipe whose posting date is after that of rice pudding	recipe whose posting date is larger than 2004 or 2010
+show me recipes requiring fewest ingredients	recipe that requires the least number of ingredient
+show me recipes requiring fewest ingredients	recipe that requires at most two ingredient
+show me recipes requiring fewest ingredients	recipe that requires less than two ingredient
+show me recipes requiring fewest ingredients	recipe that requires the most number of ingredient
+show me recipes requiring fewest ingredients	recipe that requires milk or spinach
+what is the minimum time required to prepare rice pudding	recipe whose cooking time is at least preparation time of rice pudding
+recipe prepared in preparation time of rice pudding	recipe whose preparation time is preparation time of rice pudding
+what recipe has less than two cuisines	recipe that has less than two cuisine
+what recipe has less than two cuisines	recipe that has at most two cuisine
+what recipe has less than two cuisines	recipe that is for less than two meal
+what recipe has less than two cuisines	recipe that requires less than two ingredient
+what recipe has less than two cuisines	recipe that has the most number of cuisine
+what recipe has less than two cuisines	recipe that has the least number of cuisine
+what recipe has less than two cuisines	recipe that requires at most two ingredient
+tell me recipethat at most require two ingredients	ingredient that at most two recipe requires
+find recipes that are made with two ingredients	recipe that requires two ingredient
+is it the recipe for rice pudding or quiche	rice pudding or quiche
+recipe for meal same as rice pudding	recipe that is for meal that rice pudding is for
+recipe for meal same as rice pudding	recipe that is for lunch
+recipe for meal same as rice pudding	recipe that is for lunch and that is for lunch
+what is a meal for which you can find more than two recipes	meal that more than two recipe is for
+what is a meal for which you can find more than two recipes	meal that the most number of recipe is for
+what is a meal for which you can find more than two recipes	lunch or dinner
+what recipe has the smallest cooking time	recipe that has the smallest cooking time
+show me recipes with a preparation time equal to or greater than rice pudding	recipe whose preparation time is at least preparation time of rice pudding
+what recipes are prepared in cooking time of rice pudding	recipe whose cooking time is preparation time of rice pudding
+which is the latest recipe posted	recipe that has the largest posting date
+recipe with most cuisine	recipe that has the most number of cuisine
+recipe with most cuisine	recipe that has at most two cuisine
+recipe with most cuisine	recipe that has less than two cuisine
+recipe with most cuisine	recipe that has the least number of cuisine

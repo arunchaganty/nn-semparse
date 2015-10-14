@@ -1,0 +1,907 @@
+is there any block with a height of either 3 or 6 inches	block whose height is 3 inches or 6 inches
+find me a pyramid block that is 3 inches tall	block whose shape is a pyramid and whose height is 3 inches
+find me a pyramid block that is 3 inches tall	block whose height is 3 inches and whose shape is a pyramid
+block whose height is 3 inches and whose shape is a pyramid	block whose height is 3 inches and whose shape is a pyramid
+block whose height is 3 inches and whose shape is a pyramid	block whose shape is a pyramid and whose height is 3 inches
+block above a pyramid shaped block	block that is above block whose shape is a pyramid
+get a 3inch block above block 1	block that is above block 1 and whose height is 3 inches
+below special block	block that block that is special is above
+block whose height is at most width of block 1	block whose height is at most width of block 1
+block whose height is length of block 1	block whose height is length of block 1
+block whose width is 3 inches and that is below block 1	block whose width is 3 inches and that is below block 1
+block whose width is 3 inches and that is below block 1	block that is below block 1 and whose width is 3 inches
+a special block	block that is special
+a special block	block that is special and that is special
+locate the block with a height that equals more than the width of block 1	block whose height is larger than width of block 1
+find me the block that is left of the block that block 1 is right of	block that is left of block that block 1 is right of
+pyramid block to left of block 1	block whose shape is a pyramid and that block 1 is right of
+what block is not as long as block 1 is tall	block whose length is smaller than height of block 1
+what block is not as long as block 1 is tall	block whose length is at most length of block 1
+identify a block with a width of 3 inches	block whose width is 3 inches and whose width is 3 inches
+identify a block with a width of 3 inches	block whose width is 3 inches
+identify a block with a width of 3 inches	block whose width is length of block 1
+find a block between block 1 and a block below block 1	block that is above block that is below block 1
+what block is not above block 1	block that block 1 not is above
+find me a block as long or longer then block 1 is wide	block whose length is at least width of block 1
+find me a block as long or longer then block 1 is wide	block whose length is larger than height of block 1
+what block is below the block that block 1 is to the right of	block that is below block that block 1 is right of
+select the block on the right	block that block 1 is above and that is right of block 1
+find me the block that is both above and to the right of block 1	block that block 1 is right of and that is above block 1
+find me all the 3 inch wide and tall blocks	block whose width is 3 inches and whose height is 3 inches
+find me all the 3 inch wide and tall blocks	block whose height is 3 inches and whose width is 3 inches
+choose a block that is to the left of block 1 and 2	block that is left of block 1 or block 2
+special block left of block 1	block that is special and that block 1 is right of
+special block left of block 1	block that block 1 is right of and that is special
+special block left of block 1	block that block 1 is right of
+special block left of block 1	block that block 1 is right of and that block 1 is right of
+find me all blocks at most as wide at block 1 is tall	block whose width is at most height of block 1
+find me all blocks left of 3 inch wide blocks	block that block whose width is 3 inches is left of
+find me all blocks left of 3 inch wide blocks	block that is left of block whose width is 3 inches
+find me all blocks left and above block 1	block that block that is left of block 1 is above
+find me all special blocks that block 1 is below	block that block 1 is below and that is special
+find me all special blocks that block 1 is below	block that is special and that block 1 is below
+find me all special blocks that block 1 is below	block that block 1 is below
+find me all special blocks that block 1 is below	block that block 1 is below and that block 1 is below
+block taller than the width of block 1	block whose height is larger than width of block 1
+3 inch long block below block	block that is below block whose length is 3 inches
+is there a block to the right of more than two other blocks	block that more than two block is left of
+is there a block to the right of more than two other blocks	block that the most number of block is left of
+find me a block that is above the most blocks	block that the most number of block is below
+find me a block that is above the most blocks	block that block that block 1 is below is above
+block that is not left of block 1	block that not is left of block 1
+3 inches wide block below block 1	block whose width is 3 inches and that block 1 is below
+find me all blocks with 2 blocks to the left	block that two block is left of
+choose a block that is right of block 1	block that is right of block 1
+choose a block that is right of block 1	block that is special and that is right of block 1
+choose a block that is right of block 1	block that is right of block 1 and that is special
+choose a block that is right of block 1	block that is right of block 1 or block 2
+choose a block that is right of block 1	block that is right of block 1 and that is right of block 1
+find me all blocks with the same color as block 1	block whose color is color of block 1
+find me all blocks with the same color as block 1	block whose color is red
+find me all blocks with the same color as block 1	block whose color is red and whose color is red
+what brick has more than 2 bricks to its right	block that more than two block is right of
+find me all the bricks taller than the width of block 1	block whose height is larger than width of block 1
+which block is to the right of block 1	block that block that is right of block 1 is left of
+block whose height is at leas the length of block 1	block whose height is at least length of block 1
+block whose height is at leas the length of block 1	block whose height is at least 3 inches
+find a block with a special block to the left of it	block that is right of block that is special
+select the block that is equal or bigger than block 1	block whose width is at least height of block 1
+select the block that is equal or bigger than block 1	block whose width is larger than length of block 1
+select the block that is equal or bigger than block 1	block whose width is larger than 3 inches
+choose a block that is above block 2	block that more than two block is above
+what block is above the block that block 1 is to the right of	block that is above block that block 1 is right of
+find me all blocks not 3 inches wide	block whose width is not 3 inches
+choose a block below block 2	block that is below less than two block
+choose a block below block 2	block that is below at most two block
+choose a block below block 2	block that is below the least number of block
+choose a block below block 2	block that is above at most two block
+choose a block below block 2	block that is above less than two block
+choose a block below block 2	block that is above the most number of block
+choose a block below block 2	block that is above the least number of block
+choose a block below block 2	block that is left of less than two block
+choose a block below block 2	block that is right of less than two block
+choose a block below block 2	block that is left of at most two block
+choose a block below block 2	block that is right of at most two block
+which block is bigger than block 1	block whose length is larger than length of block 1
+which block is bigger than block 1	block whose length is larger than 3 inches
+find me all blocks above 3 inch wide blocks	block that block whose width is 3 inches is above
+which brick is no taller than brick 1 is long	block whose height is at most length of block 1
+which brick is no taller than brick 1 is long	block whose height is at most 3 inches
+block left of 3 inch block	block that block whose height is 3 inches is right of
+block left of 3 inch block	block that block whose width is 3 inches is right of
+locate the block with a height that is equal to or greater than the height of block 1	block whose height is at least height of block 1
+find me the most colorful block	block that has the most number of color
+find me the most colorful block	block that has the most number of shape
+find me the most colorful block	block that is above the most number of block
+find me the most colorful block	block that is below the most number of block
+find me the most colorful block	block that has at most two color
+find me the most colorful block	block that has the least number of color
+find me the most colorful block	block that has less than two color
+find me the most colorful block	block that is above at most two block
+find me the most colorful block	block that is below at most two block
+find me the most colorful block	block that is above the least number of block
+find me the most colorful block	block that is below the least number of block
+find me the most colorful block	block that is above less than two block
+find me the most colorful block	block that is below less than two block
+find me the most colorful block	block that is right of less than two block
+select block that is below block 1 and block that is above block 1	block that is below block 1 and that block 1 is below
+what block is both above and below block one	block that is above block 1 and that is below block 1
+find me all blocks 2 left of block 1	block that is left of block that block 1 is left of
+block that is below block 1 and whose length is 3 inches	block that is below block 1 and whose length is 3 inches
+block that is below block 1 and whose length is 3 inches	block whose length is 3 inches and that is below block 1
+select the brick right and above block 1	block that is right of block that is above block 1
+find me all blocks right and below block 1	block that block that is right of block 1 is below
+select the block that is to the right of block 1	block that is right of block 1 and that block 1 is left of
+choose a pyramid or a cube	a pyramid or a cube
+block that is below block 1 and that is below block 1	block that is below block 1 and that is below block 1
+block that is below block 1 and that is below block 1	block that is below block 1
+block above 1 block and below 1 block	block that block 1 is above and that block 1 is below
+block thats less than block 2	block that has less than two shape
+block thats less than block 2	block that is below less than two block
+block thats less than block 2	block that is left of less than two block
+block thats less than block 2	block that is right of less than two block
+block thats less than block 2	block that is above at most two block
+block thats less than block 2	block that is left of at most two block
+block thats less than block 2	block that is below at most two block
+block thats less than block 2	block that is right of at most two block
+block thats less than block 2	block that has at most two shape
+block thats less than block 2	block that has at most two color
+find a block that is above at least two other blocks	block that is above at least two block
+what block is to the right of the most blocks	block that the most number of block is left of
+what block is to the right of the most blocks	block that more than two block is left of
+which pyramidshaped block is special	block that is special and whose shape is a pyramid
+which pyramidshaped block is special	block whose shape is a pyramid and that is special
+block that is below at least two blocksw	block that at least two block is below
+find me all blocks that block 1 is below and right of	block that block 1 is below and that is right of block 1
+block surrounding block 1	block that is left of block 1 and that is right of block 1
+select the longest block	block that has the largest length
+what special block is at the right of block 1	block that is right of block 1 and that is special
+what special block is at the right of block 1	block that is special and that is right of block 1
+what special block is at the right of block 1	block that is right of block 1
+what special block is at the right of block 1	block that is right of block 1 or block 2
+what special block is at the right of block 1	block that is right of block 1 and that is right of block 1
+find me all 3 inch long blocks that block 1 is above	block whose length is 3 inches and that block 1 is above
+find the block to the left of the pyramidshaped block	block that is left of block whose shape is a pyramid
+select the brick with the least number of shapes	block that has the least number of shape
+select the brick with the least number of shapes	block that has the least number of color
+select the brick with the least number of shapes	block that is below the least number of block
+select the brick with the least number of shapes	block that has the most number of shape
+select the brick with the least number of shapes	block that is above the least number of block
+select the brick with the least number of shapes	block that has less than two shape
+select the brick with the least number of shapes	block that has the most number of color
+select the brick with the least number of shapes	block that is below the most number of block
+select the brick with the least number of shapes	block that is above the most number of block
+select the brick with the least number of shapes	block that has less than two color
+select the brick with the least number of shapes	block that is left of less than two block
+select the brick with the least number of shapes	block that is right of less than two block
+select the brick with the least number of shapes	block that is above less than two block
+select the brick with the least number of shapes	block that is below less than two block
+select the block at the right of block 1	block that block 1 is left of and that block 1 is left of
+select the block at the right of block 1	block that block 1 is left of
+select the block at the right of block 1	block that block 1 is left of and that is special
+select the block at the right of block 1	block that is special and that block 1 is left of
+which block is as wide as block 1 is high	block whose width is height of block 1
+find me the block that is to the left and above block 1	block that is above block 1 and that block 1 is left of
+find me a block with length equal to block 1s height	block whose length is height of block 1
+find me all the blocks above special blocks	block that is above block that is special
+3 inch wide block to the left of block 1	block whose width is 3 inches and that block 1 is right of
+find a block with less than two shapes	block that has less than two shape
+find a block with less than two shapes	block that has at most two shape
+find a block with less than two shapes	block that is below less than two block
+find a block with less than two shapes	block that is above less than two block
+find a block with less than two shapes	block that is left of less than two block
+find a block with less than two shapes	block that has the most number of shape
+find a block with less than two shapes	block that is right of less than two block
+find a block with less than two shapes	block that has the least number of shape
+find a block with less than two shapes	block that has the most number of color
+find a block with less than two shapes	block that is above at most two block
+find a block with less than two shapes	block that is left of at most two block
+find a block with less than two shapes	block that is right of at most two block
+find a block with less than two shapes	block that is above the most number of block
+find a block with less than two shapes	block that is below the most number of block
+select the block that block 1 is above and to the left of	block that block that block 1 is above is left of
+select the block that block 1 is above and to the left of	block that block that is below block 1 is below
+find me a block to the left of at least two blocks	block that at least two block is right of
+block lft of special block 1	block that is left of block 1 and that is special
+block lft of special block 1	block that is special and that is left of block 1
+what block is not to the right of block 1	block that not is right of block 1
+find me all the 3 inch long special blocks	block whose length is 3 inches and that is special
+find me all the 3 inch long special blocks	block that is special and whose length is 3 inches
+find the block that is below and to the left of block 1	block that is below block 1 and that block 1 is left of
+find a block with a maximum of two colors on it	block that has at most two color
+find a block with a maximum of two colors on it	block that has the most number of color
+find a block with a maximum of two colors on it	block that has the least number of color
+find a block with a maximum of two colors on it	block that is left of at most two block
+find a block with a maximum of two colors on it	block that is above at most two block
+find a block with a maximum of two colors on it	block that is below at most two block
+find a block with a maximum of two colors on it	block that is right of at most two block
+find a block with a maximum of two colors on it	block that is left of less than two block
+find a block with a maximum of two colors on it	block that is right of less than two block
+find a block with a maximum of two colors on it	block that is above the most number of block
+find a block with a maximum of two colors on it	block that is above the least number of block
+find a block with a maximum of two colors on it	block that is below the most number of block
+find a block with a maximum of two colors on it	block that is below the least number of block
+what block is below block 1 and 3 inches long	block that is below block 1 and whose length is 3 inches
+what block is below block 1 and 3 inches long	block whose length is 3 inches and that is below block 1
+which brick has the least number of colors	block that has the least number of color
+which brick has the least number of colors	block that has the least number of shape
+which brick has the least number of colors	block that has the most number of color
+which brick has the least number of colors	block that is below the least number of block
+which brick has the least number of colors	block that is above the least number of block
+which brick has the least number of colors	block that has the most number of shape
+which brick has the least number of colors	block that has less than two color
+which brick has the least number of colors	block that has less than two shape
+which brick has the least number of colors	block that is below the most number of block
+which brick has the least number of colors	block that is above the most number of block
+which brick has the least number of colors	block that is left of less than two block
+which brick has the least number of colors	block that is right of less than two block
+which brick has the least number of colors	block that is above less than two block
+which brick has the least number of colors	block that is below less than two block
+find the block that is below to the right of block 1	block that block that is right of block 1 is below
+what block is block 1 not to the right of	block that block 1 not is right of
+locate a block that is located to the right of the maximum number of blocks	block that is right of the most number of block
+locate a block that is located to the right of the maximum number of blocks	block that is right of less than two block
+locate a block that is located to the right of the maximum number of blocks	block that is above the most number of block
+locate a block that is located to the right of the maximum number of blocks	block that is below the most number of block
+locate a block that is located to the right of the maximum number of blocks	block that is above the least number of block
+locate a block that is located to the right of the maximum number of blocks	block that is below the least number of block
+locate a block that is located to the right of the maximum number of blocks	block that is right of at most two block
+locate a block that is located to the right of the maximum number of blocks	block that is left of less than two block
+locate a block that is located to the right of the maximum number of blocks	block that is left of at most two block
+select the block that has greater than two colors	block that has more than two color
+what block is to the right of the pyramidshaped block	block that is right of block whose shape is a pyramid
+find me all special blocks that are to the right of block 1	block that is special and that block 1 is right of
+find me all special blocks that are to the right of block 1	block that block 1 is right of and that is special
+find me all special blocks that are to the right of block 1	block that block 1 is right of
+find me all special blocks that are to the right of block 1	block that block 1 is right of and that block 1 is right of
+what blocks length is less than or equal to block 1s height	block whose length is at most height of block 1
+what blocks length is less than or equal to block 1s height	block whose length is smaller than width of block 1
+what block is to the left of the block that block 1 is to the right of	block that is left of block 1 and that block 1 is right of
+find me all the blocks with more than 2 blocks below it	block that more than two block is below
+find a block below either block 1 or block 2	block that is below block 1 or block 2
+select a block with width equal or greater than block 1 is long	block whose width is at least length of block 1
+block below block with pyramid shape	block that block whose shape is a pyramid is below
+choose a block that is left of a 3 inch brick	block that is left of block whose height is 3 inches
+block above and below block 1	block that block 1 is below and that is above block 1
+what block has two or more colors	block that has at least two color
+3 inch block above block 1	block whose length is 3 inches and that is above block 1
+find all 3 inch pyramid blocks	block whose height is 3 inches and whose shape is a pyramid
+find all 3 inch pyramid blocks	block whose shape is a pyramid and whose height is 3 inches
+which blocks are not above block 1	block that not is above block 1
+is there a block that is on top of more than two other blocks	block that more than two block is below
+look right of block 1 and get the 3 inch tall block	block whose height is 3 inches and that block 1 is left of
+which brick is above the brick that is below brick 1	block that is above block that is below block 1
+find me all blocks right of block 1 or 2	block that block 1 or block 2 is left of
+what is the shape of block 1	shape of block 1
+find block that is below and to the right of block 1	block that is below block 1 and that is right of block 1
+block with more than 2 shapes	block that has more than two shape
+select all blocks that dont have a width of 3 inches	block whose width is not 3 inches
+which brick is to the left of brick 1 that is at least 3 inches long	block whose length is 3 inches and that is left of block 1
+which brick is to the left of brick 1 that is at least 3 inches long	block that is left of block 1 and whose length is 3 inches
+which brick is to the left of brick 1 that is at least 3 inches long	block that is special and that is left of block 1
+which brick is to the left of brick 1 that is at least 3 inches long	block that is left of block 1 and that is special
+block that is right of the least number of block	block that is right of the least number of block
+block that is right of the least number of block	block that is below the least number of block
+block that is right of the least number of block	block that is above the least number of block
+block that is right of the least number of block	block that has the least number of shape
+block that is right of the least number of block	block that has the least number of color
+block that is right of the least number of block	block that is right of less than two block
+block that is right of the least number of block	block that is below the most number of block
+block that is right of the least number of block	block that is above the most number of block
+block that is right of the least number of block	block that is left of less than two block
+find me all blocks 3 inches tall	block whose height is 3 inches and whose height is 3 inches
+find me all blocks 3 inches tall	block whose height is 3 inches
+find me all blocks 3 inches tall	block whose height is length of block 1
+what brick has two bricks to its left	block that two block is left of
+find a block as long or longer than block 1	block whose length is at most length of block 1
+find a block as long or longer than block 1	block whose length is smaller than height of block 1
+find a block as long or longer than block 1	block whose length is at most 3 inches
+find me all blocks 1 is right and above	block that block 1 is right of and that block 1 is above
+choose the block to the right of block 2	block that two block is right of
+block whose length is 3 inches and that is special	block whose length is 3 inches and that is special
+block whose length is 3 inches and that is special	block that is special and whose length is 3 inches
+block that has less than two shape	block that has less than two shape
+block that has less than two shape	block that has less than two color
+block that has less than two shape	block that has at most two shape
+block that has less than two shape	block that has the most number of shape
+block that has less than two shape	block that is below less than two block
+block that has less than two shape	block that has at most two color
+block that has less than two shape	block that has the least number of shape
+block that has less than two shape	block that is above less than two block
+block that has less than two shape	block that is left of less than two block
+block that has less than two shape	block that is right of less than two block
+block that has less than two shape	block that has the most number of color
+block that has less than two shape	block that has the least number of color
+block that has less than two shape	block that is left of at most two block
+block that has less than two shape	block that is right of at most two block
+block that has less than two shape	block that is above the most number of block
+block that has less than two shape	block that is below the most number of block
+select all blocks with the same width as block 1	block whose width is width of block 1
+pyramid shaped block left of block 1	block whose shape is a pyramid and that block 1 is left of
+pyramid shaped block left of block 1	block that block 1 is left of and whose shape is a pyramid
+pyramid shaped block left of block 1	block that block 1 is left of
+pyramid shaped block left of block 1	block that is special and that block 1 is left of
+pyramid shaped block left of block 1	block that block 1 is left of and that is special
+pyramid shaped block left of block 1	block that block 1 is left of and that block 1 is left of
+find me all pyramid blocks above block 1	block whose shape is a pyramid and that is above block 1
+choose a block that is above block 1 or 2	block that is above block 1 or block 2
+block that has the most number of color	block that has the most number of color
+block that has the most number of color	block that has the most number of shape
+block that has the most number of color	block that has the least number of color
+block that has the most number of color	block that has the least number of shape
+block that has the most number of color	block that is above the most number of block
+block that has the most number of color	block that is below the most number of block
+block that has the most number of color	block that has at most two color
+block that has the most number of color	block that has less than two color
+block that has the most number of color	block that has at most two shape
+block that has the most number of color	block that has less than two shape
+block that has the most number of color	block that is above the least number of block
+block that has the most number of color	block that is below the least number of block
+block that has the most number of color	block that is left of at most two block
+block that has the most number of color	block that is right of at most two block
+block that has the most number of color	block that is left of less than two block
+block that has the most number of color	block that is right of less than two block
+which brick is at least as long as brick 1 is tall	block whose length is at least height of block 1
+choose a block that is special	block that is special and that is special
+choose a block that is special	block that is special
+what block is 2 blocks below block 1	block that is below block that is below block 1
+block left of block one and shaped like a pyramid	block that is left of block 1 and whose shape is a pyramid
+find the block on the left side of the special block	block that block that is special is left of
+block that more than two block is above	block that more than two block is above
+find a block shaped like a pyramid or a cube	a pyramid or a cube
+find a block located to the right of two other blocks	block that two block is left of
+what pyramid shaped block is at right of block 1	block that block 1 is left of and whose shape is a pyramid
+what pyramid shaped block is at right of block 1	block whose shape is a pyramid and that block 1 is left of
+what pyramid shaped block is at right of block 1	block that block 1 is left of
+what pyramid shaped block is at right of block 1	block that block 1 is left of and that is special
+what pyramid shaped block is at right of block 1	block that block 1 is left of and that block 1 is left of
+what pyramid shaped block is at right of block 1	block that is special and that block 1 is left of
+block below block 1 and 3 inches in height	block that block 1 is above and whose height is 3 inches
+find me all blocks that block 1 is right and left of	block that block 1 is right of and that block 1 is left of
+pyramid above block 1	block whose shape is a pyramid and that is above block 1
+choose a block that is under the most populous amount of blocks	block that is below the most number of block
+choose a block that is under the most populous amount of blocks	block that is above the most number of block
+choose a block that is under the most populous amount of blocks	block that is below the least number of block
+choose a block that is under the most populous amount of blocks	block that is above the least number of block
+choose a block that is under the most populous amount of blocks	block that is below at most two block
+choose a block that is under the most populous amount of blocks	block that is below less than two block
+choose a block that is the same or below brick 1	block whose length is at most height of block 1
+a special 3 inch high block	block whose height is 3 inches and that is special
+a special 3 inch high block	block that is special and whose height is 3 inches
+select the block that is above and right of block 1	block that is above block that is right of block 1
+pyramid left of block 1	block whose shape is a pyramid and that is left of block 1
+3 inches long pyramid shaped block	block whose length is 3 inches and whose shape is a pyramid
+beneath block 1 is a block with a height of 3 inches find it	block whose height is 3 inches and that is below block 1
+beneath block 1 is a block with a height of 3 inches find it	block that block that block 1 is left of is above
+what block  has a height of 3 inches and that block 1 is above	block whose height is 3 inches and that block 1 is above
+which brick is to the right of the brick that is 3 inches high	block that is right of block whose height is 3 inches
+block whose shape is a pyramid and that is below block 1	block whose shape is a pyramid and that is below block 1
+block whose shape is a pyramid and that is below block 1	block that is below block 1 and whose shape is a pyramid
+find a block with width less than or equal to block 1	block whose width is at most width of block 1
+find me all blocks left of which block 1 is below	block that block that is left of block 1 is below
+find me all blocks right of block 1 which block 1 is left of	block that is right of block 1 and that block 1 is left of
+which brick is no longer than brick 1 is high	block whose length is at most height of block 1
+choose a block under block 2	block that two block is below
+find me all the blocks taller than the length of block 1	block whose height is larger than length of block 1
+find me all the blocks taller than the length of block 1	block whose height is at least height of block 1
+find the block buried under the smallest number of other blocks	block that the least number of block is above
+select a block that is not below block 1	block that block 1 not is below
+what block is to the left of the pyramidshaped block	block that is left of block whose shape is a pyramid
+block less wider than the length of block 1	block whose width is smaller than length of block 1
+which brick has a width smaller than the width of brick 1	block whose width is smaller than width of block 1
+which brick has a width smaller than the width of brick 1	block whose width is at most height of block 1
+find the block with maximum length of 6 inches	block whose length is at most 3 inches or 6 inches
+choose the brick to the right of the brick above brick 1	block that is right of block that is above block 1
+block either 3 inches or 6 inches long	block whose length is 3 inches or 6 inches
+what block is 3 inches wide by 3 inches tall	block whose height is 3 inches and whose width is 3 inches
+what block is 3 inches wide by 3 inches tall	block whose width is 3 inches and whose height is 3 inches
+get me the blocks to the left of the block above block 1	block that is left of block that block 1 is below
+block below blocks 1 and 2	block that block 1 or block 2 is above
+pyramid to left of block 1	block that is left of block 1 and whose shape is a pyramid
+what block is 3 inches long and has block 1 on its left	block that is right of block 1 and whose length is 3 inches
+what block is 3 inches long and has block 1 on its left	block whose length is 3 inches and that is right of block 1
+what block is 3 inches long and has block 1 on its left	block that is right of block 1
+select the pyramidshaped brick below brick 1	block whose shape is a pyramid and that is below block 1
+select the pyramidshaped brick below brick 1	block that is below block 1 and whose shape is a pyramid
+what block is 3 inches wide	block whose width is 3 inches
+what block is 3 inches wide	block whose width is 3 inches and whose width is 3 inches
+what block is 3 inches wide	block whose width is length of block 1
+find a block with a height smaller than the height of block 1	block whose height is smaller than height of block 1
+select the block that is left of block 1	block that block that block 1 is left of is left of
+3 inch tall block under first block	block that is below block 1 and whose height is 3 inches
+3 inch tall block under first block	block whose height is 3 inches and that is below block 1
+find the block that is below and to the right of block 1	block that is below block 1 and that is right of block 1
+find a block with the same length as block 1	block whose length is length of block 1
+block whose width is at least the width of block 1	block whose width is at least width of block 1
+block whose width is at least the width of block 1	block whose width is larger than height of block 1
+blocks that have block 1 or block 2 at left	block that block 1 or block 2 is left of
+find me all blocks that has less than 2 blocks to the left	block that is right of less than two block
+find me all blocks that has less than 2 blocks to the left	block that has less than two shape
+find me all blocks that has less than 2 blocks to the left	block that has less than two color
+find me all blocks that has less than 2 blocks to the left	block that is left of less than two block
+find me all blocks that has less than 2 blocks to the left	block that is below less than two block
+find me all blocks that has less than 2 blocks to the left	block that is above less than two block
+find me all blocks that has less than 2 blocks to the left	block that is left of at most two block
+find me all blocks that has less than 2 blocks to the left	block that has the most number of shape
+find me all blocks that has less than 2 blocks to the left	block that has the most number of color
+find me all blocks that has less than 2 blocks to the left	block that has the least number of shape
+find me all blocks that has less than 2 blocks to the left	block that has the least number of color
+find me all blocks that has less than 2 blocks to the left	block that is above at most two block
+find me all blocks that has less than 2 blocks to the left	block that is below at most two block
+find me all blocks that has less than 2 blocks to the left	block that is right of at most two block
+find me all blocks that has less than 2 blocks to the left	block that is above the most number of block
+find me all blocks that has less than 2 blocks to the left	block that is below the most number of block
+find me all blocks that has less than 2 blocks to the left	block that is above the least number of block
+find me all blocks that has less than 2 blocks to the left	block that is below the least number of block
+block that at least two block is below	block that at least two block is below
+left of block 1	block that block 1 is right of
+left of block 1	block that block 1 is right of and that is special
+left of block 1	block that is special and that block 1 is right of
+left of block 1	block that block 1 is right of and that block 1 is right of
+left of block 1	block that block 1 not is right of
+find a block that is below block 1	block that is below block that block 1 is above
+select a pyramid or cube shaped block	a pyramid or a cube
+find me all special blocks with length less than 3 inches	block that is special and whose length is 3 inches
+find me all special blocks with length less than 3 inches	block whose length is 3 inches and that is special
+which block has at least two blocks above it	block that at least two block is above
+block that is below block 1 and that is special	block that is below block 1 and that is special
+block that is below block 1 and that is special	block that is special and that is below block 1
+find me the block whose shape is a pyramid	block that block whose shape is a pyramid is above
+choose a smallest block than block 1	block whose width is smaller than width of block 1
+choose a smallest block than block 1	block whose width is at most height of block 1
+select the tallest block	block that has the largest height
+find me a block with at most two blocks below it	block that is above at most two block
+find me a block with at most two blocks below it	block that is below at most two block
+find me a block with at most two blocks below it	block that is left of at most two block
+find me a block with at most two blocks below it	block that has at most two shape
+find me a block with at most two blocks below it	block that has at most two color
+find me a block with at most two blocks below it	block that is right of at most two block
+find me a block with at most two blocks below it	block that is below less than two block
+find me a block with at most two blocks below it	block that is below the most number of block
+find me a block with at most two blocks below it	block that is above the most number of block
+find me a block with at most two blocks below it	block that is above less than two block
+find me a block with at most two blocks below it	block that is below the least number of block
+find me a block with at most two blocks below it	block that is left of less than two block
+find me a block with at most two blocks below it	block that is right of less than two block
+find me a block with at most two blocks below it	block that is above the least number of block
+find me the special block to the right of block 1	block that is special and that is right of block 1
+find me the special block to the right of block 1	block that is right of block 1 and that is special
+find me the special block to the right of block 1	block that is right of block 1
+find me the special block to the right of block 1	block that is right of block 1 and that is right of block 1
+find me the special block to the right of block 1	block that is right of block 1 or block 2
+which brick is no wider than brick 1 is tall	block whose width is at most height of block 1
+which special brick is to the left of brick 1	block that is left of block 1 and that is special
+which special brick is to the left of brick 1	block that is special and that is left of block 1
+find the block on the right side of the block on the right side of block 1	block that block that block 1 is right of is right of
+select the block that has a height of 3 inches and is above block 1	block whose height is 3 inches and that block 1 is below
+which brick is at least as long as brick 1	block whose length is at least length of block 1
+which brick is at least as long as brick 1	block whose length is at least 3 inches
+block that is left of block which is below block 1	block that is left of block that is below block 1
+block that is left of block which is below block 1	block that is right of block that is above block 1
+left of 3 inch block	block that block whose height is 3 inches is right of
+which block is furthest to the right	block that is right of the most number of block
+which block is furthest to the right	block that is right of less than two block
+which block is furthest to the right	block that is right of at most two block
+which block is furthest to the right	block that is above less than two block
+which block is furthest to the right	block that is above the most number of block
+which block is furthest to the right	block that is above the least number of block
+which block is furthest to the right	block that is left of less than two block
+which block is furthest to the right	block that is below less than two block
+which block is furthest to the right	block that is below the least number of block
+which block is furthest to the right	block that is below the most number of block
+which block is furthest to the right	block that is left of at most two block
+what 3inch wide brick is pyramidshaped	block whose shape is a pyramid and whose width is 3 inches
+choose a block that is no higher than 2 blocks	block that is above at most two block
+choose a block that is no higher than 2 blocks	block that is above less than two block
+choose a block that is no higher than 2 blocks	block that is left of at most two block
+choose a block that is no higher than 2 blocks	block that is below at most two block
+choose a block that is no higher than 2 blocks	block that is right of at most two block
+choose a block that is no higher than 2 blocks	block that is right of less than two block
+choose a block that is no higher than 2 blocks	block that is left of less than two block
+choose a block that is no higher than 2 blocks	block that has at most two shape
+choose a block that is no higher than 2 blocks	block that has at most two color
+choose a block that is no higher than 2 blocks	block that is above the most number of block
+choose a block that is no higher than 2 blocks	block that is above the least number of block
+choose a block that is no higher than 2 blocks	block that is below the most number of block
+find a special block above block 1	block that is special and that block 1 is below
+find a special block above block 1	block that block 1 is below and that is special
+find a special block above block 1	block that block 1 is below
+find a special block above block 1	block that block 1 is below and that block 1 is below
+what is the color of block 1	color of block 1
+what is the length of brick 1	length of block 1
+find me all the 3 inch tall pyramid blocks	block whose height is 3 inches and whose shape is a pyramid
+what pyramidshaped blocks are below block 1	block that is below block 1 and whose shape is a pyramid
+what pyramidshaped blocks are below block 1	block whose shape is a pyramid and that is below block 1
+find me all 3 inch long blocks above block 1	block that is above block 1 and whose length is 3 inches
+find me all blocks above 2 blocks	block that is above two block
+find the block with a height and length of 3 inches	block whose height is 3 inches and whose length is 3 inches
+what is the average width of a block	average width of block
+what is the average width of a block	average height of block
+what is the average width of a block	average length of block
+find a special pyramidshaped block	block that is special and whose shape is a pyramid
+find a special pyramidshaped block	block whose shape is a pyramid and that is special
+block right of 3 inches long block 1	block that is right of block 1 and whose length is 3 inches
+block right of 3 inches long block 1	block whose length is 3 inches and that is right of block 1
+block right of 3 inches long block 1	block that is right of block 1
+block right of 3 inches long block 1	block that is special and that is right of block 1
+block right of 3 inches long block 1	block that is right of block 1 or block 2
+what block has the least blocks to the left of it	block that is right of the least number of block
+what block has the least blocks to the left of it	block that has the least number of shape
+what block has the least blocks to the left of it	block that has the least number of color
+what block has the least blocks to the left of it	block that is below the least number of block
+what block has the least blocks to the left of it	block that is left of less than two block
+what block has the least blocks to the left of it	block that is above the least number of block
+what block has the least blocks to the left of it	block that has less than two shape
+what block has the least blocks to the left of it	block that has the most number of shape
+what block has the least blocks to the left of it	block that has less than two color
+what block has the least blocks to the left of it	block that has the most number of color
+what block has the least blocks to the left of it	block that is below the most number of block
+what block has the least blocks to the left of it	block that is above less than two block
+what block has the least blocks to the left of it	block that is above the most number of block
+what block has the least blocks to the left of it	block that is right of less than two block
+what block has the least blocks to the left of it	block that is below less than two block
+is there a block under one or two blocks at most	block that is below at most two block
+is there a block under one or two blocks at most	block that has at most two shape
+is there a block under one or two blocks at most	block that has at most two color
+is there a block under one or two blocks at most	block that is above at most two block
+is there a block under one or two blocks at most	block that is left of at most two block
+is there a block under one or two blocks at most	block that is right of at most two block
+is there a block under one or two blocks at most	block that is below the most number of block
+is there a block under one or two blocks at most	block that is left of less than two block
+is there a block under one or two blocks at most	block that has the most number of shape
+is there a block under one or two blocks at most	block that is right of less than two block
+is there a block under one or two blocks at most	block whose color is red or green
+is there a block under one or two blocks at most	block that has the least number of shape
+is there a block under one or two blocks at most	block that has the least number of color
+is there a block under one or two blocks at most	block that is below the least number of block
+is there a block under one or two blocks at most	block that is above the least number of block
+above block to right of block 1	block that is above block that block 1 is left of
+block whose width is 3 inches and whose length is 3 inches	block whose width is 3 inches and whose length is 3 inches
+block whose width is 3 inches and whose length is 3 inches	block whose length is 3 inches and whose width is 3 inches
+right of and above block 1	block that block 1 is below and that block 1 is left of
+select the block that is 3 inches long and to the right of block 1	block whose length is 3 inches and that is right of block 1
+select the block that is 3 inches long and to the right of block 1	block that is right of block 1 and whose length is 3 inches
+select the block that is 3 inches long and to the right of block 1	block that is right of block 1
+select the block that is 3 inches long and to the right of block 1	block that is special and that is right of block 1
+select the block that is 3 inches long and to the right of block 1	block that is right of block 1 or block 2
+select the block that is 3 inches long and to the right of block 1	block that is right of block 1 and that is right of block 1
+block that is below block whose shape is a pyramid	block that is below block whose shape is a pyramid
+find me all 3 inch high and 3 inch wide blocks	block whose height is 3 inches and whose width is 3 inches
+find me all 3 inch high and 3 inch wide blocks	block whose width is 3 inches and whose height is 3 inches
+find me a block thicker than the length of block 1	block whose width is larger than length of block 1
+is there a block to the right of just one block only	block that less than two block is left of
+block that not is left of block 1	block that not is left of block 1
+find the block to the left of the block that is 3 inches in diameter	block that is left of block whose width is 3 inches
+find the block that is 3 inches wide	block whose width is 3 inches and whose width is 3 inches
+find the block that is 3 inches wide	block whose width is 3 inches
+find the block that is 3 inches wide	block whose width is length of block 1
+what blocks length is greater than 3 to 6 inches	block whose length is larger than 3 inches or 6 inches
+what blocks length is greater than 3 to 6 inches	block whose length is larger than 3 inches
+what blocks length is greater than 3 to 6 inches	block whose length is larger than length of block 1
+select the block on the left corner	block that is left of two block
+find me a block that is below any block that is 3 inches	block that block whose height is 3 inches is below
+find the block that is left of block 1	block that is left of block 1 and that block 1 is right of
+block below either block 1 or block 2	block that is below block 1 or block 2
+choose a block that is under the least number of bricks	block that is below the least number of block
+choose a block that is under the least number of bricks	block that has the least number of shape
+choose a block that is under the least number of bricks	block that has the least number of color
+choose a block that is under the least number of bricks	block that is above the least number of block
+choose a block that is under the least number of bricks	block that is below the most number of block
+choose a block that is under the least number of bricks	block that is above the most number of block
+choose a block that is under the least number of bricks	block that is below less than two block
+choose a block that is under the least number of bricks	block that is left of less than two block
+choose a block that is under the least number of bricks	block that is right of less than two block
+right of block one with pyramid shape	block that block 1 is left of and whose shape is a pyramid
+right of block one with pyramid shape	block whose shape is a pyramid and that block 1 is left of
+right of block one with pyramid shape	block that block 1 is left of
+right of block one with pyramid shape	block that block 1 is left of and that is special
+right of block one with pyramid shape	block that is special and that block 1 is left of
+right of block one with pyramid shape	block that block 1 is left of and that block 1 is left of
+block block a 3 inch long block	block that block whose length is 3 inches is below
+which brick is below the brick below brick 1	block that is below block that is below block 1
+what block is 3 inches wide and 3 inches tall	block whose width is 3 inches and whose height is 3 inches
+what block is 3 inches wide and 3 inches tall	block whose height is 3 inches and whose width is 3 inches
+find me all blocks with width less than 3 inches	block whose width is smaller than 3 inches
+find me all blocks with width less than 3 inches	block that has the smallest width
+which brick is to the right of less than two bricks	block that is right of less than two block
+which brick is to the right of less than two bricks	block that is left of less than two block
+which brick is to the right of less than two bricks	block that is below less than two block
+which brick is to the right of less than two bricks	block that is above less than two block
+which brick is to the right of less than two bricks	block that is right of at most two block
+which brick is to the right of less than two bricks	block that is left of at most two block
+which brick is to the right of less than two bricks	block that is above the most number of block
+which brick is to the right of less than two bricks	block that is below the most number of block
+which block of 3 inches height is above the block 1	block whose height is 3 inches and that block 1 is below
+find me all 3 inch wide blocks left of block 1	block that is left of block 1 and whose width is 3 inches
+select the block that is above block 1	block that block 1 is above and that block 1 is above
+select the block that is above block 1	block that block 1 is above
+select the block that is above block 1	block that block 1 is above and that is left of block 1
+select the block that is above block 1	block that is left of block 1 and that block 1 is above
+find me the block that is to the left of block 1 and special	block that block 1 is right of and that is special
+find me the block that is to the left of block 1 and special	block that is special and that block 1 is right of
+find me the block that is to the left of block 1 and special	block that block 1 is right of
+find me the block that is to the left of block 1 and special	block that block 1 is right of and that block 1 is right of
+find me all the special blocks	block that is special
+find me all the special blocks	block that is special and that is special
+select block 1 and all of the blocks below it	block that block 1 is above and that is below block 1
+what is the width of block 1	width of block 1
+block that is special and whose shape is a pyramid	block that is special and whose shape is a pyramid
+block that is special and whose shape is a pyramid	block whose shape is a pyramid and that is special
+which block is above the special block	block that is above block that is special
+find me all the blocks that have 2 blocks to the right of it	block that at least two block is left of
+which brick has a length shorter than the height of brick 1	block whose length is smaller than height of block 1
+find me the block that has a height of 3 inches	block that block whose height is 3 inches is below
+block left of block 1 thats 3 inches high	block that is left of block 1 and whose height is 3 inches
+which brick is 3 inches wide and below brick 1	block whose width is 3 inches and that is below block 1
+which brick is 3 inches wide and below brick 1	block that is below block 1 and whose width is 3 inches
+which brick is 3 inches wide and below brick 1	block whose width is 3 inches and whose length is 3 inches
+which brick is 3 inches wide and below brick 1	block whose length is 3 inches and whose width is 3 inches
+find me all blocks left of block 1	block that block that is left of block 1 is right of
+which block has at least two blocks below it	block that at least two block is below
+find me all blocks which block 1 is not above	block that block 1 not is above
+find blocks that are at least 3 inches high or 6 inches high	block whose height is at least 3 inches or 6 inches
+find blocks that are at least 3 inches high or 6 inches high	block whose height is at least 3 inches
+block not longer than block 1	block whose length is at most length of block 1
+find the 3 inches in length block that is on the left side  of block 1	block whose length is 3 inches and that block 1 is right of
+find the 3 inches in length block that is on the left side  of block 1	block that block 1 is right of and whose length is 3 inches
+find the 3 inches in length block that is on the left side  of block 1	block that block 1 is right of
+find the 3 inches in length block that is on the left side  of block 1	block that is special and that block 1 is right of
+color of block 1	color of block 1
+which brick is the same width as brick 1	block whose width is width of block 1
+what blocks have a width larger than the height of block 1	block whose width is larger than height of block 1
+find me all the blocks that is as long as block 1 is tall	block whose length is height of block 1
+find the block below the block that is 3 inches in width	block that block whose width is 3 inches is above
+which brick is not shaped like a pyramid	block whose shape is not a pyramid
+which brick is not shaped like a pyramid	block whose shape is shape of block 1
+block below block which is below block 1	block that is below block that is below block 1
+find me all blocks that block 1 is belo	block that block that block 1 is below is below
+find me all blocks that block 1 is belo	block that block that block 1 is below is above
+find me all blocks that block 1 is belo	block that block that block 1 is right of is right of
+find the block above 2 blocks	block that at most two block is below
+what block is below two or more blocks	block that is below at least two block
+find 3 inch block left of block 1	block that block 1 is right of and whose width is 3 inches
+choose a block that is the same length as block 1	block whose length is at least length of block 1
+choose a block that is the same length as block 1	block whose length is at least 3 inches
+what block is special and left of block 1	block that is special and that block 1 is left of
+what block is special and left of block 1	block that block 1 is left of and that is special
+what block is special and left of block 1	block that block 1 is left of
+what block is special and left of block 1	block that block 1 is left of and that block 1 is left of
+which brick is longer than 3 or 6 inches	block whose length is larger than 3 inches or 6 inches
+which brick is longer than 3 or 6 inches	block whose length is larger than 3 inches
+block that is special and whose height is 3 inches	block that is special and whose height is 3 inches
+block that is special and whose height is 3 inches	block whose height is 3 inches and that is special
+which brick is at least as wide as brick 1	block whose width is at least width of block 1
+which brick is at least as wide as brick 1	block whose width is larger than height of block 1
+find me all blocks 2 blocks to the right of block 1	block that is right of block that is right of block 1
+average length of block	average length of block
+average length of block	average height of block
+average length of block	average width of block
+find me the block that has a height of 3 inches and is above block 1	block whose height is 3 inches and that is above block 1
+what block is special and is to the left of block 1	block that is special and that block 1 is left of
+what block is special and is to the left of block 1	block that block 1 is left of and that is special
+what block is special and is to the left of block 1	block that block 1 is left of
+what block is special and is to the left of block 1	block that block 1 is left of and that block 1 is left of
+find the block that block 1 is below and that has a shape of a pyramid	block that block 1 is below and whose shape is a pyramid
+what block is above and to the right of block 1	block that block that block 1 is above is right of
+select the block that is block 1 is left of and that is special	block that block 1 is left of and that is special
+select the block that is block 1 is left of and that is special	block that is special and that block 1 is left of
+select the block that is block 1 is left of and that is special	block that block 1 is left of
+select the block that is block 1 is left of and that is special	block that block 1 is left of and that block 1 is left of
+select the brick with the most blocks above it	block that the most number of block is above
+block with two or more shapes	block that has at least two shape
+select the block that is right of the block that block 1 is to the left of	block that block that is right of block 1 is left of
+find a block that is not below block 1	block that not is below block 1
+3 inch block below block 1	block whose width is 3 inches and that block 1 is above
+what blocks are above more than two blocks	block that is above more than two block
+find me all pyramid blocks left of block 1	block that is left of block 1 and whose shape is a pyramid
+choose a block that is 3 inches tall	block that is left of block whose length is 3 inches
+find the block with the greatest number of colors on it	block that has the most number of color
+find the block with the greatest number of colors on it	block that has the least number of color
+find the block with the greatest number of colors on it	block that has the most number of shape
+find the block with the greatest number of colors on it	block that is above the most number of block
+find the block with the greatest number of colors on it	block that is below the most number of block
+find the block with the greatest number of colors on it	block that has the least number of shape
+find the block with the greatest number of colors on it	block that is above the least number of block
+find the block with the greatest number of colors on it	block that has less than two color
+find the block with the greatest number of colors on it	block that is below the least number of block
+find the block with the greatest number of colors on it	block that has less than two shape
+find the block with the greatest number of colors on it	block that is left of less than two block
+find the block with the greatest number of colors on it	block that is above less than two block
+find the block with the greatest number of colors on it	block that is right of less than two block
+find the block with the greatest number of colors on it	block that is left of at most two block
+find the block with the greatest number of colors on it	block that is above at most two block
+find the block with the greatest number of colors on it	block that is below less than two block
+find the block with the greatest number of colors on it	block that is right of at most two block
+which brick is the widest	block that has the largest width
+find the 3 inch tall special block	block that is special and whose height is 3 inches
+find the 3 inch tall special block	block whose height is 3 inches and that is special
+what block has block 1 above and below	block that is below block 1 and that block 1 is below
+block that is left of at most two block	block that is left of at most two block
+block that is left of at most two block	block that is right of at most two block
+block that is left of at most two block	block that is left of less than two block
+block that is left of at most two block	block that is right of less than two block
+find me all 3 inch long blocks that block 1 is below	block that block 1 is below and whose length is 3 inches
+choose a block that is special and shaped like a pyramid	block whose shape is a pyramid and that is special
+choose a block that is special and shaped like a pyramid	block that is special and whose shape is a pyramid
+find the widest block	block that has the largest width
+what is the average length of a block	average length of block
+what is the average length of a block	average height of block
+what is the average length of a block	average width of block
+which brick has two bricks to its right	block that two block is right of
+what block has the least number of colors	block that has the least number of color
+what block has the least number of colors	block that has the least number of shape
+what block has the least number of colors	block that has the most number of color
+what block has the least number of colors	block that is below the least number of block
+what block has the least number of colors	block that is above the least number of block
+what block has the least number of colors	block that has the most number of shape
+what block has the least number of colors	block that has less than two color
+what block has the least number of colors	block that has less than two shape
+what block has the least number of colors	block that is below the most number of block
+what block has the least number of colors	block that is above the most number of block
+what block has the least number of colors	block that is left of less than two block
+what block has the least number of colors	block that is right of less than two block
+what block has the least number of colors	block that is above less than two block
+what block has the least number of colors	block that is below less than two block
+block whose length is 3 inches and whose width is 3 inches	block whose length is 3 inches and whose width is 3 inches
+block whose length is 3 inches and whose width is 3 inches	block whose width is 3 inches and whose length is 3 inches
+below and to the right of block 1	block that is below block 1 and that block 1 is left of
+select all which is less than the width of block 1	block whose length is smaller than width of block 1
+find me all 3 inch long blocks right of block 1	block that is right of block 1 and whose length is 3 inches
+find me all 3 inch long blocks right of block 1	block whose length is 3 inches and that is right of block 1
+find me all 3 inch long blocks right of block 1	block that is right of block 1
+find me all 3 inch long blocks right of block 1	block that is special and that is right of block 1
+find me all 3 inch long blocks right of block 1	block that is right of block 1 or block 2
+what block has below it a block in the shape of a pyramid	block that block whose shape is a pyramid is below
+find a pyramidshaped block	block whose shape is a pyramid and whose shape is a pyramid
+find a pyramidshaped block	block whose shape is a pyramid
+find me all blocks as wide as block 1 is tall	block whose width is height of block 1
+what block has two color	block that has two color
+find me all special blocks below block 1	block that is special and that is below block 1
+find me all special blocks below block 1	block that is below block 1 and that is special
+find a block that is not 3 inches wide	block whose width is not 3 inches
+select the block that is 3 inches and is left of block 1	block that block 1 is left of and whose height is 3 inches
+find me all blocks at block 1	block that is left of block that is right of block 1
+find a 3inch long block located to the left of block 1	block that is left of block 1 and whose length is 3 inches
+find a 3inch long block located to the left of block 1	block whose length is 3 inches and that is left of block 1
+find a 3inch long block located to the left of block 1	block that is special and that is left of block 1
+find a 3inch long block located to the left of block 1	block that is left of block 1 and that is special
+which pyramidshaped brick is below brick 1	block that is below block 1 and whose shape is a pyramid
+which pyramidshaped brick is below brick 1	block whose shape is a pyramid and that is below block 1
+find the block whose width is 3 inches and is on the right side of block 1	block whose width is 3 inches and that block 1 is left of
+find me the block that is to the right of block 1	block that block 1 is right of and that block 1 is left of
+choose the block to the right of the other block	block that at least two block is right of
+block whose height is not more than block 1	block whose height is at most length of block 1
+block whose height is not more than block 1	block whose height is at most 3 inches
+find me a block with block 1 above it	block that is below block 1
+find me a block with block 1 above it	block that is below block 1 and that is below block 1
+find a block with block 1 below it	block that is above block 1
+find a block with block 1 below it	block that is special and that is above block 1
+find a block with block 1 below it	block that block that block 1 is left of is below
+find a block with block 1 below it	block that is above block 1 and that is special
+find a block with block 1 below it	block that is above block 1 and that is above block 1
+which block is wider than 3 or 6 inches	block whose width is larger than 3 inches or 6 inches
+which block is wider than 3 or 6 inches	block whose width is larger than 3 inches
+which block is wider than 3 or 6 inches	block whose width is larger than length of block 1
+choose the block to the right of the unique block	block that is right of block that is special
+find me a block at least 3 inches long	block whose length is at least 3 inches
+find me a block at least 3 inches long	block whose length is at least 3 inches or 6 inches
+find me a block at least 3 inches long	block whose length is at least length of block 1
+which 3 inch brick is below brick 1	block that is below block 1 and whose height is 3 inches
+which 3 inch brick is below brick 1	block whose height is 3 inches and that is below block 1
+find a block that is to the left and below block 1	block that block 1 is left of and that is below block 1
+which is the least colorful block	block that has the least number of color
+which is the least colorful block	block that is below the least number of block
+which is the least colorful block	block that is above the least number of block
+which is the least colorful block	block that has less than two color
+which is the least colorful block	block whose color is red or green
+which is the least colorful block	block that is below the most number of block
+which is the least colorful block	block that is above less than two block
+which is the least colorful block	block that is left of less than two block
+which is the least colorful block	block that is below less than two block
+which is the least colorful block	block that is right of less than two block
+which brick is longer than brick 1 is tall	block whose length is larger than height of block 1
+find me all blocks at the same level as block 1	block that is below block that is above block 1
+find the block that is to the right of and below block 1	block that is right of block 1 and that is below block 1
+2 blocks below block 1	block that block that block 1 is below is below
+select the brick with the least number of blocks to the right	block that the least number of block is right of
+find me all blocks left of what block 1 is right of	block that is left of block that block 1 is right of
+find me a block that is to the right of the block that is below block 1	block that is right of block that is below block 1
+what block is above two other blocks	block that is above two block
+block whose height is less than width of block 1	block whose height is smaller than width of block 1
+block whose height is less than width of block 1	block whose height is at most height of block 1
+what brick is 3 inches long and 3 inches wide	block whose length is 3 inches and whose width is 3 inches
+what brick is 3 inches long and 3 inches wide	block whose width is 3 inches and whose length is 3 inches
+find me all special blocks right of something	block that block that is special is right of
+block whose height is 3 inches	block whose height is 3 inches
+block whose height is 3 inches	block whose height is 3 inches and whose height is 3 inches
+block whose height is 3 inches	block whose height is length of block 1
+pyramid to right of block 1	block whose shape is a pyramid and that is right of block 1
+what brick is above brick 1	block that is above block 1 and that is above block 1
+what brick is above brick 1	block that is above block 1
+what brick is above brick 1	block that is special and that is above block 1
+what brick is above brick 1	block that is above block 1 and that is special
+what brick is above brick 1	block that block that block 1 is left of is below
+which block has the largest length	block that has the largest length
+select the block to the right of the block that is 3 inches long	block that is right of block whose width is 3 inches
+find me all blocks that block 1 is left and above of	block that block 1 is left of and that block 1 is above
+what is the total length of the brick	total length of block
+what is the total length of the brick	total height of block
+what is the total length of the brick	total width of block
+select the block that block 1 is above	block that block 1 is above
+select the block that block 1 is above	block that block 1 is above and that block 1 is above
+select the block that block 1 is above	block that block 1 is above and that is left of block 1
+block whose shape is shape of block 1	block whose shape is shape of block 1
+block whose length is smaller than 3 inches or 6 inches	block whose length is smaller than 3 inches or 6 inches
+find the block that is to the left of block 1 whose shape is that of a pyramid	block that is left of block 1 and whose shape is a pyramid
+pyramid block above block 1	block that block 1 is below and whose shape is a pyramid
+a special block below block 1	block that is below block 1 and that is special
+a special block below block 1	block that is special and that is below block 1
+what block is above at two or more blocks	block that is above at least two block
+block whose width is 3 inches	block whose width is 3 inches
+block whose width is 3 inches	block whose width is 3 inches and whose width is 3 inches
+block whose width is 3 inches	block whose width is length of block 1
+find me all the blocks at least as tall as block 1	block whose height is at least height of block 1
+find me all the blocks at least as tall as block 1	block whose height is larger than 3 inches
+what block has less than two blocks below it	block that is above less than two block
+what block has less than two blocks below it	block that is below less than two block
+what block has less than two blocks below it	block that has less than two shape
+what block has less than two blocks below it	block that has less than two color
+what block has less than two blocks below it	block that is left of less than two block
+what block has less than two blocks below it	block that is below at most two block
+what block has less than two blocks below it	block that is right of less than two block
+what block has less than two blocks below it	block that is above at most two block
+what block has less than two blocks below it	block that is left of at most two block
+what block has less than two blocks below it	block that has the most number of shape
+what block has less than two blocks below it	block that has the most number of color
+what block has less than two blocks below it	block that has the least number of shape
+what block has less than two blocks below it	block that has the least number of color
+what block has less than two blocks below it	block that is right of at most two block
+what block has less than two blocks below it	block that is above the most number of block
+what block has less than two blocks below it	block that is above the least number of block
+what block that is not block 1 is below	block that block 1 not is below
+what block is at least as tall as block 1	block whose height is at most height of block 1
+what block is at least as tall as block 1	block whose height is smaller than width of block 1
+select the blocks that are left of and below block 1	block that is left of block 1 and that is below block 1
+select the special block right to block 1	block that is right of block 1 and that is special
+select the special block right to block 1	block that is special and that is right of block 1
+select the special block right to block 1	block that is right of block 1
+select the special block right to block 1	block whose color is red and that is right of block 1
+select the 3 inch long block that is left of block 1	block that block 1 is right of and whose length is 3 inches
+select the 3 inch long block that is left of block 1	block whose length is 3 inches and that block 1 is right of
+select the 3 inch long block that is left of block 1	block that block 1 is right of
+select the 3 inch long block that is left of block 1	block that block 1 is right of and that is special
+select the 3 inch long block that is left of block 1	block that is special and that block 1 is right of
+block above and left from block 1	block that block 1 is below and that block 1 is right of
+3 inch block right of block 1	block that is right of block 1 and whose height is 3 inches
+locate a block that is longer tha block 1 is tall	block whose length is larger than height of block 1
+find me all the blocks above 3 inch tall blocks	block that is above block whose height is 3 inches
+special block right of block 1	block that is right of block 1 and that is special
+special block right of block 1	block that is special and that is right of block 1
+special block right of block 1	block that is right of block 1
+special block right of block 1	block that is right of block 1 or block 2
+special block right of block 1	block that is right of block 1 and that is right of block 1
+what block is below the fewest blocks	block that the least number of block is above
+what block has block 1 below and left	block that block 1 is right of and that is above block 1
+what block is below the block that block 1 is above	block that block that is below block 1 is above
+find me all the 3 inches long blocks and below block 1	block whose length is 3 inches and that is below block 1
+find me all the 3 inches long blocks and below block 1	block that is below block 1 and whose length is 3 inches
+3 inch tall block left of block 1	block whose height is 3 inches and that is left of block 1
+what block is below the 3 inch wide block	block that is below block whose width is 3 inches
+block above 3 inch wide block	block that block whose width is 3 inches is below
+select the block whose length is 3 inches and that is to the left of block 1	block whose length is 3 inches and that block 1 is left of
+what block has block 1 below and to the left	block that block 1 is below and that block 1 is left of
+find me the block that is below and to the right of block 1	block that block that is below block 1 is right of
+find a block that has the length of block 1	block whose width is length of block 1
+find the 3 inch wide block below block 1	block that is below block 1 and whose width is 3 inches
+find the 3 inch wide block below block 1	block whose width is 3 inches and that is below block 1
+find the 3 inch wide block below block 1	block whose length is 3 inches and whose width is 3 inches
+find the 3 inch wide block below block 1	block whose width is 3 inches and whose length is 3 inches
+what block is at least as long as block 1	block whose length is at least length of block 1
+what block is at least as long as block 1	block whose length is at least 3 inches
+find me all blocks that block 1 is right and above of	block that block that block 1 is above is right of
+is there a block that is as long as block 1 is high	block whose length is height of block 1
+find me all the blocks shorter than 3 inches	block whose height is smaller than 3 inches
+find me all the blocks shorter than 3 inches	block that has the smallest height
+select the block that to the left of the most blocks	block that is left of the most number of block
+select the block that to the left of the most blocks	block that is above the most number of block
+select the block that to the left of the most blocks	block that is left of less than two block
+select the block that to the left of the most blocks	block that has the most number of shape
+select the block that to the left of the most blocks	block that is below the most number of block
+select the block that to the left of the most blocks	block that has the most number of color
+select the block that to the left of the most blocks	block that is left of at most two block
+select the block that to the left of the most blocks	block that is right of less than two block
+select the block that to the left of the most blocks	block that is above less than two block
+select the block that to the left of the most blocks	block that has less than two shape
+select the block that to the left of the most blocks	block that has less than two color
+select the block that to the left of the most blocks	block that is below less than two block
+block above and right from block 1	block that block that block 1 is left of is above
+find the block on top of at least two other blocks	block that at least two block is below
+choose a block that is above the most bricks	block that the most number of block is above
+find the blocks that are not to the right of block 1	block that not is right of block 1
+what pyramid shaped block above block 1	block that block 1 is below and whose shape is a pyramid
+look left for block 1 and get the pyramid block	block whose shape is a pyramid and that block 1 is right of
+find me the block that is above block 1 and is in the shape of a pyramid	block that is above block 1 and whose shape is a pyramid
+find me all blocks with more than 2 blocks to its left	block that is right of at least two block
+block as wide as height of block 1	block whose width is height of block 1
+choose a brick 3 inches long that is shaped like a pyramid	block whose shape is a pyramid and whose length is 3 inches
+choose a brick 3 inches long that is shaped like a pyramid	block whose length is 3 inches and whose shape is a pyramid

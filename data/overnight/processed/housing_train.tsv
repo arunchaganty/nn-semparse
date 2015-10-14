@@ -1,0 +1,594 @@
+housing found in two or less neighborhoods	housing unit that has at most two neighborhood
+which housing unit offers a private bath	housing unit that has a private bath and that has a private bath
+seeking houses in quiet neighborhoods	housing unit that has the least number of housing type
+find housing units with unique housing types	housing unit that has the least number of housing type
+housing unit with a posting date at the latest january 2	housing unit whose posting date is at most jan 2
+apartments with less than 2 units	housing unit that has less than two housing type
+show me the housing with the most space available	housing unit that has the largest size
+apartments that are dog friendly	housing unit that allows dogs and that allows dogs
+list all housing that is smaller than 800 square feet	housing unit whose size is smaller than 800 square feet
+what housing unit in midtown west was posted on jan 2	housing unit whose neighborhood is midtown west and whose posting date is jan 2
+a housing unit posted on january 2 or february 3	housing unit whose posting date is jan 2 or feb 3
+what housing units in the midtown east area also allow dogs	housing unit that allows dogs and whose neighborhood is midtown west
+housing units posted after january 2	housing unit whose posting date is larger than jan 2
+find an 800 sq ft housing unit posted on january 2	housing unit whose posting date is jan 2 and whose size is 800 square feet
+find housing unit with the latest posting date	housing unit that has the smallest posting date
+housing listed in the fewest neighborhoods	housing unit that has the least number of neighborhood
+neighborhood that has at least 2 apartments	neighborhood that is neighborhood of at least two housing unit
+housing that rents for at least 1500 per month	housing unit whose monthly rent is at least 1500 dollars
+housing unit that allows dogs and has a private bath	housing unit that allows dogs and that has a private bath
+apartment in a quiet neighborhood	housing unit that has the least number of neighborhood
+housing posted the same day or after 123 sesame street	housing unit whose posting date is at least posting date of 123 sesame street
+apartments at 800 square feet	housing unit whose housing type is apartment and whose size is 800 square feet
+which housing type allows pets	housing type that is housing type of housing unit that allows dogs
+which housing unit is posted before  the posting date of 123 sesame street	housing unit whose posting date is smaller than posting date of 123 sesame street
+housing unit in west midtown posted on january 2	housing unit whose posting date is jan 2 and whose neighborhood is midtown west
+list all housing units that are apartments	housing unit whose housing type is apartment
+a housing unit that includes more than two housing types	housing unit that has more than two housing type
+what housing unit with a private room was posted on jan 2	housing unit whose posting date is jan 2 and that has a private room
+what housing with a private room posted jan 2nd	housing unit whose posting date is jan 2 and that has a private room
+find the housing unit with the most monthly rent	housing unit that has the largest monthly rent
+unit larger than 800 square feet	housing unit whose size is larger than 800 square feet
+what is the mostused housing type	housing type that is housing type of the most number of housing unit
+which housing unit is in the area of 123 sesame street	housing unit whose neighborhood is neighborhood that is neighborhood of 123 sesame street
+find cat friendly housing units with a private bath	housing unit that allows cats and that has a private bath
+units larger than 800 square feet	housing unit whose size is larger than 800 square feet or 1000 square feet
+800 square foot apartment for 1500 rent	housing unit whose monthly rent is 1500 dollars and whose size is 800 square feet
+housing with more square footage than 123 sesame street	housing unit whose size is larger than size of 123 sesame street
+housing that is not the same kind as 123 sesame street	housing type that is not housing type of 123 sesame street
+neighborhoods with housing units with private rooms	neighborhood that is neighborhood of housing unit that has a private room
+list all housing that have the size of 800 or 1000 square feet	800 square feet or 1000 square feet
+what is the monthly rent at 123 sesame street	monthly rent of 123 sesame street
+which housing posted jan 2nd permits cats	housing unit that allows cats and whose posting date is jan 2
+housing that accepts dogs	housing unit that allows dogs
+what neighborhood is 123 sesame street in	neighborhood of 123 sesame street
+800 square foot apartments	housing unit whose size is at most 800 square feet
+dogfriendly housing that is 800 square feet	housing unit whose size is 800 square feet and that allows dogs
+show only neighborhood units of 800 square feet	neighborhood that is neighborhood of housing unit whose size is 800 square feet
+housing unit that allows cats	housing unit that allows cats and that allows cats
+what housing unit allowing dogs was posted on jan 2	housing unit whose posting date is jan 2 and that allows dogs
+find a housing that is no more than 800 square feet	housing unit whose size is at most 800 square feet
+apartments with at least 2 units	housing type that is housing type of at least two housing unit
+neighborhood with the fewest amount of housing units	neighborhood that is neighborhood of the least number of housing unit
+housing that is not an apartment	housing unit whose housing type is not apartment
+find housing units posted before 123 sesame street	housing unit whose posting date is larger than posting date of 123 sesame street
+show me places with a private room where cats are welcome	housing unit that allows cats and that has a private room
+apartment with rent between 1500 and 2000	housing unit whose monthly rent is 1500 dollars or 2000 dollars
+apartment housing that was posted on january 2	housing unit whose posting date is jan 2 and whose housing type is apartment
+smallest apartments	housing unit that has the smallest size
+find housing units that are same as or lesser than the size of 123 sesame street	housing unit whose size is at most size of 123 sesame street
+which housing unit is more expensive than 123 sesame street	housing unit whose monthly rent is larger than monthly rent of 123 sesame street
+which housing units are at least 800 square feet in size	housing unit whose size is at least 800 square feet
+housing that is beetween 800 and 1000 square feet	housing unit whose size is at least 800 square feet or 1000 square feet
+apartments with a rent below 1500 a month	housing unit whose monthly rent is not 1500 dollars
+what housing unit has two or more housing types	housing unit that has more than two housing type
+housing unit with a post date earlier than january 2	housing unit whose posting date is smaller than jan 2
+what neighborhood has less than two housing units	neighborhood that is neighborhood of less than two housing unit
+what housing unit has 2 or more types	housing unit that has at least two housing type
+what kind of housing is 123 sesame street	housing type of 123 sesame street
+apartments posted before 123 sesame street was posted	housing unit whose posting date is smaller than posting date of 123 sesame street
+housing that is not 1500month	housing unit whose monthly rent is not 1500 dollars
+housing that is 1500month and includes a private room	housing unit whose monthly rent is 1500 dollars and that has a private room
+apartments that permit cats	housing unit that allows cats and whose housing type is apartment
+housing apartments that allows cats	housing unit that allows cats and whose housing type is apartment
+neighborhoods with housing that is 1500month	neighborhood that is neighborhood of housing unit whose monthly rent is 1500 dollars
+housing unit that is 800 or 1000 square feet	housing unit whose size is 800 square feet or 1000 square feet
+housing units with less than two nieghborhoods	housing unit that has less than two neighborhood
+800 square foot apartments in midtown west	housing unit whose neighborhood is midtown west and whose size is 800 square feet
+seeking apartment or condo	apartment or condo
+housing under 800 square feet	housing unit whose size is smaller than 800 square feet
+housing that allows dogs that posted on january 2	housing unit whose posting date is jan 2 and that allows dogs
+what neighborhood is the 800 square foot apartment in	neighborhood that is neighborhood of housing unit whose size is 800 square feet
+housing in midtown west that posted on january 2	housing unit whose posting date is jan 2 and whose neighborhood is midtown west
+housing type of more than two available housings	housing type that is housing type of more than two housing unit
+what housing unit posted on jan 2 is in midtown west	housing unit whose posting date is jan 2 and whose neighborhood is midtown west
+how large is 123 sesame street	size of 123 sesame street
+cheapest places to rent	housing unit that has the smallest monthly rent
+apartment that was posted on january 2	housing unit whose posting date is jan 2 and whose housing type is apartment
+housing that is over 800 square feet or over 1000 square feet	housing unit whose size is larger than 800 square feet or 1000 square feet
+housing unit bigger than 800 square feet	housing unit whose size is at least 800 square feet
+apartment for rent at 1500	housing unit whose monthly rent is 1500 dollars
+800 square feet housing unit with a private bath	housing unit whose size is 800 square feet and that has a private bath
+apartment with a private room	housing unit whose housing type is apartment and that has a private room
+neighborhood with the most available housing	neighborhood that is neighborhood of the most number of housing unit
+what is the date of 123 sesame street posting	posting date of 123 sesame street
+what housing unit posted on jan 2 has a monthly rent of 1500 dollars	housing unit whose posting date is jan 2 and whose monthly rent is 1500 dollars
+show me apartments and condos	housing unit whose housing type is apartment or condo
+housing like 123 sesame street that was posted on january 2	housing unit whose posting date is jan 2 and that is size of 123 sesame street
+find housing units posted after 123 sesame street	housing unit whose posting date is smaller than posting date of 123 sesame street
+housing with 2 surrounding neighborhoods	housing unit that has at most two neighborhood
+show me housing in midtown west where rent is 1500 dollars a month	housing unit whose neighborhood is midtown west and whose monthly rent is 1500 dollars
+housing unit in midtown west that has monthly rent of 1500	housing unit whose monthly rent is 1500 dollars and whose neighborhood is midtown west
+which housing units permit dogs and cats	housing unit that allows cats and that allows dogs
+how big is 123 sesame street	size of 123 sesame street
+housing in the neighborhood of 123 sesame street	housing unit whose neighborhood is neighborhood of 123 sesame street
+apartments for rent below 1500	housing unit whose monthly rent is at most 1500 dollars
+show housing types for three or more units	housing type that is housing type of more than two housing unit
+what neighborhood was the housing unit posted on jan 2	neighborhood that is neighborhood of housing unit whose posting date is jan 2
+housing types like 123 sesame street or 900 mission avenue	housing type that is housing type of 123 sesame street or 900 mission ave
+what housing unit is found in the midtown east neighborhood	neighborhood that is neighborhood of housing unit whose neighborhood is midtown west
+housing that is 800 square feet and includes a private bah	housing unit that has a private bath and whose size is 800 square feet
+which housing unit resembles the size of 123 sesame street	housing unit whose size is at most size of 123 sesame street
+how  many neighbourhoods are there	number of neighborhood
+which housing posted after jan 2nd	housing unit whose posting date is larger than jan 2
+private room in midtown west	housing unit whose neighborhood is midtown west and that has a private room
+which neighborhoods have dogfriendly housing	neighborhood that is neighborhood of housing unit that allows dogs
+locate housing units with private roombath	housing unit that has a private room and that has a private bath
+which housing unit is available in the area around mid town west	housing unit whose neighborhood is midtown west and whose neighborhood is midtown west
+find housing units with a private room	housing unit that has a private room and that has a private room
+show me housing whose rent is 1500 dollars and which provides a private bathroom	housing unit that has a private bath and whose monthly rent is 1500 dollars
+neighborhood of 123 sesame street	neighborhood that is neighborhood of 123 sesame street and that is neighborhood of 123 sesame street
+what is the housing type of the housing unit that allows dogs	housing type that is housing type of housing unit that allows dogs
+what is the housing type of the housing unit with a private room	housing type that is housing type of housing unit that has a private room
+housing that ranges between 800 and 1000 square feet	housing unit whose size is at most 800 square feet or 1000 square feet
+what housing unit is the same type as the unit posted on jan 2	housing unit whose housing type is housing unit whose posting date is jan 2
+apartments that were posted on january 2	housing unit whose housing type is apartment and whose posting date is jan 2
+apartments that are smaller than 123 sesame street	housing unit whose size is smaller than size of 123 sesame street
+unit with private bath	housing type that is housing type of housing unit that has a private bath
+housing in a neighborhood larger than two houses	neighborhood that is neighborhood of more than two housing unit
+what is the phone number of this apartment complex	number of housing type
+housing with fewer than two units	housing type that is housing type of less than two housing unit
+housing 800 sq in size posted on january 2	housing unit whose posting date is jan 2 and whose size is 800 square feet
+housing unit that costs 1500 dollars rent and allows cats	housing unit whose monthly rent is 1500 dollars and that allows cats
+housing unit with the same monthly rent as 123 sesame street	housing unit whose monthly rent is monthly rent of 123 sesame street
+housing not in midtown west	housing unit whose neighborhood is not midtown west
+which housing unit has houses of apartment kind	housing unit whose housing type is apartment and whose housing type is apartment
+housing that allows dogs	housing type that is housing type of housing unit that allows dogs
+which housing unit resembles 123 sesame street or 900 mission ave	housing type that is housing type of 123 sesame street or 900 mission ave
+what housing using posted on jan 2 has a private bath	housing unit that has a private bath and whose posting date is jan 2
+housing unit smaller than 800 square feet	housing unit whose size is smaller than 800 square feet
+housing that is more than 800 square feet	housing unit whose size is not 800 square feet
+what housing is a two unit type	housing type that is housing type of two housing unit
+show me housing which posted on or before the day 123 sesame street did	housing unit whose posting date is at most posting date of 123 sesame street
+housing unit with a private room and bath	housing unit that has a private room and that has a private bath
+housing that posted on the same day at 123 sesame street	housing unit whose posting date is at least posting date of 123 sesame street
+which neighborhoods have more than two places available	neighborhood that is neighborhood of at least two housing unit
+show me housing with 800 square feet of space where cats are acceptable	housing unit that allows cats and whose size is 800 square feet
+name neighborhoods with two or more housing units	neighborhood that is neighborhood of at least two housing unit
+apartments with a private room in midtown west	housing unit whose neighborhood is midtown west and that has a private room
+how much is 123 sesame street per month	monthly rent of 123 sesame street
+what neighborhoods have units with 800 square feet	neighborhood that is neighborhood of housing unit whose size is 800 square feet
+what housing unit has two housing types	housing unit that has two housing type
+what neighborhood has housing with a private room	neighborhood that is neighborhood of housing unit that has a private room
+what housing unit has two or more neighborhoods	housing unit that has at least two neighborhood
+apartments that rent for at least 1500	housing unit whose monthly rent is at least 1500 dollars
+housing that is 1500month or 2000month	housing unit whose monthly rent is 1500 dollars or 2000 dollars
+housing that allows dogs and was posted on january 2	housing unit whose posting date is jan 2 and that allows dogs
+housing that is not 800 square feet	housing unit whose size is not 800 square feet
+housing in 123 sesame street neighborhood that was posted on january 2	housing unit whose posting date is jan 2 and that is neighborhood of 123 sesame street
+apartments with a cheaper rent than 123 sesame street	housing unit whose monthly rent is smaller than monthly rent of 123 sesame street
+apartments with rent above 1500	housing unit whose monthly rent is larger than 1500 dollars
+how many neighborhoods	number of neighborhood
+find housing units with private bath located in the neighborhoods of midtown west	housing unit that has a private bath and whose neighborhood is midtown west
+which housing unit is posted on the posting date of 123 sesame street	housing unit whose posting date is posting date of 123 sesame street
+housing that is the same size or bigger than 123 sesame street	housing unit whose size is at least size of 123 sesame street
+apartments in the same neighborhood at 123 sesame street	housing unit whose neighborhood is neighborhood of 123 sesame street
+looking for a unit with a private bathroom and dog friendly	housing unit that has a private bath and that allows dogs
+housing posted the same day as 123 sesame street	housing unit whose posting date is posting date of 123 sesame street
+find housing units that is not an apartment	housing unit whose housing type is not apartment
+which housing unit in the midtown west area has a private room	housing unit that has a private room and whose neighborhood is midtown west
+housing not posted on january 2	housing unit whose posting date is not jan 2
+which housing unit is in midtown west and was posted on january 2	housing unit whose neighborhood is midtown west and whose posting date is jan 2
+pet friendly 800 square feet housing unit	housing unit whose size is 800 square feet and that allows dogs
+housing that posted after january 2 or february 3	housing unit whose posting date is larger than jan 2 or feb 3
+which housing posted jan 2nd at 123 sesame street	housing unit whose posting date is jan 2 and that is posting date of 123 sesame street
+housing that is at least 1500month	housing unit whose monthly rent is at least 1500 dollars
+housing posted after 123 sesame street	housing unit whose posting date is larger than posting date of 123 sesame street
+housing units that are at least the same square footage as the housing unit on 123 sesame street	housing unit whose size is at least size of 123 sesame street
+what are the  units that  do  not belong to the area around midtown west	housing unit whose neighborhood is not midtown west
+find apartments posted on january 2	housing unit whose posting date is jan 2 and whose housing type is apartment
+housing units near two neighborhoods	housing unit that has two neighborhood
+units that have a private room	housing unit that has a private room and that has a private room
+housing unit that is an aprtment	housing unit whose housing type is apartment and whose housing type is apartment
+apartments in midtown west with a rent of 1500 a month	housing unit whose neighborhood is midtown west and whose monthly rent is 1500 dollars
+which housing is no larger than 123 sesame street	housing unit whose size is at most size of 123 sesame street
+what 800 square housing allows dogs	housing unit that allows dogs and whose size is 800 square feet
+find cat friendly housing units with a private room	housing unit that has a private room and that allows cats
+which apartment kind of housing units permits cats in it	housing unit that allows cats and whose housing type is apartment
+housing apartments in a midtown west neighborhood	housing unit whose neighborhood is midtown west and whose housing type is apartment
+housing unit with size of either 800 or 1000 square feet	housing unit whose size is 800 square feet or 1000 square feet
+which housing unit permits dogs and has a private bath	housing unit that has a private bath and that allows dogs
+what is the neighborhood of the apartment that is pet friendly	neighborhood that is neighborhood of housing unit that allows cats
+which housing unit resembles 123 sesame street in size	housing unit whose size is size of 123 sesame street
+find an apartment that is 800 square feet	housing unit whose housing type is apartment and whose size is 800 square feet
+neighborhoods not near 123 sesame street	neighborhood that is not neighborhood of 123 sesame street
+list all housing us that are at least 800 or 1000 square feet	housing unit whose size is at least 800 square feet or 1000 square feet
+apartment that is the same size are 123 sesame street	housing unit whose size is at least size of 123 sesame street
+which housing unit has 1500 dollars as monthly rent	housing unit whose monthly rent is 1500 dollars
+what is the 123 sesame street housing type	housing type of 123 sesame street
+show me housing with 800 square feet of space	housing unit whose size is 800 square feet
+housing that includes two units	housing type that is housing type of two housing unit
+housing posted january 2nd that includes a private room	housing unit whose posting date is jan 2 and that has a private room
+what is the monthly rent of this apartment	total monthly rent of housing unit
+housing near 123 sesame street	neighborhood of 123 sesame street
+apartment with a private room for rent at 1500	housing unit that has a private room and whose monthly rent is 1500 dollars
+which housing units in the neighbourhood permits dogs inside it	neighborhood that is neighborhood of housing unit that allows dogs
+a housing unit on 123 sesame street that posted on january 2	housing unit whose posting date is jan 2 and that is housing type of 123 sesame street
+housing that was posted on january 2 of 123 sesame street kind	housing unit whose posting date is jan 2 and that is posting date of 123 sesame street
+what housing units are the same size as those in 123 sesame street	housing unit whose size is at least size of 123 sesame street
+which is the neighborhood shared by most nuumber of housing units	neighborhood that is neighborhood of the most number of housing unit
+unit with one housing type	housing unit that has less than two housing type
+which housing unit is bigger by area	housing unit that has the largest size
+units posted before january 2nd	housing unit whose posting date is smaller than jan 2
+find 800 square feet sized housing units with a private room	housing unit that has a private room and whose size is 800 square feet
+find all units available midtown east	housing unit whose neighborhood is midtown west
+find housing that allows cats	neighborhood that is neighborhood of housing unit that allows cats
+what is the most common housing type	housing type that is housing type of the most number of housing unit
+what housing unit allowing cats was posted on jan 2	housing unit whose posting date is jan 2 and that allows cats
+housing that is bigger than 123 sesame street	housing unit whose size is larger than size of 123 sesame street
+housing that has at least two types	housing unit that has at least two housing type
+find housing units with 1500 dollars as rent and is near midtown west	housing unit whose monthly rent is 1500 dollars and whose neighborhood is midtown west
+find housings unit posted on other dates except for january 2nd	housing unit whose posting date is not jan 2
+dog and cat friendly housing	housing unit that allows cats and that allows dogs
+what kinds of housing include a private room	housing type that is housing type of housing unit that has a private room
+housing with posting dates before january 2nd and february 3rd	housing unit whose posting date is smaller than jan 2 or feb 3
+which area has more than two housing units	neighborhood that is neighborhood of more than two housing unit
+find housing units around the neighborhoods of 123 sesame street	housing unit whose neighborhood is neighborhood of 123 sesame street
+housing that is 800 square feet with a private bath	housing unit whose size is 800 square feet and that has a private bath
+apartments with rent between 1500 and 2000	housing unit whose monthly rent is smaller than 1500 dollars or 2000 dollars
+a twohousing unit	housing unit that has two housing type
+which housing unit has a private room	housing unit that has a private room and that has a private room
+apartments with a private room	housing unit whose housing type is apartment and that has a private room
+what housing unit is in the same neighborhood as 123 sesame st and was posted on jan 2	housing unit whose posting date is jan 2 and that is neighborhood of 123 sesame street
+what is the neighborhood of the  housing unit with a private room	neighborhood that is neighborhood of housing unit that has a private room
+what kind of housing was posted on january 2	housing type that is housing type of housing unit whose posting date is jan 2
+what housing costs 1500 dollars and is 800 square feet	housing unit whose size is 800 square feet and whose monthly rent is 1500 dollars
+which housing unit is posted before jan 2	housing unit whose posting date is smaller than jan 2 or feb 3
+find housing units less than 1000  square feet	housing unit whose size is at most 800 square feet or 1000 square feet
+name the neighborhood of the housing unit with private bath	neighborhood that is neighborhood of housing unit that has a private bath
+find housing units around 123 sesame street	neighborhood that is neighborhood of 123 sesame street
+find all 800 square foot units with private baths	housing unit that has a private bath and whose size is 800 square feet
+housing that is the same rent as or cheaper than 123 sesame street	housing unit whose monthly rent is at most monthly rent of 123 sesame street
+apartments that allow dogs	housing unit that allows dogs
+housing that is more than 1500month	housing unit whose monthly rent is larger than 1500 dollars
+catfriendly apartments with a private room	housing unit that allows cats and that has a private room
+neighborhood of 123 sesame street or 900 mission ave	neighborhood that is neighborhood of 123 sesame street or 900 mission ave
+what housing unit was posted on jan 2 or feb 3	housing unit whose posting date is jan 2 or feb 3
+housing that is 800 square feet or less	housing unit whose size is at most 800 square feet
+looking for apartments	housing unit whose housing type is apartment and whose housing type is apartment
+find housing units with maximum size 800 square feet	housing unit whose size is at most 800 square feet
+what size is the housing unit posted on january 2	housing unit whose size is housing unit whose posting date is jan 2
+housing at least 800 to 1000 square feet	housing unit whose size is larger than 800 square feet or 1000 square feet
+which housing unit with an area of 800 square feet has the facility of a private room	housing unit whose size is 800 square feet and that has a private room
+housing unit sizes on 123 sesame street	housing unit whose size is size of 123 sesame street
+which housing unit has a rent of 1500 dollars per month	housing unit whose monthly rent is at most 1500 dollars
+which housing unit has the monthly rent of 123 sesame street	housing unit whose monthly rent is monthly rent of 123 sesame street
+housing units with one housing type	housing unit that has less than two housing type
+pet friendly housing unit	housing unit that allows cats and that allows cats
+find 800 square feet housing units of the type apartment	housing unit whose size is 800 square feet and whose housing type is apartment
+find housing units with the least number of neighborhoods	housing unit that has the least number of neighborhood
+what kind of housing is the housing unit posted on jan 2	housing type that is housing type of housing unit whose posting date is jan 2
+housing posted on january 2nd that allows dogs	housing unit that allows dogs and whose posting date is jan 2
+which housing unit with a rent of 1500 dollars per month has a private room	housing unit that has a private room and whose monthly rent is 1500 dollars
+housing unit with 2 types of housing	housing unit that has less than two housing type
+what is the monthly rent for 123 sesame street	housing unit whose monthly rent is at least monthly rent of 123 sesame street
+what housing unit is in two neighborhoods	housing unit that has two neighborhood
+smallest available unit	housing unit that has the smallest size
+housing apartments with a private bath	housing unit whose housing type is apartment and that has a private bath
+housing that is 1500month with a private room	housing unit that has a private room and whose monthly rent is 1500 dollars
+find housing for less than 1500 dollars	housing unit whose monthly rent is smaller than 1500 dollars
+housing unit with posting date less than that of 123 sesame street	housing unit whose posting date is smaller than posting date of 123 sesame street
+show me housing that is the same type as 123 sesame street	housing type that is housing type of 123 sesame street and that is housing type of 123 sesame street
+what kinds of housing allow cats	housing type that is housing type of housing unit that allows cats
+what is the average rent per month of a housing unit	average monthly rent of housing unit
+want a housing type like 123 sesame street	housing type that is housing type of 123 sesame street and that is housing type of 123 sesame street
+what is the neighborhood of 123 sesame street called as	neighborhood that is neighborhood of 123 sesame street and that is neighborhood of 123 sesame street
+apartment between 800 and 1000 square feet	housing unit whose size is at most 800 square feet or 1000 square feet
+neighborhoods with dogfriendly apartments	neighborhood that is neighborhood of housing unit that allows dogs
+which housing unit has 1500 dollars as monthly rent and also has the facility of a private bath	housing unit whose monthly rent is 1500 dollars and that has a private bath
+find housing that is an apartment	housing unit whose housing type is apartment and whose housing type is apartment
+dogfriendly housing	housing unit that allows dogs and that allows dogs
+what housing units allows dogs	housing unit that allows dogs
+housing units that allow cats and charge 1500 rent monthly	housing unit whose monthly rent is 1500 dollars and that allows cats
+find housing units with posting date between january 2nd and february 3rd	housing unit whose posting date is at most jan 2 or feb 3
+which housing unit was posted before jan 2	housing unit whose posting date is smaller than jan 2
+find housing unit with posting date between january 2nd or february 3rd	housing unit whose posting date is smaller than jan 2 or feb 3
+unit with rent between 15002000 dollars	housing unit whose monthly rent is 1500 dollars or 2000 dollars
+housing unit with a posting date bigger than the date of 123 sesame street	housing unit whose posting date is larger than posting date of 123 sesame street
+private housing in midtown west	housing unit that has a private room and whose neighborhood is midtown west
+find housing units with size greater than 800 square feet	housing unit whose size is larger than 800 square feet
+housing that was posted on january 2 or february 3	housing unit whose posting date is at least jan 2 or feb 3
+find pet friendly housing units that charge 1500 dollars as rent	housing unit whose monthly rent is 1500 dollars and that allows dogs
+neighborhood where i can find housing with a private room	neighborhood that is neighborhood of housing unit that has a private room
+which housing unit has apartment kind of houses with an area of 800 square feet	housing unit whose housing type is apartment and whose size is 800 square feet
+what are the neighborhoods of 123 sesame street and 900 mission avenue	neighborhood that is neighborhood of 123 sesame street or 900 mission ave
+housing posted before january 2 or february 3	housing unit whose posting date is smaller than jan 2 or feb 3
+apartments with rent that is more expensive than 123 sesame street	housing unit whose monthly rent is larger than monthly rent of 123 sesame street
+800 square foot dogfriendly apartment	housing unit that allows dogs and whose size is 800 square feet
+housing unit posted january 2 and the same rent as 123 sesame street	housing unit whose posting date is jan 2 and that is monthly rent of 123 sesame street
+which housing unit permits cats and had a private bath in it	housing unit that allows cats and that has a private bath
+apartments with private baths	housing unit whose housing type is apartment and that has a private bath
+housing posted before 123 sesame street	housing unit whose posting date is smaller than posting date of 123 sesame street
+housing types of the most units	housing type that is housing type of the most number of housing unit
+which housing unit was posted january 2 that is the same housing type as 123 sesame st	housing unit whose posting date is jan 2 and that is housing type of 123 sesame street
+show me housing that is the same type as at least two others	housing type that is housing type of at least two housing unit
+list all housing types that are not the same as those in 123 sesame street	housing type that is not housing type of 123 sesame street
+find housing units that satisfies two housing types	housing unit that has at most two housing type
+what midtown west housing unit has a private bath	housing unit whose neighborhood is midtown west and that has a private bath
+find housing units with size lesser than that of 123 sesame street	housing unit whose size is smaller than size of 123 sesame street
+what kind of housing is 123 sesame street or 900 mission ave	housing type that is housing type of 123 sesame street or 900 mission ave
+what is the housing type of 123 sesame street	housing type that is housing type of 123 sesame street and that is housing type of 123 sesame street
+housing units of either 800 square feet or 1000 square feet	800 square feet or 1000 square feet
+which housing unit has the most kind of houses	housing type that is housing type of the most number of housing unit
+which neighborhood has under two housing units	neighborhood that is neighborhood of less than two housing unit
+housing types in the midtown west	housing type that is housing type of housing unit whose neighborhood is midtown west
+find housing units with private room near midtown west	housing unit whose neighborhood is midtown west and that has a private room
+name housing types other than 123 sesame street type	housing type that is not housing type of 123 sesame street
+aparartment or condo units	housing unit whose housing type is apartment or condo
+housing that is 1500month or less	housing unit whose monthly rent is at most 1500 dollars
+which housing unit is available for the least rent	housing unit that has the smallest monthly rent
+name housing types that has more than one housing unit of that type	housing type that is housing type of at least two housing unit
+apartment type housing unit that has private bath	housing unit that has a private bath and whose housing type is apartment
+where are 800 square fee housing units that allow dogs	housing unit whose size is 800 square feet and that allows dogs
+which area has the most number of housing units	housing unit that has the most number of neighborhood
+which is the housing unit that permits dogs inside it	housing unit that allows dogs and that allows dogs
+find housing units with rental charges lesser than 2000 dollars	housing unit whose monthly rent is smaller than 1500 dollars or 2000 dollars
+find housing with a private room and bath	housing unit that has a private room and that has a private bath
+catfriendly apartments in midtown west	housing unit that allows cats and whose neighborhood is midtown west
+which housing unit has more than two kinds of houses	housing type that is housing type of more than two housing unit
+what is the housing type of the two housing units	housing type that is housing type of at least two housing unit
+housing posted before january 2	housing unit whose posting date is smaller than jan 2
+apartments with the same rent as 123 sesame street	housing unit whose monthly rent is at least monthly rent of 123 sesame street
+which housing unit allows dogs and cats	housing unit that allows dogs and that allows cats
+find housing units in the same housing type of 123 sesame street	housing unit whose housing type is housing type of 123 sesame street
+which area has a minimum of two housing units	neighborhood that is neighborhood of at least two housing unit
+housing unit posted on january 2 and that is the same size as 123 sesame st	housing unit whose posting date is jan 2 and that is size of 123 sesame street
+what housing has been posted lately	housing unit that has the smallest posting date
+which midtown west housing have 800 square feet	housing unit whose size is 800 square feet and whose neighborhood is midtown west
+what kind of housing was posted on jan 2	housing type that is housing type of housing unit whose posting date is jan 2
+what kind of housing is in midtown west	housing type that is housing type of housing unit whose neighborhood is midtown west
+housing with a private room that posted on january 2	housing unit that has a private room and whose posting date is jan 2
+housing that was posted january 2 or later	housing unit whose posting date is at least jan 2
+what housing is priced at 1500 or 2000 dollars	housing unit whose monthly rent is at most 1500 dollars or 2000 dollars
+private bath with 800 square feet	housing unit that has a private bath and whose size is 800 square feet
+all housing units posted on january 2	housing unit whose posting date is housing unit whose posting date is jan 2
+apartments similar in size to 123 sesame street	housing unit whose size is size of 123 sesame street
+housing that was posted on january 2	housing unit whose posting date is at least jan 2
+either 800 or 1000 square feet	800 square feet or 1000 square feet
+a unit with a private bath that posted on january 2	housing unit whose posting date is jan 2 and that has a private bath
+apartments in midtown west with rent at 1500	housing unit whose monthly rent is 1500 dollars and whose neighborhood is midtown west
+catfriendly apartments with rent at 1500	housing unit whose monthly rent is 1500 dollars and that allows cats
+housing posted on january 2 or february 3	housing unit whose posting date is jan 2 or feb 3
+most expensive places to rent	housing unit that has the largest monthly rent
+what is the average size of housing	average size of housing unit
+housing apartment with a private bath	housing unit that has a private bath and whose housing type is apartment
+800 foot apartment with a private room	housing unit that has a private room and whose size is 800 square feet
+what is the neighborhood of 123 sesame street	neighborhood of 123 sesame street
+find me a housing unti that chagres 1500 for rent and has a priiiiiiat bathroom	housing unit whose monthly rent is 1500 dollars and that has a private room
+housing of 800 square feet posted on january 2	housing unit whose size is 800 square feet and whose posting date is jan 2
+what housing was posted no earlier than jan 2	housing unit whose posting date is at least jan 2
+in which area is 123 sesame street	neighborhood that is neighborhood of 123 sesame street
+quiet apartments	housing unit that has less than two neighborhood
+what kind of housing are the two housing units	housing type that is housing type of two housing unit
+catfriendly housing with a private bath	housing unit that has a private bath and that allows cats
+which housing unit posted jan 2nd	housing unit whose posting date is jan 2
+which housing unit around midtown west has a private bath	housing unit that has a private bath and whose neighborhood is midtown west
+housing units who have a posting date of january 2nd and on 123 sesame street	housing unit whose posting date is jan 2 and that is size of 123 sesame street
+find housing units in the same size of 123 sesame street	housing unit whose size is size of 123 sesame street
+find all housing units posted on january 2	housing type that is housing type of housing unit whose posting date is jan 2
+find housing larger than 123 sesame street	housing unit whose size is larger than size of 123 sesame street
+building with two or less kinds of unis	housing unit that has at most two housing type
+what housing unit posted on jan 2 is the same kind as 123 sesame street	housing unit whose posting date is jan 2 and that is housing type of 123 sesame street
+housing units with a  orivate bath in the midtown west area	housing unit whose neighborhood is midtown west and that has a private bath
+housing that does not have a higher rent then 123 sesame street	housing unit whose monthly rent is at most monthly rent of 123 sesame street
+neighborhoods of housing units that allows cats	neighborhood that is neighborhood of housing unit that allows cats
+housing unit which is an apartment that is dogs friendly	housing unit that allows dogs and whose housing type is apartment
+find apartments in the neighborhoods of midtown west	housing unit whose neighborhood is midtown west and whose housing type is apartment
+where is midtown west	neighborhood that is neighborhood of housing unit whose neighborhood is midtown west
+which housing unit belongs to the apartment kind with the facility of a private troom	housing unit that has a private room and whose housing type is apartment
+housing unit with the smallest posting date	housing unit that has the smallest posting date
+housing that allows cats and is 1500 a month	housing unit whose monthly rent is 1500 dollars and that allows cats
+housing units with a small amount of housing	housing unit that has the least number of housing type
+neighborhood with more than two housing units	neighborhood that is neighborhood of more than two housing unit
+housing unit that is not 800 square feet	housing unit whose size is not 800 square feet
+housing that is smaller than 800 square feet or smaller than 1000 square feet	housing unit whose size is smaller than 800 square feet or 1000 square feet
+neighborhoods that have 800 square foot housing	neighborhood that is neighborhood of housing unit whose size is 800 square feet
+show me housing which have a private bathroom and allow cats	housing unit that has a private bath and that allows cats
+apartments with rent below 1500	housing unit whose monthly rent is smaller than 1500 dollars
+housing unit that allows cats with midtown west as neighborhood	housing unit that allows cats and whose neighborhood is midtown west
+pet friendly housing near midtown west	housing unit whose neighborhood is midtown west and that allows cats
+what are the housing units in the area around midtown west	neighborhood that is neighborhood of housing unit whose neighborhood is midtown west
+apartments that have a private bath	housing unit that has a private bath and that has a private bath
+units with larger rent than 123 sesame street	housing unit whose monthly rent is larger than monthly rent of 123 sesame street
+what housing unit contains a private bath	housing unit that has a private bath
+apartments that are catfriendly	housing unit that allows cats and whose housing type is apartment
+what housing is the same type as the housing posted on january 2	housing type that is housing type of housing unit whose posting date is jan 2
+housing that is cheaper than 1500month	housing unit whose monthly rent is smaller than 1500 dollars
+count of different units	number of housing type
+catfriendly housing	housing unit that allows cats
+which housing unit is in the area of midtown west or chelsea	housing unit whose neighborhood is midtown west or chelsea
+find housing units with the most number of neighborhoods	housing unit that has the most number of neighborhood
+find 800 square feet housing units in the neighborhoods of midtown west	housing unit whose neighborhood is midtown west and whose size is 800 square feet
+what is units monthly rental	total monthly rent of housing unit
+pet friendly housing with 1500 dollars as rent	housing unit that allows dogs and whose monthly rent is 1500 dollars
+how much a month is the rent at 123 sesame street	monthly rent of 123 sesame street
+housing that is 800 square feet with a private room	housing unit that has a private room and whose size is 800 square feet
+housing with the same rent as 123 sesame street	housing unit whose monthly rent is monthly rent of 123 sesame street
+midtown west unit with 1500 rent monthly	housing unit whose monthly rent is 1500 dollars and whose neighborhood is midtown west
+housing units that have more than two neighborhoods	housing unit that has more than two neighborhood
+find housing units that are posted on the date same as 123 sesame street or later	housing unit whose posting date is at least posting date of 123 sesame street
+housing with private room that was posted on january 2	housing unit that has a private room and whose posting date is jan 2
+housing with monthly rent of 1500 dollars that was posted on january 2	housing unit whose monthly rent is 1500 dollars and whose posting date is jan 2
+find housing that allows dogs and cats	housing unit that allows dogs and that allows cats
+find housing units with size lesser than 800 square feet	housing unit whose size is smaller than 800 square feet
+what is the type of housing that has a private room	housing type that is housing type of housing unit that has a private room
+what kinds of housing has a private bath	housing type that is housing type of housing unit that has a private bath
+which housing unit has an area of 800 square feet	housing unit whose size is 800 square feet and whose size is 800 square feet
+what housing unit posted was posted on jan 2	housing unit whose posting date is jan 2 and that is posting date of 123 sesame street
+what housing unit posted on jan 2s rent is 1500 dollars	housing unit whose monthly rent is 1500 dollars and whose posting date is jan 2
+800 square foot unit with rent of 1500 monthly	housing unit whose monthly rent is 1500 dollars and whose size is 800 square feet
+neighborhood that has two housing	neighborhood that is neighborhood of two housing unit
+housing units with 2 neighborhoods	housing unit that has two neighborhood
+housing found in the most neighborhoods	housing unit that has the most number of neighborhood
+which 1500monthly rentals are 800 square feet	housing unit whose monthly rent is 1500 dollars and whose size is 800 square feet
+apartments in the midtown west or chelsea neighborhoods	housing unit whose neighborhood is midtown west or chelsea
+housing that is 800 square feet and 1500month	housing unit whose size is 800 square feet and whose monthly rent is 1500 dollars
+need a unit with a private room in the midtown west area	housing unit that has a private room and whose neighborhood is midtown west
+housing posted in a neighborhood on january 2	neighborhood that is neighborhood of housing unit whose posting date is jan 2
+which housing unit was not posted on jan 2	housing unit whose posting date is not jan 2
+unit smaller than 123 sesame street	housing unit whose size is smaller than size of 123 sesame street
+find a housing unit posted on january 2 and that allows cats	housing unit whose posting date is jan 2 and that allows cats
+housing that is 1500month or less or 2000month or less	housing unit whose monthly rent is at most 1500 dollars or 2000 dollars
+housing that was posted after january 2 or after february 3	housing unit whose posting date is at least jan 2 or feb 3
+show me housing in midtown west where dogs are welcome	housing unit whose neighborhood is midtown west and that allows dogs
+apartment complexes with the most units	housing unit that has the most number of housing type
+catfriendly housing with a private room	housing unit that allows cats and that has a private room
+what housing unit contains a private room and allows cats	housing unit that allows cats and that has a private room
+find housing units with just one neighborhood	housing unit that has less than two neighborhood
+what is the average size of an apartment	average size of housing unit
+neighborhood with at most two housing	neighborhood that is neighborhood of at most two housing unit
+what housing unit is priced at 1500 dollars	housing unit whose monthly rent is at most 1500 dollars
+housing unit in midtown west and allows dogs	housing unit whose neighborhood is midtown west and that allows dogs
+what housing has a private room	housing unit that has a private room
+apartments renting for 1500 a month	housing unit whose monthly rent is 1500 dollars and whose housing type is apartment
+housing unit for rent posted on january 2	housing unit whose monthly rent is housing unit whose posting date is jan 2
+apartment similar to the apartment in midtown west	housing type that is housing type of housing unit whose neighborhood is midtown west
+housing type on 123 sesame street	housing type of 123 sesame street
+specify the housing type of the housing unit that has a private bath	housing type that is housing type of housing unit that has a private bath
+what is the housing type that allows cats	housing type that is housing type of housing unit that allows cats
+find housing similar to the house located at 123 sesame street	housing unit whose housing type is housing type that is housing type of 123 sesame street
+how many housing units are there	number of housing unit
+which housing has a monthly rent of 1500 dollars	housing unit whose monthly rent is 1500 dollars and whose monthly rent is 1500 dollars
+area around 123sesame street	neighborhood of 123 sesame street
+neighborhoods with the least housing units	neighborhood that is neighborhood of the least number of housing unit
+what is the neighborhood of housing unit of the apartments	neighborhood that is neighborhood of housing unit whose housing type is apartment
+exclude apartments that are in the same neighborhood as 123 sesame street	neighborhood that is not neighborhood of 123 sesame street
+housing that isnt in midtown west	housing unit whose neighborhood is not midtown west
+neighborhoods medtown west or chelsea	midtown west or chelsea
+find housing types other than 123 sesame street	housing type that is not housing type of 123 sesame street
+seeking apartments between 1500 and 2000	1500 dollars or 2000 dollars
+what is that housing unit size	total size of housing unit
+apartments in midtown west with a private room	housing unit that has a private room and whose neighborhood is midtown west
+which housing unit with a rent of 1500 dollars per month permits cats in it	housing unit that allows cats and whose monthly rent is 1500 dollars
+what housing has the cheapest rent	housing unit that has the smallest monthly rent
+how big is the housing unit	total size of housing unit
+what is the kind of housing available in 123 sesamre street	housing type that is housing type of 123 sesame street
+which housing unit does not belong to the apartment type with a monthly rent of 1500 dollars	housing unit whose monthly rent is 1500 dollars and whose housing type is apartment
+housing posted on january 2 around 123 sesame street	housing unit whose posting date is jan 2 and that is neighborhood of 123 sesame street
+which housing unit is bigger  in area by 800 square feet or 1000 square feet	housing unit whose size is larger than 800 square feet or 1000 square feet
+rarest housing type	housing type that is housing type of the least number of housing unit
+find cat friendly housing units that charge 1500 dollars as rent	housing unit that allows cats and whose monthly rent is 1500 dollars
+housing posted on or before january 2 or on or before february 3	housing unit whose posting date is at most jan 2 or feb 3
+find the largest housing unit	housing unit that has the largest size
+housing with private bath that was posted on january 2	housing unit whose posting date is jan 2 and that has a private bath
+apartments in the midtown west neighborhood	housing unit whose housing type is apartment and whose neighborhood is midtown west
+rent less than 15002000 dollars	housing unit whose monthly rent is smaller than 1500 dollars or 2000 dollars
+which housing unit in the area permits cats	neighborhood that is neighborhood of housing unit that allows cats
+housing in the neighborhood of 123 sesame street or 900 mission ave	neighborhood that is neighborhood of 123 sesame street or 900 mission ave
+housing that was posted on february 3	housing unit whose posting date is at least jan 2 or feb 3
+housing unit within at most 2 neighborhoods	housing unit that has at most two neighborhood
+housing unit with a private bath and 1500 dollar rent	housing unit that has a private bath and whose monthly rent is 1500 dollars
+find housing units with a private room and is dog friendly	housing unit that allows dogs and that has a private room
+800 square foot apartment in midtown west	housing unit whose size is 800 square feet and whose neighborhood is midtown west
+which housing consists of two units maximum	housing type that is housing type of at most two housing unit
+find all detached housing units	housing type that is housing type of less than two housing unit
+housing costing more than 1500 dollars per month	housing unit whose monthly rent is larger than 1500 dollars
+what neighborhood is the housing unit in that was posted on january 2	neighborhood that is neighborhood of housing unit whose posting date is jan 2
+apartments with a private bath	housing unit whose housing type is apartment and that has a private bath
+what is the square footage of 123 sesame street	size of 123 sesame street
+housing posted on or before january 2	housing unit whose posting date is at most jan 2
+what is the monthly rent of housing units posted on january 2nd	housing unit whose monthly rent is housing unit whose posting date is jan 2
+housing in midtown west neighborhood posted on january 2	housing unit whose neighborhood is midtown west and whose posting date is jan 2
+apartment with a private room that rents for 1500 a month	housing unit whose monthly rent is 1500 dollars and that has a private room
+housing in midtown west with a private room	housing unit that has a private room and whose neighborhood is midtown west
+housing unit with a private bath and cost 1500 dollars rent	housing unit that has a private bath and whose monthly rent is 1500 dollars
+what is the rent of 123 sesame street	monthly rent of 123 sesame street
+neighborhood with the most housing units	neighborhood that is neighborhood of the most number of housing unit
+what housing unit is the same size as the unit posted on jan 2	housing unit whose size is housing unit whose posting date is jan 2
+apartment with a master bedroom and private bath	housing unit that has a private room and that has a private bath
+show me housing in midtown west or chelsea	housing unit whose neighborhood is midtown west or chelsea
+which housing unit has apartment kind of house with an area of 800 square feet	housing unit whose size is 800 square feet and whose housing type is apartment
+find 800 square feet housing units that are cat friendly	housing unit that allows cats and whose size is 800 square feet
+what is the housing type number	number of housing type
+housing that is either an apartment or townhouse	housing type that is housing type of more than two housing unit
+show me housing where dogs are allowed	housing unit that allows dogs and that allows dogs
+apartments 800 square feet and above	housing unit whose size is at least 800 square feet
+housing unit posted on january 2	housing unit whose neighborhood is housing unit whose posting date is jan 2
+which housing with a private room rents for 1500 dollar monthly	housing unit that has a private room and whose monthly rent is 1500 dollars
+housing with a private room that is 800 square feet total	housing unit whose size is 800 square feet and that has a private room
+exclude apartments from midtown west	housing unit whose neighborhood is not midtown west
+what type of housing is 123 sesame street	housing type that is housing type of 123 sesame street
+find housing units with rental charges between 1500 to 2000 dollars	housing unit whose monthly rent is at least 1500 dollars or 2000 dollars
+which housing unit has the least variety of houses	housing unit that has the least number of housing type
+housing that is 800 square feet or less or 1000 square feet or less	housing unit whose size is at most 800 square feet or 1000 square feet
+800 square foot apartment that allows cats	housing unit whose size is 800 square feet and that allows cats
+find housing units with less than or equal to the rent of 123 sesame street	housing unit whose monthly rent is at most monthly rent of 123 sesame street
+which housing unit permits dogs and has the facility of a private bath	housing unit that allows dogs and that has a private bath
+which 1500monthly rentals are dogfriendly	housing unit that allows dogs and whose monthly rent is 1500 dollars
+housing unit near midtown west	housing unit whose neighborhood is midtown west
+when was 123 sesame street posted	posting date of 123 sesame street
+housing the same size as 123 sesame street	housing unit whose size is at most size of 123 sesame street
+housing that is 1500month and 800 square feet	housing unit whose monthly rent is 1500 dollars and whose size is 800 square feet
+find housing units posted before january 2nd	housing unit whose posting date is at most jan 2
+housing allowing cats that was posted on january 2	housing unit whose posting date is jan 2 and that allows cats
+how large is the housing unit	total size of housing unit
+find a housing unit posted on january 2 and that has a private room	housing unit whose posting date is jan 2 and that has a private room
+housing units with a private bath	housing unit that has a private bath
+find housing units with monthly not equal to 1500 dollars	housing unit whose monthly rent is not 1500 dollars
+which housing in midtown west has a private bath	housing unit that has a private bath and whose neighborhood is midtown west
+what kind of housing is available for 1500month	housing type that is housing type of housing unit whose monthly rent is 1500 dollars
+housing of two types	housing type that is housing type of two housing unit
+what is the date of the 123 sesame street posting	posting date of 123 sesame street
+looking for housing that is either an apartment or condo	housing unit whose housing type is apartment or condo
+housing units that are apartments	housing unit whose housing type is apartment
+which housing unit has an apartment kind of house	housing type that is housing type of housing unit whose housing type is apartment
+housing unit which is an apartment housing type with a private room	housing unit whose housing type is apartment and that has a private room
+what housing has the latest posting date	housing unit that has the largest posting date
+what housing unit with a private bath was posted on jan 2	housing unit whose posting date is jan 2 and that has a private bath
+apartment with a private bath that also accepts cats	housing unit that allows cats and that has a private bath
+housing that is at least 800 square feet or at least 1000 square feet	housing unit whose size is at least 800 square feet or 1000 square feet
+neighborhoods with housing that has a private bath	neighborhood that is neighborhood of housing unit that has a private bath
+what is the neighborhood  of the housing unit with the monthly rent 1500 dollars	neighborhood that is neighborhood of housing unit whose monthly rent is 1500 dollars
+what neighborhood is the housing unit in that was posted january 2	housing unit whose neighborhood is housing unit whose posting date is jan 2
+which housing unit with an area of 800 square feet has a private room	housing unit that has a private room and whose size is 800 square feet
+apartment with a private bathroom	housing unit whose housing type is apartment and that has a private bath
+housing that has more than two neighborhood	housing unit that has more than two neighborhood
+cats allowed in midtown west	housing unit whose neighborhood is midtown west and that allows cats
+800 square foot apartment with a private bath	housing unit that has a private bath and whose size is 800 square feet
+which housing unit has a jan 2nd posting	housing unit whose posting date is jan 2 and whose posting date is jan 2
+a housing unit posted on january 2 in any neighborhood	housing unit whose neighborhood is housing unit whose posting date is jan 2
+housing unit with a private room	housing unit that has a private room
+find 800 square feet sized housing in the neighborhoods of midtown west	housing unit whose size is 800 square feet and whose neighborhood is midtown west
+apartments with a private bathroom that allow cats	housing unit that has a private room and that allows cats
+which kind of housing permits cats inside it	housing type that is housing type of housing unit that allows cats
+which housing posted jan 2nd rents for 1500	housing unit whose posting date is jan 2 and whose monthly rent is 1500 dollars
+how many neighborhoods are in the city	number of neighborhood
+where are the most number of housing units found	neighborhood that is neighborhood of the most number of housing unit
+building with the least number of housing types	housing unit that has the least number of housing type
+compare 123 sesame street and 900 mission avenue	123 sesame street or 900 mission ave
+housing unit that allows cats and has a private bath	housing unit that allows cats and that has a private bath
+apartments with a private bath that allow dogs	housing unit that allows dogs and that has a private bath
+show me housing units that arent apartments	housing unit whose housing type is not apartment
+find housing with rental charges between 1500 and 2000 dollars	housing unit whose monthly rent is 1500 dollars or 2000 dollars
+find housing units with a private room and has 1500 dollars as monthly rent	housing unit that has a private room and whose monthly rent is 1500 dollars
+housing that costs the same as 123 sesame street	housing unit whose monthly rent is monthly rent of 123 sesame street
+list all apartments in midtown west	housing unit whose housing type is apartment and whose neighborhood is midtown west
+which housing unit with an area of 800 square permits dogs	housing unit whose size is 800 square feet and that allows dogs
+which area has less than two housing units	housing unit that has less than two neighborhood
+housing unit that costs 1500 dollars rent and allows dogs	housing unit whose monthly rent is 1500 dollars and that allows dogs
+800 square foot apartment with a private room	housing unit whose size is 800 square feet and that has a private room
+which types of housing have a private bathroom	housing type that is housing type of housing unit that has a private bath
+find housing units in the neighborhoods of midtown west	housing unit whose neighborhood is midtown west and whose neighborhood is midtown west
+what housing unit  posted on jan 2 has a private room	housing unit that has a private room and whose posting date is jan 2
+what day did 123 sesame street become available	posting date of 123 sesame street
+what housing unit has the same rent as the unit posted on jan 2	housing unit whose monthly rent is housing unit whose posting date is jan 2
+800 square feet in midtown west	housing unit whose size is 800 square feet and whose neighborhood is midtown west
+apartments with a private bathroom	housing type that is housing type of housing unit that has a private bath
+housing that has at least two neighborhood	housing unit that has at least two neighborhood
+what is the most numerous housing type	housing unit that has the most number of housing type
+apartment or condo	housing unit whose housing type is apartment or condo
+find housing units far from midtown west	housing unit whose neighborhood is not midtown west
+housing in midtown west that was posted on january 2	housing unit whose posting date is jan 2 and whose neighborhood is midtown west
+housing unit with the largest posting date	housing unit that has the largest posting date
+smallest housing units	housing unit that has the smallest size
+housing units that allow cats in midtown west	housing unit whose neighborhood is midtown west and that allows cats
+which housing unit has a maximum of two housing types	housing unit that has at most two housing type
+which kind of housing is available for a rent of 1500 dollars per month	housing type that is housing type of housing unit whose monthly rent is 1500 dollars
+housing units in midtown west that allow dogs	housing unit whose neighborhood is midtown west and that allows dogs
+what is the average find 800 square feet housing units that allow cats	average size of housing unit
+housing type with less than 2 units	housing type that is housing type of less than two housing unit
+housing unit that both have a private room and allow dogs	housing unit that has a private room and that allows dogs
+which housing unit is posted lately	housing unit that has the smallest posting date
+which neighborhood is 123 sesame street in	neighborhood that is neighborhood of 123 sesame street
+what apartment costs 1500 dollars	housing unit whose housing type is apartment and whose monthly rent is 1500 dollars
+condomonium or flat	apartment or condo

@@ -1,0 +1,821 @@
+what is the players number	number of player
+what players made more than 3 rebounds over a season	player whose number of rebounds (over a season) is larger than 3
+player whose steals are not 3 over a season	player whose number of steals (over a season) is not 3
+player with smallest number of points over a season	player that has the smallest number of points (over a season)
+find the player who had the least number of steals over an entire season	player that has the smallest number of steals (over a season)
+when did kobe bryant have 3 all season rebounds	number of rebounds (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+name the player who did not have three blocks this season	player whose number of blocks (over a season) is not 3
+how many points kob bryant made in the season in which he made 3 fouls	number of points (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+which player scored no more points in a season than kobe bryant	player whose number of points (over a season) is at most number of points (over a season) of player kobe bryant
+which player scored no more points in a season than kobe bryant	player whose season is at most season of player kobe bryant
+which player scored no more points in a season than kobe bryant	player whose season is at least season of player kobe bryant
+which player scored no more points in a season than kobe bryant	player whose season is season of player kobe bryant
+which player scored no more points in a season than kobe bryant	player whose season is at most 2004 or 2010
+which player scored no more points in a season than kobe bryant	player whose team is team of player kobe bryant
+which player scored no more points in a season than kobe bryant	player whose position is position of player kobe bryant
+which player scored no more points in a season than kobe bryant	player that has at most two team
+which player scored no more points in a season than kobe bryant	player that has at most two position
+which player scored no more points in a season than kobe bryant	player that has the most number of team
+which player scored no more points in a season than kobe bryant	player that has the most number of position
+name a player with more than 3 rebounds in an average season	player whose number of rebounds (over a season) is at least 3
+find the player that has the hightest point score over any one season	player that has the largest number of points (over a season)
+what player had the most steals this season	player that has the largest number of steals (over a season)
+what player had less blocks allseason than kobe bryant	player whose number of blocks (over a season) is smaller than number of blocks (over a season) of player kobe bryant
+which player has played in fewer games than kobe bryant	player whose number of played games (over a season) is smaller than number of played games (over a season) of player kobe bryant
+this is considered to be the season of player kobe bryant with 3 rebounds	season of player kobe bryant whose number of rebounds (over a season) is 3
+how many turnovers in the year did kobe bryant have	number of turnovers (over a season) of player kobe bryant
+in the season in which he was responsible for 3 steals how many assists are attributable to kobe bryant	number of assists (over a season) of player kobe bryant whose number of steals (over a season) is 3
+players that have played less than 3 games over all seasons	player whose number of played games (over a season) is smaller than 3
+how many blocks has lakers player kobe bryant had in the season	number of blocks (over a season) of player kobe bryant whose team is los angeles lakers
+what is the position of kobe bryant	position of player kobe bryant
+what is the position of kobe bryant	point guard or forward
+what is the position of kobe bryant	point guard or forward
+which players had more than 3 points in a season	player whose number of points (over a season) is larger than 3
+what player had the same or less rebounds than kobe bryant this season	player whose number of rebounds (over a season) is at most number of rebounds (over a season) of player kobe bryant
+what player had the same or less rebounds than kobe bryant this season	player whose season is season of player kobe bryant
+what player had the same or less rebounds than kobe bryant this season	player whose team is team of player kobe bryant
+what player had the same or less rebounds than kobe bryant this season	player whose position is position of player kobe bryant
+what player had the same or less rebounds than kobe bryant this season	player whose number of steals (over a season) is not 3
+player who made more than2 steals over a season	player whose number of steals (over a season) is at least 3
+how many steals were awarded to kobe bryant who belonged to the los angeles lakers team	number of steals (over a season) of player kobe bryant whose team is los angeles lakers
+what nba teams play in cleveland or la	los angeles lakers or cleveland cavaliers
+what nba teams play in cleveland or la	team of player kobe bryant
+what player played the same or more games as kobe bryant	player whose number of played games (over a season) is at least number of played games (over a season) of player kobe bryant
+what player played the same or more games as kobe bryant	player whose season is at most season of player kobe bryant
+what player played the same or more games as kobe bryant	player whose season is at least season of player kobe bryant
+what player played the same or more games as kobe bryant	player whose season is season of player kobe bryant
+what player played the same or more games as kobe bryant	player whose team is team of player kobe bryant
+what player played the same or more games as kobe bryant	player whose position is position of player kobe bryant
+what player played the same or more games as kobe bryant	player that has the most number of position
+what player played the same or more games as kobe bryant	player whose season is at most 2004 or 2010
+what player played the same or more games as kobe bryant	player that has the most number of team
+what player played the same or more games as kobe bryant	player that has at most two position
+what player played the same or more games as kobe bryant	player that has at most two team
+what player played the same or more games as kobe bryant	player that has the least number of position
+what player played the same or more games as kobe bryant	player that has the least number of team
+what player played the same or more games as kobe bryant	player that has less than two position
+what player played the same or more games as kobe bryant	player that has less than two team
+what player played the same or more games as kobe bryant	player whose team is los angeles lakers or cleveland cavaliers
+during the season in which he was responsible for 3 fouls how many steals were attributable to kobe bryant	number of steals (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many fouls did kobe bryant who had three blocks have	number of fouls (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+who had fewer rebounds in a season than kobe bryant	player whose number of rebounds (over a season) is smaller than number of rebounds (over a season) of player kobe bryant
+players who are not point guards	player whose position is not point guard
+what was the total number of rebounds in each season where kobe bryant played point guard	number of rebounds (over a season) of player kobe bryant whose position is point guard
+what player had the same amount of blocks this season as kobe bryant	player whose number of blocks (over a season) is number of blocks (over a season) of player kobe bryant
+what player had the same amount of blocks this season as kobe bryant	player whose season is season of player kobe bryant
+what player had the same amount of blocks this season as kobe bryant	player whose position is position of player kobe bryant
+what player had 3 or fewer blocks	player whose number of fouls (over a season) is at most 3
+which player had a higher number of assists in a season than kobe bryant	player whose number of assists (over a season) is at most number of assists (over a season) of player kobe bryant
+which player had a higher number of assists in a season than kobe bryant	player whose season is season of player kobe bryant
+which player had a higher number of assists in a season than kobe bryant	player whose season is at most season of player kobe bryant
+which player had a higher number of assists in a season than kobe bryant	player whose season is at least season of player kobe bryant
+which player had a higher number of assists in a season than kobe bryant	player whose team is team of player kobe bryant
+which player had a higher number of assists in a season than kobe bryant	player whose position is position of player kobe bryant
+in the same season in which he had 3 rebounds name the number of blocks performed by kobe bryant	number of blocks (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+how many games has kobe bryant played with three steals	number of played games (over a season) of player kobe bryant whose number of steals (over a season) is 3
+which player had got a minimum of 3 points	player whose number of points (over a season) is at least 3
+who has fewer per season steals than kobe bryant	player whose number of steals (over a season) is smaller than number of steals (over a season) of player kobe bryant
+how many points were attributable to kobe bryant during the season he had a total of 3 rebounds	number of points (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+in which position did kobe bryant get 3 rebounds	position of player kobe bryant whose number of rebounds (over a season) is 3
+what year did kobe bryant have three blocks	season of player kobe bryant whose number of blocks (over a season) is 3
+how many blocks has kobe bryant averaged each season hes had 3 rebounds	number of blocks (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+how many steals did kobe bryant have as point guard	number of steals (over a season) of player kobe bryant whose position is point guard
+players with the same number of steals as kobe bryant over all seasons	player whose number of steals (over a season) is number of steals (over a season) of player kobe bryant
+how many games over a season did kobe bryant play where his assists was three	number of played games (over a season) of player kobe bryant whose number of assists (over a season) is 3
+how many blocks did kobe bryant have when he had three rebounds	number of blocks (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+which team is kobe bryan on	player whose team is team of player kobe bryant
+which team is kobe bryan on	player that has the most number of team
+which team is kobe bryan on	player that has the least number of team
+which team is kobe bryan on	player that has at most two team
+which team is kobe bryan on	player that has less than two team
+which team is kobe bryan on	player whose season is season of player kobe bryant
+which team is kobe bryan on	player whose position is position of player kobe bryant
+which team is kobe bryan on	player that has the most number of position
+which team is kobe bryan on	player that has the least number of position
+which team is kobe bryan on	player whose team is los angeles lakers or cleveland cavaliers
+what player has the least amount of assists over a season	player that has the smallest number of assists (over a season)
+players for seasons other than 2004	player whose season is not 2004
+what player scored equal or less points than kobe bryant this season	player whose number of points (over a season) is at most number of points (over a season) of player kobe bryant
+what player scored equal or less points than kobe bryant this season	player whose season is at most season of player kobe bryant
+what player scored equal or less points than kobe bryant this season	player whose season is season of player kobe bryant
+what player scored equal or less points than kobe bryant this season	player whose team is team of player kobe bryant
+what player scored equal or less points than kobe bryant this season	player whose position is position of player kobe bryant
+player whos season average is more than 3 blocks	player whose number of blocks (over a season) is larger than 3
+how many games kob bryant played in the season in which he made 3 turnovers	number of played games (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+find the player who had the same number of steals as kobe bryant or less	player whose number of steals (over a season) is at most number of steals (over a season) of player kobe bryant
+find the player who had the same number of steals as kobe bryant or less	player whose season is at least season of player kobe bryant
+find the player who had the same number of steals as kobe bryant or less	player whose season is season of player kobe bryant
+find the player who had the same number of steals as kobe bryant or less	player whose season is at most season of player kobe bryant
+find the player who had the same number of steals as kobe bryant or less	player whose team is team of player kobe bryant
+find the player who had the same number of steals as kobe bryant or less	player whose position is position of player kobe bryant
+find the player who had the same number of steals as kobe bryant or less	player that has the most number of position
+find the player who had the same number of steals as kobe bryant or less	player that has the most number of team
+find the player who had the same number of steals as kobe bryant or less	player that has the least number of position
+find the player who had the same number of steals as kobe bryant or less	player that has the least number of team
+number of fouls of kobe bryant whose rebounds are three	number of fouls (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+in which season did kobe bryant play for the los angeles lakers team	season of player kobe bryant whose team is los angeles lakers
+how many games did kobe bryant have when he had 3 blocks	number of played games (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+what position did kobe bryant play on the lakers	position of player kobe bryant whose team is los angeles lakers
+what position did kobe bryant play on the lakers	position of player kobe bryant
+what position did kobe bryant play on the lakers	point guard or forward
+what player had more steals than kobe bryant whose number of rebounds is 3	number of steals (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+how many steals does kobe bryant get in seasons when hes played 3 games	number of steals (over a season) of player kobe bryant whose number of played games (over a season) is 3
+who has had more fouls than kobe bryant	player whose number of fouls (over a season) is larger than number of fouls (over a season) of player kobe bryant
+which players didnt commit 3 turnovers in a season	player whose number of turnovers (over a season) is not 3
+find those players who have participated in more games during any one specific season than kobe bryant	player whose number of played games (over a season) is larger than number of played games (over a season) of player kobe bryant
+find those players who have participated in more games during any one specific season than kobe bryant	player whose season is at most season of player kobe bryant
+find those players who have participated in more games during any one specific season than kobe bryant	player whose season is at least season of player kobe bryant
+find those players who have participated in more games during any one specific season than kobe bryant	player whose season is season of player kobe bryant
+find those players who have participated in more games during any one specific season than kobe bryant	player whose team is team of player kobe bryant
+find those players who have participated in more games during any one specific season than kobe bryant	player whose position is position of player kobe bryant
+find those players who have participated in more games during any one specific season than kobe bryant	player whose season is at most 2004 or 2010
+how many fouls did kobe bryant have when he had three rebounds	number of fouls (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+what season did kobe bryant start playing in	season of player kobe bryant whose number of played games (over a season) is 3
+what player had the most assists this season	player that has the largest number of assists (over a season)
+number of assists over a season of player kobe bryant who is at point guard	number of assists (over a season) of player kobe bryant whose position is point guard
+what team is kobe bryant on	team of player kobe bryant
+what team is kobe bryant on	team of player kobe bryant whose number of points (over a season) is 3
+what team is kobe bryant on	los angeles lakers or cleveland cavaliers
+which player has played less fouls than kobe bryant	player whose number of fouls (over a season) is smaller than number of fouls (over a season) of player kobe bryant
+how many fouls did kobe bryant make over a season	number of fouls (over a season) of player kobe bryant
+how many games did kobe bryant play in during 2004	number of played games (over a season) of player kobe bryant whose season is 2004
+how many games did kobe bryant play when he had 3 all season rebounds	number of played games (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+which player averages less than 3 blocks per season	player whose number of blocks (over a season) is at most 3
+who has had less than 3 rebounds	player whose number of rebounds (over a season) is smaller than 3
+what player had equal to or less assists than kobe bryant during a season	player whose number of assists (over a season) is at most number of assists (over a season) of player kobe bryant
+what player had equal to or less assists than kobe bryant during a season	player whose season is season of player kobe bryant
+what player had equal to or less assists than kobe bryant during a season	player whose team is team of player kobe bryant
+what player had equal to or less assists than kobe bryant during a season	player whose position is position of player kobe bryant
+player who has the least number of position	player that has the least number of position
+player who has the least number of position	player that has the most number of position
+player who has the least number of position	player that has the least number of team
+player who has the least number of position	player that has less than two position
+player who has the least number of position	player that has the most number of team
+player who has the least number of position	player that has less than two team
+player who has the least number of position	player whose position is position of player kobe bryant
+player who has the least number of position	player whose season is season of player kobe bryant
+player who has the least number of position	player whose team is team of player kobe bryant
+how many three game fouls did kobe bryant have over a season	number of fouls (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+what players have had more or less than 3 steals during a season	player whose number of steals (over a season) is not 3
+what players have had more or less than 3 steals during a season	player whose season is season of player kobe bryant
+what players have had more or less than 3 steals during a season	player whose team is team of player kobe bryant
+what players have had more or less than 3 steals during a season	player whose position is position of player kobe bryant
+name a player who is not a point guard	player whose position is not point guard
+how many players are there	number of player
+what team did kobe bryant play for when he had 3 allseason assists	team of player kobe bryant whose number of assists (over a season) is 3
+what team did kobe bryant play for when he had 3 allseason assists	team of player kobe bryant
+what team did kobe bryant play for when he had 3 allseason assists	los angeles lakers or cleveland cavaliers
+how many all season assists did kobe bryant have as an la laker	number of assists (over a season) of player kobe bryant whose team is los angeles lakers
+what players had less than 3 blocks over all seasons	player whose number of blocks (over a season) is smaller than 3
+what player has other than 3 allseason games	player whose number of played games (over a season) is not 3
+how many steals did kobe bryant have in the season in which he had three fouls	number of steals (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many assists has kobe bryant had	number of assists (over a season) of player kobe bryant whose team is los angeles lakers
+in how many seasons kob bryant made 3 fouls	number of steals (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+what seasons has kobe bryant played	season of player kobe bryant
+how many points did kobe bryant score in a season	number of points (over a season) of player kobe bryant whose number of points (over a season) is 3
+how many blocks were made by kobe bryant after getting 3 assists	number of blocks (over a season) of player kobe bryant whose number of assists (over a season) is 3
+player with not 3 rebounds over a season	player whose number of rebounds (over a season) is not 3
+player with not 3 rebounds over a season	player that has at most two team
+player with not 3 rebounds over a season	player that has at most two position
+player with not 3 rebounds over a season	player whose season is season of player kobe bryant
+player with not 3 rebounds over a season	player whose team is team of player kobe bryant
+player with not 3 rebounds over a season	player whose position is position of player kobe bryant
+which players play for the least amount of teams	player that has the least number of team
+which players play for the least amount of teams	player that has the most number of team
+which players play for the least amount of teams	player that has the least number of position
+which players play for the least amount of teams	player that has less than two team
+which players play for the least amount of teams	player whose team is team of player kobe bryant
+which players play for the least amount of teams	player whose team is los angeles lakers or cleveland cavaliers
+which players play for the least amount of teams	player whose season is season of player kobe bryant
+which players play for the least amount of teams	player whose position is position of player kobe bryant
+how many turnovers kob bryant made over a season in which he played 3 games	number of turnovers (over a season) of player kobe bryant whose number of played games (over a season) is 3
+what position did kobe bryant have 3 blocks as	position of player kobe bryant whose number of blocks (over a season) is 3
+what position did kobe bryant have 3 blocks as	position of player kobe bryant
+what position did kobe bryant have 3 blocks as	point guard or forward
+what season did kobe bryant have 3 blocks	season of player kobe bryant whose number of blocks (over a season) is 3
+during the same season in which kobe bryant was responsible for 3 assists how many rebounds was he also responsible for	number of rebounds (over a season) of player kobe bryant whose number of assists (over a season) is 3
+which player has had the fewest steals	player that has the smallest number of steals (over a season)
+which player had fewer fouls in the season than kobe bryant	player whose number of fouls (over a season) is smaller than number of fouls (over a season) of player kobe bryant
+how many points does kobe bryant make in seasons with 3 turnovers	number of points (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+player with more than 3 points in a season	player whose number of points (over a season) is larger than 3
+how many fouls kob bryant made over a season in which he made 3 points	number of fouls (over a season) of player kobe bryant whose number of points (over a season) is 3
+what are seasons played by kobe bryant	season of player kobe bryant
+what players give up less than 4 turnorvers per season	player whose number of turnovers (over a season) is at most 3
+in which season did kobe bryant get 3 assists	season of player kobe bryant whose number of assists (over a season) is 3
+how many steals did kobe bryant have in a season he had 3 fouls	number of steals (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many rebounds did kobe bryant have when his all season points equaled 3	number of rebounds (over a season) of player kobe bryant whose number of points (over a season) is 3
+what player played less games than kobe bryant	player whose number of played games (over a season) is smaller than number of played games (over a season) of player kobe bryant
+player who has played least number of games over a seasono	player that has the smallest number of played games (over a season)
+player who has played least number of games over a seasono	player that has the smallest number of rebounds (over a season)
+how many blocks has kobe bryant had in any one season	number of blocks (over a season) of player kobe bryant
+in which season did kobe bryant play for los angeles lakers	season of player kobe bryant whose team is los angeles lakers
+player not from los angeles lakers team	player whose team is not los angeles lakers
+number of blocks over a season of player kobe bryant with 3 blocks over a season	number of blocks (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+name a player who is a point guard or a forward	player whose position is point guard or forward
+name a player who is a point guard or a forward	player that has the most number of team
+name a player who is a point guard or a forward	player that has the most number of position
+name a player who is a point guard or a forward	player that has the least number of team
+name a player who is a point guard or a forward	player that has the least number of position
+name a player who is a point guard or a forward	player whose season is season of player kobe bryant
+name a player who is a point guard or a forward	player that has at most two team
+name a player who is a point guard or a forward	player whose team is los angeles lakers or cleveland cavaliers
+name a player who is a point guard or a forward	player that has at most two position
+name a player who is a point guard or a forward	player whose team is team of player kobe bryant
+name a player who is a point guard or a forward	player whose position is position of player kobe bryant
+what players had fewer turnovers than kobe bryan over a season	player whose number of turnovers (over a season) is smaller than number of turnovers (over a season) of player kobe bryant
+which is the team of kobe bryant who got 3 steals	team of player kobe bryant whose number of steals (over a season) is 3
+which is the team of kobe bryant who got 3 steals	team of player kobe bryant whose number of points (over a season) is 3
+which is the team of kobe bryant who got 3 steals	team of player kobe bryant
+which is the team of kobe bryant who got 3 steals	los angeles lakers or cleveland cavaliers
+player whose number of blocks over a season is more than that of player kobe bryant over a season	player whose number of blocks (over a season) is larger than number of blocks (over a season) of player kobe bryant
+find players responsible for fewer rebounds in any one season than kobe bryant	player whose number of rebounds (over a season) is smaller than number of rebounds (over a season) of player kobe bryant
+player who doesnt have 3 assists over a season	player whose number of assists (over a season) is not 3
+what position did kobe bryant play in 2004	position of player kobe bryant whose season is 2004
+what position did kobe bryant play in 2004	position of player kobe bryant
+what position did kobe bryant play in 2004	point guard or forward
+what position did kobe bryant play in 2004	position of player kobe bryant
+what position did kobe bryant play in 2004	point guard or forward
+name players who played in 2004 or 2010	player whose season is 2004 or 2010
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player whose number of rebounds (over a season) is at most number of rebounds (over a season) of player kobe bryant
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player whose season is at most season of player kobe bryant
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player whose season is at least season of player kobe bryant
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player whose season is season of player kobe bryant
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player whose team is team of player kobe bryant
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player whose position is position of player kobe bryant
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player that has at most two team
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player that has at most two position
+find those players with rebound tallies that at most equal those of kobe bryant over any given season	player whose number of rebounds (over a season) is not 3
+how many rebounds does kobe bryant get every season	number of rebounds (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+find those players who have committed the same number of steals in a given season as kobe bryant	player whose number of steals (over a season) is number of steals (over a season) of player kobe bryant
+name a player with at least three turnovers	player whose number of turnovers (over a season) is at least 3
+during the season he was responsible for 3 fouls what was the number of assists performed by kobe bryant	number of assists (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many points did kobe bryant have when he had 3 assists	number of points (over a season) of player kobe bryant whose number of assists (over a season) is 3
+which players have made more turnovers than kobe bryant over all seasons	player whose number of turnovers (over a season) is larger than number of turnovers (over a season) of player kobe bryant
+who was kobe bryant playing for when he made three fouls	team of player kobe bryant whose number of fouls (over a season) is 3
+what position did kobe bryant play with 3 steals over the season	position of player kobe bryant whose number of steals (over a season) is 3
+what position did kobe bryant play with 3 steals over the season	position of player kobe bryant whose number of assists (over a season) is 3
+what position did kobe bryant play with 3 steals over the season	position of player kobe bryant whose number of points (over a season) is 3
+what position did kobe bryant play with 3 steals over the season	position of player kobe bryant
+what position did kobe bryant play with 3 steals over the season	point guard or forward
+how many rebounds has kobe bryant had	number of rebounds (over a season) of player kobe bryant
+what players amount of allseason rebounds equals kobe bryants	player whose number of rebounds (over a season) is number of rebounds (over a season) of player kobe bryant
+what players amount of allseason rebounds equals kobe bryants	player whose season is season of player kobe bryant
+what players amount of allseason rebounds equals kobe bryants	player whose team is team of player kobe bryant
+what players amount of allseason rebounds equals kobe bryants	player whose position is position of player kobe bryant
+what players amount of allseason rebounds equals kobe bryants	player that has the most number of team
+what players amount of allseason rebounds equals kobe bryants	player that has the least number of team
+what players amount of allseason rebounds equals kobe bryants	player that has the most number of position
+what players amount of allseason rebounds equals kobe bryants	player that has the least number of position
+how many fouls did kobe bryant have who had three steals	number of fouls (over a season) of player kobe bryant whose number of steals (over a season) is 3
+when kobe bryant had 3 allseason blocks how many steals did he have	number of steals (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+what is position played by kobe bryant over the season	position of player kobe bryant whose position is point guard
+either los angeles lakers or cleveland cavaliers	los angeles lakers or cleveland cavaliers
+either los angeles lakers or cleveland cavaliers	team of player kobe bryant
+either los angeles lakers or cleveland cavaliers	team of player kobe bryant whose number of points (over a season) is 3
+how many games are played by kobe bryant for the los angeles lakers team	number of played games (over a season) of player kobe bryant whose team is los angeles lakers
+in what position was kobebryant playing  in the 3 games	position of player kobe bryant whose number of played games (over a season) is 3
+in what position was kobebryant playing  in the 3 games	position of player kobe bryant whose number of points (over a season) is 3
+in what position was kobebryant playing  in the 3 games	position of player kobe bryant
+in what position was kobebryant playing  in the 3 games	point guard or forward
+which player has scored the points of kobe bryant	player whose number of points (over a season) is number of points (over a season) of player kobe bryant
+name the player with the most turnovers per season	player that has the largest number of turnovers (over a season)
+how many assitss did kobe bryant have while committing three fouls	number of assists (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+what players dont play for the los angeles lakers	player whose team is not los angeles lakers
+how many rebound kob bryant made over a season in los angeles lakers team	number of blocks (over a season) of player kobe bryant whose team is los angeles lakers
+which season kob bryant made 3 turnovers	season of player kobe bryant whose number of turnovers (over a season) is 3
+name of a player with fewer annual fouls than kobe bryant	player whose number of fouls (over a season) is smaller than number of fouls (over a season) of player kobe bryant
+who has had less than 3 steals	player whose number of steals (over a season) is smaller than 3
+when did kobe bryant play as point guard	season of player kobe bryant whose position is point guard
+during the season kobe bryant participated in 3 games how many rebounds did he have	number of rebounds (over a season) of player kobe bryant whose number of played games (over a season) is 3
+players that played only one position	player that has less than two position
+players that played only one position	player that has the most number of position
+players that played only one position	player that has the least number of position
+players that played only one position	player that has at most two position
+players that played only one position	player whose position is position of player kobe bryant
+players that played only one position	player whose position is point guard or forward
+players that played only one position	player that has the most number of team
+players that played only one position	player whose season is season of player kobe bryant
+players that played only one position	player that has the least number of team
+players that played only one position	player whose team is team of player kobe bryant
+what position does kobe bryant play for the la lakers	position of player kobe bryant whose team is los angeles lakers
+what position does kobe bryant play for the la lakers	position of player kobe bryant
+what position does kobe bryant play for the la lakers	point guard or forward
+which player has not played three games	player whose number of played games (over a season) is not 3
+how many blocks did kobe bryant have over a seaon and turnovers	number of blocks (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+during the season in which kobe bryant participated in 3 games how many points was he responsible for	number of points (over a season) of player kobe bryant whose number of played games (over a season) is 3
+name a player with more than three blocks in the season	player whose number of blocks (over a season) is larger than 3
+player whose number of assists over a season is less than that of player kobe bryant over a season	player whose number of assists (over a season) is smaller than number of assists (over a season) of player kobe bryant
+how many turnovers did kobe have when scorin three points	number of turnovers (over a season) of player kobe bryant whose number of points (over a season) is 3
+how many blocks did kobe bryant have during a single season that is over 3 steals	number of blocks (over a season) of player kobe bryant whose number of steals (over a season) is 3
+player whose number of steals over a season is same as that of player kobe bryant over a season	player whose number of steals (over a season) is number of steals (over a season) of player kobe bryant
+what position did kobe bryant play when he had over three points in a season	position of player kobe bryant whose number of points (over a season) is 3
+what position did kobe bryant play when he had over three points in a season	position of player kobe bryant
+what position did kobe bryant play when he had over three points in a season	point guard or forward
+who has less rebounds than kobe bryant	player whose number of rebounds (over a season) is smaller than number of rebounds (over a season) of player kobe bryant
+player with the largest number of fouls over all seasons	player that has the largest number of fouls (over a season)
+where did kobe bryant play in 2004	team of player kobe bryant whose season is 2004
+where did kobe bryant play in 2004	team of player kobe bryant
+where did kobe bryant play in 2004	los angeles lakers or cleveland cavaliers
+what players made less than 4 assists over a season	player whose number of assists (over a season) is at most 3
+if kobe bryant has 3 assists in a season whats his average steal total	number of steals (over a season) of player kobe bryant whose number of assists (over a season) is 3
+how many rebounds did kobe bryant get after 3 steals	number of rebounds (over a season) of player kobe bryant whose number of steals (over a season) is 3
+who has made no more than 3 steals per season in their career	player whose number of steals (over a season) is at most 3
+which players made at least 3 rebounds over the season	player whose number of rebounds (over a season) is at least 3
+who did kobe bryant play for when he had 3 points in a season	team of player kobe bryant whose number of points (over a season) is 3
+who did kobe bryant play for when he had 3 points in a season	team of player kobe bryant whose season is 2004
+who did kobe bryant play for when he had 3 points in a season	team of player kobe bryant
+who did kobe bryant play for when he had 3 points in a season	los angeles lakers or cleveland cavaliers
+who is a player with 3 or less fouls each season	player whose number of fouls (over a season) is at most 3
+how many blocks did kobe bryant have in the season when he had three steals	number of blocks (over a season) of player kobe bryant whose number of steals (over a season) is 3
+how many games did kobe bryant have 3 turnovers in	number of played games (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+find the players with turnover tallies of at least 3 in any one season	player whose number of turnovers (over a season) is at least 3
+player that has played at least 3 games in a season	player whose number of played games (over a season) is at least 3
+players with less points scored than kobe bryant over all seasons	player whose number of points (over a season) is at most number of points (over a season) of player kobe bryant
+players with less points scored than kobe bryant over all seasons	player whose season is at most season of player kobe bryant
+players with less points scored than kobe bryant over all seasons	player whose season is season of player kobe bryant
+players with less points scored than kobe bryant over all seasons	player whose season is at least season of player kobe bryant
+players with less points scored than kobe bryant over all seasons	player whose team is team of player kobe bryant
+players with less points scored than kobe bryant over all seasons	player whose position is position of player kobe bryant
+players with less points scored than kobe bryant over all seasons	player that has the most number of team
+players with less points scored than kobe bryant over all seasons	player that has the most number of position
+how many steals kob bryant made over a season in which he made 3 rebounds	number of steals (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+how many rebounds has kobe bryant made in a season at point guard	number of rebounds (over a season) of player kobe bryant whose position is point guard
+players who played for the cleveland cavaliers or los angeles lakers	player whose team is los angeles lakers or cleveland cavaliers
+players who played for the cleveland cavaliers or los angeles lakers	player whose season is season of player kobe bryant
+players who played for the cleveland cavaliers or los angeles lakers	player whose position is point guard or forward
+players who played for the cleveland cavaliers or los angeles lakers	player that has the most number of team
+players who played for the cleveland cavaliers or los angeles lakers	player that has the least number of team
+players who played for the cleveland cavaliers or los angeles lakers	player that has the most number of position
+players who played for the cleveland cavaliers or los angeles lakers	player that has the least number of position
+players who played for the cleveland cavaliers or los angeles lakers	player whose team is team of player kobe bryant
+players who played for the cleveland cavaliers or los angeles lakers	player whose position is position of player kobe bryant
+players who played for the cleveland cavaliers or los angeles lakers	player that has less than two team
+players who played for the cleveland cavaliers or los angeles lakers	player that has at most two team
+players who played for the cleveland cavaliers or los angeles lakers	player that has less than two position
+players who played for the cleveland cavaliers or los angeles lakers	player that has at most two position
+in which positions did kobe bryant make 3 fouls in a season	position of player kobe bryant whose number of fouls (over a season) is 3
+how many assists does kobe bryant average	number of assists (over a season) of player kobe bryant whose number of steals (over a season) is 3
+whos got at least 3 blocks in a season	player whose number of blocks (over a season) is at least 3
+name the player who played for the most number of teams	player that has the most number of team
+name the player who played for the most number of teams	player that has the least number of team
+name the player who played for the most number of teams	player that has the most number of position
+name the player who played for the most number of teams	player whose team is team of player kobe bryant
+name the player who played for the most number of teams	player whose season is season of player kobe bryant
+who has had 3 or less turnovers	player whose number of turnovers (over a season) is at most 3
+what is the number of blocks played by kobe bryant over the season	number of blocks (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+in which season did kobe bryant play as point guard	season of player kobe bryant whose position is point guard
+note those players with steals over a season equal to or more than the number of steals made by kobe bryant	player whose number of steals (over a season) is at least number of steals (over a season) of player kobe bryant
+note those players with steals over a season equal to or more than the number of steals made by kobe bryant	player whose season is at most season of player kobe bryant
+note those players with steals over a season equal to or more than the number of steals made by kobe bryant	player whose season is season of player kobe bryant
+note those players with steals over a season equal to or more than the number of steals made by kobe bryant	player whose team is team of player kobe bryant
+note those players with steals over a season equal to or more than the number of steals made by kobe bryant	player whose position is position of player kobe bryant
+how many fouls did kobe bryant have when he had 3 assists	number of fouls (over a season) of player kobe bryant whose number of assists (over a season) is 3
+which player has not got 3 turnovers	player whose number of turnovers (over a season) is not 3
+how many points were made by kob bryant over a season in which he made 3 steals	number of points (over a season) of player kobe bryant whose number of steals (over a season) is 3
+what season did kobe bryant play	season of player kobe bryant
+in what year did kobe bryant have three assists	season of player kobe bryant whose number of assists (over a season) is 3
+which player has scored more than 3 points	player whose number of points (over a season) is larger than 3
+players that started playing between the 2004 and 2010 seasons	player whose season is 2004 or 2010
+how many threepoint rebounds did kobe bryant have	number of rebounds (over a season) of player kobe bryant whose number of points (over a season) is 3
+find players with blocks per season scores for any one season equivelant to blocks per season score for any one season performed by kobe bryant	player whose number of blocks (over a season) is number of blocks (over a season) of player kobe bryant
+find players with blocks per season scores for any one season equivelant to blocks per season score for any one season performed by kobe bryant	player whose season is at most season of player kobe bryant
+find players with blocks per season scores for any one season equivelant to blocks per season score for any one season performed by kobe bryant	player whose season is at least season of player kobe bryant
+find players with blocks per season scores for any one season equivelant to blocks per season score for any one season performed by kobe bryant	player whose season is season of player kobe bryant
+find players with blocks per season scores for any one season equivelant to blocks per season score for any one season performed by kobe bryant	player whose team is team of player kobe bryant
+find players with blocks per season scores for any one season equivelant to blocks per season score for any one season performed by kobe bryant	player whose position is position of player kobe bryant
+players with less than 4 rebounds	player whose number of rebounds (over a season) is at most 3
+who plays on the same team as kobe bryant	player whose team is team of player kobe bryant
+who plays on the same team as kobe bryant	player whose season is season of player kobe bryant
+who plays on the same team as kobe bryant	player whose season is at most season of player kobe bryant
+who plays on the same team as kobe bryant	player whose season is at least season of player kobe bryant
+who plays on the same team as kobe bryant	player whose position is position of player kobe bryant
+who plays on the same team as kobe bryant	player that has the most number of team
+who plays on the same team as kobe bryant	player that has the least number of team
+who plays on the same team as kobe bryant	player that has less than two team
+who plays on the same team as kobe bryant	player that has at most two team
+who plays on the same team as kobe bryant	player that has the most number of position
+who plays on the same team as kobe bryant	player that has the least number of position
+who plays on the same team as kobe bryant	player whose team is los angeles lakers or cleveland cavaliers
+how many times has  kobe bryant started as point guard	number of played games (over a season) of player kobe bryant whose position is point guard
+name a player with more than three steals during the season	player whose number of steals (over a season) is larger than 3
+how many assists did kobe bryant have on the los angeles lakers	number of assists (over a season) of player kobe bryant whose team is los angeles lakers
+players with more than 3 steals over all seasons	player whose number of steals (over a season) is larger than 3
+players that played for the lakers of the cavs	player whose team is los angeles lakers or cleveland cavaliers
+players that played for the lakers of the cavs	player that has the most number of team
+players that played for the lakers of the cavs	player that has the least number of team
+players that played for the lakers of the cavs	player that has the most number of position
+players that played for the lakers of the cavs	player whose season is season of player kobe bryant
+players that played for the lakers of the cavs	player that has the least number of position
+players that played for the lakers of the cavs	player that has less than two team
+players that played for the lakers of the cavs	player that has less than two position
+players that played for the lakers of the cavs	player whose team is team of player kobe bryant
+players that played for the lakers of the cavs	player whose position is position of player kobe bryant
+games played by kobe bryant over all seasons with 3 fouls	number of played games (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many turnovers did kobe bryant have after 3 games	number of turnovers (over a season) of player kobe bryant whose number of played games (over a season) is 3
+during the season in which he had 3 turnovers name the number of steals attributable to kobe bryant	number of steals (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+how many fouls kob bryant made over the season in which he made 3 turnovers	number of fouls (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+what season did kobe bryant play 3 games in	season of player kobe bryant whose number of played games (over a season) is 3
+how many assists did kobe bryant have playing point guard in a season	number of assists (over a season) of player kobe bryant whose position is point guard
+players that did not have more than three steals	player whose number of steals (over a season) is at most 3
+how many steals kob bryant made in the season in which he played in point guard position	number of steals (over a season) of player kobe bryant whose position is point guard
+player with fouls over a season not less than fouls over a season of player kobe bryant	player whose number of fouls (over a season) is at least number of fouls (over a season) of player kobe bryant
+player with fouls over a season not less than fouls over a season of player kobe bryant	player whose season is at most season of player kobe bryant
+player with fouls over a season not less than fouls over a season of player kobe bryant	player whose season is season of player kobe bryant
+player with fouls over a season not less than fouls over a season of player kobe bryant	player whose season is at least season of player kobe bryant
+player with fouls over a season not less than fouls over a season of player kobe bryant	player whose team is team of player kobe bryant
+player with fouls over a season not less than fouls over a season of player kobe bryant	player whose position is position of player kobe bryant
+player with fouls over a season not less than fouls over a season of player kobe bryant	player that has the most number of team
+player with fouls over a season not less than fouls over a season of player kobe bryant	player that has the most number of position
+player with fouls over a season not less than fouls over a season of player kobe bryant	player that has at most two team
+player with fouls over a season not less than fouls over a season of player kobe bryant	player that has at most two position
+how many turnovers did point guard kobe bryant have	number of turnovers (over a season) of player kobe bryant whose position is point guard
+for the season in which he played with the los angeles lakers name the number of blocks attributable to kobe bryant	number of blocks (over a season) of player kobe bryant whose team is los angeles lakers
+in which season did kobe bryant have more than 3 fouls	season of player kobe bryant whose number of fouls (over a season) is 3
+what player had 3 or less rebounds	player whose number of rebounds (over a season) is at most 3
+player with more than 3 assists over a season	player whose number of assists (over a season) is larger than 3
+who had the most rebounds in a season	player that has the largest number of rebounds (over a season)
+which players made more than 3 rebounds in a season	player whose number of rebounds (over a season) is larger than 3
+which players have made at least as many points as kobe bryant	player whose number of points (over a season) is at least number of points (over a season) of player kobe bryant
+which players have made at least as many points as kobe bryant	player whose season is season of player kobe bryant
+which players have made at least as many points as kobe bryant	player whose team is team of player kobe bryant
+which players have made at least as many points as kobe bryant	player whose position is position of player kobe bryant
+how many steals did kobe get after 3 rebounds	number of steals (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+who has had less blocks than kobe bryant	player whose number of blocks (over a season) is smaller than number of blocks (over a season) of player kobe bryant
+what teams has kobe bryant played with other than the la lakers	team of player kobe bryant whose team is los angeles lakers
+how many assists did kobe bryant have in a season he played 3 games	number of assists (over a season) of player kobe bryant whose number of played games (over a season) is 3
+how many turnovers has kobe had a laker	number of turnovers (over a season) of player kobe bryant whose team is los angeles lakers
+who has more than 3 fouls every season theyve played	player whose number of fouls (over a season) is larger than 3
+how many points did kobe bryant have the seasons he had 3 fouls	number of points (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many rebounds  kob bryant made in the season he made 3 assists	number of rebounds (over a season) of player kobe bryant whose number of assists (over a season) is 3
+number of played games over a season of player kobe bryant whose number of rebounds over a season	number of played games (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+what player has more than 3 games played during a season	player whose number of played games (over a season) is larger than 3
+number of games kobe bryant has played in a season	number of played games (over a season) of player kobe bryant
+which player has  got less than 3 rebounds	player whose number of rebounds (over a season) is smaller than 3
+how many seasons has kobe bryant played	season of player kobe bryant whose number of rebounds (over a season) is 3
+during the 2004 season how many blocks was kobe bryant responsible for	number of blocks (over a season) of player kobe bryant whose season is 2004
+player that doesnt have 3 turnovers	player whose number of turnovers (over a season) is not 3
+which players have been played the same number of games as kobe bryant	player whose number of played games (over a season) is number of played games (over a season) of player kobe bryant
+which players have been played the same number of games as kobe bryant	player whose season is season of player kobe bryant
+which players have been played the same number of games as kobe bryant	player whose season is at most season of player kobe bryant
+which players have been played the same number of games as kobe bryant	player whose season is at least season of player kobe bryant
+which players have been played the same number of games as kobe bryant	player whose team is team of player kobe bryant
+which players have been played the same number of games as kobe bryant	player whose position is position of player kobe bryant
+which players have been played the same number of games as kobe bryant	player that has the most number of position
+which players have been played the same number of games as kobe bryant	player that has the most number of team
+which players have been played the same number of games as kobe bryant	player that has the least number of position
+which players have been played the same number of games as kobe bryant	player that has the least number of team
+which players have been played the same number of games as kobe bryant	player that has less than two position
+which players have been played the same number of games as kobe bryant	player whose team is los angeles lakers or cleveland cavaliers
+how many points did kobe bryant score during the season in which he played point guard	number of points (over a season) of player kobe bryant whose position is point guard
+find those players with total fouls in any one season equalling an amount more than 3	player whose number of fouls (over a season) is larger than 3
+how many rebounds did kobe bryant make in seasons where he made 3 steals	number of rebounds (over a season) of player kobe bryant whose number of steals (over a season) is 3
+how many points does kobe bryant make per season when hes got at least 3 blocks	number of points (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+players that tied kobe inn total scoring for the season	player whose number of points (over a season) is number of points (over a season) of player kobe bryant
+how many assists does kobe bryant have in seasons with exactly 3 turnovers	number of assists (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+how many fouls did kobe bryant have in games in which he had three assists	number of fouls (over a season) of player kobe bryant whose number of assists (over a season) is 3
+what players did not play in 2004	player whose season is not 2004
+how many fouls does kobe bryant have in a typical season	number of fouls (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+player who has less than 3 rebounds over a season	player whose number of rebounds (over a season) is smaller than 3
+how many points has kobe bryant gotten in a season	number of points (over a season) of player kobe bryant
+how many turnovers did kobe bryant have as point guard	number of turnovers (over a season) of player kobe bryant whose position is point guard
+how many points did kobe score after 3 fouls	number of points (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many games did kobe bryant play in which he made three rebounds	number of played games (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+how many steals did kobe bryant have in the season in which he had three assists	number of steals (over a season) of player kobe bryant whose number of assists (over a season) is 3
+how many steals did kobe braynt have when he had 3 fouls	number of steals (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many rebounds did kobe bryant have during the same season in which his number of total fouls was 3	number of rebounds (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+find those players with fouls to their credit equalling at least 3 in any given season	player whose number of fouls (over a season) is at least 3
+which team is it the la lakers or the cleveland cavaliers	los angeles lakers or cleveland cavaliers
+which team is it the la lakers or the cleveland cavaliers	team of player kobe bryant
+which team is it the la lakers or the cleveland cavaliers	team of player kobe bryant whose number of points (over a season) is 3
+what player had the same or more steals as kobe bryant	player whose number of steals (over a season) is at least number of steals (over a season) of player kobe bryant
+what player had the same or more steals as kobe bryant	player whose season is at most season of player kobe bryant
+what player had the same or more steals as kobe bryant	player whose season is at least season of player kobe bryant
+what player had the same or more steals as kobe bryant	player whose season is season of player kobe bryant
+what player had the same or more steals as kobe bryant	player whose team is team of player kobe bryant
+what player had the same or more steals as kobe bryant	player whose position is position of player kobe bryant
+what player had the same or more steals as kobe bryant	player that has the most number of position
+what player had the same or more steals as kobe bryant	player that has the most number of team
+what player had the same or more steals as kobe bryant	player that has at most two position
+what player had the same or more steals as kobe bryant	player that has at most two team
+what player had the same or more steals as kobe bryant	player that has the least number of position
+what player had the same or more steals as kobe bryant	player that has less than two position
+what player had the same or more steals as kobe bryant	player that has less than two team
+what player had the same or more steals as kobe bryant	player whose team is los angeles lakers or cleveland cavaliers
+how many steals did kobe bryant have allseason as an la laker	number of steals (over a season) of player kobe bryant whose team is los angeles lakers
+how many games has kobe bryant participated in during any one season	number of played games (over a season) of player kobe bryant
+what team was kobe bryant on when he scored 3 points over the season	team of player kobe bryant whose number of points (over a season) is 3
+what team was kobe bryant on when he scored 3 points over the season	team of player kobe bryant whose position is point guard
+what team was kobe bryant on when he scored 3 points over the season	team of player kobe bryant
+what team was kobe bryant on when he scored 3 points over the season	los angeles lakers or cleveland cavaliers
+player who has minimum 3 points over a season	player whose number of points (over a season) is at least 3
+how many fouls does kobe bryant have in seasons with 3 blocks	number of fouls (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+player that plays less than two positions	player that has less than two position
+player that plays less than two positions	player that has less than two team
+player that plays less than two positions	player that has at most two position
+player that plays less than two positions	player that has the most number of position
+player that plays less than two positions	player that has the least number of position
+player that plays less than two positions	player that has the most number of team
+player that plays less than two positions	player that has the least number of team
+what player is not on the los angeles lakers	player whose team is not los angeles lakers
+how many fouls did kobe bryant of the los angeles lakers have during the season	number of fouls (over a season) of player kobe bryant whose team is los angeles lakers
+which player played with kobe bryant	player whose season is season of player kobe bryant
+which player played with kobe bryant	player whose season is at most season of player kobe bryant
+which player played with kobe bryant	player whose season is at least season of player kobe bryant
+which player played with kobe bryant	player whose team is team of player kobe bryant
+which player played with kobe bryant	player whose position is position of player kobe bryant
+which player played with kobe bryant	player that has the most number of team
+which player played with kobe bryant	player that has the least number of team
+which player played with kobe bryant	player that has the most number of position
+which player played with kobe bryant	player that has the least number of position
+which player played with kobe bryant	player that has at most two team
+which player played with kobe bryant	player that has less than two team
+which player played with kobe bryant	player that has at most two position
+which player played with kobe bryant	player that has less than two position
+which player played with kobe bryant	player whose team is los angeles lakers or cleveland cavaliers
+find those players who have scored tallies equivelant to those of kobe bryant in any one specific season	player whose number of points (over a season) is number of points (over a season) of player kobe bryant
+players whose total number of blocks in a season is the fewest that kobe bryant had in a season	player whose number of blocks (over a season) is at least number of blocks (over a season) of player kobe bryant
+players whose total number of blocks in a season is the fewest that kobe bryant had in a season	player whose season is season of player kobe bryant
+players whose total number of blocks in a season is the fewest that kobe bryant had in a season	player whose team is team of player kobe bryant
+players whose total number of blocks in a season is the fewest that kobe bryant had in a season	player whose position is position of player kobe bryant
+name someone with at least as many games played per season as kobe bryant	player whose number of played games (over a season) is at least number of played games (over a season) of player kobe bryant
+name someone with at least as many games played per season as kobe bryant	player whose season is at least season of player kobe bryant
+name someone with at least as many games played per season as kobe bryant	player whose number of played games (over a season) is number of played games (over a season) of player kobe bryant
+name someone with at least as many games played per season as kobe bryant	player whose season is season of player kobe bryant
+name someone with at least as many games played per season as kobe bryant	player whose team is team of player kobe bryant
+name someone with at least as many games played per season as kobe bryant	player whose position is position of player kobe bryant
+how many blocks kob bryant made in the season in which he made 3 turnovers	number of blocks (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+what is the number of turnovers by kobe bryant who made 3 fouls over the season	number of turnovers (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many assists did kobe bryant get	number of assists (over a season) of player kobe bryant
+which player had the same amount of assists as kobe bryant	player whose number of assists (over a season) is number of assists (over a season) of player kobe bryant
+which player had the same amount of assists as kobe bryant	player whose season is season of player kobe bryant
+which player had the same amount of assists as kobe bryant	player whose team is team of player kobe bryant
+which player had the same amount of assists as kobe bryant	player whose position is position of player kobe bryant
+which player had the same amount of assists as kobe bryant	player that has the most number of position
+which player had the same amount of assists as kobe bryant	player that has the most number of team
+which player had the same amount of assists as kobe bryant	player that has the least number of position
+which player had the same amount of assists as kobe bryant	player that has the least number of team
+who has had less than 3 blocks in a season	player whose number of blocks (over a season) is not 3
+what position was kobe bryant playing in the season in which he committed 3 fouls	position of player kobe bryant whose number of fouls (over a season) is 3
+players that played at the same time as kobe bryant	player whose season is season of player kobe bryant
+players that played at the same time as kobe bryant	player whose season is at most season of player kobe bryant
+players that played at the same time as kobe bryant	player whose season is at least season of player kobe bryant
+players that played at the same time as kobe bryant	player whose team is team of player kobe bryant
+players that played at the same time as kobe bryant	player whose position is position of player kobe bryant
+players that played at the same time as kobe bryant	player that has at most two position
+players that played at the same time as kobe bryant	player that has the most number of position
+players that played at the same time as kobe bryant	player that has the most number of team
+players that played at the same time as kobe bryant	player that has the least number of position
+players that played at the same time as kobe bryant	player that has the least number of team
+players that played at the same time as kobe bryant	player that has less than two position
+players that played at the same time as kobe bryant	player that has less than two team
+players that played at the same time as kobe bryant	player whose team is los angeles lakers or cleveland cavaliers
+during the season he scored 3 points what was kobe bryants steal tally	number of steals (over a season) of player kobe bryant whose number of points (over a season) is 3
+name a player with more steals during the season than kobe bryant	player whose number of steals (over a season) is larger than number of steals (over a season) of player kobe bryant
+how many points and turn overs does kobe bryant have over a season	number of points (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+season of kobe bryant with 3 points	season of player kobe bryant whose number of points (over a season) is 3
+what player had the same amount of fouls as kobe bryant	player whose number of fouls (over a season) is number of fouls (over a season) of player kobe bryant
+what player had the same amount of fouls as kobe bryant	player whose season is season of player kobe bryant
+what player had the same amount of fouls as kobe bryant	player whose team is team of player kobe bryant
+what player had the same amount of fouls as kobe bryant	player whose position is position of player kobe bryant
+what player had the same amount of fouls as kobe bryant	player that has the most number of position
+what player had the same amount of fouls as kobe bryant	player that has the most number of team
+what player had the same amount of fouls as kobe bryant	player that has the least number of position
+what player had the same amount of fouls as kobe bryant	player that has the least number of team
+does kobe bryant play point guard	position of player kobe bryant whose position is point guard
+how many blocks did kobe bryant have when he had three fouls	number of blocks (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+name a player with no more assists than kobe bryant in a season	player whose number of assists (over a season) is at most number of assists (over a season) of player kobe bryant
+name a player with no more assists than kobe bryant in a season	player whose season is at most season of player kobe bryant
+name a player with no more assists than kobe bryant in a season	player whose season is at least season of player kobe bryant
+name a player with no more assists than kobe bryant in a season	player whose season is season of player kobe bryant
+name a player with no more assists than kobe bryant in a season	player whose season is at most 2004 or 2010
+name a player with no more assists than kobe bryant in a season	player that has at most two team
+name a player with no more assists than kobe bryant in a season	player whose team is team of player kobe bryant
+name a player with no more assists than kobe bryant in a season	player that has at most two position
+name a player with no more assists than kobe bryant in a season	player whose position is position of player kobe bryant
+name a player with no more assists than kobe bryant in a season	player that has the most number of team
+name a player with no more assists than kobe bryant in a season	player that has the most number of position
+when kobe bryant has 3 steals in a season how many points does he usually have	number of points (over a season) of player kobe bryant whose number of steals (over a season) is 3
+what team was he on during the season that kobe bryant had 3 fouls	team of player kobe bryant whose number of fouls (over a season) is 3
+who has had the same number of steals as kobe bryant	player whose number of steals (over a season) is number of steals (over a season) of player kobe bryant
+which player had no more than the number of fouls obtained by kobe bryant	player whose number of fouls (over a season) is at most number of fouls (over a season) of player kobe bryant
+which player had no more than the number of fouls obtained by kobe bryant	player whose season is at most season of player kobe bryant
+which player had no more than the number of fouls obtained by kobe bryant	player whose number of fouls (over a season) is number of fouls (over a season) of player kobe bryant
+which player had no more than the number of fouls obtained by kobe bryant	player whose season is season of player kobe bryant
+which player had no more than the number of fouls obtained by kobe bryant	player whose team is team of player kobe bryant
+which player had no more than the number of fouls obtained by kobe bryant	player whose position is position of player kobe bryant
+which player had no more than the number of fouls obtained by kobe bryant	player that has the most number of team
+which player had no more than the number of fouls obtained by kobe bryant	player that has the most number of position
+which player had no more than the number of fouls obtained by kobe bryant	player that has at most two team
+which player had no more than the number of fouls obtained by kobe bryant	player that has at most two position
+which player had no more than the number of fouls obtained by kobe bryant	player whose season is at most 2004 or 2010
+how many turnovers did kobe bryant have allseason as point guard	number of turnovers (over a season) of player kobe bryant whose position is point guard
+what player has had equal to or less fouls than kobe bryant	player whose number of fouls (over a season) is at most number of fouls (over a season) of player kobe bryant
+what player has had equal to or less fouls than kobe bryant	player whose number of fouls (over a season) is number of fouls (over a season) of player kobe bryant
+what player has had equal to or less fouls than kobe bryant	player whose season is at most season of player kobe bryant
+what player has had equal to or less fouls than kobe bryant	player whose season is season of player kobe bryant
+what player has had equal to or less fouls than kobe bryant	player whose team is team of player kobe bryant
+what player has had equal to or less fouls than kobe bryant	player whose position is position of player kobe bryant
+what player has had equal to or less fouls than kobe bryant	player that has the most number of team
+what player has had equal to or less fouls than kobe bryant	player that has the most number of position
+what player has had equal to or less fouls than kobe bryant	player that has at most two position
+are there players who have participated in either the same number or less than the same number of games in any one season as kobe bryant	player whose number of played games (over a season) is at most number of played games (over a season) of player kobe bryant
+are there players who have participated in either the same number or less than the same number of games in any one season as kobe bryant	player whose season is at most season of player kobe bryant
+are there players who have participated in either the same number or less than the same number of games in any one season as kobe bryant	player whose season is at least season of player kobe bryant
+are there players who have participated in either the same number or less than the same number of games in any one season as kobe bryant	player whose season is season of player kobe bryant
+are there players who have participated in either the same number or less than the same number of games in any one season as kobe bryant	player whose team is team of player kobe bryant
+are there players who have participated in either the same number or less than the same number of games in any one season as kobe bryant	player whose position is position of player kobe bryant
+what player has highest number rebounds	player that has the largest number of rebounds (over a season)
+what player has had less fouls than kobe bryant during a season	player whose number of fouls (over a season) is smaller than number of fouls (over a season) of player kobe bryant
+what player had less assists than kobe bryant	player whose number of assists (over a season) is smaller than number of assists (over a season) of player kobe bryant
+has kobe bryant had a season with exactly 3 rebounds	number of rebounds (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+how many turnovers did kobe bryant who had three steals have during the season	number of turnovers (over a season) of player kobe bryant whose number of steals (over a season) is 3
+when kobe bryant has at least 3 fouls in a season how many rebounds did he have	number of rebounds (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+how many games has kobe bryant made at least 3 rebounds in this season	number of played games (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+how many rebounds did kobe bryant have when he had 3 assists	number of rebounds (over a season) of player kobe bryant whose number of assists (over a season) is 3
+name a player with the same assists per season as kobe bryant	player whose number of assists (over a season) is number of assists (over a season) of player kobe bryant
+name a player with the same assists per season as kobe bryant	player whose season is season of player kobe bryant
+name a player with the same assists per season as kobe bryant	player whose season is at most season of player kobe bryant
+name a player with the same assists per season as kobe bryant	player whose season is at least season of player kobe bryant
+name a player with the same assists per season as kobe bryant	player whose team is team of player kobe bryant
+name a player with the same assists per season as kobe bryant	player whose position is position of player kobe bryant
+name a player with the same assists per season as kobe bryant	player that has the most number of position
+name a player with the same assists per season as kobe bryant	player that has the least number of position
+name a player with the same assists per season as kobe bryant	player that has the least number of team
+name a player with the same assists per season as kobe bryant	player that has at most two position
+players that play point guard	player whose position is not point guard
+steals by kobe bryant over all season with 3 blocks	number of steals (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+who played more than 3 games all season	player whose number of played games (over a season) is larger than 3
+what players have had more assists than kobe bryant	player whose number of assists (over a season) is larger than number of assists (over a season) of player kobe bryant
+for the season in which he performed 3 blocks name the number of rebounds attributable to kobe bryant	number of rebounds (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+on what team did kobe bryant only have 3 turnovers in a season	team of player kobe bryant whose number of turnovers (over a season) is 3
+on what team did kobe bryant only have 3 turnovers in a season	team of player kobe bryant whose number of points (over a season) is 3
+on what team did kobe bryant only have 3 turnovers in a season	team of player kobe bryant
+on what team did kobe bryant only have 3 turnovers in a season	team of player kobe bryant whose season is 2004
+on what team did kobe bryant only have 3 turnovers in a season	los angeles lakers or cleveland cavaliers
+which player has played the maximum number of fouls	player that has the largest number of fouls (over a season)
+who has had more or equal to 3 blocks	player whose number of blocks (over a season) is at least 3
+name of someone with more fouls since the start of the season than kobe bryant	player whose number of fouls (over a season) is larger than number of fouls (over a season) of player kobe bryant
+how many assists did kobe bryant have for the 04 season	number of assists (over a season) of player kobe bryant whose season is 2004
+how many turnovers did kobe get after playing 3 fouls	number of turnovers (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+name a player with fewer assists than kobe bryant	player whose number of assists (over a season) is smaller than number of assists (over a season) of player kobe bryant
+which player had fewer than three rebounds	player whose number of rebounds (over a season) is smaller than 3
+how many points did kobe bryant score after getting 3 steals	number of points (over a season) of player kobe bryant whose number of steals (over a season) is 3
+name players responsible for the least number of assists over any given season	player that has the smallest number of assists (over a season)
+how many steals does kobe bryant get in his usual season	number of steals (over a season) of player kobe bryant whose number of steals (over a season) is 3
+what player had the least blocks this season	player that has the smallest number of blocks (over a season)
+how many fouls did kobe bryant commit the seasons he had 3 blocks	number of fouls (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+how many assists did kobe get after 3 rebounds	number of assists (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+who averages at least 3 fouls a season	player whose number of fouls (over a season) is at least 3
+number of turnovers for kobe bryant over all season with 3 or more blocks	number of turnovers (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+players tied with kobe bryant for blocks in a season	player whose number of blocks (over a season) is number of blocks (over a season) of player kobe bryant
+players tied with kobe bryant for blocks in a season	player whose season is season of player kobe bryant
+players tied with kobe bryant for blocks in a season	player whose season is at most season of player kobe bryant
+players tied with kobe bryant for blocks in a season	player whose season is at least season of player kobe bryant
+players tied with kobe bryant for blocks in a season	player whose team is team of player kobe bryant
+players tied with kobe bryant for blocks in a season	player whose position is position of player kobe bryant
+how many allseason fouls did kobe bryant have when his allseason points were 3	number of fouls (over a season) of player kobe bryant whose number of points (over a season) is 3
+which player does not play for the la lakers	player whose team is not los angeles lakers
+who gets more than 3 steals a season	player whose number of steals (over a season) is larger than 3
+who made the least steals over a season	player that has the smallest number of steals (over a season)
+what are the number of steals of player kobe bryant over this season with 3 rebounds	number of steals (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+which player have played for fewer than two teams	player that has less than two team
+which player have played for fewer than two teams	player that has at most two team
+which player have played for fewer than two teams	player that has less than two position
+which player have played for fewer than two teams	player that has the most number of team
+which player have played for fewer than two teams	player that has the least number of team
+which player have played for fewer than two teams	player that has the most number of position
+which player have played for fewer than two teams	player that has the least number of position
+which player have played for fewer than two teams	player whose team is team of player kobe bryant
+which player have played for fewer than two teams	player whose season is season of player kobe bryant
+which player have played for fewer than two teams	player whose team is los angeles lakers or cleveland cavaliers
+which player have played for fewer than two teams	player whose number of rebounds (over a season) is not 3
+what players have not even made 3 rebounds in a season	player whose number of rebounds (over a season) is not 3
+what players have not even made 3 rebounds in a season	player whose number of rebounds (over a season) is number of rebounds (over a season) of player kobe bryant
+what players have not even made 3 rebounds in a season	player whose season is season of player kobe bryant
+what players have not even made 3 rebounds in a season	player whose team is team of player kobe bryant
+what players have not even made 3 rebounds in a season	player whose position is position of player kobe bryant
+how many all season steals did kobe bryant have when his points equaled 3	number of steals (over a season) of player kobe bryant whose number of points (over a season) is 3
+how many assists did kobe have in seasons when he had 3 steals in a season	number of assists (over a season) of player kobe bryant whose number of steals (over a season) is 3
+how many assists in the season did kobe bryant have	number of assists (over a season) of player kobe bryant
+what player has less than 3 rebounds over a season	player whose number of rebounds (over a season) is smaller than 3
+player whose position is point guard or forward	player whose position is point guard or forward
+player whose position is point guard or forward	player that has the most number of position
+player whose position is point guard or forward	player that has the least number of position
+player whose position is point guard or forward	player whose position is position of player kobe bryant
+player whose position is point guard or forward	player that has at most two position
+player whose position is point guard or forward	player that has the most number of team
+player whose position is point guard or forward	player whose team is los angeles lakers or cleveland cavaliers
+player whose position is point guard or forward	player that has the least number of team
+player whose position is point guard or forward	player that has at most two team
+how many games did kobe bryant get 3 rebounds in	number of played games (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+name the player with the fewest points in the season	player that has the smallest number of points (over a season)
+what position does kobe bryant play for on the lakers	position of player kobe bryant whose team is los angeles lakers
+what position does kobe bryant play for on the lakers	position of player kobe bryant
+what position does kobe bryant play for on the lakers	point guard or forward
+name the player who did not have three steals in the season	player whose number of steals (over a season) is not 3
+name the player who did not have three steals in the season	player whose number of rebounds (over a season) is not 3
+name the player who did not have three steals in the season	player whose season is season of player kobe bryant
+name the player who did not have three steals in the season	player whose team is team of player kobe bryant
+name the player who did not have three steals in the season	player whose position is position of player kobe bryant
+how many steals kob bryant made over a season in which he made 3 turnovers	number of steals (over a season) of player kobe bryant whose number of turnovers (over a season) is 3
+how many turnovers did kobe bryant get when he was at point guard	number of turnovers (over a season) of player kobe bryant whose position is point guard
+number of fouls over a season of player kobe bryant with 3 points over a season	number of fouls (over a season) of player kobe bryant whose number of points (over a season) is 3
+which player has the most allseason assists	player that has the largest number of assists (over a season)
+how many points total did kobe score during the season that he average three points per game	number of points (over a season) of player kobe bryant whose number of points (over a season) is 3
+how many games has kobe bryant played	number of played games (over a season) of player kobe bryant whose season is 2004
+find those players with a maximum number of turnovers  in a given season equalling that of kobe bryant in a given season	player whose number of turnovers (over a season) is at most number of turnovers (over a season) of player kobe bryant
+find those players with a maximum number of turnovers  in a given season equalling that of kobe bryant in a given season	player whose season is season of player kobe bryant
+find those players with a maximum number of turnovers  in a given season equalling that of kobe bryant in a given season	player whose season is at most season of player kobe bryant
+find those players with a maximum number of turnovers  in a given season equalling that of kobe bryant in a given season	player whose season is at least season of player kobe bryant
+find those players with a maximum number of turnovers  in a given season equalling that of kobe bryant in a given season	player whose team is team of player kobe bryant
+find those players with a maximum number of turnovers  in a given season equalling that of kobe bryant in a given season	player whose position is position of player kobe bryant
+who has 3 or less steals	player whose number of steals (over a season) is at most 3
+kobe bryant scored 3 points	number of points (over a season) of player kobe bryant whose number of points (over a season) is 3
+what player played 3 or less games this season	player whose number of played games (over a season) is at most 3
+how many games has kobe bryant been a laker for	number of played games (over a season) of player kobe bryant whose team is los angeles lakers
+who has gotten 3 or more steals	player whose number of steals (over a season) is at least 3
+what team does point guard kobe bryant play for	team of player kobe bryant whose position is point guard
+what team does point guard kobe bryant play for	team of player kobe bryant
+what team does point guard kobe bryant play for	los angeles lakers or cleveland cavaliers
+what player had less than 3 assists	player whose number of assists (over a season) is smaller than 3
+what position did kobe bryant play in the three games	position of player kobe bryant whose number of played games (over a season) is 3
+what position did kobe bryant play in the three games	position of player kobe bryant
+what position did kobe bryant play in the three games	position of player kobe bryant whose number of points (over a season) is 3
+what position did kobe bryant play in the three games	point guard or forward
+blocks by kobe bryant over all seasons as point guard	number of blocks (over a season) of player kobe bryant whose position is point guard
+how many players are in the team	number of team
+how many players are in the team	number of position
+how many fouls did kobe bryant have over the season in which he had 3 steals	number of fouls (over a season) of player kobe bryant whose number of steals (over a season) is 3
+how many blocks did kobe bryant have during a single season that he had exactly three fouls	number of blocks (over a season) of player kobe bryant whose number of fouls (over a season) is 3
+who has the least turnovers	player that has the smallest number of turnovers (over a season)
+how many blocks did kobe bryant have	player whose number of blocks (over a season) is number of blocks (over a season) of player kobe bryant
+how many blocks did kobe bryant have	player whose season is season of player kobe bryant
+how many blocks did kobe bryant have	player whose team is team of player kobe bryant
+how many blocks did kobe bryant have	player whose position is position of player kobe bryant
+name those players who have performed a specific number of assists over any given season equalling that of kobe bryant also over any given season	player whose number of assists (over a season) is at least number of assists (over a season) of player kobe bryant
+name those players who have performed a specific number of assists over any given season equalling that of kobe bryant also over any given season	player whose season is season of player kobe bryant
+name those players who have performed a specific number of assists over any given season equalling that of kobe bryant also over any given season	player whose team is team of player kobe bryant
+name those players who have performed a specific number of assists over any given season equalling that of kobe bryant also over any given season	player whose position is position of player kobe bryant
+who has had more turnovers than kobe bryant	player whose number of turnovers (over a season) is larger than number of turnovers (over a season) of player kobe bryant
+blocks made by kob bryant over a season in which he made 3 points	number of blocks (over a season) of player kobe bryant whose number of points (over a season) is 3
+what player scored the same amount of teams as kobe bryant this season	player whose number of points (over a season) is number of points (over a season) of player kobe bryant
+how many fouls did kobe byrant have during his laker career	number of fouls (over a season) of player kobe bryant whose team is los angeles lakers
+players that had the most blocks over a season	player that has the largest number of blocks (over a season)
+what teams has kobe bryant played on	team of player kobe bryant whose number of points (over a season) is 3
+what teams has kobe bryant played on	team of player kobe bryant
+what teams has kobe bryant played on	los angeles lakers or cleveland cavaliers
+which player had as many turnovers as kobe bryant	player whose number of turnovers (over a season) is number of turnovers (over a season) of player kobe bryant
+players that have played in the same number of games as kobe over all seasons	player whose number of played games (over a season) is at most number of played games (over a season) of player kobe bryant
+players that have played in the same number of games as kobe over all seasons	player whose season is season of player kobe bryant
+players that have played in the same number of games as kobe over all seasons	player whose season is at most season of player kobe bryant
+players that have played in the same number of games as kobe over all seasons	player whose season is at least season of player kobe bryant
+players that have played in the same number of games as kobe over all seasons	player whose team is team of player kobe bryant
+players that have played in the same number of games as kobe over all seasons	player whose position is position of player kobe bryant
+players who dont play for los angeles lakers	player whose team is not los angeles lakers
+during his season playing with the los angeles lakers how many turnovers did kobe bryant have	number of turnovers (over a season) of player kobe bryant whose team is los angeles lakers
+how many players are on the team	number of team
+how many players are on the team	number of position
+what players have less than 3 steals during a season	player whose number of steals (over a season) is smaller than 3
+which player had more than three points scored	player whose number of points (over a season) is larger than 3
+which is the team of kobe bryant who made 3 blocks	team of player kobe bryant whose number of blocks (over a season) is 3
+which is the team of kobe bryant who made 3 blocks	team of player kobe bryant whose number of points (over a season) is 3
+which is the team of kobe bryant who made 3 blocks	team of player kobe bryant
+which is the team of kobe bryant who made 3 blocks	los angeles lakers or cleveland cavaliers
+what player had less blocks than kobe bryant this season	player whose number of blocks (over a season) is smaller than number of blocks (over a season) of player kobe bryant
+what player played for two or less teams	player that has at most two team
+what player played for two or less teams	player that has less than two team
+what player played for two or less teams	player that has the most number of team
+what player played for two or less teams	player that has the least number of team
+what player played for two or less teams	player that has at most two position
+what player played for two or less teams	player whose team is los angeles lakers or cleveland cavaliers
+what player played for two or less teams	player whose team is team of player kobe bryant
+what player played for two or less teams	player that has the most number of position
+what player played for two or less teams	player that has the least number of position
+what player played for two or less teams	player whose season is season of player kobe bryant
+which player has the least number of positions	player that has the least number of position
+which player has the least number of positions	player that has the most number of position
+which player has the least number of positions	player that has the least number of team
+which player has the least number of positions	player that has less than two position
+which player has the least number of positions	player that has the most number of team
+which player has the least number of positions	player that has less than two team
+which player has the least number of positions	player whose position is position of player kobe bryant
+which player has the least number of positions	player whose position is point guard or forward
+which player has the least number of positions	player whose season is season of player kobe bryant
+which player has the least number of positions	player whose team is team of player kobe bryant
+what team does kobe bryant play for	team of player kobe bryant whose position is point guard
+what player had 3 or more fouls	player whose number of fouls (over a season) is at least 3
+who is a player with more than 3 baskets per season played	player whose number of points (over a season) is at most 3
+what position did kob bryant play in 2004	position of player kobe bryant whose season is 2004
+what position did kob bryant play in 2004	position of player kobe bryant
+what position did kob bryant play in 2004	point guard or forward
+how many steals did kobe bryant get when he was at point guard	number of steals (over a season) of player kobe bryant whose position is point guard
+how many assists in three games did kobe bryant make	number of assists (over a season) of player kobe bryant whose number of played games (over a season) is 3
+number of points made by kob bryant over a season in which he played 3 games	number of points (over a season) of player kobe bryant whose number of played games (over a season) is 3
+number of played games over a season of player kobe bryant	number of played games (over a season) of player kobe bryant
+which players have made more than 3 turnovers in a season	player whose number of turnovers (over a season) is larger than 3
+how many blocks did kobe bryant make allseason as point guard	number of blocks (over a season) of player kobe bryant whose position is point guard
+how many steals did kobe bryant have when he made three rebounds	number of steals (over a season) of player kobe bryant whose number of rebounds (over a season) is 3
+name a player who had at least as many turnovers as kobe bryant	player whose number of turnovers (over a season) is at least number of turnovers (over a season) of player kobe bryant
+does kobe bryant have more turnovers than his 3 blocks	number of turnovers (over a season) of player kobe bryant whose number of blocks (over a season) is 3
+which player has the maximum number of turnovers	player that has the largest number of turnovers (over a season)
+what player did not have 3 blocks	player whose number of blocks (over a season) is not 3
