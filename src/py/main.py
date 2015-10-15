@@ -2,6 +2,7 @@
 import argparse
 import collections
 import itertools
+import json
 import math
 import numpy
 import random
@@ -36,6 +37,9 @@ VOCAB_TYPES = collections.OrderedDict([
 
 # Global options
 OPTIONS = None
+
+# Global statistics
+STATS = {}
 
 def _parse_args():
   global OPTIONS
@@ -77,6 +81,7 @@ def _parse_args():
   parser.add_argument('--dev-data', help='Path to dev data.')
   parser.add_argument('--save-file', help='Path to save parameters.')
   parser.add_argument('--load-file', help='Path to load parameters, will ignore other passed arguments.')
+  parser.add_argument('--stats-file', help='Path to save statistics (JSON format).')
   parser.add_argument('--theano-fast-compile', action='store_true',
                       help='Run Theano in fast compile mode.')
   parser.add_argument('--theano-profile', action='store_true',
@@ -191,7 +196,7 @@ def get_model(spec):
     model = constructor(spec)
   return model
 
-def print_accuracy_metrics(is_correct_list, tokens_correct_list,
+def print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
                            x_len_list, y_len_list):
   # Overall metrics
   num_examples = len(is_correct_list)
@@ -213,7 +218,14 @@ def print_accuracy_metrics(is_correct_list, tokens_correct_list,
     num_per_len[x_len] += 1
     tokens_per_len[x_len] += y_len
 
+  STATS[name] = {}
+
   # Print sequence-level accuracy
+  STATS[name]['sentence'] = {
+      'correct': num_correct,
+      'total': num_examples,
+      'accuracy': seq_accuracy,
+  }
   print 'Sequence-level accuracy: %d/%d = %g' % (num_correct, num_examples, seq_accuracy)
   for i in sorted(num_correct_per_len):
     cur_num_correct = num_correct_per_len[i]
@@ -223,6 +235,11 @@ def print_accuracy_metrics(is_correct_list, tokens_correct_list,
         i - 1, cur_num_correct, cur_num_examples, cur_accuracy)
 
   # Print token-level accuracy
+  STATS[name]['token'] = {
+      'correct': num_tokens_correct,
+      'total': num_tokens,
+      'accuracy': token_accuracy,
+  }
   print 'Token-level accuracy: %d/%d = %g' % (num_tokens_correct, num_tokens, token_accuracy)
   for i in sorted(tokens_correct_per_len):
     cur_num_tokens_correct = tokens_correct_per_len[i]
@@ -237,7 +254,7 @@ def decode(model, x_inds):
   else:
     return model.decode_beam(x_inds, beam_size=OPTIONS.beam_size)
 
-def evaluate(model, in_vocabulary, out_vocabulary, dataset):
+def evaluate(name, model, in_vocabulary, out_vocabulary, dataset):
   """Evaluate the model.
 
   Supports dataset mapping x to multiple y.  If so, it treats
@@ -293,7 +310,7 @@ def evaluate(model, in_vocabulary, out_vocabulary, dataset):
     print '  sequence correct = %s' % is_correct
     print '  token accuracy = %d/%d = %g' % (
         tokens_correct, len(y_inds), float(tokens_correct) / len(y_inds))
-  print_accuracy_metrics(is_correct_list, tokens_correct_list,
+  print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
                          x_len_list, y_len_list)
 
 def run():
@@ -326,7 +343,7 @@ def run():
 
   if OPTIONS.train_data:
     print 'Training data:'
-    evaluate(model, in_vocabulary, out_vocabulary, train_data)
+    evaluate('train', model, in_vocabulary, out_vocabulary, train_data)
 
   if OPTIONS.dev_data:
     dev_raw = load_dataset(OPTIONS.dev_data)
@@ -334,7 +351,12 @@ def run():
     dev_data = preprocess_data(dev_model.in_vocabulary,
                                dev_model.out_vocabulary, dev_raw)
     print 'Testing data:'
-    evaluate(dev_model, in_vocabulary, out_vocabulary, dev_data)
+    evaluate('dev', dev_model, in_vocabulary, out_vocabulary, dev_data)
+
+  if OPTIONS.stats_file:
+      out = open(OPTIONS.stats_file, 'w')
+      print >>out, json.dumps(STATS)
+      out.close()
 
 def main():
   _parse_args()
