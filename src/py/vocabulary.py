@@ -48,8 +48,9 @@ class Vocabulary:
     indices = [self.get_index(w) for w in words]
     return indices
 
-  def indices_to_sentence(self, indices):
-    return ' '.join(self.word_list[i] for i in indices)
+  def indices_to_sentence(self, indices, strip_eos=False):
+    return ' '.join(self.word_list[i] for i in indices
+                    if not (strip_eos and i == self.END_OF_SENTENCE_INDEX))
 
   def size(self):
     return len(self.word_list)

@@ -80,7 +80,7 @@ class EncoderDecoderModel(NeuralModel):
     h_t = self._encode(x)
     y_seq = []
     p_y_seq = []  # Should be handy for error analysis
-    while True:
+    for i in range(max_len):
       write_dist = self._decoder_write(h_t)
       y_t = numpy.argmax(write_dist)
       p_y_t = write_dist[y_t]

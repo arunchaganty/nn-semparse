@@ -10,13 +10,11 @@ import sys
 import theano
 import os
 
-# IRW imports
+# Local imports
 from encoderdecoder import EncoderDecoderModel
 from encdecspec import VanillaEncDecSpec, GRUEncDecSpec, LSTMEncDecSpec
+from example import Example
 import spec as specutil
-
-# Imports from parent directory
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from vocabulary import GloveVocabulary, RawVocabulary, Vocabulary
 
 CONTINUOUS_MODELS = collections.OrderedDict([
@@ -69,8 +67,6 @@ def _parse_args():
   parser.add_argument('--output-vocab-type',
                       help='type of output vocabulary (options: [%s])' % (
                           ', '.join(VOCAB_TYPES)), default='raw')
-  parser.add_argument('--no-eos-on-output', action='store_true',
-                      help='Do not add end of sentence token to output sequence.')
   parser.add_argument('--reverse-input', action='store_true',
                       help='Reverse the input sentence (intended for encoder-decoder).')
   parser.add_argument('--float32', action='store_true',
@@ -167,21 +163,12 @@ def update_model(model, dataset):
   return model
 
 def preprocess_data(in_vocabulary, out_vocabulary, raw):
-  eos_on_output = not OPTIONS.no_eos_on_output
   data = []
-  for ex in raw:
-    kwargs = {}
-    if len(ex) == 2:
-      x, y = ex
-    else:
-      x, y, actions_raw = ex
-      actions = [int(a) for a in actions_raw.split(' ')]
-      kwargs['actions'] = actions
-    x_inds = in_vocabulary.sentence_to_indices(x)
-    y_inds = out_vocabulary.sentence_to_indices(y, add_eos=eos_on_output)
-    if OPTIONS.reverse_input:
-      x_inds = x_inds[::-1]
-    data.append((x_inds, y_inds, kwargs))
+  for raw_ex in raw:
+    x_str, y_str = raw_ex
+    ex = Example(x_str, y_str, in_vocabulary, out_vocabulary,
+                 reverse_input=OPTIONS.reverse_input)
+    data.append(ex)
   return data
 
 def get_continuous_spec(in_vocabulary, out_vocabulary):
@@ -250,14 +237,14 @@ def print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
 
 def decode(model, x_inds):
   if OPTIONS.beam_size == 0:
-    return model.decode_greedy(x_inds, max_len=(2*len(x_inds)+50))
+    return model.decode_greedy(x_inds, max_len=100)
   else:
     return model.decode_beam(x_inds, beam_size=OPTIONS.beam_size)
 
 def evaluate(name, model, in_vocabulary, out_vocabulary, dataset):
   """Evaluate the model.
 
-  Supports dataset mapping x to multiple y.  If so, it treats
+  TODO(robinjia): Support dataset mapping x to multiple y.  If so, it treats
   any of those y as acceptable answers.
   """
   is_correct_list = []
@@ -265,51 +252,25 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, dataset):
   x_len_list = []
   y_len_list = []
 
-  all_x_list = []
-  all_x_set = set()
-  x_to_inds = {}
-  x_to_all_y = collections.defaultdict(list)
-  x_to_kwargs = {}
-  for x_inds, y_inds, kwargs in dataset:
-    x_words = in_vocabulary.indices_to_sentence(x_inds)
-    y_words = out_vocabulary.indices_to_sentence(y_inds)
-    if x_words not in all_x_set:
-      all_x_set.add(x_words)
-      all_x_list.append(x_words)
-    x_to_inds[x_words] = x_inds
-    x_to_all_y[x_words].append((y_inds, y_words))
-    x_to_kwargs[x_words] = kwargs
-
-  for example_num, x_words in enumerate(all_x_list):
-    x_inds = x_to_inds[x_words]
-    y_all = x_to_all_y[x_words]
-    y_inds_all = [y[0] for y in y_all]
-    y_words_all = [y[1] for y in y_all]
-    kwargs = x_to_kwargs[x_words]
-
+  for example_num, ex in enumerate(dataset):
     print 'Example %d' % example_num
-    print '  x      = "%s"' % x_words
-    print '  y      = "%s"' % y_words_all[0]
-
-    y_pred = decode(model, x_inds)
-    y_pred_words = out_vocabulary.indices_to_sentence(y_pred)
+    print '  x      = "%s"' % ex.x_str
+    print '  y      = "%s"' % ex.y_str
+    y_pred_inds = decode(model, ex.x_inds)
+    y_pred_str = out_vocabulary.indices_to_sentence(y_pred_inds, strip_eos=True)
+    y_pred_toks = y_pred_str.split(' ')
 
     # Compute accuracy metrics
-    is_correct = (y_pred_words in y_words_all)
-    if len(y_all) == 1:
-      y_inds = y_inds_all[0]
-      y_words = y_words_all[0]
-      tokens_correct = sum(a == b for a, b in zip(y_pred, y_inds))
-    else:
-      tokens_correct = 0  # TODO(robinjia): Take the max over y_all?
+    is_correct = (y_pred_str == ex.y_str)
+    tokens_correct = sum(a == b for a, b in zip(y_pred_toks, ex.y_toks))
     is_correct_list.append(is_correct)
     tokens_correct_list.append(tokens_correct)
-    x_len_list.append(len(x_inds))
-    y_len_list.append(len(y_inds))
-    print '  y_pred = "%s"' % y_pred_words
+    x_len_list.append(len(ex.x_toks))
+    y_len_list.append(len(ex.y_toks))
+    print '  y_pred = "%s"' % y_pred_str
     print '  sequence correct = %s' % is_correct
     print '  token accuracy = %d/%d = %g' % (
-        tokens_correct, len(y_inds), float(tokens_correct) / len(y_inds))
+        tokens_correct, len(ex.y_toks), float(tokens_correct) / len(ex.y_toks))
   print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
                          x_len_list, y_len_list)
 

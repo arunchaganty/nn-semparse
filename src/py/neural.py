@@ -91,11 +91,10 @@ class NeuralModel(object):
     objective = 0
     gradients = {}
     for ex in examples:
-      x_inds, y_inds, kwargs = ex
-      print 'x: %s' % self.in_vocabulary.indices_to_sentence(x_inds)
-      print 'y: %s' % self.out_vocabulary.indices_to_sentence(y_inds)
+      print 'x: %s' % ex.x_str
+      print 'y: %s' % ex.y_str
       cur_objective, cur_gradients = self.get_objective_and_gradients(
-          x_inds, y_inds, total_examples=len(examples), **kwargs)
+          ex.x_inds, ex.y_inds, total_examples=len(examples))
       objective += cur_objective
       for p in self.params:
         if p in gradients:
