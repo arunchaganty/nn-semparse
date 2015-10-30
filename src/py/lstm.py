@@ -13,7 +13,7 @@ class LSTMLayer(RNNLayer):
 
   Parameter names follow convention in Richard Socher's CS224D slides.
   """
-  def create_vars(self, create_init_state, create_output_layer):
+  def create_vars(self, create_init_state):
     # Initial state
     # The hidden state must store both c_t, the memory cell, 
     # and h_t, what we normally call the hidden state
@@ -55,17 +55,8 @@ class LSTMLayer(RNNLayer):
         self.wo, self.uo, self.wc, self.uc,
     ]
 
-    # Output layer
-    if create_output_layer:
-      self.w_out = theano.shared(
-          name='w_out', 
-          value=0.2 * numpy.random.uniform(-1.0, 1.0, (2 * self.nh, self.nw)).astype(theano.config.floatX))
-      output_params = [self.w_out]
-    else:
-      output_params = []
-
     # Params
-    self.params = init_state_params + recurrence_params + output_params
+    self.params = init_state_params + recurrence_params
 
   def unpack(self, hidden_state):
     c_t = hidden_state[0:self.nh]
@@ -89,6 +80,7 @@ class LSTMLayer(RNNLayer):
     h_t = o_t * T.tanh(c_t)
     return self.pack(c_t, h_t)
 
-  def write(self, c_h_t):
-    # TODO: try writing only based on h_t, not c_t
-    return T.nnet.softmax(T.dot(c_h_t, self.w_out))[0]
+  def get_h_for_write(self, c_h_t):
+    c_t, h_t = self.unpack(c_h_t)
+    return h_t
+

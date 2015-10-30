@@ -9,7 +9,7 @@ class Spec(object):
   - self.create_vars(): called by __init__, should initialize parameters.
   - self.get_local_params(): Get all local parameters (excludes vocabulary).
   """
-  def __init__(self, in_vocabulary, out_vocabulary, hidden_size):
+  def __init__(self, in_vocabulary, out_vocabulary, lexicon, hidden_size):
     """Initialize.
 
     Args:
@@ -20,6 +20,7 @@ class Spec(object):
     """
     self.in_vocabulary = in_vocabulary
     self.out_vocabulary = out_vocabulary
+    self.lexicon = lexicon
     self.hidden_size = hidden_size
     self.create_vars()
 
@@ -53,7 +54,8 @@ class Spec(object):
     """Get all parameters (things we optimize with respect to)."""
     return (self.get_local_params()
             + self.in_vocabulary.get_theano_params()
-            + self.out_vocabulary.get_theano_params())
+            + self.out_vocabulary.get_theano_params()
+            + self.lexicon.get_theano_params())
 
   def get_all_shared(self):
     """Get all shared theano varaibles.
@@ -64,7 +66,8 @@ class Spec(object):
     """
     return (self.get_local_params() 
             + self.in_vocabulary.get_theano_all()
-            + self.out_vocabulary.get_theano_all())
+            + self.out_vocabulary.get_theano_all()
+            + self.lexicon.get_theano_all())
 
   def save(self, filename):
     """Save the parameters to a filename."""

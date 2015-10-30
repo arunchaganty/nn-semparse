@@ -41,6 +41,9 @@ class Vocabulary:
       return self.word_to_index[word]
     return self.word_to_index[self.UNKNOWN]
 
+  def get_word(self, i):
+    return self.word_list[i]
+
   def sentence_to_indices(self, sentence, add_eos=True):
     words = sentence.split(' ')
     if add_eos:

@@ -9,12 +9,12 @@ class RNNLayer(object):
     de: dimension of word embeddings
   """ 
   def __init__(self, vocab, hidden_size, 
-               create_init_state=False, create_output_layer=False):
+               create_init_state=False):
     self.vocab = vocab
     self.de = vocab.emb_size
     self.nh = hidden_size
     self.nw = vocab.size()
-    self.create_vars(create_init_state, create_output_layer)
+    self.create_vars(create_init_state)
 
   def create_vars(self):
     raise NotImplementedError
@@ -25,8 +25,9 @@ class RNNLayer(object):
   def step(self, x_t, h_prev):
     raise NotImplementedError
 
-  def write(self, h_t):
-    raise NotImplementedError
+  def get_h_for_write(self, h):
+    """Override if only want to expose part of hidden state for output."""
+    return h
 
   def f_embedding(self, i):
     return self.vocab.get_theano_embedding(i)

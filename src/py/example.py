@@ -34,4 +34,6 @@ class Example(object):
     if reverse_input:
       self.x_inds = self.x_inds[::-1]
     self.y_inds = output_vocab.sentence_to_indices(y_str)
-    self.y_input_inds = [[int(x_j == y_i) for x_j in self.x_toks] for y_i in self.y_toks]
+    self.y_input_inds = [[int(x_j == y_i) for x_j in self.x_toks] + [0]
+                         for y_i in self.y_toks] + [[0] * len(self.x_inds)]
+        # Add 0's for the EOS tag in both x and y

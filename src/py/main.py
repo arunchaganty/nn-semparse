@@ -14,6 +14,7 @@ import os
 from encoderdecoder import EncoderDecoderModel
 from encdecspec import VanillaEncDecSpec, GRUEncDecSpec, LSTMEncDecSpec
 from example import Example
+from lexicon import Lexicon
 import spec as specutil
 from vocabulary import GloveVocabulary, RawVocabulary, Vocabulary
 
@@ -171,9 +172,9 @@ def preprocess_data(in_vocabulary, out_vocabulary, raw):
     data.append(ex)
   return data
 
-def get_continuous_spec(in_vocabulary, out_vocabulary):
+def get_continuous_spec(in_vocabulary, out_vocabulary, lexicon):
   constructor = CONTINUOUS_MODELS[OPTIONS.continuous_spec]
-  return constructor(in_vocabulary, out_vocabulary, OPTIONS.hidden_size)
+  return constructor(in_vocabulary, out_vocabulary, lexicon, OPTIONS.hidden_size)
 
 def get_model(spec):
   constructor = MODELS[OPTIONS.model]
@@ -241,7 +242,20 @@ def decode(model, x_inds):
   else:
     return model.decode_beam(x_inds, beam_size=OPTIONS.beam_size)
 
-def evaluate(name, model, in_vocabulary, out_vocabulary, dataset):
+def decoded_ind_to_word(ind, out_vocabulary, x_toks):
+  if ind < out_vocabulary.size():
+    if ind == Vocabulary.END_OF_SENTENCE_INDEX:
+      return None
+    return out_vocabulary.get_word(ind)
+  else:
+    new_ind = ind - out_vocabulary.size()
+    if new_ind == len(x_toks):
+      # Should never happen, but handle this case for correctness
+      return Vocabulary.END_OF_SENTENCE
+    return x_toks[new_ind]
+
+
+def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
   """Evaluate the model.
 
   TODO(robinjia): Support dataset mapping x to multiple y.  If so, it treats
@@ -257,8 +271,10 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, dataset):
     print '  x      = "%s"' % ex.x_str
     print '  y      = "%s"' % ex.y_str
     y_pred_inds = decode(model, ex.x_inds)
-    y_pred_str = out_vocabulary.indices_to_sentence(y_pred_inds, strip_eos=True)
-    y_pred_toks = y_pred_str.split(' ')
+    y_pred_toks = [decoded_ind_to_word(i, out_vocabulary, ex.x_toks)
+                   for i in y_pred_inds]
+    y_pred_toks = [t for t in y_pred_toks if t]
+    y_pred_str = ' '.join(y_pred_toks)
 
     # Compute accuracy metrics
     is_correct = (y_pred_str == ex.y_str)
@@ -283,11 +299,13 @@ def run():
     spec = specutil.load(OPTIONS.load_file)
     in_vocabulary = spec.in_vocabulary
     out_vocabulary = spec.out_vocabulary
+    lexicon = spec.lexicon
   elif OPTIONS.train_data:
     print >> sys.stderr, 'Initializing parameters...'
     in_vocabulary = get_input_vocabulary(train_raw)
     out_vocabulary = get_output_vocabulary(train_raw)
-    spec = get_continuous_spec(in_vocabulary, out_vocabulary)
+    lexicon = Lexicon.from_vocabulary(in_vocabulary, OPTIONS.hidden_size)
+    spec = get_continuous_spec(in_vocabulary, out_vocabulary, lexicon)
   else:
     raise Exception('Must either provide parameters to load or training data.')
 
@@ -303,16 +321,18 @@ def run():
     spec.save(OPTIONS.save_file)
 
   if OPTIONS.train_data:
+    print >> sys.stderr, 'Evaluating on training data...'
     print 'Training data:'
-    evaluate('train', model, in_vocabulary, out_vocabulary, train_data)
+    evaluate('train', model, in_vocabulary, out_vocabulary, lexicon, train_data)
 
   if OPTIONS.dev_data:
+    print >> sys.stderr, 'Evaluating on dev data...'
     dev_raw = load_dataset(OPTIONS.dev_data)
     dev_model = update_model(model, dev_raw)
     dev_data = preprocess_data(dev_model.in_vocabulary,
                                dev_model.out_vocabulary, dev_raw)
     print 'Testing data:'
-    evaluate('dev', dev_model, in_vocabulary, out_vocabulary, dev_data)
+    evaluate('dev', dev_model, in_vocabulary, out_vocabulary, lexicon, dev_data)
 
   if OPTIONS.stats_file:
       out = open(OPTIONS.stats_file, 'w')

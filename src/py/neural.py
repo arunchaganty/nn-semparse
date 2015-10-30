@@ -45,7 +45,7 @@ class NeuralModel(object):
     """Do all necessary setup (e.g. compile theano functions)."""
     raise NotImplementedError
 
-  def get_objective_and_gradients(self, x, y):
+  def get_objective_and_gradients(self, example):
     """Get objective and gradients.
 
     Returns: tuple (objective, gradients) where
@@ -93,8 +93,7 @@ class NeuralModel(object):
     for ex in examples:
       print 'x: %s' % ex.x_str
       print 'y: %s' % ex.y_str
-      cur_objective, cur_gradients = self.get_objective_and_gradients(
-          ex.x_inds, ex.y_inds, total_examples=len(examples))
+      cur_objective, cur_gradients = self.get_objective_and_gradients(ex)
       objective += cur_objective
       for p in self.params:
         if p in gradients:
