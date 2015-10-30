@@ -242,19 +242,6 @@ def decode(model, x_inds):
   else:
     return model.decode_beam(x_inds, beam_size=OPTIONS.beam_size)
 
-def decoded_ind_to_word(ind, out_vocabulary, x_toks):
-  if ind < out_vocabulary.size():
-    if ind == Vocabulary.END_OF_SENTENCE_INDEX:
-      return None
-    return out_vocabulary.get_word(ind)
-  else:
-    new_ind = ind - out_vocabulary.size()
-    if new_ind == len(x_toks):
-      # Should never happen, but handle this case for correctness
-      return Vocabulary.END_OF_SENTENCE
-    return x_toks[new_ind]
-
-
 def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
   """Evaluate the model.
 
@@ -270,10 +257,7 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
     print 'Example %d' % example_num
     print '  x      = "%s"' % ex.x_str
     print '  y      = "%s"' % ex.y_str
-    y_pred_inds = decode(model, ex.x_inds)
-    y_pred_toks = [decoded_ind_to_word(i, out_vocabulary, ex.x_toks)
-                   for i in y_pred_inds]
-    y_pred_toks = [t for t in y_pred_toks if t]
+    y_pred_toks = decode(model, ex.x_inds)
     y_pred_str = ' '.join(y_pred_toks)
 
     # Compute accuracy metrics

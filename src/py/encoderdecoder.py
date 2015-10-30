@@ -87,21 +87,24 @@ class EncoderDecoderModel(NeuralModel):
     print 'P(y_i): %s' % p_y_seq
     return (objective, gradients)
 
-  def decode_greedy(self, x, max_len=100):
-    h_t = self._encode(x)
-    y_seq = []
+  def decode_greedy(self, x_inds, max_len=100):
+    h_t = self._encode(x_inds)
+    y_tok_seq = []
     p_y_seq = []  # Should be handy for error analysis
     for i in range(max_len):
       # TODO(robinjia): only pass in x if lexicon is simple
-      write_dist = self._decoder_write(h_t, x)
+      write_dist = self._decoder_write(h_t, x_inds)
       y_t = numpy.argmax(write_dist)
       p_y_t = write_dist[y_t]
-      y_seq.append(y_t)
       p_y_seq.append(p_y_t)
       if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
         break
-      if y_t >= self.out_vocabulary.size():
-        # TODO(robinjia): Check if this word is in output dictionary
-        y_t = Vocabulary.UNKNOWN_INDEX
+      if y_t < self.out_vocabulary.size():
+        y_tok = self.out_vocabulary.get_word(y_t)
+      else:
+        new_ind = y_t - self.out_vocabulary.size()
+        y_tok = self.in_vocabulary.get_word(x_inds[new_ind])
+        y_t = self.out_vocabulary.get_index(y_tok)
+      y_tok_seq.append(y_tok)
       h_t = self._decoder_step(y_t, h_t)
-    return y_seq
+    return y_tok_seq
