@@ -156,6 +156,12 @@ def get_lexicon(dataset):
 
 def update_model(model, dataset):
   """Update model for new dataset if fixed word vectors were used."""
+  # Do the lexicon update in-place
+  for x, y in dataset:
+    words = x.split(' ')
+    for w in words:
+      model.lexicon.add_entry((w, w))
+
   need_new_model = False
   if OPTIONS.input_vocab_type == 'glove_fixed':
     in_vocabulary = get_input_vocabulary(dataset)
@@ -327,7 +333,8 @@ def run():
     dev_raw = load_dataset(OPTIONS.dev_data)
     dev_model = update_model(model, dev_raw)
     dev_data = preprocess_data(dev_model.in_vocabulary,
-                               dev_model.out_vocabulary, lexicon, dev_raw)
+                               dev_model.out_vocabulary, 
+                               dev_model.lexicon, dev_raw)
     print 'Testing data:'
     evaluate('dev', dev_model, in_vocabulary, out_vocabulary, lexicon, dev_data)
 

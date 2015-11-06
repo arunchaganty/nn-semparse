@@ -63,6 +63,16 @@ class Lexicon(object):
     # Note: indices are NOT unique!  Some indices may map to 0 for UNK
     return self.entry_to_index[entry]
 
+  def add_entry(self, entry):
+    """Add an entry to the lexicon.  
+    
+    Always maps to UNK, since embedding matrix is fixed after lexicon creation.
+    """
+    if entry in self.entry_to_index: return
+    self.entries.append(entry)
+    self.entry_to_index[entry] = 0  # 0 is for UNK
+    self.entry_map[entry[0]].append(entry)
+
   @classmethod
   def from_sentences(cls, sentences, emb_size, unk_cutoff):
     """Create a lexicon that just maps every word in a vocabulary to itself."""

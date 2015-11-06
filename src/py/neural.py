@@ -34,6 +34,7 @@ class NeuralModel(object):
     self.spec = spec
     self.in_vocabulary = spec.in_vocabulary
     self.out_vocabulary = spec.out_vocabulary
+    self.lexicon = spec.lexicon
     self.float_type = float_type
     self.params = spec.get_params()
     self.all_shared = spec.get_all_shared()
