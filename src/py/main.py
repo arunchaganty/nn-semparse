@@ -84,6 +84,8 @@ def _parse_args():
   parser.add_argument('--save-file', help='Path to save parameters.')
   parser.add_argument('--load-file', help='Path to load parameters, will ignore other passed arguments.')
   parser.add_argument('--stats-file', help='Path to save statistics (JSON format).')
+  parser.add_argument('--shell', action='store_true', 
+                      help='Start an interactive shell.')
   parser.add_argument('--theano-fast-compile', action='store_true',
                       help='Run Theano in fast compile mode.')
   parser.add_argument('--theano-profile', action='store_true',
@@ -276,7 +278,8 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
     print 'Example %d' % example_num
     print '  x      = "%s"' % ex.x_str
     print '  y      = "%s"' % ex.y_str
-    y_pred_toks = decode(model, ex)
+    preds = decode(model, ex)
+    prob, y_pred_toks = preds[0]
     y_pred_str = ' '.join(y_pred_toks)
 
     # Compute accuracy metrics
@@ -292,6 +295,22 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
         tokens_correct, len(ex.y_toks), float(tokens_correct) / len(ex.y_toks))
   print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
                          x_len_list, y_len_list)
+
+def run_shell(model):
+  print '==== Neural Network Semantic Parsing REPL ===='
+  print ''
+  print 'Enter an utterance:'
+  while True:
+    s = raw_input('> ').strip()
+    example = Example(s, '', model.in_vocabulary, model.out_vocabulary,
+                      model.lexicon, reverse_input=OPTIONS.reverse_input)
+    print ''
+    print 'Result:'
+    preds = decode(model, example)
+    for prob, y_toks in preds[:10]:
+      y_str = ' '.join(y_toks)
+      print '  [p=%f] %s' % (prob, y_str)
+    print ''
 
 def run():
   configure_theano()
@@ -339,9 +358,12 @@ def run():
     evaluate('dev', dev_model, in_vocabulary, out_vocabulary, lexicon, dev_data)
 
   if OPTIONS.stats_file:
-      out = open(OPTIONS.stats_file, 'w')
-      print >>out, json.dumps(STATS)
-      out.close()
+    out = open(OPTIONS.stats_file, 'w')
+    print >>out, json.dumps(STATS)
+    out.close()
+
+  if OPTIONS.shell:
+    run_shell(model)
 
 def main():
   _parse_args()

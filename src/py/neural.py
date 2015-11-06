@@ -17,7 +17,8 @@ class NeuralModel(object):
   Implementing classes must implement the following functions:
     - self.setup(): set up the model.
     - self.get_objective_and_gradients(x, y): Get objective and gradients.
-    - self.decode_greedy(x, max_len=100): Do a greedy decoding of x, predict y.
+    - self.decode_greedy(ex, max_len=100): Do a greedy decoding of x, predict y.
+    - self.decode_greedy(ex, beam_size=1, max_len=100): Beam search to predict y
 
   Convention used by this class:
     nh: dimension of hidden layer
@@ -55,8 +56,16 @@ class NeuralModel(object):
     """
     raise NotImplementedError
 
-  def decode_greedy(self, x, max_len=100):
-    """Decode x to predict y, greedily."""
+  def decode_greedy(self, ex, max_len=100):
+    """Decode input greedily.
+    
+    Returns list of (prob, y_tok_seq) pairs."""
+    raise NotImplementedError
+
+  def decode_beam(self, ex, beam_size=1, max_len=100):
+    """Decode input with beam search.
+    
+    Returns list of (prob, y_tok_seq) pairs."""
     raise NotImplementedError
 
   def on_train_epoch(self, t):

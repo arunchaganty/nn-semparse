@@ -91,12 +91,13 @@ class EncoderDecoderModel(NeuralModel):
     h_t = self._encode(ex.x_inds)
     y_tok_seq = []
     p_y_seq = []  # Should be handy for error analysis
+    p = 1
     for i in range(max_len):
-      # TODO(robinjia): only pass in x if lexicon is simple
       write_dist = self._decoder_write(h_t, ex.lex_inds)
       y_t = numpy.argmax(write_dist)
       p_y_t = write_dist[y_t]
       p_y_seq.append(p_y_t)
+      p *= p_y_t
       if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
         break
       if y_t < self.out_vocabulary.size():
@@ -108,4 +109,35 @@ class EncoderDecoderModel(NeuralModel):
         y_t = self.out_vocabulary.get_index(y_tok)
       y_tok_seq.append(y_tok)
       h_t = self._decoder_step(y_t, h_t)
-    return y_tok_seq
+    return [(p, y_tok_seq)]
+
+  def decode_beam(self, ex, beam_size=1, max_len=100):
+    h_t = self._encode(ex.x_inds)
+    beam = [[(1, h_t, [])]]  
+        # Beam entries are (prob, hidden_state, token_list)
+    finished = []  # Finished entires are (prob, token_list)
+    for i in range(1, max_len):
+      new_beam = []
+      for cur_p, h_t, y_tok_seq in beam[i-1]:
+        write_dist = self._decoder_write(h_t, ex.lex_inds)
+        sorted_dist = sorted([(p_y_t, y_t) for y_t, p_y_t in enumerate(write_dist)],
+                             reverse=True)
+        for j in range(beam_size):
+          p_y_t, y_t = sorted_dist[j]
+          new_p = cur_p * p_y_t
+          if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
+            finished.append((new_p, y_tok_seq))
+            continue
+          if y_t < self.out_vocabulary.size():
+            y_tok = self.out_vocabulary.get_word(y_t)
+          else:
+            new_ind = y_t - self.out_vocabulary.size()
+            lex_entry = ex.lex_entries[new_ind]
+            y_tok = lex_entry[1]
+            y_t = self.out_vocabulary.get_index(y_tok)
+          new_h_t = self._decoder_step(y_t, h_t)
+          new_entry = (new_p, new_h_t, y_tok_seq + [y_tok])
+          new_beam.append(new_entry)
+      new_beam.sort(key=lambda x: x[0], reverse=True)
+      beam.append(new_beam[:beam_size])
+    return sorted(finished, key=lambda x: x[0], reverse=True)
