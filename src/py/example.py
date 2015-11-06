@@ -7,12 +7,15 @@ class Example(object):
     - self.x_toks, self.y_toks: input/output as list of strings
     - self.input_vocab, self.output_vocab: Vocabulary objects
     - self.x_inds, self.y_inds: input/output as indices in corresponding vocab
-    - self.y_input_inds: for each i, a bit vector of length len(self.x)
-          where j-th bit is true iff x[j] == y[i].
+    - self.lex_entries: list of all lexicon entries relevant to this example
+    - self.lex_inds: indices in lexicon corresponding to items
+    - self.y_lex_inds: for each i, a bit vector of length len(self.lex_entries)
+          where j-th bit is true iff lex_entries[j] == y[i].
 
   Treat these objects as read-only.
   """
-  def __init__(self, x_str, y_str, input_vocab, output_vocab, reverse_input=False):
+  def __init__(self, x_str, y_str, input_vocab, output_vocab, lexicon,
+               reverse_input=False):
     """Create an Example object.
     
     Args:
@@ -34,6 +37,12 @@ class Example(object):
     if reverse_input:
       self.x_inds = self.x_inds[::-1]
     self.y_inds = output_vocab.sentence_to_indices(y_str)
-    self.y_input_inds = [[int(x_j == y_i) for x_j in self.x_toks] + [0]
-                         for y_i in self.y_toks] + [[0] * len(self.x_inds)]
-        # Add 0's for the EOS tag in both x and y
+
+    self.lex_entries = [e for t in self.x_toks for e in lexicon.get_entries(t)]
+    # TODO(robinjia): handle multi-word input lexicon entries
+    self.lex_inds = [lexicon.get_index(e) for e in self.lex_entries]
+
+    self.y_lex_inds = (
+        [[int(e[1] == y_i) for e in self.lex_entries] for y_i in self.y_toks] +
+        [[0] * len(self.lex_entries)])
+        # Add 0's for the EOS tag in y

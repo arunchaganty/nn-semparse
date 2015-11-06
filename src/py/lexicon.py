@@ -10,32 +10,48 @@ class Lexicon(object):
   TODO(robinjia): This will probably change later, as we want
   to generate the embeddings based on local context.
 
+  In this class, an "entry" is a (input, output) 2-tuple.
+
   TODO(robinjia): enable mapping to a sequence of output tokens.
   """
-  def __init__(self, entries, emb_size):
+  def __init__(self, entries, emb_size, unk_func=None):
     """Create the lexicon.
 
-    entries should be a list of (input, output) pairs.
+    Args:
+      entries: list of (input, output) pairs.
+      emb_size: size of embeddings
+      unk_func: If provided, this function says whether to map entry to UNK embedding.
     """
     self.entries = entries
-    self._map = collections.defaultdict(list)
+    self.entry_to_index = {}
+    self.entry_map = collections.defaultdict(list)  # Map input to entry
+    cur_ind = 1
     for e in entries:
-      self._map[e[0]].append(e[1])
+      self.entry_map[e[0]].append(e)
+      if not unk_func or not unk_func(e):
+        self.entry_to_index[e] = cur_ind
+        cur_ind += 1
+      else:
+        self.entry_to_index[e] = 0  # 0 represents UNK.
 
+    self.num_embeddings = cur_ind
     # Embedding matrix
     self.emb_mat = theano.shared(
         name='lexicon_emb_mat',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.size(), emb_size)).astype(theano.config.floatX))
+        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.num_embeddings, emb_size)).astype(theano.config.floatX))
 
-  def get_outputs(self, in_str):
-    if in_str not in self._map: return []
-    return self._map[in_str]
+  def get_entries(self, in_str):
+    if in_str not in self.entry_map: return []
+    return self.entry_map[in_str]
 
   def size(self):
     return len(self.entries)
 
-  def get_theano_embedding(self, i):
-    return self.emb_mat[i]
+  def get_num_embeddings(self):
+    return self.num_embeddings
+
+  def get_theano_embedding(self, index):
+    return self.emb_mat[index]
 
   def get_theano_params(self):
     return [self.emb_mat]
@@ -43,14 +59,20 @@ class Lexicon(object):
   def get_theano_all(self):
     return [self.emb_mat]
 
-  def get_word(self, i):
-    """Get the output word associated with this lexicon entry."""
-    return self.entries[i][1]
+  def get_index(self, entry):
+    # Note: indices are NOT unique!  Some indices may map to 0 for UNK
+    return self.entry_to_index[entry]
 
   @classmethod
-  def from_vocabulary(cls, vocab, emb_size):
+  def from_sentences(cls, sentences, emb_size, unk_cutoff):
     """Create a lexicon that just maps every word in a vocabulary to itself."""
-    entries = [(w, w) for w in vocab.word_list]
-    lex = cls(entries, emb_size)
-    print 'Extract lexicon of size %d' % lex.size()
+    counts = collections.Counter()
+    words = set()
+    for s in sentences:
+      counts.update(s.split(' '))
+      words.update(s.split(' '))
+    entries = [(w, w) for w in words]
+    lex = cls(entries, emb_size, unk_func=lambda e: counts[e[0]] <= unk_cutoff)
+    print 'Extract lexicon of size %d, %d embeddings' % (
+        lex.size(), lex.get_num_embeddings())
     return lex

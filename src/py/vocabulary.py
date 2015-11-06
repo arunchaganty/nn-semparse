@@ -1,4 +1,5 @@
 """A vocabulary for a neural model."""
+import collections
 import numpy
 import os
 import sys
@@ -59,36 +60,42 @@ class Vocabulary:
     return len(self.word_list)
 
   @classmethod
-  def extract_from_sentences(cls, sentences, emb_size, **kwargs):
-    """Get list of all words used in a list of sentences."""
-    words = set()
+  def from_sentences(cls, sentences, emb_size, unk_cutoff=0, **kwargs):
+    """Get list of all words used in a list of sentences.
+    
+      Args:
+        sentences: list of sentences
+        emb_size: size of embedding
+        unk_cutoff: Treat words with <= this many occurrences as UNK.
+    """
+    counts = collections.Counter()
     for s in sentences:
-      if '' in s.split(' '):
-        print 'Found empty string: "%s"' % s
-      words.update(s.split(' '))
-    word_list = sorted(list(words))
+      counts.update(s.split(' '))
+    word_list = [w for w in counts if counts[w] > unk_cutoff]
     print 'Extracted vocabulary of size %d' % len(word_list)
     return cls(word_list, emb_size, **kwargs)
 
   @classmethod
-  def extract_from_sdf(cls, sdf_data, emb_size, **kwargs):
+  def from_sdf(cls, sdf_data, emb_size, **kwargs):
     """Get list of all words used in sentences in these SDF records."""
     sentences = []
     for records in sdf_data:
       for r in records:
         sentences.append(r.utterance)
         sentences.append(r.canonical_utterance)
-    return cls.extract_from_sentences(sentences, emb_size, **kwargs)
+    return cls.from_sentences(sentences, emb_size, **kwargs)
 
 
 class RawVocabulary(Vocabulary):
   """A vocabulary that's initialized randomly."""
-  def __init__(self, word_list, emb_size, float_type=numpy.float64):
+  def __init__(self, word_list, emb_size, float_type=numpy.float64,
+               unk_cutoff=0):
     """Create the vocabulary. 
 
     Args:
       word_list: List of words that occurred in the training data.
       emb_size: dimension of word embeddings
+      float_type: numpy float type for theano
     """
     self.word_list = [self.END_OF_SENTENCE, self.UNKNOWN] + word_list
     self.word_to_index = dict((x[1], x[0]) for x in enumerate(self.word_list))

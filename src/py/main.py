@@ -29,9 +29,12 @@ MODELS = collections.OrderedDict([
 ])
 
 VOCAB_TYPES = collections.OrderedDict([
-    ('raw', lambda s, e: RawVocabulary.extract_from_sentences(s, e)), 
-    ('glove_fixed', lambda s, e: GloveVocabulary.extract_from_sentences(s, e, hold_fixed=True)),
-    ('glove_not_fixed', lambda s, e: GloveVocabulary.extract_from_sentences(s, e, hold_fixed=False))
+    ('raw', lambda s, e, **kwargs: RawVocabulary.from_sentences(
+        s, e, **kwargs)), 
+    ('glove_fixed', lambda s, e, **kwargs: GloveVocabulary.from_sentences(
+        s, e, hold_fixed=True, **kwargs)),
+    ('glove_not_fixed', lambda s, e, **kwargs: GloveVocabulary.from_sentences(
+        s, e, hold_fixed=False, **kwargs))
 ])
 
 # Global options
@@ -50,6 +53,8 @@ def _parse_args():
                       help='Dimension of input vectors.')
   parser.add_argument('--output-embedding-dim', '-o', type=int,
                       help='Dimension of output word vectors.')
+  parser.add_argument('--unk-cutoff', '-u', type=int, default=0,
+                      help='Treat input words with <= this many occurrences as UNK.')
   parser.add_argument('--num_epochs', '-t', type=int, default=0,
                       help='Number of epochs to train (default is no training).')
   parser.add_argument('--learning-rate', '-r', type=float, default=0.1,
@@ -128,9 +133,11 @@ def get_input_vocabulary(dataset):
   constructor = VOCAB_TYPES[OPTIONS.input_vocab_type]
   if OPTIONS.float32:
     return constructor(sentences, OPTIONS.input_embedding_dim,
+                       unk_cutoff=OPTIONS.unk_cutoff,
                        float_type=numpy.float32)
   else:
-    return constructor(sentences, OPTIONS.input_embedding_dim)
+    return constructor(sentences, OPTIONS.input_embedding_dim,
+                       unk_cutoff=OPTIONS.unk_cutoff)
 
 def get_output_vocabulary(dataset):
   sentences = [x[1] for x in dataset]
@@ -140,6 +147,12 @@ def get_output_vocabulary(dataset):
                        float_type=numpy.float32)
   else:
     return constructor(sentences, OPTIONS.output_embedding_dim)
+
+def get_lexicon(dataset):
+  sentences = [x[0] for x in dataset]
+  # TODO(robinjia): load lexicon entries for test data too
+  return Lexicon.from_sentences(sentences, OPTIONS.hidden_size,
+                                OPTIONS.unk_cutoff)
 
 def update_model(model, dataset):
   """Update model for new dataset if fixed word vectors were used."""
@@ -163,11 +176,11 @@ def update_model(model, dataset):
     model = get_model(spec)  # Create a new model!
   return model
 
-def preprocess_data(in_vocabulary, out_vocabulary, raw):
+def preprocess_data(in_vocabulary, out_vocabulary, lexicon, raw):
   data = []
   for raw_ex in raw:
     x_str, y_str = raw_ex
-    ex = Example(x_str, y_str, in_vocabulary, out_vocabulary,
+    ex = Example(x_str, y_str, in_vocabulary, out_vocabulary, lexicon,
                  reverse_input=OPTIONS.reverse_input)
     data.append(ex)
   return data
@@ -236,11 +249,11 @@ def print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
     print '  input length = %d: %d/%d = %g correct' % (
         i - 1, cur_num_tokens_correct, cur_num_tokens, cur_accuracy)
 
-def decode(model, x_inds):
+def decode(model, ex):
   if OPTIONS.beam_size == 0:
-    return model.decode_greedy(x_inds, max_len=100)
+    return model.decode_greedy(ex, max_len=100)
   else:
-    return model.decode_beam(x_inds, beam_size=OPTIONS.beam_size)
+    return model.decode_beam(ex, beam_size=OPTIONS.beam_size)
 
 def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
   """Evaluate the model.
@@ -257,7 +270,7 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
     print 'Example %d' % example_num
     print '  x      = "%s"' % ex.x_str
     print '  y      = "%s"' % ex.y_str
-    y_pred_toks = decode(model, ex.x_inds)
+    y_pred_toks = decode(model, ex)
     y_pred_str = ' '.join(y_pred_toks)
 
     # Compute accuracy metrics
@@ -288,7 +301,7 @@ def run():
     print >> sys.stderr, 'Initializing parameters...'
     in_vocabulary = get_input_vocabulary(train_raw)
     out_vocabulary = get_output_vocabulary(train_raw)
-    lexicon = Lexicon.from_vocabulary(in_vocabulary, OPTIONS.hidden_size)
+    lexicon = get_lexicon(train_raw)
     spec = get_continuous_spec(in_vocabulary, out_vocabulary, lexicon)
   else:
     raise Exception('Must either provide parameters to load or training data.')
@@ -296,7 +309,7 @@ def run():
   model = get_model(spec)
 
   if OPTIONS.train_data:
-    train_data = preprocess_data(in_vocabulary, out_vocabulary, train_raw)
+    train_data = preprocess_data(in_vocabulary, out_vocabulary, lexicon, train_raw)
     model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate,
                 batch_size=OPTIONS.batch_size)
 
@@ -314,7 +327,7 @@ def run():
     dev_raw = load_dataset(OPTIONS.dev_data)
     dev_model = update_model(model, dev_raw)
     dev_data = preprocess_data(dev_model.in_vocabulary,
-                               dev_model.out_vocabulary, dev_raw)
+                               dev_model.out_vocabulary, lexicon, dev_raw)
     print 'Testing data:'
     evaluate('dev', dev_model, in_vocabulary, out_vocabulary, lexicon, dev_data)
 

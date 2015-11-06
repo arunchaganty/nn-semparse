@@ -78,7 +78,7 @@ class EncoderDecoderModel(NeuralModel):
 
   def get_objective_and_gradients(self, ex):
     # TODO(robinjia): Only pass x for cur_lex_entries if lexicon is simple.
-    info = self._backprop(ex.x_inds, ex.y_inds, ex.x_inds, ex.y_input_inds)
+    info = self._backprop(ex.x_inds, ex.y_inds, ex.lex_inds, ex.y_lex_inds)
     p_y_seq = info[0]
     log_p_y = info[1]
     gradients_list = info[2:]
@@ -87,13 +87,13 @@ class EncoderDecoderModel(NeuralModel):
     print 'P(y_i): %s' % p_y_seq
     return (objective, gradients)
 
-  def decode_greedy(self, x_inds, max_len=100):
-    h_t = self._encode(x_inds)
+  def decode_greedy(self, ex, max_len=100):
+    h_t = self._encode(ex.x_inds)
     y_tok_seq = []
     p_y_seq = []  # Should be handy for error analysis
     for i in range(max_len):
       # TODO(robinjia): only pass in x if lexicon is simple
-      write_dist = self._decoder_write(h_t, x_inds)
+      write_dist = self._decoder_write(h_t, ex.lex_inds)
       y_t = numpy.argmax(write_dist)
       p_y_t = write_dist[y_t]
       p_y_seq.append(p_y_t)
@@ -103,7 +103,8 @@ class EncoderDecoderModel(NeuralModel):
         y_tok = self.out_vocabulary.get_word(y_t)
       else:
         new_ind = y_t - self.out_vocabulary.size()
-        y_tok = self.in_vocabulary.get_word(x_inds[new_ind])
+        lex_entry = ex.lex_entries[new_ind]
+        y_tok = lex_entry[1]
         y_t = self.out_vocabulary.get_index(y_tok)
       y_tok_seq.append(y_tok)
       h_t = self._decoder_step(y_t, h_t)
