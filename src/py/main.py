@@ -53,6 +53,8 @@ def _parse_args():
                       help='Dimension of input vectors.')
   parser.add_argument('--output-embedding-dim', '-o', type=int,
                       help='Dimension of output word vectors.')
+  parser.add_argument('--lexicon', '-l', default=None,
+                      help='Use a lexicon to copy words (options: [copy]).')
   parser.add_argument('--unk-cutoff', '-u', type=int, default=0,
                       help='Treat input words with <= this many occurrences as UNK.')
   parser.add_argument('--num_epochs', '-t', type=int, default=0,
@@ -151,18 +153,22 @@ def get_output_vocabulary(dataset):
     return constructor(sentences, OPTIONS.output_embedding_dim)
 
 def get_lexicon(dataset):
-  sentences = [x[0] for x in dataset]
-  # TODO(robinjia): load lexicon entries for test data too
-  return Lexicon.from_sentences(sentences, OPTIONS.hidden_size,
-                                OPTIONS.unk_cutoff)
+  if OPTIONS.lexicon == 'copy':
+    sentences = [x[0] for x in dataset]
+    # TODO(robinjia): load lexicon entries for test data too
+    return Lexicon.from_sentences(sentences, OPTIONS.hidden_size,
+                                  OPTIONS.unk_cutoff)
+  else:
+    return None
 
 def update_model(model, dataset):
   """Update model for new dataset if fixed word vectors were used."""
   # Do the lexicon update in-place
-  for x, y in dataset:
-    words = x.split(' ')
-    for w in words:
-      model.lexicon.add_entry((w, w))
+  if model.lexicon:
+    for x, y in dataset:
+      words = x.split(' ')
+      for w in words:
+        model.lexicon.add_entry((w, w))
 
   need_new_model = False
   if OPTIONS.input_vocab_type == 'glove_fixed':

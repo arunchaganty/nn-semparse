@@ -38,11 +38,16 @@ class Example(object):
       self.x_inds = self.x_inds[::-1]
     self.y_inds = output_vocab.sentence_to_indices(y_str)
 
-    self.lex_entries = [e for t in self.x_toks for e in lexicon.get_entries(t)]
-    # TODO(robinjia): handle multi-word input lexicon entries
-    self.lex_inds = [lexicon.get_index(e) for e in self.lex_entries]
+    if lexicon:
+      self.lex_entries = [e for t in self.x_toks for e in lexicon.get_entries(t)]
+      # TODO(robinjia): handle multi-word input lexicon entries
+      self.lex_inds = [lexicon.get_index(e) for e in self.lex_entries]
 
-    self.y_lex_inds = (
-        [[int(e[1] == y_i) for e in self.lex_entries] for y_i in self.y_toks] +
-        [[0] * len(self.lex_entries)])
-        # Add 0's for the EOS tag in y
+      self.y_lex_inds = (
+          [[int(e[1] == y_i) for e in self.lex_entries] for y_i in self.y_toks] +
+          [[0] * len(self.lex_entries)])
+          # Add 0's for the EOS tag in y
+    else:
+      self.lex_entries = []
+      self.lex_inds = []
+      self.y_lex_inds = [[] for i in range(len(self.y_toks)+1)]

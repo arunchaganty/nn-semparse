@@ -52,10 +52,12 @@ class Spec(object):
 
   def get_params(self):
     """Get all parameters (things we optimize with respect to)."""
-    return (self.get_local_params()
-            + self.in_vocabulary.get_theano_params()
-            + self.out_vocabulary.get_theano_params()
-            + self.lexicon.get_theano_params())
+    params = (self.get_local_params()
+              + self.in_vocabulary.get_theano_params()
+              + self.out_vocabulary.get_theano_params())
+    if self.lexicon:
+      params += self.lexicon.get_theano_params()
+    return params
 
   def get_all_shared(self):
     """Get all shared theano varaibles.
@@ -64,10 +66,12 @@ class Spec(object):
     but may be held fixed (e.g. GloVe vectors, if desired).
     We don't backpropagate through these, but we do need to feed them to scan.
     """
-    return (self.get_local_params() 
-            + self.in_vocabulary.get_theano_all()
-            + self.out_vocabulary.get_theano_all()
-            + self.lexicon.get_theano_all())
+    params = (self.get_local_params() 
+              + self.in_vocabulary.get_theano_all()
+              + self.out_vocabulary.get_theano_all())
+    if self.lexicon:
+      params += self.lexicon.get_theano_all()
+    return params
 
   def save(self, filename):
     """Save the parameters to a filename."""

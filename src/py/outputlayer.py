@@ -1,6 +1,7 @@
 """An output layer."""
 import numpy
 import theano
+from theano.ifelse import ifelse
 import theano.tensor as T
 
 class OutputLayer(object):
@@ -50,7 +51,11 @@ class OutputLayer(object):
     # Concatenate embeddings of all lexicon entries in cur_lex_entries
     def f(i, *params):
       return self.lexicon.get_theano_embedding(i)
-    cur_embs, _ = theano.scan(f, sequences=[cur_lex_entries],
-                              non_sequences=self.lexicon.get_theano_params())
-    mat = T.concatenate([self.w_out, cur_embs])  # total_num_words x self.nh
+    if self.lexicon:
+      cur_embs, _ = theano.scan(f, sequences=[cur_lex_entries],
+                                non_sequences=self.lexicon.get_theano_params())
+      big_mat = T.concatenate([self.w_out, cur_embs])  # total_num_words x self.nh
+      mat = ifelse(T.eq(cur_lex_entries.shape[0], 0), self.w_out, big_mat)
+    else:
+      mat = self.w_out
     return T.nnet.softmax(T.dot(h_t, mat.T))[0]

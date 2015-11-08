@@ -41,7 +41,9 @@ class EncoderDecoderModel(NeuralModel):
     cur_lex_entries = T.lvector('cur_lex_entries_for_write')
     h_for_write = self.spec.decoder.get_h_for_write(h_prev)
     write_dist = self.spec.f_write(h_for_write, cur_lex_entries)
-    self._decoder_write = theano.function(inputs=[h_prev, cur_lex_entries], outputs=write_dist)
+    self._decoder_write = theano.function(inputs=[h_prev, cur_lex_entries], 
+                                          outputs=write_dist, 
+                                          on_unused_input='warn')
 
   def setup_backprop(self):
     x = T.lvector('x_for_backprop')
