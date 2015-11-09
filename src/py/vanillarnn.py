@@ -35,7 +35,6 @@ class VanillaRNNLayer(RNNLayer):
   def get_init_state(self):
     return self.h0
 
-  def step(self, x_t, h_prev):
-    input_t = self.f_embedding(x_t)
+  def step(self, input_t, h_prev):
     h_t = T.nnet.sigmoid(T.dot(h_prev, self.u_h) + T.dot(input_t, self.u_x))
     return h_t

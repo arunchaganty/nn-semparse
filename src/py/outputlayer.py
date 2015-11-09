@@ -11,6 +11,7 @@ class OutputLayer(object):
     nh: dimension of hidden layer
     nw: number of words in the vocabulary
     de: dimension of word embeddings
+    nl: number of lexicon entries to create embeddings for.
   """ 
   def __init__(self, vocab, lexicon, hidden_size):
     self.vocab = vocab
@@ -18,6 +19,7 @@ class OutputLayer(object):
     self.de = vocab.emb_size
     self.nh = hidden_size
     self.nw = vocab.size()
+    self.nl = lexicon.num_embeddings
     self.create_vars()
 
   def create_vars(self):
@@ -25,7 +27,11 @@ class OutputLayer(object):
         name='w_out', 
         value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nw, self.nh)).astype(theano.config.floatX))
         # Each row is one word
-    self.params = [self.w_out]
+
+    self.w_lex = theano.shared(
+        name='w_lex', 
+        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nl, self.nh)).astype(theano.config.floatX))
+    self.params = [self.w_out, self.w_lex]
 
   def write(self, h_t, cur_lex_entries):
     """Get a distribution over words to write.
@@ -50,11 +56,11 @@ class OutputLayer(object):
     """
     # Concatenate embeddings of all lexicon entries in cur_lex_entries
     def f(i, *params):
-      return self.lexicon.get_theano_embedding(i)
+      return self.w_lex[i]
     if self.lexicon:
-      cur_embs, _ = theano.scan(f, sequences=[cur_lex_entries],
-                                non_sequences=self.lexicon.get_theano_params())
-      big_mat = T.concatenate([self.w_out, cur_embs])  # total_num_words x self.nh
+      lex_embs, _ = theano.scan(f, sequences=[cur_lex_entries],
+                                non_sequences=self.w_lex)
+      big_mat = T.concatenate([self.w_out, lex_embs])  # total_num_words x self.nh
       mat = ifelse(T.eq(cur_lex_entries.shape[0], 0), self.w_out, big_mat)
     else:
       mat = self.w_out

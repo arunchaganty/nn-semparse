@@ -12,20 +12,15 @@ import os
 
 # Local imports
 from encoderdecoder import EncoderDecoderModel
-from encdecspec import VanillaEncDecSpec, GRUEncDecSpec, LSTMEncDecSpec
+from attention import AttentionModel
 from example import Example
 from lexicon import Lexicon
 import spec as specutil
 from vocabulary import GloveVocabulary, RawVocabulary, Vocabulary
 
-CONTINUOUS_MODELS = collections.OrderedDict([
-    ('rnn', VanillaEncDecSpec),
-    ('gru', GRUEncDecSpec),
-    ('lstm', LSTMEncDecSpec),
-])
-
 MODELS = collections.OrderedDict([
     ('encoderdecoder', EncoderDecoderModel),
+    ('attention', AttentionModel),
 ])
 
 VOCAB_TYPES = collections.OrderedDict([
@@ -63,9 +58,9 @@ def _parse_args():
                       help='Learning rate (default = 0.1).')
   parser.add_argument('--batch-size', '-b', type=int, default=1,
                       help='Size of mini-batch (default is SGD).')
-  parser.add_argument('--continuous-spec', '-c',
-                      help='type of continuous model (options: [%s])' % (
-                          ', '.join(CONTINUOUS_MODELS)))
+  parser.add_argument('--rnn-type', '-c',
+                      help='type of continuous RNN model (options: [%s])' % (
+                          ', '.join(specutil.RNN_TYPES)))
   parser.add_argument('--model', '-m',
                       help='type of overall model (options: [%s])' % (
                           ', '.join(MODELS)))
@@ -99,9 +94,9 @@ def _parse_args():
   OPTIONS = parser.parse_args()
   
   # Some basic error checking
-  if OPTIONS.continuous_spec not in CONTINUOUS_MODELS:
-    print >> sys.stderr, 'Error: continuous_spec must be in %s' % (
-        ', '.join(CONTINUOUS_MODELS))
+  if OPTIONS.rnn_type not in specutil.RNN_TYPES:
+    print >> sys.stderr, 'Error: rnn type must be in %s' % (
+        ', '.join(specutil.RNN_TYPES))
     sys.exit(1)
   if OPTIONS.model not in MODELS:
     print >> sys.stderr, 'Error: model must be in %s' % (
@@ -199,9 +194,10 @@ def preprocess_data(in_vocabulary, out_vocabulary, lexicon, raw):
     data.append(ex)
   return data
 
-def get_continuous_spec(in_vocabulary, out_vocabulary, lexicon):
-  constructor = CONTINUOUS_MODELS[OPTIONS.continuous_spec]
-  return constructor(in_vocabulary, out_vocabulary, lexicon, OPTIONS.hidden_size)
+def get_spec(in_vocabulary, out_vocabulary, lexicon):
+  constructor = MODELS[OPTIONS.model].get_spec_class()
+  return constructor(in_vocabulary, out_vocabulary, lexicon,
+                     OPTIONS.hidden_size, rnn_type=OPTIONS.rnn_type)
 
 def get_model(spec):
   constructor = MODELS[OPTIONS.model]
@@ -333,7 +329,7 @@ def run():
     in_vocabulary = get_input_vocabulary(train_raw)
     out_vocabulary = get_output_vocabulary(train_raw)
     lexicon = get_lexicon(train_raw)
-    spec = get_continuous_spec(in_vocabulary, out_vocabulary, lexicon)
+    spec = get_spec(in_vocabulary, out_vocabulary, lexicon)
   else:
     raise Exception('Must either provide parameters to load or training data.')
 

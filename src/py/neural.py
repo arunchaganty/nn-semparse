@@ -1,5 +1,6 @@
 """A generic continuous neural sequence-to-sequence model."""
 import collections
+import itertools
 import numpy
 import os
 import random
@@ -19,6 +20,9 @@ class NeuralModel(object):
     - self.get_objective_and_gradients(x, y): Get objective and gradients.
     - self.decode_greedy(ex, max_len=100): Do a greedy decoding of x, predict y.
     - self.decode_greedy(ex, beam_size=1, max_len=100): Beam search to predict y
+
+  They should also override
+    - cls.get_spec_class(): The associated Spec subclass for this NeuralModel.
 
   Convention used by this class:
     nh: dimension of hidden layer
@@ -43,18 +47,35 @@ class NeuralModel(object):
     self.setup()
     print >> sys.stderr, 'Setup complete.'
 
+  @classmethod
+  def get_spec_class(cls):
+    raise NotImplementedError
+
   def setup(self):
     """Do all necessary setup (e.g. compile theano functions)."""
     raise NotImplementedError
 
-  def get_objective_and_gradients(self, example):
+  def get_objective_and_gradients(self, ex):
     """Get objective and gradients.
+
+    This is a default implementation, which assumes
+    a function called self._backprop().
+
+    Override if you need a more complicated way of computing the 
+    objective and gradient.
 
     Returns: tuple (objective, gradients) where
       objective: the current objective value
       gradients: map from parameter to gradient
     """
-    raise NotImplementedError
+    info = self._backprop(ex.x_inds, ex.y_inds, ex.lex_inds, ex.y_lex_inds)
+    p_y_seq = info[0]
+    log_p_y = info[1]
+    gradients_list = info[2:]
+    objective = -log_p_y
+    gradients = dict(itertools.izip(self.params, gradients_list))
+    print 'P(y_i): %s' % p_y_seq
+    return (objective, gradients)
 
   def decode_greedy(self, ex, max_len=100):
     """Decode input greedily.
@@ -114,71 +135,6 @@ class NeuralModel(object):
       for p in self.params:
         self._perform_sgd_step(p, gradients[p], eta)
     return objective
-
-  """
-  def decode_greedy(self, x, max_len=100):
-    r, w = self._get_map(x, max_len)
-    r_list = list(r)
-    w_list = list(w)
-    try:
-      eos_ind = w_list.index(Vocabulary.END_OF_SENTENCE_INDEX)
-    except ValueError:
-      eos_ind = len(w_list) - 1
-    r_out = r_list[:(eos_ind+1)]
-    w_out = w_list[:(eos_ind+1)]
-    return r_out, w_out
-
-  def decode_beam(self, x, max_len=100, beam_size=5):
-    print 'decode_beam'
-    BeamState = collections.namedtuple(
-        'BeamState', ['r_seq', 'w_seq', 'h_prev', 'next_read', 'log_p'])
-    best_finished_state = None
-    max_log_p = float('-Inf')
-    beam = []
-    # Start with a read
-    beam.append([BeamState([x[0]], [-1], self.spec.h0.get_value(), 1, 0)])
-    for i in range(1, max_len):
-      candidates = []
-      for state in beam[i-1]:
-        if state.w_seq[-1] == Vocabulary.END_OF_SENTENCE_INDEX:
-          if state.log_p > max_log_p:
-            max_log_p = state.log_p
-            best_finished_state = state
-          continue
-        if state.log_p < max_log_p: continue  # Prune here
-        h_t, p_r, p_dist_w = self._step_forward(
-            state.r_seq[-1], state.w_seq[-1], state.h_prev)
-        if state.next_read < len(x):
-          read_state = BeamState(
-              state.r_seq + [x[state.next_read]], state.w_seq + [-1], h_t,
-              state.next_read + 1, state.log_p + numpy.log(p_r))
-          candidates.append(read_state)
-        else:
-          p_r = 0  # Force write
-        if p_r < 1:
-          write_candidates = sorted(enumerate(p_dist_w), key=lambda x: x[1],
-                                    reverse=True)[:beam_size]
-          for index, prob in write_candidates:
-            new_state = BeamState(
-                state.r_seq + [-1], state.w_seq + [index], h_t, state.next_read, 
-                state.log_p + numpy.log(1 - p_r) + numpy.log(prob))
-            candidates.append(new_state)
-      beam.append(sorted(
-          candidates, key=lambda x: x.log_p, reverse=True)[:beam_size])
-
-    return (best_finished_state.r_seq, best_finished_state.w_seq)
-  """
-
-  def get_gradient_seq(self, y_seq):
-    """Utility to compute gradient with respect to a sequence."""
-    def grad_fn(j, y, *params):
-      return T.grad(y[j], self.params, disconnected_inputs='warn')
-    results, _ = theano.scan(fn=grad_fn,
-                             sequences=T.arange(y_seq.shape[0]),
-                             non_sequences=[y_seq] + self.params,
-                             strict=True)
-    # results[i][j] is gradient of y[j] w.r.t. self.params[i]
-    return results
 
   def _perform_sgd_step(self, param, gradient, eta):
     """Do a gradient descent step."""

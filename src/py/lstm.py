@@ -69,8 +69,7 @@ class LSTMLayer(RNNLayer):
   def get_init_state(self):
     return self.h0
 
-  def step(self, x_t, c_h_prev):
-    input_t = self.f_embedding(x_t)
+  def step(self, input_t, c_h_prev):
     c_prev, h_prev = self.unpack(c_h_prev)
     i_t = T.nnet.sigmoid(T.dot(input_t, self.wi) + T.dot(h_prev, self.ui))
     f_t = T.nnet.sigmoid(T.dot(input_t, self.wf) + T.dot(h_prev, self.uf))

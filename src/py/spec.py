@@ -2,6 +2,12 @@
 import numpy
 import pickle
 
+from gru import GRULayer
+from lstm import LSTMLayer
+from vanillarnn import VanillaRNNLayer
+
+RNN_TYPES=['vanillarnn', 'gru', 'lstm']
+
 class Spec(object):
   """Abstract class for a specification of a sequence-to-sequence RNN model.
 
@@ -9,7 +15,8 @@ class Spec(object):
   - self.create_vars(): called by __init__, should initialize parameters.
   - self.get_local_params(): Get all local parameters (excludes vocabulary).
   """
-  def __init__(self, in_vocabulary, out_vocabulary, lexicon, hidden_size):
+  def __init__(self, in_vocabulary, out_vocabulary, lexicon, hidden_size,
+               rnn_type='lstm'):
     """Initialize.
 
     Args:
@@ -22,6 +29,7 @@ class Spec(object):
     self.out_vocabulary = out_vocabulary
     self.lexicon = lexicon
     self.hidden_size = hidden_size
+    self.rnn_type = rnn_type
     self.create_vars()
 
   def set_in_vocabulary(self, in_vocabulary):
@@ -55,8 +63,6 @@ class Spec(object):
     params = (self.get_local_params()
               + self.in_vocabulary.get_theano_params()
               + self.out_vocabulary.get_theano_params())
-    if self.lexicon:
-      params += self.lexicon.get_theano_params()
     return params
 
   def get_all_shared(self):
@@ -69,9 +75,19 @@ class Spec(object):
     params = (self.get_local_params() 
               + self.in_vocabulary.get_theano_all()
               + self.out_vocabulary.get_theano_all())
-    if self.lexicon:
-      params += self.lexicon.get_theano_all()
     return params
+
+  def create_rnn_layer(self, hidden_dim, input_dim, vocab_size, is_encoder):
+    if self.rnn_type == 'vanillarnn':
+      return VanillaRNNLayer(hidden_dim, input_dim, vocab_size,
+                             create_init_state=is_encoder)
+    elif self.rnn_type == 'gru':
+      return GRULayer(hidden_dim, input_dim, vocab_size,
+                      create_init_state=is_encoder)
+    elif self.rnn_type == 'lstm':
+      return LSTMLayer(hidden_dim, input_dim, vocab_size,
+                       create_init_state=is_encoder)
+    raise Exception('Unrecognized rnn_type %s' % self.rnn_type)
 
   def save(self, filename):
     """Save the parameters to a filename."""

@@ -1,7 +1,5 @@
 """A lexicon maps input substrings to an output token."""
 import collections
-import numpy
-import theano
 
 class Lexicon(object):
   """A lexicon object.
@@ -33,12 +31,7 @@ class Lexicon(object):
         cur_ind += 1
       else:
         self.entry_to_index[e] = 0  # 0 represents UNK.
-
-    self.num_embeddings = cur_ind
-    # Embedding matrix
-    self.emb_mat = theano.shared(
-        name='lexicon_emb_mat',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.num_embeddings, emb_size)).astype(theano.config.floatX))
+    self.num_embeddings = cur_ind  # Embeddings actually stored in OutputLayer.
 
   def get_entries(self, in_str):
     if in_str not in self.entry_map: return []
@@ -49,15 +42,6 @@ class Lexicon(object):
 
   def get_num_embeddings(self):
     return self.num_embeddings
-
-  def get_theano_embedding(self, index):
-    return self.emb_mat[index]
-
-  def get_theano_params(self):
-    return [self.emb_mat]
-
-  def get_theano_all(self):
-    return [self.emb_mat]
 
   def get_index(self, entry):
     # Note: indices are NOT unique!  Some indices may map to 0 for UNK

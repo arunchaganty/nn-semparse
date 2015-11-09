@@ -6,14 +6,12 @@ class RNNLayer(object):
   Conventions used by this class (shared with spec.py):
     nh: dimension of hidden layer
     nw: number of words in the vocabulary
-    de: dimension of word embeddings
+    de: dimension of input vectors
   """ 
-  def __init__(self, vocab, hidden_size, 
-               create_init_state=False):
-    self.vocab = vocab
-    self.de = vocab.emb_size
-    self.nh = hidden_size
-    self.nw = vocab.size()
+  def __init__(self, hidden_dim, input_dim, vocab_size, create_init_state=False):
+    self.nh = hidden_dim
+    self.de = input_dim
+    self.nw = vocab_size
     self.create_vars(create_init_state)
 
   def create_vars(self):
@@ -28,6 +26,3 @@ class RNNLayer(object):
   def get_h_for_write(self, h):
     """Override if only want to expose part of hidden state for output."""
     return h
-
-  def f_embedding(self, i):
-    return self.vocab.get_theano_embedding(i)

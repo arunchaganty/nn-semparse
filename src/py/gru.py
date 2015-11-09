@@ -50,8 +50,7 @@ class GRULayer(RNNLayer):
   def get_init_state(self):
     return self.h0
 
-  def step(self, x_t, h_prev):
-    input_t = self.f_embedding(x_t)
+  def step(self, input_t, h_prev):
     z_t = T.nnet.sigmoid(T.dot(input_t, self.wz) + T.dot(h_prev, self.uz))
     r_t = T.nnet.sigmoid(T.dot(input_t, self.wr) + T.dot(h_prev, self.ur))
     h_tilde_t = T.nnet.sigmoid(T.dot(input_t, self.w) + r_t * T.dot(h_prev, self.u))
