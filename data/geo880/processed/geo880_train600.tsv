@@ -410,7 +410,7 @@ which states border new york ?	answer ( A , ( state ( A ) , next_to ( A , B ) , 
 what is the population of maine ?	answer ( A , ( population ( B , A ) , const ( B , stateid ( maine ) ) ) )
 what is the biggest city in the smallest state ?	answer ( A , largest ( A , ( city ( A ) , loc ( A , B ) , smallest ( B , state ( B ) ) ) ) )
 what is the elevation of the highest point in the usa ?	answer ( A , ( elevation ( B , A ) , highest ( B , ( place ( B ) , loc ( B , C ) , const ( C , countryid ( usa ) ) ) ) ) )
-what state borders the least states excluding alaska and excluding hawaii ?	answer ( A , fewest ( A , B , ( state ( A ) , next_to ( A , B ) , state ( B ) , \+const ( A , stateid ( alaska ) ) , \+const ( A , stateid ( hawaii ) ) ) ) )
+what state borders the least states excluding alaska and excluding hawaii ?	answer ( A , fewest ( A , B , ( state ( A ) , next_to ( A , B ) , state ( B ) , \+ const ( A , stateid ( alaska ) ) , \+ const ( A , stateid ( hawaii ) ) ) ) )
 what is the highest point in new mexico ?	answer ( A , highest ( A , ( place ( A ) , loc ( A , B ) , const ( B , stateid ( ' new mexico ' ) ) ) ) )
 what is the biggest state ?	answer ( A , largest ( A , state ( A ) ) )
 how many people live in spokane washington ?	answer ( A , ( population ( B , A ) , const ( B , cityid ( spokane , wa ) ) ) )
