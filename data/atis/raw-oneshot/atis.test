@@ -1,0 +1,1344 @@
+what flights go from dallas to phoenix
+(lambda $v0 e (and (flight $v0) (from $v0 dallas:ci) (to $v0 phoenix:ci) )
+
+what flights go from phoenix to salt lake city
+(lambda $v0 e (and (flight $v0) (from $v0 phoenix:ci) (to $v0 salt_lake_city:ci) )
+
+i need an early flight from milwaukee to denver
+(lambda $v0 e (and (flight $v0) (during_day $v0 early:pd) (from $v0 milwaukee:ci) (to $v0 denver:ci) )
+
+what types of ground transportation are available in denver
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 denver:ci) ))
+
+what flights go from denver to st. louis on tuesday morning
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 denver:ci) (to $v0 st_louis:ci) (day $v0 tuesday:da) )
+
+is ground transportation available in st. louis
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 st_louis:ci) ))
+
+i need to fly from st. louis to milwaukee on wednesday afternoon
+(lambda $v0 e (and (flight $v0) (during_day $v0 afternoon:pd) (from $v0 st_louis:ci) (to $v0 milwaukee:ci) (day $v0 wednesday:da) )
+
+flights from washington to seattle
+(lambda $v0 e (and (flight $v0) (from $v0 washington:ci) (to $v0 seattle:ci) )
+
+flights from atlanta to seattle
+(lambda $v0 e (and (flight $v0) (from $v0 atlanta:ci) (to $v0 seattle:ci) )
+
+flights from san diego to seattle
+(lambda $v0 e (and (flight $v0) (from $v0 san_diego:ci) (to $v0 seattle:ci) )
+
+i would like flight information from phoenix to denver
+(lambda $v0 e (and (flight $v0) (from $v0 phoenix:ci) (to $v0 denver:ci) )
+
+could i have flight information on flights from salt lake city to phoenix please
+(lambda $v0 e (and (flight $v0) (from $v0 salt_lake_city:ci) (to $v0 phoenix:ci) )
+
+could i have flight information on flights from pittsburgh to phoenix please
+(lambda $v0 e (and (flight $v0) (from $v0 pittsburgh:ci) (to $v0 phoenix:ci) )
+
+i would like information on flights leaving from washington dc to denver
+(lambda $v0 e (and (flight $v0) (from $v0 washington:ci) (to $v0 denver:ci) )
+
+i need information on flights from washington to boston that leave on a saturday
+(lambda $v0 e (and (flight $v0) (from $v0 washington:ci) (to $v0 boston:ci) (day $v0 saturday:da) )
+
+i need the flights from washington to montreal on a saturday
+(lambda $v0 e (and (flight $v0) (from $v0 washington:ci) (to $v0 montreal:ci) (day $v0 saturday:da) )
+
+i need the fares on flights from washington to toronto on a saturday
+(lambda $v1 e (exists $v0 (and (flight $v0) (from $v0 washington:ci) (to $v0 toronto:ci) (day $v0 saturday:da)  (= (fare $v0) $v1))))
+
+i want to go from boston to washington on a saturday
+(lambda $v0 e (and (from $v0 boston:ci) (to $v0 washington:ci) (day $v0 saturday:da) )
+
+i need a flight from cleveland to dallas that leaves before noon see if too much information
+(lambda $v0 e (and (flight $v0) (< (departure_time $v0) 1200:ti) (from $v0 cleveland:ci) (to $v0 dallas:ci) )
+
+get fares from washington to boston
+(lambda $v1 e (exists $v0 (and (from $v0 washington:ci) (to $v0 boston:ci)  (= (fare $v0) $v1))))
+
+get saturday fares from washington to boston
+(lambda $v1 e (exists $v0 (and (from $v0 washington:ci) (to $v0 boston:ci) (day $v0 saturday:da)  (= (fare $v0) $v1))))
+
+get fares from washington to montreal
+(lambda $v1 e (exists $v0 (and (from $v0 washington:ci) (to $v0 montreal:ci)  (= (fare $v0) $v1))))
+
+get saturday fares from washington to montreal
+(lambda $v1 e (exists $v0 (and (from $v0 washington:ci) (to $v0 montreal:ci) (day $v0 saturday:da)  (= (fare $v0) $v1))))
+
+get saturday fares from washington to toronto
+(lambda $v1 e (exists $v0 (and (from $v0 washington:ci) (to $v0 toronto:ci) (day $v0 saturday:da)  (= (fare $v0) $v1))))
+
+get the saturday fare from washington to toronto
+(lambda $v1 e (exists $v0 (and (from $v0 washington:ci) (to $v0 toronto:ci) (day $v0 saturday:da)  (= (fare $v0) $v1))))
+
+list saturday flights from washington to boston
+(lambda $v0 e (and (flight $v0) (from $v0 washington:ci) (to $v0 boston:ci) (day $v0 saturday:da) )
+
+list saturday flights from boston to washington
+(lambda $v0 e (and (flight $v0) (from $v0 boston:ci) (to $v0 washington:ci) (day $v0 saturday:da) )
+
+get flights from milwaukee to dtw
+(lambda $v0 e (and (flight $v0) (from $v0 milwaukee:ci) (to $v0 dtw:ap) )
+
+list flights from milwaukee to detroit
+(lambda $v0 e (and (flight $v0) (from $v0 milwaukee:ci) (to $v0 detroit:ci) )
+
+get flights from detroit to toronto
+(lambda $v0 e (and (flight $v0) (from $v0 detroit:ci) (to $v0 toronto:ci) )
+
+get flights from toronto to milwaukee
+(lambda $v0 e (and (flight $v0) (from $v0 toronto:ci) (to $v0 milwaukee:ci) )
+
+get last flight from oakland to salt lake city on wednesday or first flight from oakland to salt lake city on thursday
+ (lambda $x e (or (equals $x (argmax $v7 (and (flight $v7) (from $v7 oakland:ci) (to $v7 salt_lake_city:ci) (day $v7 wednesday:da)) (departure_time $v7))) (equals $x (argmin $v7 (and (flight $v7) (from $v7 oakland:ci) (to $v7 salt_lake_city:ci) (day $v7 thursday:da) ) (departure_time $v7)))))
+
+get first flight from oakland to salt lake city on thursday
+(argmin $v1 (and (flight $v1) (from $v1 oakland:ci) (to $v1 salt_lake_city:ci) (day $v1 thursday:da)  ) (departure_time $v1))
+
+get last flight from oakland to salt lake city on wednesday
+(argmax $v1 (and (flight $v1) (from $v1 oakland:ci) (to $v1 salt_lake_city:ci) (day $v1 wednesday:da)  ) (departure_time $v1))
+
+list last wednesday flight from oakland to salt lake city
+(argmax $v1 (and (flight $v1) (from $v1 oakland:ci) (to $v1 salt_lake_city:ci) (day $v1 wednesday:da)  ) (departure_time $v1))
+
+get flight from toronto to san diego stopping at dtw
+(lambda $v0 e (and (flight $v0) (from $v0 toronto:ci) (to $v0 san_diego:ci) (stop $v0 dtw:ap) ))
+
+get flights between st. petersburg and charlotte
+(lambda $v0 e (and (flight $v0) (from $v0 st_petersburg:ci) (to $v0 charlotte:ci) )
+
+i need a flight from milwaukee to indianapolis leaving monday before 9am
+(lambda $v0 e (and (flight $v0) (< (departure_time $v0) 900:ti) (from $v0 milwaukee:ci) (to $v0 indianapolis:ci) (day $v0 monday:da) )
+
+i need a flight departing from milwaukee to indianapolis leaving monday before 8am
+(lambda $v0 e (and (flight $v0) (< (departure_time $v0) 800:ti) (from $v0 milwaukee:ci) (to $v0 indianapolis:ci) (day $v0 monday:da) )
+
+is there ground transportation available at the indianapolis airport
+(lambda $v0 e (and (ground_transport $v0) (from_airport $v0 ind:ap) ))
+
+i need flight information for a flight departing from indianapolis to cleveland departing tuesday at noon
+(lambda $v0 e (and (flight $v0) (departure_time $v0 1200:ti) (from $v0 indianapolis:ci) (to $v0 cleveland:ci) (day $v0 tuesday:da) )
+
+i need flight information for a flight departing from cleveland to milwaukee wednesday after 6pm
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1800:ti) (from $v0 cleveland:ci) (to $v0 milwaukee:ci) (day $v0 wednesday:da) )
+
+i need flight information for flights departing from cleveland going back to milwaukee wednesday after 5pm
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1700:ti) (from $v0 cleveland:ci) (to $v0 milwaukee:ci) (day $v0 wednesday:da) )
+
+i need flight information for flights departing from cleveland to milwaukee on wednesday after 5pm
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1700:ti) (from $v0 cleveland:ci) (to $v0 milwaukee:ci) (day $v0 wednesday:da) )
+
+i need flight information for flights departing from cleveland to milwaukee on wednesday after 5pm
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1700:ti) (from $v0 cleveland:ci) (to $v0 milwaukee:ci) (day $v0 wednesday:da) )
+
+i need a flight from denver to salt lake city on monday
+(lambda $v0 e (and (flight $v0) (from $v0 denver:ci) (to $v0 salt_lake_city:ci) (day $v0 monday:da) )
+
+is there ground transportation available at the denver airport
+(lambda $v0 e (and (ground_transport $v0) (from_airport $v0 den:ap) ))
+
+i need flight and airline information for a flight from denver to salt lake city on monday departing after 5pm
+ (lambda $v0 e (lambda $1 e (and (flight $v0) (> (departure_time $v0) 1700:ti) (from $v0 denver:ci) (to $v0 salt_lake_city:ci) (day $v0 monday:da) (= (airline:e $v0) $1))))
+
+is there ground transportation available at the salt lake city airport
+ (lambda $v0 e (and (ground_transport $v0) (from_airport $v0 slc:ap) ))
+
+i need a flight from salt lake city to phoenix departing wednesday after 5pm
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1700:ti) (from $v0 salt_lake_city:ci) (to $v0 phoenix:ci) (day $v0 wednesday:da) )
+
+is there ground transportation available at the phoenix airport
+(lambda $v0 e (and (ground_transport $v0) (from_airport $v0 phx:ap) ))
+
+i need a flight from oakland to salt lake city on wednesday departing after 6pm
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1800:ti) (from $v0 oakland:ci) (to $v0 salt_lake_city:ci) (day $v0 wednesday:da) )
+
+i need flight and fare information for thursday departing prior to 9am from oakland going to salt lake city
+ (lambda $v0 e (lambda $v1 e (and (flight $v0) (< (departure_time $v0) 900:ti) (from $v0 oakland:ci) (to $v0 salt_lake_city:ci) (day $v0 thursday:da) (= (fare $v0) $v1))))
+
+i need flight and fare information departing from oakland to salt lake city on thursday before 8am
+ (lambda $v0 e (lambda $v1 e (and (flight $v0) (< (departure_time $v0) 800:ti) (from $v0 oakland:ci) (to $v0 salt_lake_city:ci) (day $v0 thursday:da) (= (fare $v0) $v1))))
+
+i need flight numbers and airlines for flights departing from oakland to salt lake city on thursday departing before 8am
+ (lambda $v1 e (lambda $v2 e (exists $v0 (and (flight $v0) (< (departure_time $v0) 800:ti) (from $v0 oakland:ci) (to $v0 salt_lake_city:ci) (day $v0 thursday:da)  (= (flight_number $v0) $v1) (= (airline:e $v0) $v2)))))
+
+i need flight numbers for those flights departing on thursday before 8am from oakland going to salt lake city
+(lambda $v1 e (exists $v0 (and (< (departure_time $v0) 800:ti) (from $v0 oakland:ci) (to $v0 salt_lake_city:ci) (day $v0 thursday:da)  (= (flight_number $v0) $v1)))
+
+list airports in arizona nevada and california please
+ (lambda $x e (and (airport $x) (or (loc:t $x arizona:st) (loc:t $x nevada:st) (loc:t $x california:st))))
+
+list california nevada arizona airports
+ (lambda $x e (and (airport $x) (or (loc:t $x arizona:st) (loc:t $x nevada:st) (loc:t $x california:st))))
+
+list the arizona airport
+ (lambda $x e (and (airport $x) (loc:t $x arizona:st)))
+
+list california airports
+ (lambda $x e (and (airport $x) (loc:t $x california:st)))
+
+list flights from las vegas to phoenix
+(lambda $v0 e (and (flight $v0) (from $v0 las_vegas:ci) (to $v0 phoenix:ci) )
+
+list california airports
+ (lambda $x e (and (airport $x) (loc:t $x california:st)))
+
+list airports
+ (lambda $x e (airport $x))
+
+list wednesday night flights from oakland to salt lake city
+ (lambda $v0 e (and (flight $v0) (during_day $v0 late:pd) (from $v0 oakland:ci) (to $v0 salt_lake_city:ci) (day $v0 wednesday:da) ))
+
+list flights from oakland to salt lake city before 6am thursday morning
+ (lambda $v0 e (and (flight $v0) (< (departure_time $v0) 600:ti) (from $v0 oakland:ci) (to $v0 salt_lake_city:ci) (day $v0 thursday:da) (during_day $v0 morning:pd)))
+
+which airlines fly between toronto and san diego
+(lambda $airline e (exists $v1 (and (flight $v1) (from $v1 toronto:ci) (to $v1 san_diego:ci)  (= (airline:e $v1) $airline))))
+
+please list afternoon flights between st. petersburg and charlotte
+(lambda $v0 e (and (flight $v0) (during_day $v0 afternoon:pd) (from $v0 st_petersburg:ci) (to $v0 charlotte:ci) )
+
+what is tpa
+tpa:ap
+
+what are the flights from cleveland to dallas
+(lambda $v0 e (and (flight $v0) (from $v0 cleveland:ci) (to $v0 dallas:ci) )
+
+please list only the flights from cleveland to dallas that leave before noon
+(lambda $v0 e (and (flight $v0) (< (departure_time $v0) 1200:ti) (from $v0 cleveland:ci) (to $v0 dallas:ci) )
+
+what type of aircraft are flying from cleveland to dallas before noon
+(lambda $v0 e (exists $v2 (and (flight $v2) (< (departure_time $v2) 1200:ti) (from $v2 cleveland:ci) (to $v2 dallas:ci)  (= (aircraft_code $v2) $v0))))
+
+i need information on flights from indianapolis to seattle
+(lambda $v0 e (and (flight $v0) (from $v0 indianapolis:ci) (to $v0 seattle:ci) )
+
+i need a flight from memphis to seattle
+(lambda $v0 e (and (flight $v0) (from $v0 memphis:ci) (to $v0 seattle:ci) )
+
+i need a ticket from nashville to seattle
+ (lambda $v0 e (and (from $v0 nashville:ci) (to $v0 seattle:ci)))
+
+i need a ticket from nashville tennessee to seattle
+ (lambda $v0 e (and (from $v0 nashville:ci) (to $v0 seattle:ci)))
+
+i need flight information from milwaukee to tampa
+(lambda $v0 e (and (flight $v0) (from $v0 milwaukee:ci) (to $v0 tampa:ci) )
+
+i need to rent a car at tampa
+(lambda $v0 e (and (rental_car $v0) (to_city $v0 tampa:ci) ))
+
+i need a daily flight from st. louis to milwaukee
+(lambda $v0 e (and (flight $v0) (daily $v0) (from $v0 st_louis:ci) (to $v0 milwaukee:ci) )
+
+i need flights departing from oakland and arriving salt lake city
+(lambda $v0 e (and (flight $v0) (from $v0 oakland:ci) (to $v0 salt_lake_city:ci) )
+
+i need information on flights from toronto to san diego
+(lambda $v0 e (and (flight $v0) (from $v0 toronto:ci) (to $v0 san_diego:ci) )
+
+i need information on flights from toronto to san diego
+(lambda $v0 e (and (flight $v0) (from $v0 toronto:ci) (to $v0 san_diego:ci) )
+
+i want a flight from toronto to san diego
+(lambda $v0 e (and (flight $v0) (from $v0 toronto:ci) (to $v0 san_diego:ci) )
+
+i need information on flights between st. petersburg and charlotte
+(lambda $v0 e (and (flight $v0) (from $v0 st_petersburg:ci) (to $v0 charlotte:ci) )
+
+i need the flight numbers of flights leaving from cleveland and arriving at dallas
+(lambda $v1 e (exists $v0 (and (flight $v0) (from $v0 cleveland:ci) (to $v0 dallas:ci)  (= (flight_number $v0) $v1)))
+
+which flights go from new york to miami and back
+(lambda $v0 e (and (flight $v0) (from $v0 new_york:ci) (to $v0 miami:ci) )
+
+what does fare code qo mean
+qo:fb
+
+show me flights from milwaukee to orlando one way
+(lambda $v0 e (and (flight $v0) (oneway $v0) (from $v0 milwaukee:ci) (to $v0 orlando:ci) ))
+
+what the abbreviation us stand for
+us:al
+
+i'd like a one way ticket from milwaukee to orlando either wednesday evening or thursday morning
+ (lambda $v0 e (and (oneway $v0) (from $v0 milwaukee:ci) (to $v0 orlando:ci) (or (and (day $v0 wednesday:da) (during_day $v0 evening:pd)) (and (day $v0 thursday:da) (during_day $v0 morning:pd)))))
+
+show me flights from milwaukee to orlando
+(lambda $v0 e (and (flight $v0) (from $v0 milwaukee:ci) (to $v0 orlando:ci) )
+
+what does fare code f mean
+f:fb
+
+what does fare code h mean
+h:fb
+
+what does fare code y mean
+y:fb
+
+what are restrictions ap/57
+ap_57:rc
+
+please show me first class flights from indianapolis to memphis one way leaving before 10am
+(lambda $v0 e (and (flight $v0) (oneway $v0) (class_type $v0 first:cl) (< (departure_time $v0) 1000:ti) (from $v0 indianapolis:ci) (to $v0 memphis:ci) ))
+
+now show me all round trip flights from burbank to seattle that arrive before 7pm in seattle
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (< (arrival_time $v0) 1900:ti) (from $v0 burbank:ci) (to $v0 seattle:ci) ))
+
+round trip flights from orlando to montreal please
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 orlando:ci) (to $v0 montreal:ci) ))
+
+what airline is dl
+dl:al
+
+show me all delta airlines flights from montreal to orlando
+(lambda $v0 e (and (flight $v0) (airline $v0 dl:al) (from $v0 montreal:ci) (to $v0 orlando:ci) )
+
+show me all flights from orlando to montreal please
+(lambda $v0 e (and (flight $v0) (from $v0 orlando:ci) (to $v0 montreal:ci) )
+
+which airline is kw
+kw:al
+
+please list all flights from new york to miami any any type of class
+(lambda $v0 e (and (flight $v0) (from $v0 new_york:ci) (to $v0 miami:ci) ))
+
+what does fare code bh mean
+bh:fb
+
+show me a return flight from miami to jfk please
+(lambda $v0 e (and (flight $v0) (from $v0 miami:ci) (to $v0 jfk:ap) )
+
+what does fare code bh mean
+bh:fb
+
+what does fare code bh mean
+bh:fb
+
+what does fare code bh mean
+bh:fb
+
+what does fare code bh mean
+bh:fb
+
+show me one way flights from milwaukee to orlando after 6pm on wednesday
+(lambda $v0 e (and (flight $v0) (oneway $v0) (> (departure_time $v0) 1800:ti) (from $v0 milwaukee:ci) (to $v0 orlando:ci) (day $v0 wednesday:da) ))
+
+show me the flights from indianapolis to memphis
+(lambda $v0 e (and (flight $v0) (from $v0 indianapolis:ci) (to $v0 memphis:ci) )
+
+show me round trip flights from burbank to seattle
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 burbank:ci) (to $v0 seattle:ci) ))
+
+show me round trip flights from orlando to montreal
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 orlando:ci) (to $v0 montreal:ci) ))
+
+show me nonstop flights from montreal to orlando
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 montreal:ci) (to $v0 orlando:ci) )
+
+show me round trips between montreal and orlando
+(lambda $v0 e (and (round_trip $v0) (from $v0 montreal:ci) (to $v0 orlando:ci) ))
+
+show me round trip flights from montreal to orlando
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 montreal:ci) (to $v0 orlando:ci) ))
+
+show me the cheapest one way flights from montreal to orlando
+(argmin $v5 (and (flight $v5) (oneway $v5) (from $v5 montreal:ci) (to $v5 orlando:ci)  ) (fare $v5))
+
+show me the cheapest one way flights from orlando to montreal
+(argmin $v5 (and (flight $v5) (oneway $v5) (from $v5 orlando:ci) (to $v5 montreal:ci)  ) (fare $v5))
+
+show me the cheapest economy flights from miami to new york
+(argmin $v10 (and (flight $v10) (economy $v10) (from $v10 miami:ci) (to $v10 new_york:ci)  ) (fare $v10))
+
+kansas city to las vegas economy
+(lambda $v0 e (and (economy $v0) (from $v0 kansas_city:ci) (to $v0 las_vegas:ci) ))
+
+kansas city to las vegas economy
+(lambda $v0 e (and (economy $v0) (from $v0 kansas_city:ci) (to $v0 las_vegas:ci) ))
+
+what airline is hp
+hp:al
+
+ground transportation in las vegas
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 las_vegas:ci) ))
+
+ground transportation for las vegas
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 las_vegas:ci) ))
+
+las vegas to baltimore economy
+(lambda $v0 e (and (economy $v0) (from $v0 las_vegas:ci) (to $v0 baltimore:ci) ))
+
+las vegas to baltimore economy
+(lambda $v0 e (and (economy $v0) (from $v0 las_vegas:ci) (to $v0 baltimore:ci) ))
+
+baltimore to kansas city economy
+(lambda $v0 e (and (economy $v0) (from $v0 baltimore:ci) (to $v0 kansas_city:ci) ))
+
+what airline is us
+us:al
+
+which airline is us
+us:al
+
+which airline is us
+us:al
+
+which airline is us
+us:al
+
+which airline is us
+us:al
+
+columbus to chicago one way before 10am
+(lambda $v0 e (and (oneway $v0) (< (departure_time $v0) 1000:ti) (from $v0 columbus:ci) (to $v0 chicago:ci) ))
+
+what airline is hp
+hp:al
+
+st petersburg to detroit
+(lambda $v0 e (and (from $v0 st_petersburg:ci) (to $v0 detroit:ci) )
+
+from milwaukee to orlando one way after 5pm wednesday
+(lambda $v0 e (and (oneway $v0) (> (departure_time $v0) 1700:ti) (from $v0 milwaukee:ci) (to $v0 orlando:ci) (day $v0 wednesday:da) ))
+
+and from milwaukee to atlanta before 10am daily
+(lambda $v0 e (and (daily $v0) (< (departure_time $v0) 1000:ti) (from $v0 milwaukee:ci) (to $v0 atlanta:ci) )
+
+what airline is yx
+yx:al
+
+show me all flights from san jose to phoenix
+(lambda $v0 e (and (flight $v0) (from $v0 san_jose:ci) (to $v0 phoenix:ci) )
+
+show me all flights from san jose to phoenix
+(lambda $v0 e (and (flight $v0) (from $v0 san_jose:ci) (to $v0 phoenix:ci) )
+
+what airline is hp
+hp:al
+
+show me ground transportation in phoenix
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 phoenix:ci) ))
+
+show me flights from phoenix to fort worth
+(lambda $v0 e (and (flight $v0) (from $v0 phoenix:ci) (to $v0 fort_worth:ci) )
+
+show me ground transportation in fort worth
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 fort_worth:ci) ))
+
+show me flights from fort worth to san jose
+(lambda $v0 e (and (flight $v0) (from $v0 fort_worth:ci) (to $v0 san_jose:ci) )
+
+show me first class flights from new york to miami round trip
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (class_type $v0 first:cl) (from $v0 new_york:ci) (to $v0 miami:ci) ))
+
+show me first class flights from new york to miami round trip
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (class_type $v0 first:cl) (from $v0 new_york:ci) (to $v0 miami:ci) ))
+
+show me all round trip flights from new york to miami nonstop
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (round_trip $v0) (from $v0 new_york:ci) (to $v0 miami:ci) ))
+
+show me all round trip flights from miami to new york nonstop
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (round_trip $v0) (from $v0 miami:ci) (to $v0 new_york:ci) ))
+
+show me one way flights from indianapolis to memphis before 10am on any day
+(lambda $v0 e (and (flight $v0) (oneway $v0) (< (departure_time $v0) 1000:ti) (from $v0 indianapolis:ci) (to $v0 memphis:ci) ))
+
+what does fare code f mean
+f:fb
+
+show me round trip flights from burbank to tacoma
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 burbank:ci) (to $v0 tacoma:ci) ))
+
+what does the restriction ap58 mean
+ap_58:rc
+
+what does fare code h mean
+h:fb
+
+what airline is as
+as:al
+
+what airline is as
+as:al
+
+what airline is as
+as:al
+
+what airline is a s as in sam
+as:al
+
+show me nonstop flights from st. petersburg to toronto
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 st_petersburg:ci) (to $v0 toronto:ci) )
+
+show me nonstop flights from toronto to st. petersburg
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 toronto:ci) (to $v0 st_petersburg:ci) )
+
+show me the nonstop flights and fares from toronto to st. petersburg
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 toronto:ci) (to $v0 st_petersburg:ci) )
+
+show me the nonstop flights from toronto to st. petersburg
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 toronto:ci) (to $v0 st_petersburg:ci) )
+
+show me weekday flights from milwaukee to orlando one way
+(lambda $v0 e (and (flight $v0) (oneway $v0) (from $v0 milwaukee:ci) (to $v0 orlando:ci) (weekday $v0) ))
+
+show me weekday flights from milwaukee to orlando one way
+(lambda $v0 e (and (flight $v0) (oneway $v0) (from $v0 milwaukee:ci) (to $v0 orlando:ci) (weekday $v0) ))
+
+what airline is hp
+hp:al
+
+list flights from chicago to san diego
+(lambda $v0 e (and (flight $v0) (from $v0 chicago:ci) (to $v0 san_diego:ci) )
+
+list flights from chicago to san diego
+(lambda $v0 e (and (flight $v0) (from $v0 chicago:ci) (to $v0 san_diego:ci) )
+
+list flights from kansas city to denver
+(lambda $v0 e (and (flight $v0) (from $v0 kansas_city:ci) (to $v0 denver:ci) )
+
+list flights from denver to phoenix
+(lambda $v0 e (and (flight $v0) (from $v0 denver:ci) (to $v0 phoenix:ci) )
+
+list flights from phoenix to las vegas
+(lambda $v0 e (and (flight $v0) (from $v0 phoenix:ci) (to $v0 las_vegas:ci) )
+
+list flights from las vegas to san diego
+(lambda $v0 e (and (flight $v0) (from $v0 las_vegas:ci) (to $v0 san_diego:ci) )
+
+list flights from chicago to kansas city in the morning
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 kansas_city:ci) )
+
+list flights from houston to san jose
+(lambda $v0 e (and (flight $v0) (from $v0 houston:ci) (to $v0 san_jose:ci) )
+
+list flights from houston to milwaukee
+(lambda $v0 e (and (flight $v0) (from $v0 houston:ci) (to $v0 milwaukee:ci) )
+
+list flights from milwaukee to san jose on wednesday
+(lambda $v0 e (and (flight $v0) (from $v0 milwaukee:ci) (to $v0 san_jose:ci) (day $v0 wednesday:da) )
+
+list flights from san jose to dallas on friday
+(lambda $v0 e (and (flight $v0) (from $v0 san_jose:ci) (to $v0 dallas:ci) (day $v0 friday:da) )
+
+list flights from dallas to houston
+(lambda $v0 e (and (flight $v0) (from $v0 dallas:ci) (to $v0 houston:ci) )
+
+list distance from airports to downtown in new york
+(lambda $v0 e (and (miles_distant $v0) (to_city $v0 new_york:ci) (from_airport $v0 new_york:ci) ))
+
+list airports in new york
+ (lambda $x e (and (airport $x) (loc:t $x new_york:ci)))
+
+list airports in new york
+ (lambda $x e (and (airport $x) (loc:t $x new_york:ci)))
+
+list airports in la
+ (lambda $x e (and (airport $x) (loc:t $x los_angeles:ci)))
+
+list airports
+ (lambda $x e (airport $x))
+
+list airports in la
+ (lambda $x e (and (airport $x) (loc:t $x los_angeles:ci)))
+
+list airports in la
+ (lambda $x e (and (airport $x) (loc:t $x los_angeles:ci)))
+
+list the airports in la
+ (lambda $x e (and (airport $x) (loc:t $x los_angeles:ci)))
+
+list la
+ los_angeles:ci
+
+list la
+ los_angeles:ci
+
+list flights from new york to la
+(lambda $v0 e (and (flight $v0) (from $v0 new_york:ci) (to $v0 los_angeles:ci) )
+
+list flights from la guardia to burbank
+(lambda $v0 e (and (flight $v0) (from $v0 lga:ap) (to $v0 burbank:ci) )
+
+list flights from la to orlando
+(lambda $v0 e (and (flight $v0) (from $v0 los_angeles:ci) (to $v0 orlando:ci) )
+
+list flights from ontario california to orlando
+ (lambda $v0 e (and (flight $v0) (from $v0 ontario:ci) (to $v0 orlando:ci) ))
+
+list flights from ontario california to orlando
+ (lambda $v0 e (and (flight $v0) (from $v0 ontario:ci) (to $v0 orlando:ci) ))
+
+list flights from indianapolis to memphis with fares on monday
+ (lambda $v0 e (lambda $v1 e (and (flight $v0) (from $v0 indianapolis:ci) (to $v0 memphis:ci) (day $v0 monday:da) (= (fare $v0) $v1))))
+
+list flights from indianapolis to memphis on monday
+(lambda $v0 e (and (flight $v0) (from $v0 indianapolis:ci) (to $v0 memphis:ci) (day $v0 monday:da) )
+
+list flights from memphis to miami on wednesday
+(lambda $v0 e (and (flight $v0) (from $v0 memphis:ci) (to $v0 miami:ci) (day $v0 wednesday:da) )
+
+list flights from miami to indianapolis on sunday
+(lambda $v0 e (and (flight $v0) (from $v0 miami:ci) (to $v0 indianapolis:ci) (day $v0 sunday:da) )
+
+list flights from charlotte on saturday afternoon
+(lambda $v0 e (and (flight $v0) (during_day $v0 afternoon:pd) (from $v0 charlotte:ci) (day $v0 saturday:da) )
+
+list type of aircraft for all flights from charlotte
+(lambda $v0 e (exists $v2 (and (flight $v2) (from $v2 charlotte:ci)  (= (aircraft_code $v2) $v0))))
+
+list flights and fares from tacoma to orlando round trip leaving saturday returning next saturday
+ (lambda $v0 e (lambda $v1 e (and (flight $v0) (round_trip $v0) (from $v0 tacoma:ci) (to $v0 orlando:ci) (day $v0 saturday:da) (= (fare $v0) $v1))))
+
+what class is fare code q
+q:fb
+
+list flights from orlando to tacoma on saturday of fare basis code of q
+(lambda $v0 e (and (flight $v0) (fare_basis_code $v0 q:fb) (from $v0 orlando:ci) (to $v0 tacoma:ci) (day $v0 saturday:da) ))
+
+list airfares for first class round trip from detroit to st. petersburg
+(lambda $v1 e (exists $v0 (and (round_trip $v0) (class_type $v0 first:cl) (from $v0 detroit:ci) (to $v0 st_petersburg:ci)  (= (fare $v0) $v1))))
+
+list coach round trip airfare from detroit to st. petersburg
+(lambda $v1 e (exists $v0 (and (round_trip $v0) (class_type $v0 coach:cl) (from $v0 detroit:ci) (to $v0 st_petersburg:ci)  (= (fare $v0) $v1))))
+
+list flights from pittsburgh to newark on monday morning
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 pittsburgh:ci) (to $v0 newark:ci) (day $v0 monday:da) )
+
+list flights from minneapolis to pittsburgh on friday
+(lambda $v0 e (and (flight $v0) (from $v0 minneapolis:ci) (to $v0 pittsburgh:ci) (day $v0 friday:da) )
+
+list flights before 9am from cincinnati to tampa
+(lambda $v0 e (and (flight $v0) (< (departure_time $v0) 900:ti) (from $v0 cincinnati:ci) (to $v0 tampa:ci) )
+
+list flights from cincinnati to tampa before noon
+(lambda $v0 e (and (flight $v0) (< (departure_time $v0) 1200:ti) (from $v0 cincinnati:ci) (to $v0 tampa:ci) )
+
+list flights from tampa to cincinnati after 3pm
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1500:ti) (from $v0 tampa:ci) (to $v0 cincinnati:ci) )
+
+list airlines that fly from seattle to salt lake city
+(lambda $airline e (exists $v1 (and (flight $v1) (from $v1 seattle:ci) (to $v1 salt_lake_city:ci)  (= (airline:e $v1) $airline))))
+
+list delta flights from seattle to salt lake city
+(lambda $v0 e (and (flight $v0) (airline $v0 dl:al) (from $v0 seattle:ci) (to $v0 salt_lake_city:ci) )
+
+list seating capacities of delta flights from seattle to salt lake city
+ (lambda $v0 e (and (exists $v2 (and (flight $v2) (airline $v2 dl:al) (from $v2 seattle:ci) (to $v2 salt_lake_city:ci)  (= (capacity $v2) $v0)))))
+
+list delta flights from seattle to salt lake city with aircraft type
+ (lambda $v0 e (lambda $v1 e (and (flight $v0) (airline $v0 dl:al) (from $v0 seattle:ci) (to $v0 salt_lake_city:ci) (aircraft_code $v0 $v1))))
+
+what ground transportation is there in baltimore
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 baltimore:ci) ))
+
+list ground transportation in baltimore
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 baltimore:ci) ))
+
+list flights from baltimore to san francisco on friday
+(lambda $v0 e (and (flight $v0) (from $v0 baltimore:ci) (to $v0 san_francisco:ci) (day $v0 friday:da) )
+
+give me the flights from los angeles to pittsburgh on tuesday
+(lambda $v0 e (and (flight $v0) (from $v0 los_angeles:ci) (to $v0 pittsburgh:ci) (day $v0 tuesday:da) )
+
+give me the flights from pittsburgh to los angeles thursday evening
+(lambda $v0 e (and (flight $v0) (during_day $v0 evening:pd) (from $v0 pittsburgh:ci) (to $v0 los_angeles:ci) (day $v0 thursday:da) )
+
+give me the round trip flights from cleveland to miami next wednesday
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 cleveland:ci) (to $v0 miami:ci) (day $v0 wednesday:da) ))
+
+give me the fares for round trip flights from cleveland to miami next wednesday
+(lambda $v1 e (exists $v0 (and (flight $v0) (round_trip $v0) (from $v0 cleveland:ci) (to $v0 miami:ci) (day $v0 wednesday:da)  (= (fare $v0) $v1))))
+
+give me the flights and fares for a trip to cleveland from miami on wednesday
+ (lambda $v0 e (lambda $v1 e (and (flight $v0) (from $v0 miami:ci) (to $v0 cleveland:ci) (day $v0 wednesday:da) (fare $v0 $v1))))
+
+give me the fares from miami to cleveland next sunday
+(lambda $v1 e (exists $v0 (and (from $v0 miami:ci) (to $v0 cleveland:ci) (day $v0 sunday:da)  (= (fare $v0) $v1))))
+
+give me the flights from milwaukee to phoenix on saturday or sunday on american airlines
+ (lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (from $v0 milwaukee:ci) (to $v0 phoenix:ci) (or (day $v0 saturday:da) (day $v0 sunday:da))))
+
+give me the flights from phoenix to milwaukee on wednesday evening
+(lambda $v0 e (and (flight $v0) (during_day $v0 evening:pd) (from $v0 phoenix:ci) (to $v0 milwaukee:ci) (day $v0 wednesday:da) )
+
+give me the flights from phoenix to milwaukee on wednesday on american airlines
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (from $v0 phoenix:ci) (to $v0 milwaukee:ci) (day $v0 wednesday:da) )
+
+give me the flights from phoenix to milwaukee on american airlines
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (from $v0 phoenix:ci) (to $v0 milwaukee:ci) )
+
+give me the flights from phoenix to milwaukee
+(lambda $v0 e (and (flight $v0) (from $v0 phoenix:ci) (to $v0 milwaukee:ci) )
+
+give me the meal flights departing early saturday morning from chicago to seattle nonstop
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (has_meal $v0) (during_day $v0 early:pd) (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 seattle:ci) (day $v0 saturday:da) )
+
+give me the flights from chicago to seattle saturday morning that have meals
+(lambda $v0 e (and (flight $v0) (has_meal $v0) (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 seattle:ci) (day $v0 saturday:da) )
+
+give me flights from seattle to chicago that have meals on continental
+(lambda $v0 e (and (flight $v0) (has_meal $v0) (airline $v0 co:al) (from $v0 seattle:ci) (to $v0 chicago:ci) )
+
+give me the flights from seattle to chicago that have meals on continental saturday morning
+(lambda $v0 e (and (flight $v0) (has_meal $v0) (airline $v0 co:al) (during_day $v0 morning:pd) (from $v0 seattle:ci) (to $v0 chicago:ci) (day $v0 saturday:da) )
+
+give me the flights from chicago to seattle on continental that have meals early saturday morning
+(lambda $v0 e (and (flight $v0) (has_meal $v0) (airline $v0 co:al) (during_day $v0 early:pd) (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 seattle:ci) (day $v0 saturday:da) )
+
+give me a combination of continental flights from chicago to seattle that have meals early saturday morning
+(lambda $v0 e (and (flight $v0) (has_meal $v0) (airline $v0 co:al) (during_day $v0 early:pd) (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 seattle:ci) (day $v0 saturday:da) )
+
+give me the saturday morning flights with meals from chicago to minneapolis
+(lambda $v0 e (and (flight $v0) (has_meal $v0) (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 minneapolis:ci) (day $v0 saturday:da) )
+
+give me the saturday morning flights on continental that have meals from chicago to minneapolis
+(lambda $v0 e (and (flight $v0) (has_meal $v0) (airline $v0 co:al) (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 minneapolis:ci) (day $v0 saturday:da) )
+
+give me the saturday morning flights from chicago to st. paul on continental that have meals
+(lambda $v0 e (and (flight $v0) (has_meal $v0) (airline $v0 co:al) (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 st_paul:ci) (day $v0 saturday:da) )
+
+give me the flights from new york to las vegas nonstop
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 new_york:ci) (to $v0 las_vegas:ci) )
+
+give me the flights from memphis to las vegas nonstop
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 memphis:ci) (to $v0 las_vegas:ci) )
+
+give me the cheapest round trip flights from indianapolis to orlando around december twenty fifth
+(argmin $v14 (and (flight $v14) (from $v14 indianapolis:ci) (to $v14 orlando:ci) (day_number $v14 25:dn) (month $v14 december:mn)  (round_trip $v14) ) (fare $v14))
+
+i need a friday flight from newark to tampa
+(lambda $v0 e (and (flight $v0) (from $v0 newark:ci) (to $v0 tampa:ci) (day $v0 friday:da) )
+
+i need a sunday flight from tampa to charlotte
+(lambda $v0 e (and (flight $v0) (from $v0 tampa:ci) (to $v0 charlotte:ci) (day $v0 sunday:da) )
+
+give me a flight from charlotte to baltimore on tuesday morning
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 charlotte:ci) (to $v0 baltimore:ci) (day $v0 tuesday:da) )
+
+can i have a morning flight from baltimore to newark please
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 baltimore:ci) (to $v0 newark:ci) )
+
+cheapest round trip fare from indianapolis to orlando on december twenty fifth
+(min $f (exists $v6 (and (from $v6 indianapolis:ci) (to $v6 orlando:ci) (day_number $v6 25:dn) (month $v6 december:mn)  (round_trip $v6) (= (fare $v6) $f))))
+
+cheapest one way fare from indianapolis to orlando on december twenty seventh
+(min $f (exists $v6 (and (oneway $v6) (from $v6 indianapolis:ci) (to $v6 orlando:ci) (day_number $v6 27:dn) (month $v6 december:mn)  (= (fare $v6) $f))))
+
+flight number from dallas to houston
+(lambda $v1 e (exists $v0 (and (from $v0 dallas:ci) (to $v0 houston:ci)  (= (flight_number $v0) $v1)))
+
+flight number from houston to dallas
+(lambda $v1 e (exists $v0 (and (from $v0 houston:ci) (to $v0 dallas:ci)  (= (flight_number $v0) $v1)))
+
+saturday flight on american airlines from milwaukee to phoenix
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (from $v0 milwaukee:ci) (to $v0 phoenix:ci) (day $v0 saturday:da) )
+
+flight numbers on american airlines from phoenix to milwaukee
+(lambda $v1 e (exists $v0 (and (airline $v0 aa:al) (from $v0 phoenix:ci) (to $v0 milwaukee:ci)  (= (flight_number $v0) $v1)))
+
+flight numbers from chicago to seattle
+(lambda $v1 e (exists $v0 (and (from $v0 chicago:ci) (to $v0 seattle:ci)  (= (flight_number $v0) $v1)))
+
+flight numbers from chicago to seattle on continental
+(lambda $v1 e (exists $v0 (and (airline $v0 co:al) (from $v0 chicago:ci) (to $v0 seattle:ci)  (= (flight_number $v0) $v1)))
+
+flight numbers from seattle to chicago on continental
+(lambda $v1 e (exists $v0 (and (airline $v0 co:al) (from $v0 seattle:ci) (to $v0 chicago:ci)  (= (flight_number $v0) $v1)))
+
+is there a fare from pittsburgh to cleveland under 200 dollars
+(lambda $0 e (and (< (fare $0) 200:do) (exists $1 (and (= (fare $1) $0) (from $1 pittsburgh:ci) (to $1 cleveland:ci)))))
+
+how much is coach flight from pittsburgh to atlanta
+(lambda $v1 e (exists $v0 (and (flight $v0) (class_type $v0 coach:cl) (from $v0 pittsburgh:ci) (to $v0 atlanta:ci)  (= (fare $v0) $v1))))
+
+newark to tampa on friday
+(lambda $v0 e (and (from $v0 newark:ci) (to $v0 tampa:ci) (day $v0 friday:da) )
+
+tampa to charlotte sunday morning
+(lambda $v0 e (and (during_day $v0 morning:pd) (from $v0 tampa:ci) (to $v0 charlotte:ci) (day $v0 sunday:da) )
+
+charlotte to baltimore on tuesday
+(lambda $v0 e (and (from $v0 charlotte:ci) (to $v0 baltimore:ci) (day $v0 tuesday:da) )
+
+baltimore to newark wednesday morning
+(lambda $v0 e (and (during_day $v0 morning:pd) (from $v0 baltimore:ci) (to $v0 newark:ci) (day $v0 wednesday:da) )
+
+dallas to houston after 1201am
+(lambda $v0 e (and (> (departure_time $v0) 1:ti) (from $v0 dallas:ci) (to $v0 houston:ci) )
+
+houston to dallas before midnight
+(lambda $v0 e (and (< (departure_time $v0) 0:ti) (from $v0 houston:ci) (to $v0 dallas:ci) )
+
+indianapolis to orlando december twenty seventh
+(lambda $v0 e (and (from $v0 indianapolis:ci) (to $v0 orlando:ci) (day_number $v0 27:dn) (month $v0 december:mn) )
+
+cheapest fare from indianapolis to orlando on the twenty seventh of december
+(min $f (exists $v6 (and (from $v6 indianapolis:ci) (to $v6 orlando:ci) (day_number $v6 27:dn) (month $v6 december:mn)  (= (fare $v6) $f))))
+
+cheapest fare round trip from indianapolis to orlando on december twenty seventh
+(min $f (exists $v6 (and (from $v6 indianapolis:ci) (to $v6 orlando:ci) (day_number $v6 27:dn) (month $v6 december:mn)  (round_trip $v6) (= (fare $v6) $f))))
+
+cleveland to miami on wednesday arriving before 4pm
+(lambda $v0 e (and (< (arrival_time $v0) 1600:ti) (from $v0 cleveland:ci) (to $v0 miami:ci) (day $v0 wednesday:da) )
+
+miami to cleveland sunday afternoon
+(lambda $v0 e (and (during_day $v0 afternoon:pd) (from $v0 miami:ci) (to $v0 cleveland:ci) (day $v0 sunday:da) )
+
+new york city to las vegas and memphis to las vegas on sunday
+(lambda $v0 e (and (or (and (from $v0 new_york:ci) (to $v0 las_vegas:ci)) (and (from $v0 new_york:ci) (to $v0 las_vegas:ci))) (day $v0 sunday:da)))
+
+new york city to las vegas and memphis to las vegas on sunday
+(lambda $v0 e (and (or (and (from $v0 new_york:ci) (to $v0 las_vegas:ci)) (and (from $v0 new_york:ci) (to $v0 las_vegas:ci))) (day $v0 sunday:da)))
+
+new york to las vegas sunday afternoon
+(lambda $v0 e (and (during_day $v0 afternoon:pd) (from $v0 new_york:ci) (to $v0 las_vegas:ci) (day $v0 sunday:da) )
+
+memphis to las vegas sunday afternoon
+(lambda $v0 e (and (during_day $v0 afternoon:pd) (from $v0 memphis:ci) (to $v0 las_vegas:ci) (day $v0 sunday:da) )
+
+new york to las vegas on sunday afternoon
+(lambda $v0 e (and (during_day $v0 afternoon:pd) (from $v0 new_york:ci) (to $v0 las_vegas:ci) (day $v0 sunday:da) )
+
+chicago to seattle saturday morning
+(lambda $v0 e (and (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 seattle:ci) (day $v0 saturday:da) )
+
+chicago to las vegas saturday morning
+(lambda $v0 e (and (during_day $v0 morning:pd) (from $v0 chicago:ci) (to $v0 las_vegas:ci) (day $v0 saturday:da) )
+
+los angeles to pittsburgh afternoon tuesday
+(lambda $v0 e (and (during_day $v0 afternoon:pd) (from $v0 los_angeles:ci) (to $v0 pittsburgh:ci) (day $v0 tuesday:da) ))
+
+los angeles to pittsburgh afternoon on monday
+(lambda $v0 e (and (during_day $v0 afternoon:pd) (from $v0 los_angeles:ci) (to $v0 pittsburgh:ci) (day $v0 monday:da) ))
+
+pittsburgh to los angeles thursday evening
+(lambda $v0 e (and (during_day $v0 evening:pd) (from $v0 pittsburgh:ci) (to $v0 los_angeles:ci) (day $v0 thursday:da) )
+
+milwaukee to phoenix on saturday
+(lambda $v0 e (and (from $v0 milwaukee:ci) (to $v0 phoenix:ci) (day $v0 saturday:da) )
+
+phoenix to milwaukee on sunday
+(lambda $v0 e (and (from $v0 phoenix:ci) (to $v0 milwaukee:ci) (day $v0 sunday:da) )
+
+phoenix to milwaukee on wednesday
+(lambda $v0 e (and (from $v0 phoenix:ci) (to $v0 milwaukee:ci) (day $v0 wednesday:da) )
+
+a flight from baltimore to san francisco arriving between 5 and 8pm
+(lambda $v0 e (and (flight $v0) (> (arrival_time $v0) 1700:ti) (< (arrival_time $v0) 2000:ti) (from $v0 baltimore:ci) (to $v0 san_francisco:ci) )
+
+how many northwest flights leave st. paul
+ (count $v0 (and (flight $v0) (airline $v0 nw:al) (from $v0 st_paul:ci) ))
+
+how many northwest flights leave washington dc
+ (count $v0 (and (flight $v0) (airline $v0 nw:al) (from $v0 washington:ci) ))
+
+how many flights does northwest have leaving dulles
+ (count $v0 (and (flight $v0) (airline $v0 nw:al) (from $v0 iad:ap) ))
+
+what cities does northwest fly out of
+ (lambda $x e (and (city $x) (exists $y (and (flight $y) (airline $y nw:al) (from $y $x)))))
+
+list the cities from which northwest flies
+ (lambda $x e (and (city $x) (exists $y (and (flight $y) (airline $y nw:al) (from $y $x)))))
+
+what cities does northwest fly to
+ (lambda $x e (and (city $x) (exists $y (and (flight $y) (airline $y nw:al) (to $y $x)))))
+
+i would like a connecting flight from dallas to san francisco leaving after 4 o'clock
+ (lambda $v0 e (and (flight $v0) (connecting $v0) (> (departure_time $v0) 1600:ti) (from $v0 dallas:ci) (to $v0 san_francisco:ci) )
+
+please list all the flights from dallas to san francisco
+(lambda $v0 e (and (flight $v0) (from $v0 dallas:ci) (to $v0 san_francisco:ci) )
+
+tell me again the morning flights on american airlines from philadelphia to dallas
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (during_day $v0 morning:pd) (from $v0 philadelphia:ci) (to $v0 dallas:ci) )
+
+tell me the flights that leave philadelphia and go to dallas
+(lambda $v0 e (and (flight $v0) (from $v0 philadelphia:ci) (to $v0 dallas:ci) )
+
+what is a d9s
+d9s:ac
+
+what type of plane is a d9s
+d9s:ac
+
+what is a d9s
+d9s:ac
+
+show me the airports serviced by tower air
+ (lambda $x e (and (airport $x) (services ff:al $x)))
+
+show me the first class and coach flights between jfk and orlando
+ (lambda $v0 e (and (flight $v0) (or (class_type $v0 first:cl) (class_type $v0 coach:cl)) (from $v0 jfk:ap) (to $v0 orlando:ci) ))
+
+show me the first class and coach flights from kennedy airport to miami
+ (lambda $v0 e (and (flight $v0) (or (class_type $v0 first:cl) (class_type $v0 coach:cl)) (from $v0 jfk:ap) (to $v0 miami:ci) ))
+
+show me the first class and coach flights from jfk to miami
+ (lambda $v0 e (and (flight $v0) (or (class_type $v0 first:cl) (class_type $v0 coach:cl)) (from $v0 jfk:ap) (to $v0 miami:ci) ))
+
+are meals ever served on tower air
+(lambda $0 e (and (airline $0 ff:al) (meal_code $0)))
+
+are snacks served on tower air
+(lambda $0 e (and (meal $0 snack:me) (airline $0 ff:al)))
+
+show delta airlines flights from jfk to miami
+(lambda $v0 e (and (flight $v0) (airline $v0 dl:al) (from $v0 jfk:ap) (to $v0 miami:ci) )
+
+show delta airlines from boston to salt lake
+(lambda $v0 e (and (airline $v0 dl:al) (from $v0 boston:ci) (to $v0 salt_lake_city:ci) )
+
+show delta airlines flights from boston to salt lake
+(lambda $v0 e (and (flight $v0) (airline $v0 dl:al) (from $v0 boston:ci) (to $v0 salt_lake_city:ci) )
+
+show delta airlines flights from boston to salt lake city
+(lambda $v0 e (and (flight $v0) (airline $v0 dl:al) (from $v0 boston:ci) (to $v0 salt_lake_city:ci) )
+
+what are the fares for flights between boston and washington dc
+(lambda $v1 e (exists $v0 (and (flight $v0) (from $v0 boston:ci) (to $v0 washington:ci)  (= (fare $v0) $v1))))
+
+what is the least expensive fare from boston to salt lake city
+(min $f (exists $v3 (and (from $v3 boston:ci) (to $v3 salt_lake_city:ci)  (= (fare $v3) $f))))
+
+what are the lowest fares from washington dc to salt lake city
+(min $f (exists $v3 (and (from $v3 washington:ci) (to $v3 salt_lake_city:ci)  (= (fare $v3) $f))))
+
+what is the lowest fare from bwi to salt lake city
+(min $f (exists $v3 (and (from $v3 bwi:ap) (to $v3 salt_lake_city:ci)  (= (fare $v3) $f))))
+
+show me the cost of a first class ticket from detroit to las vegas and back
+(lambda $0 e (exists $1 (and (= (fare $1) $0) (to $1 las_vegas:ci) (from $1 detroit:ci) (class_type $1 first:cl))))
+
+what is the earliest arriving flight from boston to washington dc
+(argmin $v1 (and (flight $v1) (from $v1 boston:ci) (to $v1 washington:ci)  ) (arrival_time $v1))
+
+what is the earliest arriving flight between boston and washington dc
+(argmin $v1 (and (flight $v1) (from $v1 boston:ci) (to $v1 washington:ci)  ) (arrival_time $v1))
+
+what's the earliest arriving flight between boston and washington dc
+(argmin $v1 (and (flight $v1) (from $v1 boston:ci) (to $v1 washington:ci)  ) (arrival_time $v1))
+
+what is the earliest arriving flight from houston to orlando
+(argmin $v1 (and (flight $v1) (from $v1 houston:ci) (to $v1 orlando:ci)  ) (arrival_time $v1))
+
+what is the earliest arriving flight from houston to orlando
+(argmin $v1 (and (flight $v1) (from $v1 houston:ci) (to $v1 orlando:ci)  ) (arrival_time $v1))
+
+show me the flights between houston and orlando
+(lambda $v0 e (and (flight $v0) (from $v0 houston:ci) (to $v0 orlando:ci) )
+
+show me the flights between houston and orlando
+(lambda $v0 e (and (flight $v0) (from $v0 houston:ci) (to $v0 orlando:ci) )
+
+show me the flights from houston to orlando
+(lambda $v0 e (and (flight $v0) (from $v0 houston:ci) (to $v0 orlando:ci) )
+
+list all flights leaving denver between 8pm and 9pm
+(lambda $0 e (and (< (departure_time $0) 2100:ti) (> (departure_time $0) 2000:ti) (from $0 denver:ci) (flight $0)))
+
+what is the seating capacity on the aircraft 733
+(capacity 733:ac)
+
+what is the seating capacity of a 72s
+(capacity 72s:ac)
+
+what is the seating capacity of the aircraft 72s
+(capacity 72s:ac)
+
+what is the seating capacity of the aircraft m80
+(capacity m80:ac)
+
+what is the seating capacity of the type of aircraft m80
+(capacity m80:ac)
+
+what is the seating capacity of an m80
+(capacity m80:ac)
+
+what airlines serve denver
+ (lambda x e (and (airline x) (services x denver:ci)))
+
+list the airlines with flights to or from denver
+ (lambda $airline e (exists $v1 (and (flight $v1) (or (from $v1 denver:ci) (to $v1 denver:ci))  (= (airline:e $v1) $airline))))
+
+what airlines fly into denver
+(lambda $airline e (exists $v1 (and (flight $v1) (to $v1 denver:ci)  (= (airline:e $v1) $airline))))
+
+list all flights arriving in denver between 8 and 9pm
+ (lambda $v0 e (and (flight $v0) (> (arrival_time $v0) 2000:ti) (< (arrival_time $v0) 2100:ti) (to $v0 denver:ci) ))
+
+what is the capacity of the 73s
+(capacity 73s:ac)
+
+what is 73s
+73s:ac
+
+what is seating capacity on the aircraft 73s
+(capacity 73s:ac)
+
+what is the seating capacity of a 757
+(capacity 757:ac)
+
+how many people will a 757 hold
+(capacity 757:ac)
+
+how many passengers can fly on a 757
+(capacity 757:ac)
+
+list all of the daily flights arriving in denver between 8 and 9pm
+ (lambda $v0 e (and (flight $v0) (daily $v0) (> (arrival_time $v0) 2000:ti) (< (arrival_time $v0) 2100:ti) (to $v0 denver:ci) ))
+
+list all of the daily flights arriving in denver from 8 to 9pm
+ (lambda $v0 e (and (flight $v0) (daily $v0) (> (arrival_time $v0) 2000:ti) (< (arrival_time $v0) 2100:ti) (to $v0 denver:ci) ))
+
+show me all of the daily flights arriving in denver between 8pm and 9pm
+ (lambda $v0 e (and (flight $v0) (daily $v0) (> (arrival_time $v0) 2000:ti) (< (arrival_time $v0) 2100:ti) (to $v0 denver:ci) ))
+
+what is the seating capacity of the 757
+(capacity 757:ac)
+
+tell me about the m80 aircraft
+m80:ac
+
+tell me about the m80 aircraft
+m80:ac
+
+tell me about the type of aircraft called an m80
+m80:ac
+
+what is the seating capacity of the 733
+(capacity 733:ac)
+
+what is the seating capacity of the m80
+(capacity m80:ac)
+
+what is the seating capacity on the aircraft m80
+(capacity m80:ac)
+
+list all flights arriving or leaving denver between 8 and 9pm
+ (lambda $v0 e (and (flight $v0) (daily $v0) (> (arrival_time $v0) 2000:ti) (< (arrival_time $v0) 2100:ti) (or (to $v0 denver:ci) (from $v0 denver:ci))))
+
+list all flights arriving in denver between 8 and 9pm
+ (lambda $v0 e (and (flight $v0) (daily $v0) (> (arrival_time $v0) 2000:ti) (< (arrival_time $v0) 2100:ti) (to $v0 denver:ci) ))
+
+list all flights on all types of aircraft arriving in denver between 8 and 9pm
+ (lambda $v0 e (and (flight $v0) (daily $v0) (> (arrival_time $v0) 2000:ti) (< (arrival_time $v0) 2100:ti) (to $v0 denver:ci) ))
+
+please list all flights from nashville to memphis on monday morning
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 nashville:ci) (to $v0 memphis:ci) (day $v0 monday:da) )
+
+please list the flights from nashville to memphis on monday morning
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 nashville:ci) (to $v0 memphis:ci) (day $v0 monday:da) )
+
+is there ground transportation from the memphis airport into town when if i arrive at 842 in the morning
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 memphis:ci) (from_airport $v0 memphis:ci) ))
+
+please list the flights from memphis to new york city on a monday night
+ (lambda $v0 e (and (flight $v0) (during_day $v0 late:pd) (from $v0 memphis:ci) (to $v0 new_york:ci) (day $v0 monday:da) )
+
+what is cvg
+cvg:ap
+
+what ground transportation is available from la guardia airport into new york city
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 new_york:ci) (from_airport $v0 lga:ap) ))
+
+is there ground transportation from lga into new york city
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 new_york:ci) (from_airport $v0 lga:ap) ))
+
+please list the ground transportation from lga into new york city
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 new_york:ci) (from_airport $v0 lga:ap) ))
+
+please list ground transportation from ewr into new york city
+(lambda $v0 e (and (ground_transport $v0) (to_city $v0 new_york:ci) (from_airport $v0 ewr:ap) ))
+
+show me the morning flights from memphis to new york city
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 memphis:ci) (to $v0 new_york:ci) )
+
+give me the flights from new york city to nashville leaving after 5pm on wednesday
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1700:ti) (from $v0 new_york:ci) (to $v0 nashville:ci) (day $v0 wednesday:da) )
+
+tell me about the ground transportation from nashville airport
+ (lambda $v0 e (and (ground_transport $v0) (from_airport $v0 bna:ap) ))
+
+what are the nonstop flights from cincinnati to charlotte leaving after noon and arriving before 7pm
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (> (departure_time $v0) 1200:ti) (< (arrival_time $v0) 1900:ti) (from $v0 cincinnati:ci) (to $v0 charlotte:ci) )
+
+how many flights does alaska airlines have to burbank
+ (count $v0 (and (flight $v0) (airline $v0 as:al) (to $v0 burbank:ci) ))
+
+list the alaska airline flights from burbank to anywhere
+(lambda $v0 e (and (flight $v0) (airline $v0 as:al) (from $v0 burbank:ci) )
+
+list the alaska airline flights from burbank
+(lambda $v0 e (and (flight $v0) (airline $v0 as:al) (from $v0 burbank:ci) )
+
+which airline is as
+as:al
+
+list the alaska airlines flights arriving in burbank
+(lambda $v0 e (and (flight $v0) (airline $v0 as:al) (to $v0 burbank:ci) )
+
+list the alaska airlines flights departing from burbank
+(lambda $v0 e (and (flight $v0) (airline $v0 as:al) (from $v0 burbank:ci) )
+
+list all alaska airlines flights
+(lambda $v0 e (and (flight $v0) (airline $v0 as:al) )
+
+list all flights departing from seattle
+(lambda $v0 e (and (flight $v0) (from $v0 seattle:ci) )
+
+list the flights from indianapolis to memphis that leave before noon
+(lambda $v0 e (and (flight $v0) (< (departure_time $v0) 1200:ti) (from $v0 indianapolis:ci) (to $v0 memphis:ci) )
+
+list the cheapest fare from charlotte to las vegas
+(min $f (exists $v3 (and (from $v3 charlotte:ci) (to $v3 las_vegas:ci)  (= (fare $v3) $f))))
+
+i want a flight from los angeles to charlotte early in the morning
+(lambda $v0 e (and (flight $v0) (during_day $v0 early:pd) (during_day $v0 morning:pd) (from $v0 los_angeles:ci) (to $v0 charlotte:ci) )
+
+i would like a morning flight from charlotte to newark
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 charlotte:ci) (to $v0 newark:ci) )
+
+i'd like a morning flight from newark to los angeles
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 newark:ci) (to $v0 los_angeles:ci) )
+
+i'd like an evening flight from newark to los angeles
+(lambda $v0 e (and (flight $v0) (during_day $v0 evening:pd) (from $v0 newark:ci) (to $v0 los_angeles:ci) )
+
+i would like a flight that leaves on sunday from montreal quebec to san diego california
+(lambda $v0 e (and (flight $v0) (from $v0 montreal:ci) (to $v0 san_diego:ci) (day $v0 sunday:da) )
+
+i would like a flight on tuesday which leaves from san diego to indianapolis indiana and that leaves in the afternoon
+(lambda $v0 e (and (flight $v0) (during_day $v0 afternoon:pd) (from $v0 san_diego:ci) (to $v0 indianapolis:ci) (day $v0 tuesday:da) )
+
+i would like to leave thursday morning from indianapolis to toronto
+(lambda $v0 e (and (during_day $v0 morning:pd) (from $v0 indianapolis:ci) (to $v0 toronto:ci) (day $v0 thursday:da) )
+
+i would like a flight on friday morning from toronto to montreal
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 toronto:ci) (to $v0 montreal:ci) (day $v0 friday:da) )
+
+i would like a flight from cincinnati to burbank on american
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (from $v0 cincinnati:ci) (to $v0 burbank:ci) )
+
+what type of aircraft is used for the american flight leaving at 419pm
+(lambda $v0 e (exists $v2 (and (flight $v2) (airline $v2 aa:al) (departure_time $v2 1619:ti) (from $v2 cincinnati:ci) (to $v2 burbank:ci)  (= (aircraft_code $v2) $v0))))
+
+i need a flight leaving kansas city to chicago leaving next wednesday and returning the following day
+(lambda $v0 e (and (flight $v0) (from $v0 kansas_city:ci) (to $v0 chicago:ci) (day $v0 wednesday:da) )
+
+what flights go from long beach to st. louis
+(lambda $v0 e (and (flight $v0) (from $v0 long_beach:ci) (to $v0 st_louis:ci) )
+
+what are the flights from memphis to las vegas
+(lambda $v0 e (and (flight $v0) (from $v0 memphis:ci) (to $v0 las_vegas:ci) )
+
+what are the flights from las vegas to ontario
+(lambda $v0 e (and (flight $v0) (from $v0 las_vegas:ci) (to $v0 ontario:ci) )
+
+what are the flights from ontario to memphis
+(lambda $v0 e (and (flight $v0) (from $v0 ontario:ci) (to $v0 memphis:ci) )
+
+what type of ground transportation is there at the las vegas airport
+ (lambda $v0 e (and (ground_transport $v0) (from_airport $v0 las:ap) ))
+
+is there taxi service at the ontario airport
+(lambda $v0 e (and (taxi $v0) (from_airport $v0 ont:ap) ))
+
+what are the flights from tampa to milwaukee
+(lambda $v0 e (and (flight $v0) (from $v0 tampa:ci) (to $v0 milwaukee:ci) )
+
+what are the flights from milwaukee to seattle
+(lambda $v0 e (and (flight $v0) (from $v0 milwaukee:ci) (to $v0 seattle:ci) )
+
+what are the flights from la guardia to san jose on united
+(lambda $v0 e (and (flight $v0) (airline $v0 ua:al) (from $v0 lga:ap) (to $v0 san_jose:ci) )
+
+what are the flights on mondays that travel from charlotte north carolina to phoenix arizona
+(lambda $v0 e (and (flight $v0) (from $v0 charlotte:ci) (to $v0 phoenix:ci) (day $v0 monday:da) )
+
+what are the flights from phoenix arizona to st. paul minnesota on tuesday
+(lambda $v0 e (and (flight $v0) (from $v0 phoenix:ci) (to $v0 st_paul:ci) (day $v0 tuesday:da) )
+
+what are the flights on thursday leaving from st. paul minnesota to st. louis
+(lambda $v0 e (and (flight $v0) (from $v0 st_paul:ci) (to $v0 st_louis:ci) (day $v0 thursday:da) )
+
+what are the flights from st. louis to charlotte north carolina leaving on friday
+(lambda $v0 e (and (flight $v0) (from $v0 st_louis:ci) (to $v0 charlotte:ci) (day $v0 friday:da) )
+
+what are the flights from boston to orlando that stop in new york
+(lambda $v0 e (and (flight $v0) (from $v0 boston:ci) (to $v0 orlando:ci) (stop $v0 new_york:ci) ))
+
+i need a morning flight from burbank to milwaukee on next monday
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 burbank:ci) (to $v0 milwaukee:ci) (day $v0 monday:da) )
+
+how about a flight from milwaukee to st. louis that leaves monday night
+ (lambda $v0 e (and (flight $v0) (during_day $v0 late:pd) (from $v0 milwaukee:ci) (to $v0 st_louis:ci) (day $v0 monday:da) )
+
+and a flight from st. louis to burbank that leaves tuesday afternoon
+(lambda $v0 e (and (flight $v0) (during_day $v0 afternoon:pd) (from $v0 st_louis:ci) (to $v0 burbank:ci) (day $v0 tuesday:da) )
+
+how about a flight leaving tuesday night from st. louis to burbank
+ (lambda $v0 e (and (flight $v0) (during_day $v0 late:pd) (from $v0 st_louis:ci) (to $v0 burbank:ci) (day $v0 tuesday:da) )
+
+i need a flight from salt lake to newark airport that arrives on saturday before 6pm
+(lambda $v0 e (and (flight $v0) (< (arrival_time $v0) 1800:ti) (from $v0 salt_lake_city:ci) (to $v0 ewr:ap) (day_arrival $v0 saturday:da) )
+
+i'd like a flight from cincinnati to newark airport that arrives on saturday before 6pm
+(lambda $v0 e (and (flight $v0) (< (arrival_time $v0) 1800:ti) (from $v0 cincinnati:ci) (to $v0 ewr:ap) (day_arrival $v0 saturday:da) )
+
+i need a flight on american airlines from miami to chicago that arrives around 5pm
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (approx_arrival_time $v0 1700:ti) (from $v0 miami:ci) (to $v0 chicago:ci) )
+
+i need a flight from memphis to tacoma that goes through los angeles
+(lambda $v0 e (and (flight $v0) (from $v0 memphis:ci) (to $v0 tacoma:ci) (stop $v0 los_angeles:ci) ))
+
+what are the flights between cincinnati and san jose california which leave after 6pm
+(lambda $v0 e (and (flight $v0) (> (departure_time $v0) 1800:ti) (from $v0 cincinnati:ci) (to $v0 san_jose:ci) )
+
+what are the nonstop flights between san jose and houston texas
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 san_jose:ci) (to $v0 houston:ci) )
+
+what are the nonstop flights between houston and memphis
+(lambda $v0 e (and (flight $v0) (nonstop $v0) (from $v0 houston:ci) (to $v0 memphis:ci) )
+
+what are the flights between memphis and cincinnati on wednesday
+(lambda $v0 e (and (flight $v0) (from $v0 memphis:ci) (to $v0 cincinnati:ci) (day $v0 wednesday:da) )
+
+what are the american flights from newark to nashville
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (from $v0 newark:ci) (to $v0 nashville:ci) )
+
+the flights from ontario to westchester that stop in chicago
+(lambda $v0 e (and (flight $v0) (from $v0 ontario:ci) (to $v0 westchester_county:ci) (stop $v0 chicago:ci) ))
+
+please list the flights from los angeles to charlotte
+(lambda $v0 e (and (flight $v0) (from $v0 los_angeles:ci) (to $v0 charlotte:ci) )
+
+please list the flights from charlotte to newark
+(lambda $v0 e (and (flight $v0) (from $v0 charlotte:ci) (to $v0 newark:ci) )
+
+please list the flights from newark to los angeles
+(lambda $v0 e (and (flight $v0) (from $v0 newark:ci) (to $v0 los_angeles:ci) )
+
+please list the flights from cincinnati to burbank on american airlines
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (from $v0 cincinnati:ci) (to $v0 burbank:ci) )
+
+please give me the flights from kansas city to chicago on june sixteenth
+(lambda $v0 e (and (flight $v0) (from $v0 kansas_city:ci) (to $v0 chicago:ci) (day_number $v0 16:dn) (month $v0 june:mn) )
+
+please give me the flights from chicago to kansas city on june seventeenth
+(lambda $v0 e (and (flight $v0) (from $v0 chicago:ci) (to $v0 kansas_city:ci) (day_number $v0 17:dn) (month $v0 june:mn) )
+
+please list all the flights from kansas city to chicago on june sixteenth
+(lambda $v0 e (and (flight $v0) (from $v0 kansas_city:ci) (to $v0 chicago:ci) (day_number $v0 16:dn) (month $v0 june:mn) )
+
+please list all the flights from chicago to kansas city on june seventeenth
+(lambda $v0 e (and (flight $v0) (from $v0 chicago:ci) (to $v0 kansas_city:ci) (day_number $v0 17:dn) (month $v0 june:mn) )
+
+i'd like to travel from burbank to milwaukee
+(lambda $v0 e (and (from $v0 burbank:ci) (to $v0 milwaukee:ci) )
+
+can you find me a flight from salt lake city to new york city next saturday before arriving before 6pm
+(lambda $v0 e (and (flight $v0) (< (arrival_time $v0) 1800:ti) (from $v0 salt_lake_city:ci) (to $v0 new_york:ci) (day $v0 saturday:da) )
+
+can you find me another flight from cincinnati to new york on saturday before 6pm
+(lambda $v0 e (and (flight $v0) (< (departure_time $v0) 1800:ti) (from $v0 cincinnati:ci) (to $v0 new_york:ci) (day $v0 saturday:da) )
+
+can you list all of the delta flights from salt lake city to new york next saturday arriving before 6pm
+(lambda $v0 e (and (flight $v0) (airline $v0 dl:al) (< (arrival_time $v0) 1800:ti) (from $v0 salt_lake_city:ci) (to $v0 new_york:ci) (day $v0 saturday:da) )
+
+i'd like to fly from miami to chicago on on american airlines arriving around 5pm
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (approx_arrival_time $v0 1700:ti) (from $v0 miami:ci) (to $v0 chicago:ci) )
+
+i'd like to travel from kansas city to chicago next wednesday
+(lambda $v0 e (and (from $v0 kansas_city:ci) (to $v0 chicago:ci) (day $v0 wednesday:da) )
+
+i'd like a round trip flight from kansas city to chicago on wednesday may twenty sixth arriving at 7pm
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (arrival_time $v0 1900:ti) (from $v0 kansas_city:ci) (to $v0 chicago:ci) (day $v0 wednesday:da) (day_number $v0 26:dn) (month $v0 may:mn) ))
+
+yes i'd like to find a flight from memphis to tacoma stopping in los angeles
+(lambda $v0 e (and (flight $v0) (from $v0 memphis:ci) (to $v0 tacoma:ci) (stop $v0 los_angeles:ci) ))
+
+find flight from san diego to phoenix on monday am
+(lambda $v0 e (and (flight $v0) (during_day $v0 morning:pd) (from $v0 san_diego:ci) (to $v0 phoenix:ci) (day $v0 monday:da) )
+
+find flight from phoenix to detroit on monday
+(lambda $v0 e (and (flight $v0) (from $v0 phoenix:ci) (to $v0 detroit:ci) (day $v0 monday:da) )
+
+find flight from detroit to san diego on tuesday
+(lambda $v0 e (and (flight $v0) (from $v0 detroit:ci) (to $v0 san_diego:ci) (day $v0 tuesday:da) )
+
+find flight from cincinnati to san jose on monday
+(lambda $v0 e (and (flight $v0) (from $v0 cincinnati:ci) (to $v0 san_jose:ci) (day $v0 monday:da) )
+
+find flight from san jose to houston on wednesday
+(lambda $v0 e (and (flight $v0) (from $v0 san_jose:ci) (to $v0 houston:ci) (day $v0 wednesday:da) )
+
+find flight from houston to memphis on friday
+(lambda $v0 e (and (flight $v0) (from $v0 houston:ci) (to $v0 memphis:ci) (day $v0 friday:da) )
+
+find flight from memphis to cincinnati on sunday
+(lambda $v0 e (and (flight $v0) (from $v0 memphis:ci) (to $v0 cincinnati:ci) (day $v0 sunday:da) )
+
+find american flight from newark to nashville around 630pm
+ (lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (approx_departure_time $v0 1830:ti) (from $v0 newark:ci) (to $v0 nashville:ci) )
+
+please find a flight round trip from los angeles to tacoma washington with a stopover in san francisco not exceeding the price of 300 dollars for june tenth 1993
+ (lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 los_angeles:ci) (to $v0 tacoma:ci) (stop $v0 san_francisco:ci) (< (cost $v0) 300:do) (day_number $v0 10:dn) (month $v0 june:mn) (year $v0 1993:yr) ))
+
+are there any flights on june tenth from burbank to tacoma
+(lambda $v0 e (and (flight $v0) (from $v0 burbank:ci) (to $v0 tacoma:ci) (day_number $v0 10:dn) (month $v0 june:mn) )
+
+please find a flight from ontario to westchester that makes a stop in chicago on may seventeenth one way with dinner
+(lambda $v0 e (and (flight $v0) (oneway $v0) (meal $v0 dinner:me) (from $v0 ontario:ci) (to $v0 westchester_county:ci) (stop $v0 chicago:ci) (day_number $v0 17:dn) (month $v0 may:mn) ))
+
+like to book a flight from burbank to milwaukee
+(lambda $v0 e (and (flight $v0) (from $v0 burbank:ci) (to $v0 milwaukee:ci) )
+
+show me all the flights from burbank to milwaukee
+(lambda $v0 e (and (flight $v0) (from $v0 burbank:ci) (to $v0 milwaukee:ci) )
+
+find me all the flights from milwaukee to st. louis
+(lambda $v0 e (and (flight $v0) (from $v0 milwaukee:ci) (to $v0 st_louis:ci) )
+
+now show me all the flights from st. louis to burbank
+(lambda $v0 e (and (flight $v0) (from $v0 st_louis:ci) (to $v0 burbank:ci) )
+
+is there one airline that flies from burbank to milwaukee milwaukee to st. louis and from st. louis to burbank
+ (lambda $airline e (exists $v1 (and (flight $v1) (or (and (from $v1 milwaukee:ci) (to $v1 st_louis:ci)) (and (from $v1 milwaukee:ci) (to $v1 st_louis:ci)) (and (to $v1 milwaukee:ci) (to $v1 burbank:ci)) (and (to $v1 st_louis:ci) (from $v1 st_louis:ci))) (= (airline:e $v1) $airline))))
+
+find me all the round trip flights from burbank to milwaukee stopping in st. louis
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 burbank:ci) (to $v0 milwaukee:ci) (stop $v0 st_louis:ci) ))
+
+i'd like to book two flights to westchester county
+(lambda $v0 e (and (flight $v0) (to $v0 westchester_county:ci) )
+
+i want to book a flight from salt lake city to westchester county
+(lambda $v0 e (and (flight $v0) (from $v0 salt_lake_city:ci) (to $v0 westchester_county:ci) )
+
+tell me all the airports near westchester county
+ (lambda x e (and (airport x) (loc:t x westchester_county:ci)))
+
+i'd like to book a flight from cincinnati to new york city on united airlines for next saturday
+(lambda $v0 e (and (flight $v0) (airline $v0 ua:al) (from $v0 cincinnati:ci) (to $v0 new_york:ci) (day $v0 saturday:da) )
+
+tell me all the airports in the new york city area
+ (lambda x e (and (airport x) (loc:t x new_york:ci)))
+
+please find all the flights from cincinnati to any airport in the new york city area that arrive next saturday before 6pm
+(lambda $v0 e (and (flight $v0) (< (arrival_time $v0) 1800:ti) (from $v0 cincinnati:ci) (to $v0 new_york:ci) (day_arrival $v0 saturday:da) )
+
+find me a flight from cincinnati to any airport in the new york city area
+(lambda $v0 e (and (flight $v0) (from $v0 cincinnati:ci) (to $v0 new_york:ci) )
+
+i'd like to fly from miami to chicago on american airlines
+(lambda $v0 e (and (flight $v0) (airline $v0 aa:al) (from $v0 miami:ci) (to $v0 chicago:ci) )
+
+i would like to book a round trip flight from kansas city to chicago
+(lambda $v0 e (and (flight $v0) (round_trip $v0) (from $v0 kansas_city:ci) (to $v0 chicago:ci) ))
+
+find me a flight that flies from memphis to tacoma
+(lambda $v0 e (and (flight $v0) (from $v0 memphis:ci) (to $v0 tacoma:ci) )
+
