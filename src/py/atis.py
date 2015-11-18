@@ -28,17 +28,14 @@ def read_examples(filename):
 def split_logical_form(lf):
   words = lf.split()
 
-  # First: obscure all predicates
-  def obscure(w):
-    if w.startswith('('):
-      return '(_' + w
-    return w
-  words = [obscure(w) for w in words]
-
-  # Now insert spaces
-  chars = ['(', ')', ':']
-  for c in chars:
-    lf = lf.replace(c, ' %s ' % c)
+  # Insert spaces and obscure predicates
+  replacements = [
+      ('(', ' ( _'),
+      (')', ' ) '),
+      (':', ' : _'),
+  ]
+  for r in replacements:
+    lf = lf.replace(r[0], r[1])
   return ' '.join(lf.split())
 
 def process(filename, stemmer=None, less_copy=False):
