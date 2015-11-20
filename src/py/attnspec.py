@@ -78,9 +78,12 @@ class AttentionSpec(Spec):
     input_t = T.concatenate([y_emb_t, c_prev])
     return self.decoder.step(input_t, h_prev)
 
-  def get_context(self, h_for_write, annotations):
+  def get_alpha(self, h_for_write, annotations):
     scores = T.dot(T.dot(self.w_attention, annotations.T).T, h_for_write)
     alpha = T.nnet.softmax(scores)[0]
+    return alpha
+
+  def get_context(self, alpha, annotations):
     c_t = T.dot(alpha, annotations)
     return c_t
 

@@ -11,6 +11,7 @@ from theano import tensor as T
 import sys
 
 from attnspec import AttentionSpec
+from derivation import Derivation
 from neural import NeuralModel
 from vocabulary import Vocabulary
 
@@ -71,10 +72,11 @@ class AttentionModel(NeuralModel):
     h_prev = T.vector('h_prev_for_write')
     cur_lex_entries = T.lvector('cur_lex_entries_for_write')
     h_for_write = self.spec.decoder.get_h_for_write(h_prev)
-    c_t = self.spec.get_context(h_for_write, annotations)
+    alpha = self.spec.get_alpha(h_for_write, annotations)
+    c_t = self.spec.get_context(alpha, annotations)
     write_dist = self.spec.f_write(h_for_write, c_t, cur_lex_entries)
     self._decoder_write = theano.function(inputs=[annotations, h_prev, cur_lex_entries],
-                                          outputs=[write_dist, c_t])
+                                          outputs=[write_dist, c_t, alpha])
 
   def setup_backprop(self):
     x = T.lvector('x_for_backprop')
@@ -86,7 +88,8 @@ class AttentionModel(NeuralModel):
     def decoder_recurrence(y_t, cur_y_input_inds, h_prev,
                            annotations, cur_lex_entries, *params):
       h_for_write = self.spec.decoder.get_h_for_write(h_prev)
-      c_t = self.spec.get_context(h_for_write, annotations)
+      alpha = self.spec.get_alpha(h_for_write, annotations)
+      c_t = self.spec.get_context(alpha, annotations)
       write_dist = self.spec.f_write(h_for_write, c_t, cur_lex_entries)
       p_y_t = write_dist[y_t] + T.dot(
           write_dist[self.out_vocabulary.size():],
@@ -112,7 +115,7 @@ class AttentionModel(NeuralModel):
     p_y_seq = []  # Should be handy for error analysis
     p = 1
     for i in range(max_len):
-      write_dist, c_t = self._decoder_write(annotations, h_t, ex.lex_inds)
+      write_dist, c_t, alpha = self._decoder_write(annotations, h_t, ex.lex_inds)
       y_t = numpy.argmax(write_dist)
       p_y_t = write_dist[y_t]
       p_y_seq.append(p_y_t)
@@ -132,20 +135,24 @@ class AttentionModel(NeuralModel):
 
   def decode_beam(self, ex, beam_size=1, max_len=100):
     h_t, annotations = self._encode(ex.x_inds)
-    beam = [[(1, h_t, [])]]  
-        # Beam entries are (prob, hidden_state, token_list)
+    beam = [[Derivation(ex, 1, [], hidden_state=h_t, attention_list=[])]]
     finished = []  # Finished entires are (prob, token_list)
     for i in range(1, max_len):
       new_beam = []
-      for cur_p, h_t, y_tok_seq in beam[i-1]:
-        write_dist, c_t = self._decoder_write(annotations, h_t, ex.lex_inds)
+      for deriv in beam[i-1]:
+        cur_p = deriv.p
+        h_t = deriv.hidden_state
+        y_tok_seq = deriv.y_toks
+        attention_list = deriv.attention_list
+        write_dist, c_t, alpha = self._decoder_write(annotations, h_t, ex.lex_inds)
         sorted_dist = sorted([(p_y_t, y_t) for y_t, p_y_t in enumerate(write_dist)],
                              reverse=True)
         for j in range(beam_size):
           p_y_t, y_t = sorted_dist[j]
           new_p = cur_p * p_y_t
           if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
-            finished.append((new_p, y_tok_seq))
+            finished.append(Derivation(ex, new_p, y_tok_seq,
+                                       attention_list=attention_list + [alpha]))
             continue
           if y_t < self.out_vocabulary.size():
             y_tok = self.out_vocabulary.get_word(y_t)
@@ -155,8 +162,10 @@ class AttentionModel(NeuralModel):
             y_tok = lex_entry[1]
             y_t = self.out_vocabulary.get_index(y_tok)
           new_h_t = self._decoder_step(y_t, c_t, h_t)
-          new_entry = (new_p, new_h_t, y_tok_seq + [y_tok])
+          new_entry = Derivation(ex, new_p, y_tok_seq + [y_tok],
+                                 hidden_state=new_h_t,
+                                 attention_list=attention_list + [alpha])
           new_beam.append(new_entry)
-      new_beam.sort(key=lambda x: x[0], reverse=True)
+      new_beam.sort(key=lambda x: x.p, reverse=True)
       beam.append(new_beam[:beam_size])
-    return sorted(finished, key=lambda x: x[0], reverse=True)
+    return sorted(finished, key=lambda x: x.p, reverse=True)

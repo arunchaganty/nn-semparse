@@ -83,6 +83,8 @@ def _parse_args():
   parser.add_argument('--stats-file', help='Path to save statistics (JSON format).')
   parser.add_argument('--shell', action='store_true', 
                       help='Start an interactive shell.')
+  parser.add_argument('--server', action='store_true', 
+                      help='Start an interactive web console (requires bottle).')
   parser.add_argument('--theano-fast-compile', action='store_true',
                       help='Run Theano in fast compile mode.')
   parser.add_argument('--theano-profile', action='store_true',
@@ -314,6 +316,68 @@ def run_shell(model):
       print '  [p=%f] %s' % (prob, y_str)
     print ''
 
+def make_heatmap(x_str, y_str, attention_list):
+  """Make an HTML heatmap of attention."""
+  def css_color(r, g, b):
+    """r, g, b are in 0-1, make """
+    r2 = int(r * 255)
+    g2 = int(g * 255)
+    b2 = int(b * 255)
+    return 'rgb(%d,%d,%d)' % (r2, g2, b2)
+
+  x_toks = x_str.split(' ') + ['EOS']
+  y_toks = y_str.split(' ') + ['EOS']
+  lines = ['<table>', '<tr>', '<td/>']
+  for w in y_toks:
+    lines.append('<td>%s</td>' % w)
+  lines.append('</tr>')
+  for i, w in enumerate(x_toks):
+    lines.append('<tr>')
+    lines.append('<td>%s</td>' % w)
+    for j in range(len(y_toks)):
+      color = css_color(1, 1 - attention_list[j][i], 1 - attention_list[j][i])
+      lines.append('<td/ style="background-color: %s">' % color)
+    lines.append('</tr>')
+  lines.append('</table>')
+  return '\n'.join(lines)
+
+def run_server(model, hostname='127.0.0.1', port=9001):
+  import bottle
+  print '==== Neural Network Semantic Parsing Server ===='
+
+  app = bottle.Bottle()
+  
+  @app.route('/debug')
+  def debug():
+    content = make_heatmap(
+        'what states border texas',
+        'answer ( A , ( state ( A ) , next_to ( A , B ) , const ( B , stateid ( texas ) ) ) )',
+        [[0.0, 0.25, 0.5, 0.75, 1.0]] * 29)
+    return bottle.template('main', prompt='Enter a new query', content=content)
+
+  @app.route('/post_query')
+  def post_query():
+    query = bottle.request.params.get('query')
+    print 'Received query: "%s"' % query
+    example = Example(query, '', model.in_vocabulary, model.out_vocabulary,
+                      model.lexicon, reverse_input=OPTIONS.reverse_input)
+    preds = decode(model, example)
+    lines = ['<b>Query: "%s"</b>' % query, '<ul>']
+    for i, deriv in enumerate(preds[:10]):
+      y_str = ' '.join(deriv.y_toks)
+      lines.append('<li> %d. [p=%f] %s' % (i, deriv.p, y_str))
+      lines.append(make_heatmap(query, y_str, deriv.attention_list))
+    lines.append('</ul>')
+
+    content = '\n'.join(lines)
+    return bottle.template('main', prompt='Enter a new query', content=content)
+
+  @app.route('/')
+  def index():
+    return bottle.template('main', prompt='Enter a query', content='')
+
+  bottle.run(app, host=hostname, port=port)
+
 def run():
   configure_theano()
   if OPTIONS.train_data:
@@ -366,6 +430,8 @@ def run():
 
   if OPTIONS.shell:
     run_shell(model)
+  elif OPTIONS.server:
+    run_server(model)
 
 def main():
   _parse_args()
