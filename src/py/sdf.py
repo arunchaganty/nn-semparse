@@ -4,7 +4,7 @@ import collections
 
 Record = collections.namedtuple(
     'Record', 
-    ['utterance', 'canonical_utterance', 'compatibility', 'formula', 'prob'])
+    ['utterance', 'canonical_utterance', 'compatibility', 'logical_form', 'prob'])
 
 
 def read(filename):
