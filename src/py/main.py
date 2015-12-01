@@ -85,6 +85,8 @@ def _parse_args():
                       help='Start an interactive shell.')
   parser.add_argument('--server', action='store_true', 
                       help='Start an interactive web console (requires bottle).')
+  parser.add_argument('--hostname', default='127.0.0.1', help='server hostname')
+  parser.add_argument('--port', default=9001, type=int, help='server port')
   parser.add_argument('--theano-fast-compile', action='store_true',
                       help='Run Theano in fast compile mode.')
   parser.add_argument('--theano-profile', action='store_true',
@@ -316,7 +318,7 @@ def run_shell(model):
       print '  [p=%f] %s' % (prob, y_str)
     print ''
 
-def make_heatmap(x_str, y_str, attention_list):
+def make_heatmap(x_str, y_str, attention_list, copy_list):
   """Make an HTML heatmap of attention."""
   def css_color(r, g, b):
     """r, g, b are in 0-1, make """
@@ -335,7 +337,11 @@ def make_heatmap(x_str, y_str, attention_list):
     lines.append('<tr>')
     lines.append('<td>%s</td>' % w)
     for j in range(len(y_toks)):
-      color = css_color(1, 1 - attention_list[j][i], 1 - attention_list[j][i])
+      do_copy = copy_list[j]
+      if do_copy:
+        color = css_color(1 - attention_list[j][i], 1 - attention_list[j][i], 1)
+      else:
+        color = css_color(1, 1 - attention_list[j][i], 1 - attention_list[j][i])
       lines.append('<td/ style="background-color: %s">' % color)
     lines.append('</tr>')
   lines.append('</table>')
@@ -366,7 +372,7 @@ def run_server(model, hostname='127.0.0.1', port=9001):
     for i, deriv in enumerate(preds[:10]):
       y_str = ' '.join(deriv.y_toks)
       lines.append('<li> %d. [p=%f] %s' % (i, deriv.p, y_str))
-      lines.append(make_heatmap(query, y_str, deriv.attention_list))
+      lines.append(make_heatmap(query, y_str, deriv.attention_list, deriv.copy_list))
     lines.append('</ul>')
 
     content = '\n'.join(lines)
@@ -431,7 +437,7 @@ def run():
   if OPTIONS.shell:
     run_shell(model)
   elif OPTIONS.server:
-    run_server(model)
+    run_server(model, hostname=OPTIONS.hostname, port=OPTIONS.port)
 
 def main():
   _parse_args()

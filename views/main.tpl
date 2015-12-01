@@ -23,6 +23,7 @@
         border-style: solid;
         border-width: 1px;
         min-width: 20px;
+        padding: 0px 3px;
       }
     </style>
 	</head>
