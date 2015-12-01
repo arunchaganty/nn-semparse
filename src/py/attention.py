@@ -135,7 +135,8 @@ class AttentionModel(NeuralModel):
 
   def decode_beam(self, ex, beam_size=1, max_len=100):
     h_t, annotations = self._encode(ex.x_inds)
-    beam = [[Derivation(ex, 1, [], hidden_state=h_t, attention_list=[])]]
+    beam = [[Derivation(ex, 1, [], hidden_state=h_t, 
+                        attention_list=[], copy_list=[])]]
     finished = []  # Finished entires are (prob, token_list)
     for i in range(1, max_len):
       new_beam = []
@@ -144,6 +145,7 @@ class AttentionModel(NeuralModel):
         h_t = deriv.hidden_state
         y_tok_seq = deriv.y_toks
         attention_list = deriv.attention_list
+        copy_list = deriv.copy_list
         write_dist, c_t, alpha = self._decoder_write(annotations, h_t, ex.lex_inds)
         sorted_dist = sorted([(p_y_t, y_t) for y_t, p_y_t in enumerate(write_dist)],
                              reverse=True)
@@ -152,19 +154,23 @@ class AttentionModel(NeuralModel):
           new_p = cur_p * p_y_t
           if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
             finished.append(Derivation(ex, new_p, y_tok_seq,
-                                       attention_list=attention_list + [alpha]))
+                                       attention_list=attention_list + [alpha],
+                                       copy_list=copy_list + [0]))
             continue
           if y_t < self.out_vocabulary.size():
             y_tok = self.out_vocabulary.get_word(y_t)
+            do_copy = 0
           else:
             new_ind = y_t - self.out_vocabulary.size()
             lex_entry = ex.lex_entries[new_ind]
             y_tok = lex_entry[1]
             y_t = self.out_vocabulary.get_index(y_tok)
+            do_copy = 1
           new_h_t = self._decoder_step(y_t, c_t, h_t)
           new_entry = Derivation(ex, new_p, y_tok_seq + [y_tok],
                                  hidden_state=new_h_t,
-                                 attention_list=attention_list + [alpha])
+                                 attention_list=attention_list + [alpha],
+                                 copy_list=copy_list + [do_copy])
           new_beam.append(new_entry)
       new_beam.sort(key=lambda x: x.p, reverse=True)
       beam.append(new_beam[:beam_size])
