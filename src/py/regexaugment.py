@@ -50,11 +50,12 @@ def get_templates(in_data):
     quoted_strs = get_quoted_strs(x)
     for x_quot in quoted_strs:
       y_quot = x_quot[2:-2].replace(' ', ' _ ') 
-      if y_quot not in y:
+      pattern = '(^| )%s($| )' % re.escape(y_quot)
+      if not re.search(pattern, y):
         print >> sys.stderr, 'Quoted string "%s" not found in y = "%s"' % (y_quot, y)
         continue
       x_new = x.replace(x_quot, '%(w)s')
-      y_new = y.replace(y_quot, '%(w)s')
+      y_new = re.sub(pattern, lambda m: m.group(1) + '%(w)s' + m.group(2), y)
       str_templates.add((x_new, y_new))
 
     # Handle ints
