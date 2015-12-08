@@ -19,6 +19,7 @@ random.seed(0)
 def split_regex(r):
   r = r[9:-2]
   replacements = [
+      (' ', ' _ '),
       ('(', ' ( '),
       (')', ' ) '),
       ('[', ' ['),
@@ -29,6 +30,10 @@ def split_regex(r):
       ('~', ' ~ '),
       ('&', ' & '),
       ('+', ' + '),
+      ('{', ' { '),
+      ('}', ' } '),
+      ('|', ' | '),
+      (',', ' , '),
   ]
   for a, b in replacements:
     r = r.replace(a, b)
