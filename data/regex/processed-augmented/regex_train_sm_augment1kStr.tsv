@@ -1,0 +1,1560 @@
+lines using words containing " ope " .	. * \\b [A-Za-z] * ope [A-Za-z] * \\b . *
+lines that contain words starting with ' pa ' .	. * \\b pa [A-Za-z] * \\b . *
+lines that contain instances of ' ape ' , but only if its one of the first three words.	( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 2 } [^A-Za-z] * \\b ape \\b . *
+lines that have ' sandwich ' but not the word ' ham '	( . * sandwich . * ) & ( ~ ( . * \\b ham \\b . * ) )
+lines using ' abc ' after ' def '	. * def . * abc . *
+lines that contain at least one word and the number ' 12 '	. * ( . * \\b [A-Za-z] + \\b . * ) & ( . * 12 . * ) . *
+lines that contain at least three words and at least one number.	( . * \\b [A-Za-z] [A-Za-z] * \\b . * ) { 3 } & ( . * [0-9] . * )
+lines that have 6 words.	( . * \\b [A-Za-z] + \\b . * ) { 6 }
+lines that contain at least three five letter words	( . * \\b [A-Za-z] { 5 } \\b . * ) { 3 }
+lines that have ' turn '	. * turn . *
+lines that have the letter ' X ' at the end of a word.	. * \\b [A-Za-z] * X \\b . *
+lines using words containing " e " before " i " .	. * ( ( \\b [A-Za-z] [A-Za-z] * \\b ) & ( . * e . * i . * ) ) . *
+lines utilizing ' ! '	. * \! . *
+lines where " TRY " is separated from " LOL " with a comma	. * TRY . * \ , . * LOL . * | . * LOL . * \ , . * TRY . *
+lines that contain words using the letters " ant "	. * \\b [A-Za-z] * ant [A-Za-z] * \\b . *
+lines using ' ness ' or ' ed '	. * ( ness | ed ) . *
+lines where numbers exist only after a sequence of " ABC " and " XYZ "	( [^0-9] * ) | ( ( ( [^0-9] * ) & ( . * ABC . * ) & ( . * XYZ . * ) ) . * )
+lines using ' ss ' between ' a ' and ' le '	. * a . * ss . * le . *
+lines that have three characters before the sequence " SBC "	. * . { 3 } SBC . *
+lines where the word " and " appears between the words " sand " and " tide "	. * \\b sand \\b . * \\b and \\b . * \\b tide \\b . * | . * \\b tide \\b . * \\b and \\b . * \\b sand \\b . *
+lines beginning with " Therefore "	Therefore . *
+lines using the word " going " followed by " d " .	. * \\b going \\b . * d . *
+lines containing a word using the letters " tt " .	. * \\b [A-Za-z] * tt [A-Za-z] * \\b . *
+lines which have three words.	( . * \\b [A-Za-z] + \\b . * ) { 3 , }
+lines that have two vowels	( . * [AEIOUaeiou] . * ) { 2 }
+lines using a word of 5 letters or less.	. * \\b [A-Za-z] { 1 , 5 } \\b . *
+lines that contain 2 repetitions of the word " a "	( . * \\b a \\b . * ) { 2 }
+lines that contain the word " bar "	. * \\b bar \\b . *
+lines that contain words using " ie "	. * \\b [A-Za-z] * ie [A-Za-z] * \\b . *
+lines containing 3 or more vowels and 5 or more words	( . * [AEIOUaeiou] . * ) { 3 , } & ( . * \\b [A-Za-z] + \\b . * ) { 5 , }
+lines containing the word " country "	. * \\b country \\b . *
+lines that contain words starting with ' gu ' .	. * \\b gu [A-Za-z] * \\b . *
+lines that have two or more words ending in " a " .	. * ( . * \\b [A-Za-z] * a \\b . * ) { 2 } . *
+lines that begin with a number	[0-9] . *
+lines using the letter sequence " ably " followed by a word ending in " ed " .	. * ably . * \\b [A-Za-z] * ed \\b . *
+lines with words ending in ' y ' .	. * \\b [A-Za-z] * y \\b . *
+lines containing ' k ' , or ' l '	. * ( k | l ) . *
+lines that contain words starting with ' de ' .	. * ( ( \\b de . * \\b ) & ( [A-Za-z] + ) ) . *
+lines which contain a 3 letter string	. * ( [A-Za-z] { 3 } ) . *
+lines where there is at least one word in which ' e ' follows ' i '	. * ( ( \\b [A-Za-z] [A-Za-z] * \\b ) & ( . * i . * e . * ) ) . *
+lines using numbers that show two or more " 0 " .	. * ( . * 0 . * ) { 2 , } . *
+lines that contain a 3 letter word and a 2 letter word.	. * ( . * \\b [A-Za-z] { 3 } \\b . * ) & ( . * \\b [A-Za-z] { 2 } \\b . * ) . *
+lines that have less than 6 words but more than 3 words.	( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 5 } & ( . * \\b [A-Za-z] + \\b . * ) { 4 , }
+lines containing ' a ' before ' b '	. * a . * b . *
+lines that contain words starting in ' s '	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( s . * ) ) \\b . *
+lines that start with ' news '	news . *
+lines that contain the number " 2005 " and " May " and begin with " Mary " .	( . * 2005 . * ) & ( . * May . * ) & ( Mary . * )
+lines using ' life ' or ' lives '	. * ( life | lives ) . *
+lines that contain ' dre ' or ' ber '	. * ( dre | ber ) . *
+lines that contain at least one vowel in each word.	~ ( . * ( ( \\b [A-Za-z] + \\b ) & ( [^AEIOUaeiou] * ) ) . * )
+lines that have words ending with ' ti ' .	. * \\b [A-Za-z] * ti \\b . *
+lines using words ending with ' mo ' .	. * ( ( \\b . * mo \\b ) & ( [A-Za-z] + ) ) . *
+lines using a word	. * \\b [A-Za-z] + \\b . *
+lines composed with a word	. * \\b [A-Za-z] + \\b . *
+lines that include words with ' ra ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * ra . * ) ) . *
+lines that have a capital " A " , but not a lowercase " a " .	( . * A . * ) & ( ~ ( . * a . * ) )
+lines that use words ending with ' ot ' .	. * \\b [A-Za-z] * ot \\b . *
+lines that use words with ' ce ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * ce . * ) ) . *
+lines having words ending with ' oo ' .	. * \\b ( ( [A-Za-z] + ) & ( . * oo ) ) \\b . *
+lines that end with " 2 " and contain words that begin with " Sel "	. * \\b Sel [A-Za-z] * \\b . * 2
+lines using ' oon '	. * oon . *
+lines that ends with ' ABC ' and contain two numbers.	( . * [0-9] . * ) { 2 } ABC
+lines ending with ' xyz '	. * xyz
+lines that start with the letter " t " .	t . *
+lines which have at least 7 numbers.	. * ( . * [0-9] . * ) { 7 } . *
+lines that use the number ' 33 ' .	. * 33 . *
+lines using the word " Westbury " next to a number.	( . * \\b Westbury \\b . * ) & ( . * [0-9] . * )
+lines which start with ' start '	start . *
+lines that start with " the " .	( the . * ) . *
+lines that have words with 7 letters.	. * \\b [A-Za-z] { 7 } \\b . *
+lines using a 3 letter sequence	. * [A-Za-z] { 3 } . *
+lines that start with " Al " but do not contain any numbers.	( Al . * ) & ( ~ ( . * [0-9] . * ) )
+lines using at least 5 ' d '	( . * d . * ) { 5 , }
+lines using at least three numerical characters	( . * [0-9] . * ) { 3 , }
+lines which contain 2 or more " q " .	( . * q . * ) { 2 , }
+lines using the word " hurry " followed by the word " up " .	( . * \\b hurry \\b . * ) ( . * \\b up \\b . * )
+lines that contain a word starting with a vowel.	. * \\b [AEIOUaeiou] [A-Za-z] * \\b . *
+lines containing at least one uppercase letter, and at least one lowercase letter	( . * [A-Z] . * ) & ( . * [a-z] . * )
+lines that contin words ending in " e " .	. * \\b [A-Za-z] * e \\b . *
+lines that contain ' news ' before ' paper ' or ' show ' .	. * news . * ( paper | show ) . *
+lines which contain the letter " x " and the letter " y "	( . * x . * ) & ( . * y . * )
+lines that do not have ' the ' in them	~ ( . * the . * )
+lines which contain " qu " at the start	qu . *
+lines starting with ' abc '	abc . *
+lines using ' gophers ' and containing the words ' grass ' and ' seeds ' .	( . * gophers . * ) & ( . * \\b grass \\b . * ) & ( . * \\b seeds \\b . * )
+lines that have 5 characters and no vowels.	( . { 5 } ) & ( ~ ( . * [AEIOUaeiou] . * ) )
+lines using 2 instances of ' irl '	. * ( . * irl . * ) { 2 } . *
+lines beginning with the letter ' f '	f . *
+lines that begins with the word " total " .	total \\b . *
+lines that using the symbol ' + ' or ' - ' .	. * ( \ + | - ) . *
+lines that contain exactly two words.	( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 2 }
+lines which start with ' oocl '	oocl . *
+lines that utilize words starting with ' do ' .	. * ( ( [A-Za-z] + ) & ( \\b do . * \\b ) ) . *
+lines that have 4 words or less where at least 1 of those words contains the letter sequence " uin " .	( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 4 } & ( . * ( ( \\b [A-Za-z] + \\b ) & ( . * uin . * ) ) . * ) { 1 , }
+lines where there are exactly two words and 7 characters.	( ( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 2 } & . { 7 } )
+lines having words starting with ' fo ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( fo . * ) ) \\b . *
+lines using more than 1 character	. * . { 2 , } . *
+lines containing the word " laughing " .	. * \\b laughing \\b . *
+lines containg the number ' 9 ' .	. * 9 . *
+lines that contain four letter words.	. * \\b [A-Za-z] { 4 } \\b . *
+lines with words that end with ' ca ' before words that end with ' att '	. * \\b [A-Za-z] * ca \\b . * \\b [A-Za-z] * att \\b . *
+lines that contain words ending in ' os '	. * \\b [A-Za-z] * os \\b . *
+lines that contain at least one digit.	. * [0-9] . *
+lines using a 3 letter sequence starting with ' n '	. * n [A-Za-z] { 2 } . *
+lines that have words ending with a ' g '	. * ( ( \\b . * g \\b ) & ( [A-Za-z] + ) ) . *
+lines that contain the word " Kelly " but do not contain the word " Chris " .	( . * \\b Kelly \\b . * ) & ( ~ ( . * \\b Chris \\b . * ) )
+lines that have at least 5 numbers.	( . * [0-9] . * ) { 5 , }
+lines that contain the word " orange " .	. * \\b orange \\b . *
+lines that contain the number ' 10 ' .	. * 10 . *
+lines using ' lives ' , ' lifes ' , or ' life '	. * li ( ves | fes | fe ) . *
+lines that contain only 2 words, and, begin with the letter ' f ' .	f . * & ( ( [^A-Za-z] ) * ( \\b ) * [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 2 }
+lines using words beginning with the letter " g "	. * \\b g [A-Za-z] * \\b . *
+lines that contain words that have the letter ' e ' occuring after the letter ' c ' .	. * \\b [A-Za-z] * c [A-Za-z] * e [A-Za-z] * \\b . *
+lines that have a word containing the string " ude "	. * \\b [A-Za-z] * ude [A-Za-z] * \\b . *
+lines that begin with a number and end with " street " or " avenue " .	[0-9] . * ( street | avenue )
+lines that end with " and "	. * and
+lines containing words that start with ' x '	. * \\b x [A-Za-z] * \\b . *
+lines containing an instance of the name ' Beaker ' .	. * Beaker . *
+lines containing ' tt ' and containing ' bb ' too	( . * tt . * ) & ( . * bb . * )
+lines that contain a word starting with ' l ' .	. * \\b l [A-Za-z] * \\b . *
+lines that end containing the letter " z " .	. * z
+lines that contain words starting with ' da ' .	. * \\b da [A-Za-z] * \\b . *
+lines of words whose last letters are " ing " .	. * \\b [A-Za-z] * ing \\b . *
+lines where the word " Homer " precedes the word " Odyssey "	. * \\b Homer \\b . * \\b Odyssey \\b . *
+lines that contain a word in all uppercase.	. * \\b [A-Z] + \\b . *
+lines where no word is more than 5 characters	~ ( . * \\b [A-Z-a-z] { 6 , } \\b . * )
+lines using words that have " ire "	. * \\b [A-Za-z] * ire [A-Za-z] * \\b . *
+lines that have at least one capital letter.	. * [A-Z] . *
+lines that contain ' is ' or ' it '	. * ( is | it ) . *
+lines that end with ' hey '	. * hey
+lines using any instance of " d " or " e " followed by " s " or " r "	. * ( d | e ) . * ( s | r ) . *
+lines that include both ' cake ' and ' candles ' .	( . * cake . * ) & ( . * candles . * )
+lines that contain 3 numbers and one number contains 1.	( . * [0-9] . * ) & ( . * 1 . * )
+lines using ' lay ' or ' lie '	. * l ( ay | ie ) . *
+lines that start with ' A ' or ' An '	A . * | An . *
+lines using 1 number and 2 letters	. * ( . * [0-9] . * ) & ( . * [A-Za-z] . * ) { 2 } . *
+lines using the word " clue "	. * \\b clue \\b . *
+lines that contain a word containing 5 or more letters.	. * \\b [A-Za-z] { 5 , } \\b . *
+lines which do not contain ' excellent '	~ ( . * excellent . * )
+lines which begin with the letter " z " .	z . *
+lines that contain the word " Boby " .	. * \\b Boby \\b . *
+lines that end with the word " free " .	. * \\b free
+lines using at least two numbers, " aby " , and " oz " .	( . * [0-9] . * ) { 2 } & ( . * aby . * ) & ( . * oz . * )
+lines that have no vowels.	~ ( . * [AEIOUaeiou] . * )
+lines which contain " x " and " y " .	( . * x . * ) & ( . * y . * )
+lines that use " Jane " but not " Janet " or " 2 " .	( . * Jane . * ) & ( ~ ( . * ( Janet | 2 ) . * ) )
+lines with all words beginning with " a " .	~ ( . * ( ( \\b [A-Za-z] + \\b ) & ( ~ ( a . * ) ) ) . * )
+lines using the string " gue "	. * gue . *
+lines with the word ' and ' between ' zyx ' and ' cba '	. * zyx . * \\b and \\b . * cba . * | . * cba . * \\b and \\b . * zyx . *
+lines containing words that end with s.	. * \\b [A-Za-z] * s \\b . *
+lines that contain the word " hello " within 5 characters of the word " world " .	. * ( \\b hello \\b . { 1 , 5 } \\b world \\b | \\b world \\b . { 1 , 5 } \\b hello \\b ) . *
+lines with words matching the word ' fur ' .	. * \\b fur \\b . *
+lines comprised of 5 or more words containing 5 or fewer letters	( . * ( ( \\b [A-Za-z] + \\b ) & ( [A-Za-z] { 0 , 5 } ) ) . * ) { 5 , }
+lines that contain 1 to 5 numbers and 1 letter.	( [^0-9] * [0-9] [^0-9] * ) { 1 , 5 } & ( . * [A-Za-z] . * )
+lines having words ending with ' fa ' .	. * \\b ( ( [A-Za-z] + ) & ( . * fa ) ) \\b . *
+lines with fox that do not contain the word chicken.	( . * fox . * ) & ( ~ ( . * \\b chicken \\b . * ) )
+lines containing at least 2 characters but not 4 characters or more	. { 2 , 3 }
+lines that use ' native ' and ' tribes ' .	( . * native . * ) & ( . * tribes . * )
+lines which do not contain a vowel.	~ ( . * [AEIOUaeiou] . * )
+lines that have a number in them	. * [0-9] . *
+lines that do not contain the character " x "	~ ( . * x . * )
+lines containing ' 8 ' and containing a ' 3 ' as well.	. * ( . * 8 . * ) & ( . * 3 . * ) . *
+lines where there are three characters between instances of " ABC " and " WEX "	. * ABC . * . { 3 } . * WEX . * | . * WEX . * . { 3 } . * ABC . *
+lines that end with ' you ' .	. * you
+lines that contain 3 words with at least 1 number in between the 1st and 3rd word.	[^A-Za-z] * \\b [A-Za-z] + \\b ( ( . * \\b [A-Za-z] + \\b . * ) & ( . * [0-9] . * ) ) \\b [A-Za-z] + \\b [^A-Za-z] *
+lines that contain the text " hello "	. * hello . *
+lines that contain words ending in ' e ' .	. * ( . * \\b [A-Za-z] * e \\b . * ) . *
+lines which contain " rh " but do not contain the letter " y " .	( . * rh . * ) & ~ ( . * y . * )
+lines that have only two words in them.	( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 2 }
+lines which have ' bar '	. * bar . *
+lines that contain words with ' ri ' .	. * \\b [A-Za-z] * ri [A-Za-z] * \\b . *
+lines that begin with the word " Topo " .	\\b Topo \\b . *
+lines using ' ox ' before ' en '	. * ox . * en . *
+lines that contain the phrase " Booyah " .	. * Booyah . *
+lines that use the ' \\ " ' symbol	. * \\\" . *
+lines which contain a 3 letter string starting with a	. * ( a [A-Za-z] { 2 } ) . *
+lines containing " tain " after " re " or " per " .	. * ( re | per ) . * tain . *
+lines that have at least 3, but not more that 6 words.	( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 3 , 6 }
+lines ending with the letter " f "	. * f
+lines using the word ' An ' at least once.	. * \\b An \\b . *
+lines that contain ' fu ' before ' ba ' or ' bar ' .	. * fu . * ( ba | bar ) . *
+lines using words which have a vowel.	. * \\b [A-Za-z] * [aeiouAEIOU] [A-Za-z] * \\b . *
+lines that start with ' gates '	gates . *
+lines that contain words starting with a vowel and ending with a vowel.	. * \\b ( ( [A-Za-z] + ) & ( [AEIOUaeiou] . * ) & ( . * [AEIOUaeiou] ) ) \\b . *
+lines starting with ' tra '	tra . *
+lines that only have 3 words	( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 3 }
+lines that contain the phrase " city of " .	. * ( . * \\b city _ of \\b . * ) . *
+lines that contain words ending in " az "	. * \\b [A-Za-z] * az \\b . *
+lines using words ending with ' on ' .	. * \\b [A-Za-z] * on \\b . *
+lines using words that contain the letter " q " .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * q . * ) ) . *
+lines using 6 ' e '	( . * e . * ) { 6 }
+lines which do not have numbers.	~ ( . * [0-9] . * )
+lines ending with ' wrench ' that use the word ' monkey ' .	. * \\b monkey \\b . * wrench
+lines that have a number, but only if it is followed by " ABC "	. * [0-9] . * ABC . *
+lines that contain the words " the " and " cold " .	( . * \\b the \\b . * ) & ( . * \\b cold \\b . * )
+lines that utilize words starting with ' ni ' followed by the word ' knight '	. * \\b ( ( [A-Za-z] + ) & ( ni . * ) ) \\b . * \\b knight \\b . *
+lines with words that end in ' n ' .	. * \\b [A-Za-z] * n \\b . *
+lines that have at least 2 words of 3 or more letters	( . * \\b [A-Za-z] { 3 , } \\b . * ) { 2 , }
+lines containing ' ant '	. * ant . *
+lines containing three vowels	( . * [AEIOUaeiou] . * ) { 3 }
+lines that contain at least one vowel and at least two numbers.	( . * [AEIOUaeiou] . * ) & ( . * [0-9] . * ) { 2 }
+lines utilizing the phrase " this is it " .	. * this _ is _ it . *
+lines that contain 3 words and have at least 2 numbers.	. * ( . * \\b [A-Za-z] + \\b . * ) { 3 } & ( . * [0-9] . * ) { 2 } . *
+lines utilizing words starting with ' b ' .	. * \\b b [A-Za-z] * \\b . *
+lines using ' x ' before ' z '	. * x . * z . *
+lines that contain 2 numbers that contain " 19 " .	( . * 19 . * ) { 2 }
+lines which contain 3 or more vowels.	( . * [AEIOUaeiou] . * ) { 3 , }
+lines containing the text " and so it came to pass "	. * and _ so _ it _ came _ to _ pass . *
+lines using the vowel combination " ou " and " th " .	( . * ou . * ) & ( . * th . * )
+lines containing only four words.	( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 4 }
+lines that use the word ' boom ' followed by words starting with ' ka '	. * \\b boom \\b . * \\b ka [A-Za-z] * \\b . *
+lines containing words which begin with " c " and end with " d "	. * \\b c [A-Za-z] * d \\b . *
+lines that contain ' day ' or ' to '	. * ( day | to ) . *
+lines which have at least one word which has six or more letters.	. * \\b [A-Za-z] { 6 , } \\b . *
+lines that end in ' y ' and begins in ' a ' .	a . * y
+lines that only contain vowels.	[AEIOUaeiou] *
+lines using the word " hero " .	. * \\b hero \\b . *
+lines that contain words ending in ' n '	. * \\b [A-Za-z] * n \\b . *
+lines that show " May " and " June " .	. * ( . * May . * ) & ( . * June . * ) . *
+lines which feature the word ' hairy ' .	. * \\b hairy \\b . *
+lines containing the word " blog "	. * \\b blog \\b . *
+lines that contain at least 2 digits.	( . * [0-9] . * ) { 2 , }
+lines where " PQR " is between a number and " LMNO "	. * [0-9] . * PQR . * LMNO . * | . * LMNO . * PQR . * [0-9] . *
+lines that contain 5 or more words.	. * ( . * \\b [A-Za-z] [A-Za-z] * \\b . * ) { 5 } . *
+lines that contain at least one ' z '	. * z . *
+lines which have ' oo ' , but no instances of ' o ' between the letters ' d ' and ' a '	( . * oo . * ) & ( ~ ( . * d . * o . * a . * | . * a . * o . * d . * ) )
+lines using more than 4 characters	. * . { 5 , } . *
+lines that contain at least two words beginging with " y " .	( . * \\b y [A-Za-z] * \\b . * ) { 2 }
+lines that have any instance of " ight " .	. * ight . *
+lines containing the word " crack " .	. * \\b crack \\b . *
+lines containing words using the letters " ers " .	. * \\b [A-Za-z] * ers [A-Za-z] * \\b . *
+lines that have a 2 letter sequence	. * [A-Za-z] { 2 } . *
+lines containing " ge " or " an " before ' ger ' or ' tra '	. * ( ge | an ) . * ( ger | tra ) . *
+lines that do not contain any number	~ ( . * [0-9] . * )
+lines that contain words starting with ' go ' .	. * \\b go [A-Za-z] * \\b . *
+lines that contain words ending in ' g '	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * g ) ) \\b . *
+lines containing both " ac " and " dc "	( . * ac . * ) & ( . * dc . * )
+lines with ' helper ' where the word ' little ' comes before ' helper ' .	( . * helper . * ) & ( . * \\b little \\b . * helper . * )
+lines that have words that start with ' b ' .	. * \\b b [A-Za-z] * \\b . *
+lines which end with ' hula '	. * hula
+lines utilizing words ending with ' fe ' .	. * \\b ( ( [A-Za-z] + ) & ( . * fe ) ) \\b . *
+lines that have a word ending with the letters " ked " .	. * \\b [A-Za-z] * ked \\b . *
+lines that match the words " and in this life " .	. * \\b and _ in _ this _ life \\b . *
+lines using at least 4 ' c '	( . * c . * ) { 4 , }
+lines that contain the word " null "	. * \\b null \\b . *
+lines that contain numbers	. * [0-9] . *
+lines that contain words using aught in them.	. * ( . * \\b [A-Za-z] * aught [A-Za-z] * \\b . * ) . *
+lines that have ' efg ' followed by the word ' car '	. * efg . * \\b car \\b . *
+lines using more than 5 characters	. * . { 6 , } . *
+lines that include " Canada " and " Mexico " but not " Cuba " .	( . * Canada . * ) & ( . * Mexico . * ) & ( ~ ( . * Cuba . * ) )
+lines that contain at least 2 digits.	( . * [0-9] . * ) { 2 , }
+lines containing the word " inoperative " .	. * \\b inoperative \\b . *
+lines starting with ' cl '	cl . *
+lines which start with " n " and end with " y "	( n . * ) & ( . * y )
+lines that end in ' e '	. * e
+lines containing a word	. * \\b [A-Za-z] + \\b . *
+2 letter lines	[A-Za-z] { 2 }
+lines which contain both " i " and " e " but no instances of " u " .	( . * i . * ) & ( . * e . * ) & ( ~ ( . * u . * ) )
+lines that contain ' on '	. * on . *
+lines using 2 or more words comprised of 5 letters	( . * \\b [A-Za-z] { 5 } \\b . * ) { 2 , }
+lines that contain 4 or more capital letters	. * ( . * [A-Z] . * ) { 4 } . *
+lines that contain five words that begin with " P " .	. * ( . * \\b P [A-Za-z] * \\b . * ) { 5 } . *
+lines using 3 instances of ' b '	. * ( . * b . * ) { 3 } . *
+lines starting with ' re '	re . *
+lines that contain a digit.	. * [0-9] . *
+lines that contain words ending in " ch "	. * \\b [A-Za-z] * ch \\b . *
+lines with the word ' Goal ' in them.	. * \\b ( ( [A-Za-z] + ) & ( Goal ) ) \\b . *
+lines that end with " gh "	. * gh
+lines using " foo " between " car " and " cop "	. * ( car . * foo . * cop | cop . * foo . * car ) . *
+lines that have at least two words that start with ' s ' .	( . * \\b s [A-Za-z] * \\b . * ) { 2 }
+lines containing the word " run " or the word " hat "	. * \\b ( run | hat ) \\b . *
+lines using words beginning with the letter ' x ' .	. * \\b x [A-Za-z] * \\b . *
+lines that end in ' t '	. * t
+lines that contain the word " trust " .	. * \\b trust \\b . *
+lines that contain " Freddie Mercury " and contain " AIDS " .	( . * Freddie _ Mercury . * ) & ( . * AIDS . * )
+lines containing the word " tag " .	. * \\b tag \\b . *
+lines that start with ' iffl '	iffl . *
+lines that utilize words starting with ' pu ' .	. * \\b ( ( [A-Za-z] + ) & ( pu . * ) ) \\b . *
+lines that have at least five words that start with a vowel.	( . * \\b [AEIOUaeiou] [A-Za-z] * \\b . * ) { 5 }
+lines ending in ' ia '	. * ia
+lines that utilize the number ' 7 ' .	. * 7 . *
+lines that use words starting with ' ga ' .	. * \\b ga [A-Za-z] * \\b . *
+lines containing " foo " or " nu " before ' dist ' or ' dust '	. * ( foo | nu ) . * ( dist | dust ) . *
+lines that have 5 or more words of 3 or fewer letters.	( . * \\b [A-Za-z] { 1 , 3 } \\b . * ) { 5 , }
+lines with " buck "	. * buck . *
+lines that contain the word " dance "	. * \\b dance \\b . *
+lines that contain the letter " V " and the number " 33 " .	( . * V . * ) & ( . * 33 . * )
+lines that have all of its letters capitalized.	~ ( . * [a-z] . * )
+lines using the letter pair " no "	. * no . *
+lines that end in ' e '	. * e
+lines that use ' mo ' followed by words starting with ' fo '	. * mo . * \\b ( ( [A-Za-z] + ) & ( fo . * ) ) \\b . *
+lines starting and ending with ' a '	a ( . * a ) ?
+lines using a word containing the letter " l ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * l . * ) ) . *
+lines that end in a digit	. * [0-9]
+lines that contain a nine letter word.	. * \\b [A-Za-z] { 9 } \\b . *
+lines that contain words starting with ' gi ' .	. * \\b ( ( [A-Za-z] + ) & ( gi . * ) ) \\b . *
+lines containing words starting with the letter " x " .	. * \\b x [A-Za-z] * \\b . *
+lines that have 1 word in them	. * \\b [A-Za-z] [A-Za-z] * \\b . *
+lines that contain only three words.	( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 3 }
+lines that ends with letter ' f '	. * f
+lines that contain a number ending with " 0 "	. * [0-9] * 0 . *
+lines that contain words beginning in ' p '	. * \\b p [A-Za-z] * \\b . *
+lines which contain ' out '	. * out . *
+lines that use ' a ' or ' b ' before words ending with ' er ' .	. * ( a | b ) . * \\b [A-Za-z] * er \\b . *
+lines where there are two consecutive capital letters	. * [A-Z] [A-Z] . *
+lines that mention ' trolls ' .	. * trolls . *
+lines that contain 5 words	( . * \\b [A-Za-z] + \\b . * ) { 5 }
+lines containing the word " shoe " and containing the word " lace "	( . * \\b shoe \\b . * ) & ( . * \\b lace \\b . * )
+lines that contain three words that start with the letter ' Y ' .	( . * \\b Y [A-Za-z] * \\b . * ) { 3 }
+lines that have more than 5 words ending with a " c. "	( . * \\b [A-Za-z] * c \\b . * ) { 6 , }
+lines that do not contain the letter " a "	~ ( . * a . * )
+lines that contain " x " and " y " but not " z " .	( . * x . * ) & ( . * y . * ) & ( ~ ( . * z . * ) )
+lines ending in ' az '	. * az
+lines that have two words containing 5 or more letters.	( . * \\b [A-Za-z] { 5 , } \\b . * ) { 2 }
+lines that contain five vowels	( . * [AEIOUaeiou] . * ) { 5 }
+lines that are 20 characters or less	. { 0 , 20 }
+lines composed of 3 or more characters	. * . { 3 , } . *
+lines that have three words of five letters each.	( . * \\b [A-Za-z] { 5 } \\b . * ) { 3 }
+lines that contain both the word " bar " and the word " stress "	. * ( . * \\b bar \\b . * ) & ( . * \\b stress \\b . * ) . *
+lines containing a 5 letter word beginning with ' t '	. * \\b t [A-Za-z] { 4 } \\b . *
+lines that contain a word using at most 6 letters	. * \\b [A-Za-z] { 1 , 6 } \\b . *
+lines utilizing the word ' law ' .	. * . * \\b law \\b . *
+lines which contain " q " and " u "	. * q . * u . * | . * u . * q . *
+lines that feature ' email ' followed by the word " spam " .	. * email . * \\b spam \\b . *
+lines that have words with ' la ' .	. * \\b [A-Za-z] * la [A-Za-z] * \\b . *
+6 letter lines	[A-Za-z] { 6 }
+lines starting with ' uu ' followed by words starting with ' z ' .	uu . * \\b z [A-Za-z] * \\b . *
+lines that start with the letter ' c '	c . *
+lines which begin with ' y ' , has a ' z ' in the middle and end in a number.	y . * z . * [0-9]
+lines using at least 3 characters	. * . { 3 } . *
+lines that have three numbers between " abc " and " def " .	. * ( abc . * ( . * [0-9] . * ) { 3 } . * def | . * def . * ( . * [0-9] . * ) { 3 } . * abc ) . *
+lines that contain ' ig ' or ' physics ' before ' nobel ' .	. * ( ig | physics ) . * nobel . *
+lines using three letter words.	. * \\b [A-Za-z] { 3 } \\b . *
+lines that contain words and 4 numbers.	( . * \\b [A-Za-z] + \\b . * ) & ( . * [0-9] . * ) { 4 }
+lines starting with ' X ' followed by a word with ' oa ' .	X . * ( ( \\b [A-Za-z] + \\b ) & ( . * oa . * ) ) . *
+lines using words that begin with the letter " G " .	. * \\b G [A-Za-z] * \\b . *
+lines that contain words starting with ' po ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( po . * ) ) \\b . *
+lines that contain 7 or more words	( . * \\b [A-Za-z] + \\b . * ) { 7 }
+lines with instances of " ABC " between " XYX " and a comma	. * XYX . * ABC . * \ , . * | . * \ , . * ABC . * XYX . *
+lines that have 2 or more numbers.	( . * [0-9] . * ) { 2 , }
+lines that contain DEF " with a period immediately after it. "	. * DEF\ . . *
+lines which start with the word " The "	\\b The \\b . *
+lines with " tch " but not " wi " .	( . * tch . * ) & ( ~ ( . * wi . * ) )
+lines that contain ' jellyfish ' and mention ' breeding ' .	( . * jellyfish . * ) & ( . * breeding . * )
+lines containing at least 2 words	( . * \\b [A-Za-z] + \\b . * ) { 2 , }
+lines that have ' twist '	. * twist . *
+lines using an instance of ' itch '	. * itch . *
+lines containing a 6 letter sequence	. * [A-Za-z] { 6 } . *
+lines which start with a number.	[0-9] . *
+lines using words ending in " er " .	. * \\b [A-Za-z] * er \\b . *
+lines that utilize words starting with ' bu ' .	. * ( ( [A-Za-z] + ) & ( \\b bu . * \\b ) ) . *
+lines using words that end with the letter " n "	. * \\b [A-Za-z] * n \\b . *
+lines that contain at least 2 vowels in a word.	. * ( ( \\b [A-Za-z] + \\b ) & ( . * [AEIOUaeiou] . * ) { 2 } ) . *
+lines that contain the numbers " 9 " , and " 10 "	. * ( 9 . * 10 | 10 . * 9 ) . *
+lines which contain the letter " z " twice.	( . * z . * ) { 2 , }
+lines that start with a vowel and ends in an ' e ' .	[AEIOUaeiou] . * e
+lines that contain three letter words in them.	. * \\b [A-Za-z] { 3 } \\b . *
+lines that use words ending with ' es ' .	. * \\b [A-Za-z] * es \\b . *
+3 letter lines starting with ' x '	x [A-Za-z] { 2 }
+lines with words that contain 3 letters	. * \\b [A-Za-z] { 3 } \\b . *
+lines that start with the letter ' a ' and end with the letter ' c '	a . * c
+lines that start with " Transport One " and end in a number.	Transport _ One . * [0-9]
+lines that contain a number.	. * [0-9] . *
+lines with " car " between " try " and " say " .	. * try . * car . * say . * | . * say . * car . * try . *
+lines using a capital letter followed by a number	. * [A-Z] . * [0-9] . *
+lines which end with ' you '	. * you
+lines that include one word using at least 2 letters	. * \\b [A-Za-z] { 2 , } \\b . *
+lines that contain a number and contain a 3 letter word.	( . * \\b [A-Za-z] { 3 } \\b . * ) & ( . * [0-9] . * )
+lines that contain at least one number.	. * [0-9] . *
+lines which contain multiple quoted words.	( . * \" [A-Za-z] + \" . * ) { 2 , }
+lines in which all words start with the letter " a " .	~ ( . * ( ( \\b [A-Za-z] + \\b ) & ( [^a] . * ) ) . * )
+lines containing " oo " and " at " .	( . * oo . * ) & ( . * at . * )
+lines of 6 characters that end with the letter " s " .	. { 5 } s
+lines beginning with the letter ' s ' and ending with the letter ' y '	s . * y
+lines using ' q ' before ' r '	. * q . * r . *
+lines that contain both a " B " and a " b " .	( . * B . * ) & ( . * b . * )
+lines containing a letter	. * [A-Za-z] . *
+lines with a word ending in " aought " that contain only one word	( [^A-Za-z] ) * \\b [A-Za-z] * aought \\b ( [^A-Za-z] ) *
+lines that contain 5 or less words that have 4 or more letters where one of those letters is an " a " .	( [^A-Za-z] * ( ( \\b [A-Za-z] + \\b ) & ( [A-Za-z] { 4 , } ) & ( . * a . * ) ) [^A-Za-z] * ) { 0 , 5 }
+lines where the letter c appears more than one time	( . * c . * ) { 2 , }
+lines utilizing the number ' 2 ' .	. * 2 . *
+lines using ' ick '	. * ick . *
+lines that contain the text " NOW "	. * NOW . *
+lines containing ' left ' and also containing ' right '	( . * left . * ) & ( . * right . * )
+lines containing the number 11 and the word " eleven " .	( . * 11 . * ) & ( . * eleven . * )
+lines starting with ' the '	the . *
+lines that have words ending in ' ing '	. * \\b [A-Za-z] * ing \\b . *
+lines that contain 4 letter words ending in ' s '	. * \\b [A-Za-z] { 3 } s \\b . *
+lines that contain words starting with ' ac ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( ac . * ) ) \\b . *
+lines which contain " I am mad " .	. * I _ am _ mad . *
+lines beginning with words that have a vowel as the first letter.	\\b [AEIOUaeiou] [A-Za-z] * \\b . *
+lines that begin with the word " once " .	once \\b . *
+lines that use words starting with ' bi ' .	. * \\b bi [A-Za-z] * \\b . *
+lines which contain only lowercase letters.	[a-z] *
+lines ending with ' vem '	. * vem
+lines that include words starting with ' q ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( q . * ) ) \\b . *
+lines having words starting with ' di ' .	. * \\b di [A-Za-z] * \\b . *
+lines containing words that start with " th "	. * \\b th [A-Za-z] * \\b . *
+lines using words starting with ' be ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( be . * ) ) . *
+lines containing ' b ' , or ' c '	. * ( b | c ) . *
+lines that end in ' o '	. * o
+lines which contain a word ending in " ing " .	. * \\b [A-Za-z] * ing \\b . *
+lines that have five words that all end with the letter " G " .	( . * ( ( \\b . * G \\b ) & ( [A-Za-z] + ) ) . * ) { 5 }
+lines that begin with the phrase ' once upon a time '	once _ upon _ a _ time . *
+lines containing the word ' art '	. * \\b art \\b . *
+lines that start with " ABC " and end with " TRY "	ABC . * TRY
+lines that end with vowels.	. * [AEIOUaeiou]
+lines that contain more than five words.	( . * \\b [A-Za-z] + \\b . * ) { 6 , }
+lines that contain numbers.	. * [0-9] . *
+lines containing vowels	. * [AEIOUaeiou] . *
+lines that contain the number " 254 " at least twice.	( . * 254 . * ) { 2 }
+lines that include three capital letters	( . * [A-Z] . * ) { 3 }
+lines using " d " in the middle of a word.	. * \\b [A-Za-z] + d [A-Za-z] + \\b . *
+lines which have 3 words.	. * ( . * \\b [A-Za-z] + \\b . * ) { 3 } . *
+lines which contain " sorry "	. * sorry . *
+lines containing words that end with " L "	. * \\b [A-Za-z] * L \\b . *
+lines which begin with the word ' how '	\\b ( ( [A-Za-z] + ) & ( how ) ) \\b . *
+lines composed of at least 3 words of 4 or more letters	( . * \\b [A-Za-z] { 4 , } \\b . * ) { 3 , }
+lines using ' ly ' or ' ny '	. * ( ly | ny ) . *
+lines that contain words with ' ci ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * ci . * ) ) . *
+lines using 3 instances of ' sw '	. * ( . * sw . * ) { 3 } . *
+lines containing only one word	( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) *
+lines containing words starting with " t " .	. * ( ( \\b t . * \\b ) & ( [A-Za-z] + ) ) . *
+lines which have at least 1 numeric character.	. * [0-9] . *
+lines that contain ' Beaker ' but do not contain ' Bunsen ' .	( . * Beaker . * ) & ( ~ ( . * Bunsen . * ) )
+lines that utilize words starting with ' ab ' .	. * \\b ab [A-Za-z] * \\b . *
+lines that have at least 3 words.	( . * \\b [A-Za-z] + \\b . * ) { 3 }
+lines which contain a word starting with " ch "	. * \\b ch [A-Za-z] * \\b . *
+lines with " bit " and not " ch " .	( . * bit . * ) & ( ~ ( . * ch . * ) )
+lines using 4 instances of ' ug '	. * ( . * ug . * ) { 4 } . *
+lines using ' min ' before ' imal '	. * min . * imal . *
+lines which contain only the number " 3 " .	3
+lines that contain words starting with ' ge ' .	. * \\b ge [A-Za-z] * \\b . *
+lines containing " ku " after " mar " or " is " .	. * ( mar | is ) . * ku . *
+lines that contain only the letters " agde " .	agde
+lines that contain " er " at the end of every word.	~ ( . * ( ( \\b [A-Za-z] + \\b ) & ( ~ ( . * er ) ) ) . * )
+lines using a word starting with a vowel and ending with ' y '	. * \\b [AEIOUaeiou] [A-Za-z] * y \\b . *
+lines that start with a ' z ' and end with an ' a ' .	z . * a
+lines that feature the word " moot " , and at least 3 words of 6 letters or more.	( . * \\b moot \\b . * ) & ( . * \\b [A-Za-z] { 6 , } \\b . * ) { 3 , }
+lines that contain any numbers.	. * [0-9] . *
+lines containing words that end with ' P '	. * ( ( \\b . * P \\b ) & ( [A-Za-z] + ) ) . * . *
+lines containing usage of the word " fried " .	. * \\b fried \\b . *
+lines using the word " piggy " and " his mother " .	. * ( . * \\b piggy \\b . * ) & ( . * his _ mother . * )
+lines that use words that are only four letters long.	. * \\b [A-Za-z] { 4 } \\b . *
+lines that have words ending in " ing " .	. * \\b [A-Za-z] * ing \\b . *
+lines that carry the word " Jim " located in between " Stacks " and " Slim " .	. * Stacks . * \\b Jim \\b . * Slim . * | . * Slim . * \\b Jim \\b . * Stacks . *
+lines containing ' sing ' or ' sung '	. * ( sing | sung ) . *
+lines containing ' tal ' and containing ' tel ' too	( . * tal . * ) & ( . * tel . * )
+lines that use words ending in ' g '	. * \\b ( ( . * g ) & ( [A-Za-z] [A-Za-z] * ) ) \\b . *
+lines that contain " tran " and the word " nguyen " .	( . * tran . * ) & ( . * \\b nguyen \\b . * )
+lines which contain five or more " y "	( . * y . * ) { 5 , }
+lines that have the word ' couch ' included	. * \\b couch \\b . *
+lines that utilize words starting with ' r ' .	. * \\b r [A-Za-z] * \\b . *
+lines containing " lake " and containing the word " house "	. * lake . * & ( . * \\b house \\b . * )
+lines which have " ing " and " out " but not " sh " or " cl " .	( ( . * ing . * ) & ( . * out . * ) & ( ~ ( . * ( sh | cl ) . * ) ) )
+lines that do not use the word ' the '	~ ( . * \\b the \\b . * )
+lines which have the word ' egg '	. * \\b egg \\b . *
+lines that contain the word " Hindi " .	. * \\b Hindi \\b . *
+lines using a 5 letter sequence	. * [A-Za-z] { 5 } . *
+lines containing words that have 5 letters in them.	. * \\b [A-Za-z] { 5 } \\b . *
+lines that end in an ' o '	. * o
+lines that have 3 characters after the first vowel	. * [AEIOUaeiou] . * ( . { 3 } ) . *
+lines using a word which has uppercase letters and has lowercase letters	. * \\b ( ( [A-Za-z] * [A-Z] [A-Za-z] * ) & ( [A-Za-z] * [a-z] [A-Za-z] * ) ) \\b . *
+lines that use words of at least 9 letters.	. * \\b [A-Za-z] { 9 , } \\b . *
+lines that contain at least one vowel and at least two numbers	( ( . * [AEIOUaeiou] . * ) & ( . * [0-9] . * ) { 2 } )
+lines that use words starting with ' no ' .	. * \\b no [A-Za-z] * \\b . *
+lines that do not contain numerical characters.	~ ( . * [0-9] . * )
+lines which do not begin with an uppercase letter.	~ ( [A-Z] . * )
+lines containing words using a vowel.	. * \\b [A-Za-z] * [aeiouAEIOU] [A-Za-z] * \\b . *
+lines which contain " upper " or " lower "	. * ( upper | lower ) . *
+lines which contain a mix of uppercase letters and lowercase letters	( . * [A-Z] . * ) & ( . * [a-z] . * )
+lines containing ' ers ' and containing ' oxy ' too	( . * ers . * ) & ( . * oxy . * )
+lines not containing 4 or more characters	~ ( . * . { 4 , } . * )
+lines ending in ' z ' preceded by a word that ends in " nt "	. * \\b [A-Za-z] * nt \\b . * z
+lines that begin with a numeral	[0-9] . *
+lines that have a ' 7 ' in them	. * 7 . *
+lines containing ' on ' and also containing ' off '	( . * on . * ) & ( . * off . * )
+lines with numbers	. * [0-9] . *
+lines that contain three letter words.	. * \\b [A-Za-z] { 3 } \\b . *
+lines with " helper " and " little "	( . * little . * ) & ( . * helper . * )
+lines which mention ' Pat ' with the word ' turkey ' .	. * ( . * Pat . * ) & ( . * \\b turkey \\b . * ) . *
+lines that have 3 numbers and contain the word " Columbia " .	( . * [0-9] . * ) { 3 } & ( . * \\b Columbia \\b . * )
+lines containing 5 letter words.	. * \\b [A-Za-z] { 5 } \\b . *
+lines containing " annou " and " irth " that do not have a " c " anywhere.	( . * annou . * ) & ( . * irth . * ) & ( ~ ( . * c . * ) )
+lines that are composed of 5 words or less where at least one word begins with the letter " k " .	( ( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 5 } ) & ( . * \\b k [A-Za-z] * \\b . * )
+lines with capital letters	. * [A-Z] . *
+lines that contain the text, " New York " .	. * New _ York . *
+lines having words ending with ' ne ' .	. * \\b [A-Za-z] * ne \\b . *
+lines that are composed of 4 or more words.	( . * \\b [A-Za-z] + \\b . * ) { 4 , }
+lines where ' 4 ' is between ' 3 ' and ' 5 '	. * 3 . * 4 . * 5 . * | . * 5 . * 4 . * 3 . *
+lines using a word that ends in " spoon "	. * \\b ( ( [A-Za-z] + ) & ( . * spoon ) ) \\b . *
+lines that do not contain the letter " c " .	~ ( . * c . * )
+lines that contain words with ' oo ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * oo . * ) ) . *
+lines having words with ' ro ' .	. * \\b [A-Za-z] * ro [A-Za-z] * \\b . *
+lines using ' ent ' or ' ong '	. * ( ent | ong ) . *
+lines that have words ending with ' ge ' .	. * \\b [A-Za-z] * ge \\b . *
+lines that have at least three words beginning with a vowel.	( . * \\b [AEIOUaeiou] [A-Za-z] * \\b . * ) { 3 }
+lines that use words with ' ca ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * ca . * ) ) . *
+lines with no vowels	~ ( . * [AEIOUaeiou] . * )
+lines that contain words ending with ' d ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * d ) ) \\b . *
+lines that have only 3 words	( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 3 }
+lines that end with " boby "	. * boby
+lines using words ending with ' tu ' .	. * \\b [A-Za-z] * tu \\b . *
+lines that contain words ending with ' ol ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * ol ) ) \\b . *
+lines that contain words ending with ' la ' .	. * \\b [A-Za-z] * la \\b . *
+lines that list the word " Bean " .	. * \\b Bean \\b . *
+lines that end with " bar " and include the phrase " San Jose " .	( . * bar ) & ( . * San _ Jose . * )
+lines containing a word using " ause "	. * \\b [A-Za-z] * ause [A-Za-z] * \\b . *
+lines having words ending with ' te ' .	. * \\b ( ( [A-Za-z] + ) & ( . * te ) ) \\b . *
+lines that each begin with a vowel	[AEIOUaeiou] . *
+lines using words with ' ca ' .	. * \\b [A-Za-z] * ca [A-Za-z] * \\b . *
+lines which have instances of " tch " .	. * tch . *
+lines starting with ' sign '	sign . *
+lines that are only comprised of uppercase letters.	[A-Z] *
+lines containing " ast "	( . * ast . * ) . *
+lines that have words starting with ' kai ' .	. * \\b kai [A-Za-z] * \\b . *
+lines that have 4 characters	. { 4 }
+lines that begin with a vowel and end with a vowel	[aeiouAEIOU] ( . * [aeiouAEIOU] ) ?
+lines that contain at least one numeric in it.	. * [0-9] . *
+lines that show " Mr " and " Mrs " but not " Ms " or " Miss " .	( ( . * Mr . * ) & ( . * Mrs . * ) & ( ~ ( . * ( Ms | Miss ) . * ) ) )
+lines with " sec " before " mun " .	. * sec . * mun . *
+lines containing the word " revolution " .	. * \\b revolution \\b . *
+lines using the word " intellectual "	. * \\b intellectual \\b . *
+lines using 5 ' d '	( . * d . * ) { 5 }
+lines which do not have " life " .	~ ( . * life . * )
+lines that contain at least two words starting with " h " in them.	( . * \\b h [A-Za-z] * \\b . * ) { 2 }
+lines that contain at least five words.	( . * \\b [A-Za-z] [A-Za-z] * \\b . * ) { 5 , }
+lines using only three words	( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 3 }
+lines utilizing the number ' 1 ' .	. * 1 . *
+lines having words ending with ' lo ' .	. * \\b [A-Za-z] * lo \\b . *
+lines that end with ' ... '	. * \ . \ . \ .
+lines that contain the word ' tron ' but not ' bot ' .	( . * tron . * ) & ( ~ ( . * bot . * ) )
+lines that contain words ending with ' mae ' .	. * \\b [A-Za-z] * mae \\b . *
+lines that contain words between ' I ' and ' you '	. * I . * \\b [A-Za-z] + \\b . * you . * | . * you . * \\b [A-Za-z] + \\b . * I . *
+lines using a word that contains the letters " der "	. * \\b [A-Za-z] * der [A-Za-z] * \\b . *
+lines which contain only an uppercase letter	[A-Z]
+lines which do have numbers.	. * [0-9] . *
+lines that contain the word " zoo " .	. * \\b zoo \\b . *
+lines that contain words starting with ' ki " .	. * \\b ki [A-Za-z] * \\b . *
+lines containing words that begin with " G " and end with " y "	. * \\b G [A-Za-z] * y \\b . *
+lines using at least 3 ' b '	( . * b . * ) { 3 , }
+lines that contain at least one word without any vowels.	. * ( ( \\b [A-Za-z] + \\b ) & ( ~ ( . * [AEIOUaeiou] . * ) ) ) . *
+lines that have 2 words using 4 letters	( . * \\b [A-Za-z] { 4 } \\b . * ) { 2 }
+lines ending with ' cem '	. * cem
+lines that contain a word and five numbers.	( . * \\b [A-Za-z] [A-Za-z] * \\b . * ) & ( . * [0-9] . * ) { 5 }
+lines that use the word " white "	. * \\b white \\b . *
+lines that have " JFK " but not " WAS "	( . * JFK . * ) & ( ~ ( . * WAS . * ) )
+lines with the word ' Triple ' followed by words that start with ' X '	. * \\b Triple \\b . * \\b X [A-Za-z] * \\b . *
+lines containing one instance of " ca " followed by an " r " or a " t "	. * ( . * ca . * ( r | t ) . * ) . *
+lines containing ' h ' , or ' i '	. * ( h | i ) . *
+lines that begin with a number	[0-9] . *
+lines that contain 5 numbers and 2 words that contain " ly " .	. * ( . * [0-9] . * ) { 5 } & ( . * \\b [A-Za-z] * ly [A-Za-z] * \\b . * ) { 2 } . *
+lines that contain words ending in ' i ' .	. * \\b [A-Za-z] * i \\b . *
+lines where there is only one word.	[^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] *
+lines that have only one b.	( [^b] ) * b ( [^b] ) *
+lines that use only four words	( ( [^A-Za-z] ) * \\b [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 4 }
+lines where the letter ' b ' appears exactly 4 times	( [^b] * b [^b] * ) { 4 }
+lines that contain five letter words.	. * \\b [A-Za-z] { 5 } \\b . *
+lines that have ' aba ' between ' bcb ' and ' cbc '	. * bcb . * aba . * cbc . * | . * cbc . * aba . * bcb . *
+lines containing two or more words containing " y " .	( . * \\b [A-Za-z] * y [A-Za-z] * \\b . * ) { 2 , }
+lines with " bit " and not ' c ' .	( . * bit . * ) & ( ~ ( . * c . * ) )
+lines containing ' dust ' and containing the word " house "	. * dust . * & ( . * \\b house \\b . * )
+lines that contain the word ' tron ' but not " shoe " .	( . * tron . * ) & ( ~ ( . * shoe . * ) )
+lines which start with ' ham '	ham . *
+lines that have three characters before the sequence " ire "	. * . { 3 } ire . *
+lines that end with ' lie '	. * lie
+lines using " h " or ' ny '	. * ( h | ny ) . *
+lines which have " ing " and " out " but not ' 9 ' or " cl " .	( ( . * ing . * ) & ( . * out . * ) & ( ~ ( . * ( 9 | cl ) . * ) ) )
+lines that use the word ' boom ' followed by words starting with " c. "	. * \\b boom \\b . * \\b c. [A-Za-z] * \\b . *
+lines which start with " n " and end with " PQR "	( n . * ) & ( . * PQR )
+lines using the word ' show '	. * \\b show \\b . *
+lines that start with ' it ' but do not contain any numbers.	( it . * ) & ( ~ ( . * [0-9] . * ) )
+lines that contain the word ' tron ' but not " agde " .	( . * tron . * ) & ( ~ ( . * agde . * ) )
+lines that contain words using the letters ' Y '	. * \\b [A-Za-z] * Y [A-Za-z] * \\b . *
+lines containing both ' ot ' and " dc "	( . * ot . * ) & ( . * dc . * )
+lines containing ' h ' , or ' ing '	. * ( h | ing ) . *
+lines which have ' te ' and " out " but not " sh " or " cl " .	( ( . * te . * ) & ( . * out . * ) & ( ~ ( . * ( sh | cl ) . * ) ) )
+lines that begin with the word ' ge ' .	ge \\b . *
+lines with words that end with ' ca ' before words that end with " nguyen "	. * \\b [A-Za-z] * ca \\b . * \\b [A-Za-z] * nguyen \\b . *
+lines that include words starting with ' gophers ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( gophers . * ) ) \\b . *
+lines with " car " between " try " and ' day ' .	. * try . * car . * day . * | . * day . * car . * try . *
+lines using any instance of " d " or " e " followed by " ant " or " r "	. * ( d | e ) . * ( ant | r ) . *
+lines that contain ' cbc ' before ' paper ' or ' show ' .	. * cbc . * ( paper | show ) . *
+lines that start with " country " .	( country . * ) . *
+lines that contain only the letters ' ick ' .	ick
+lines using any instance of " d " or " helper " followed by " s " or " r "	. * ( d | helper ) . * ( s | r ) . *
+lines which start with " n " and end with ' s '	( n . * ) & ( . * s )
+lines which start with " white " and end with " y "	( white . * ) & ( . * y )
+lines that contain words ending with ' to ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * to ) ) \\b . *
+lines that have three characters before the sequence " sorry "	. * . { 3 } sorry . *
+lines that contain words starting in " x "	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( x . * ) ) \\b . *
+lines that carry the word " 9 " located in between " Stacks " and " Slim " .	. * Stacks . * \\b 9 \\b . * Slim . * | . * Slim . * \\b 9 \\b . * Stacks . *
+lines that use words with ' 7 ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * 7 . * ) ) . *
+lines containing one instance of " ca " followed by an " r " or a " hero "	. * ( . * ca . * ( r | hero ) . * ) . *
+lines which have " B " , but no instances of ' o ' between the letters ' d ' and ' a '	( . * B . * ) & ( ~ ( . * d . * o . * a . * | . * a . * o . * d . * ) )
+lines that contain ' day ' or ' off '	. * ( day | off ) . *
+lines in which all words start with the letter ' dist ' .	~ ( . * ( ( \\b [A-Zdist-z] + \\b ) & ( [^dist] . * ) ) . * )
+lines with instances of ' d ' between " XYX " and a comma	. * XYX . * d . * \ , . * | . * \ , . * d . * XYX . *
+lines that contain the word " hello " within 5 characters of the word " intellectual " .	. * ( \\b hello \\b . { 1 , 5 } \\b intellectual \\b | \\b intellectual \\b . { 1 , 5 } \\b hello \\b ) . *
+lines that contain the letter " V " and the number " XYX " .	( . * V . * ) & ( . * XYX . * )
+lines with " helper " and " P "	( . * P . * ) & ( . * helper . * )
+lines that contain at least two words starting with ' \\ " ' in them.	( . * \\b \\ _ " [A-Za-z] * \\b . * ) { 2 }
+lines containing usage of the word " ing " .	. * \\b ing \\b . *
+lines where the word " Homer " precedes the word ' abc '	. * \\b Homer \\b . * \\b abc \\b . *
+lines containing ' h ' , or ' ss '	. * ( h | ss ) . *
+lines that have ' efg ' followed by the word ' t '	. * efg . * \\b t \\b . *
+lines that contain words beginning in ' ape '	. * \\b ape [A-Za-z] * \\b . *
+lines using any instance of " d " or " mun " followed by " s " or " r "	. * ( d | mun ) . * ( s | r ) . *
+lines beginning with the letter " San Jose " and ending with the letter ' y '	San _ Jose . * y
+lines that contain words starting with ' bb ' .	. * \\b ( ( [A-Za-z] + ) & ( bb . * ) ) \\b . *
+lines using the letter sequence ' g ' followed by a word ending in " ed " .	. * g . * \\b [A-Za-z] * ed \\b . *
+lines containing ' dist ' and containing ' bb ' too	( . * dist . * ) & ( . * bb . * )
+lines that contain three words that start with the letter ' monkey ' .	( . * \\b monkey [A-Za-z] * \\b . * ) { 3 }
+lines that contain 2 numbers that contain " Mexico " .	( . * Mexico . * ) { 2 }
+lines that include words with ' day ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * day . * ) ) . *
+lines that contain 2 repetitions of the word " n "	( . * \\b n \\b . * ) { 2 }
+lines where the word " q " precedes the word " Odyssey "	. * \\b q \\b . * \\b Odyssey \\b . *
+lines that contain the number " ast " and " May " and begin with " Mary " .	( . * ast . * ) & ( . * May . * ) & ( Mary . * )
+lines that have at least two words that start with ' ham ' .	( . * \\b ham [A-Za-z] * \\b . * ) { 2 }
+lines which have ' oo ' , but no instances of ' o ' between the letters ' d ' and " trust "	( . * oo . * ) & ( ~ ( . * d . * o . * trust . * | . * trust . * o . * d . * ) )
+lines that start with ' A ' or ' bcb '	A . * | bcb . *
+lines that list the word ' tra ' .	. * \\b tra \\b . *
+lines that end in ' mae ' and begins in ' a ' .	a . * mae
+lines that mention " zoo " .	. * zoo . *
+lines that use words ending in ' ge '	. * \\b ( ( . * ge ) & ( [A-Za-z] [A-Za-z] * ) ) \\b . *
+lines that contain words ending with " ac " .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * ac ) ) \\b . *
+lines using words beginning with the letter ' e '	. * \\b e [A-Za-z] * \\b . *
+lines containing words starting with the letter " nguyen " .	. * \\b nguyen [A-Za-z] * \\b . *
+lines that contain words ending in ' irl ' .	. * ( . * \\b [A-Za-z] * irl \\b . * ) . *
+lines using the word " mar " and " his mother " .	. * ( . * \\b mar \\b . * ) & ( . * his _ mother . * )
+lines containing words that begin with " avenue " and end with " y "	. * \\b avenue [A-Za-z] * y \\b . *
+lines which start with " n " and end with ' candles '	( n . * ) & ( . * candles )
+lines where the word " oo " appears between the words " sand " oo " tide "	. * \\b soo \\b . * \\b oo \\b . * \\b tide \\b . * | . * \\b tide \\b . * \\b oo \\b . * \\b soo \\b . *
+lines that end in ' little ' and begins in ' a ' .	a . * little
+lines that contain 5 or less words that have 4 or more letters where one of those letters is an ' lifes ' .	( [^A-Zlifes-z] * ( ( \\b [A-Zlifes-z] + \\b ) & ( [A-Zlifes-z] { 4 , } ) & ( . * lifes . * ) ) [^A-Zlifes-z] * ) { 0 , 5 }
+lines that have ' aba ' between ' bcb ' and ' da '	. * bcb . * aba . * da . * | . * da . * aba . * bcb . *
+lines using the word ' oon ' and " his mother " .	. * ( . * \\b oon \\b . * ) & ( . * his _ mother . * )
+lines that use " Jane " but not " Janet " or ' itch ' .	( . * Jane . * ) & ( ~ ( . * ( Janet | itch ) . * ) )
+lines using " spam " and containing the words ' grass ' and ' seeds ' .	( . * spam . * ) & ( . * \\b grass \\b . * ) & ( . * \\b seeds \\b . * )
+lines that contain 5 or less words that have 4 or more letters where one of those letters is an " spam " .	( [^A-Zspam-z] * ( ( \\b [A-Zspam-z] + \\b ) & ( [A-Zspam-z] { 4 , } ) & ( . * spam . * ) ) [^A-Zspam-z] * ) { 0 , 5 }
+lines that have words ending with a ' e '	. * ( ( \\b . * e \\b ) & ( [A-Za-z] + ) ) . *
+lines that show " the " and " June " .	. * ( . * the . * ) & ( . * June . * ) . *
+lines that contain at least two words starting with " Bean " in them.	( . * \\b Bean [A-Za-z] * \\b . * ) { 2 }
+lines that contain words starting in " Chris "	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( Chris . * ) ) \\b . *
+lines containing words which begin with ' lives ' and end with " d "	. * \\b lives [A-Za-z] * d \\b . *
+lines that start with a ' z ' and end with an ' sign ' .	z . * sign
+lines that feature the word " XYZ " , and at least 3 words of 6 letters or more.	( . * \\b XYZ \\b . * ) & ( . * \\b [A-Za-z] { 6 , } \\b . * ) { 3 , }
+lines containing one instance of " ca " followed by an " r " or a ' ed '	. * ( . * ca . * ( r | ed ) . * ) . *
+lines that have the word ' oxy ' included	. * \\b oxy \\b . *
+lines containing words using the letters " r " .	. * \\b [A-Za-z] * r [A-Za-z] * \\b . *
+lines containing ' ed ' and " irth " that do not have a " c " anywhere.	( . * ed . * ) & ( . * irth . * ) & ( ~ ( . * c . * ) )
+lines that contain instances of " shoe " , but only if its one of the first three words.	( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 2 } [^A-Za-z] * \\b shoe \\b . *
+lines that contain words starting with " ch " .	. * \\b ch [A-Za-z] * \\b . *
+lines where there are three characters between instances of " ABC " and " ing "	. * ABC . * . { 3 } . * ing . * | . * ing . * . { 3 } . * ABC . *
+lines that contain words starting with " zoo " .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( zoo . * ) ) \\b . *
+lines using ' oocl ' between " car " and " cop "	. * ( car . * oocl . * cop | cop . * oocl . * car ) . *
+lines containing ' 8 ' and containing a " LOL " as well.	. * ( . * 8 . * ) & ( . * LOL . * ) . *
+lines which feature the word " rh " .	. * \\b rh \\b . *
+lines containing the word " lace " or the word " hat "	. * \\b ( lace | hat ) \\b . *
+lines which begin with ' 1 ' , has a ' z ' in the middle and end in a number.	1 . * z . * [0-9]
+lines containing ' sing ' or ' ABC '	. * ( sing | ABC ) . *
+lines that have " ou "	. * ou . *
+lines that are composed of 5 words or less where at least one word begins with the letter " dance " .	( ( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 5 } ) & ( . * \\b dance [A-Za-z] * \\b . * )
+lines starting with " z "	z . *
+lines that include words with ' 1 ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * 1 . * ) ) . *
+lines that use ' mo ' followed by words starting with " Cuba "	. * mo . * \\b ( ( [A-Za-z] + ) & ( Cuba . * ) ) \\b . *
+lines starting with ' X ' followed by a word with " Columbia " .	X . * ( ( \\b [A-Za-z] + \\b ) & ( . * Columbia . * ) ) . *
+lines containing " ku " after " mar " or ' it ' .	. * ( mar | it ) . * ku . *
+lines that show " ked " and " June " .	. * ( . * ked . * ) & ( . * June . * ) . *
+lines which begin with ' y ' , has a ' go ' in the middle and end in a number.	y . * go . * [0-9]
+lines containing " annou " and " irth " that do not have a " u " anywhere.	( . * annou . * ) & ( . * irth . * ) & ( ~ ( . * u . * ) )
+lines containing one instance of " ca " followed by an " r " or a " Jim "	. * ( . * ca . * ( r | Jim ) . * ) . *
+lines containg the number " TRY " .	. * TRY . *
+lines which have ' ing ' and " out " but not " sh " or " cl " .	( ( . * ing . * ) & ( . * out . * ) & ( ~ ( . * ( sh | cl ) . * ) ) )
+lines which contain ' i ' or " lower "	. * ( i | lower ) . *
+lines containing " lake " and containing the word " hurry "	. * lake . * & ( . * \\b hurry \\b . * )
+lines that use words ending with " PQR " .	. * \\b [A-Za-z] * PQR \\b . *
+lines that ends with ' ra ' and contain two numbers.	( . * [0-9] . * ) { 2 } ra
+lines that have at least two words that start with ' bi ' .	( . * \\b bi [A-Za-z] * \\b . * ) { 2 }
+lines using 2 instances of ' ol '	. * ( . * ol . * ) { 2 } . *
+lines which start with ' cba '	cba . *
+lines where the word " and " appears between the words " sand " and " his mother "	. * \\b sand \\b . * \\b and \\b . * \\b his _ mother \\b . * | . * \\b his _ mother \\b . * \\b and \\b . * \\b sand \\b . *
+lines that contain both the word " bar " and the word ' native '	. * ( . * \\b bar \\b . * ) & ( . * \\b native \\b . * ) . *
+lines using an instance of " say "	. * say . *
+lines that begin with a number and end with " street " or ' q ' .	[0-9] . * ( street | q )
+lines with words that end in " k " .	. * \\b [A-Za-z] * k \\b . *
+lines where the letter " boby " appears exactly 4 times	( [^boby] * boby [^boby] * ) { 4 }
+lines that contain " dc " and the word " nguyen " .	( . * dc . * ) & ( . * \\b nguyen \\b . * )
+lines which mention ' min ' with the word ' turkey ' .	. * ( . * min . * ) & ( . * \\b turkey \\b . * ) . *
+lines which begin with ' y ' , has a " once " in the middle and end in a number.	y . * once . * [0-9]
+lines with the word ' and ' between ' zyx ' and " tt "	. * zyx . * \\b and \\b . * tt . * | . * tt . * \\b and \\b . * zyx . *
+lines with the word ' Triple ' followed by words that start with " ause "	. * \\b Triple \\b . * \\b ause [A-Za-z] * \\b . *
+lines that contain the word ' Triple ' .	. * \\b Triple \\b . *
+lines which contain only the number ' er ' .	er
+lines that end with " ast " .	. * ast
+lines containing the word " mun "	. * \\b mun \\b . *
+lines that have ' efg ' followed by the word ' fa '	. * efg . * \\b fa \\b . *
+lines with the word ' and ' between ' le ' and ' cba '	. * le . * \\b and \\b . * cba . * | . * cba . * \\b and \\b . * le . *
+lines that end with " Mexico " and include the phrase " San Jose " .	( . * Mexico ) & ( . * San _ Jose . * )
+lines starting with ' sw ' followed by words starting with ' z ' .	sw . * \\b z [A-Za-z] * \\b . *
+lines using ' gophers ' and containing the words " Mrs " and ' seeds ' .	( . * gophers . * ) & ( . * \\b Mrs \\b . * ) & ( . * \\b seeds \\b . * )
+lines that contain ' dre ' or " B "	. * ( dre | B ) . *
+lines which contain both ' ig ' and " e " but no instances of " u " .	( . * ig . * ) & ( . * e . * ) & ( ~ ( . * u . * ) )
+lines that contain ' fu ' before ' n ' or ' bar ' .	. * fu . * ( n | nr ) . *
+lines using the word " piggy " and ' lie ' .	. * ( . * \\b piggy \\b . * ) & ( . * lie . * )
+lines that begin with the word " an " .	\\b an \\b . *
+lines utilizing ' abc '	. * \abc . *
+lines that end in ' mae '	. * mae
+lines that have words ending in " and "	. * \\b [A-Za-z] * and \\b . *
+lines that contain ' jellyfish ' and mention ' go ' .	( . * jellyfish . * ) & ( . * go . * )
+lines that contain ' day ' or ' os '	. * ( day | os ) . *
+lines that begin with a number and end with " street " or " eleven " .	[0-9] . * ( street | eleven )
+lines that contain " x " and ' c ' but not " z " .	( . * x . * ) & ( . * c . * ) & ( ~ ( . * z . * ) )
+lines that contin words ending in " ant " .	. * \\b [A-Za-z] * ant \\b . *
+lines that contain the word ' bb ' .	. * \\b bb \\b . *
+lines using " blog " before ' en '	. * blog . * en . *
+lines using " Slim " between ' a ' and ' le '	. * a . * Slim . * le . *
+lines using ' ness ' or ' gophers '	. * ( ness | gophers ) . *
+lines which start with ' cem ' and end with " y "	( cem . * ) & ( . * y )
+lines using ' q ' before " and so it came to pass "	. * q . * and _ so _ it _ came _ to _ pass . *
+lines that have at least two words that start with " Mexico " .	( . * \\b Mexico [A-Za-z] * \\b . * ) { 2 }
+lines which contain the letter " crack " and the letter " y "	( . * crack . * ) & ( . * y . * )
+lines with " free " before " mun " .	. * free . * mun . *
+lines that contain the word ' off ' but do not contain the word " Chris " .	( . * \\b off \\b . * ) & ( ~ ( . * \\b Chris \\b . * ) )
+lines using the word " c " and " his mother " .	. * ( . * \\b c \\b . * ) & ( . * his _ mother . * )
+lines that contain the text ' day '	. * day . *
+lines that end with ' lay ' and include the phrase " San Jose " .	( . * lay ) & ( . * San _ Jose . * )
+lines with " tch " but not " er " .	( . * tch . * ) & ( ~ ( . * er . * ) )
+lines that contain at least two words beginging with " Chris " .	( . * \\b Chris [A-Za-z] * \\b . * ) { 2 }
+lines having words starting with " nguyen " .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( nguyen . * ) ) \\b . *
+3 letter lines starting with " ge "	ge [A-Za-z] { 2 }
+lines containing words that start with " rh "	. * \\b rh [A-Za-z] * \\b . *
+lines that contain ' ig ' or " Columbia " before ' nobel ' .	. * ( ig | Columbia ) . * nobel . *
+lines that contain the letter ' - ' and the number " 33 " .	( . * - . * ) & ( . * 33 . * )
+lines using ' min ' before " stress "	. * min . * stress . *
+lines that contain " avenue " before ' paper ' or ' show ' .	. * avenue . * ( paper | show ) . *
+lines using any instance of " d " or " e " followed by " s " or ' lie '	. * ( d | e ) . * ( s | lie ) . *
+lines containing ' pa ' or ' sung '	. * ( pa | sung ) . *
+lines that begin with a number and end with " ie " or " avenue " .	[0-9] . * ( ie | avenue )
+lines that contain the number " 2005 " and ' 9 ' and begin with " Mary " .	( . * 2005 . * ) & ( . * 9 . * ) & ( Mary . * )
+lines which contain " rh " but do not contain the letter ' + ' .	( . * rh . * ) & ~ ( . * + . * )
+lines which contain " q " and " r "	. * q . * r . * | . * r . * q . *
+lines where there are three characters between instances of " ABC " and ' right '	. * ABC . * . { 3 } . * right . * | . * right . * . { 3 } . * ABC . *
+lines that contain ' go ' or ' it '	. * ( go | it ) . *
+lines that are composed of 5 words or less where at least one word begins with the letter ' fur ' .	( ( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 5 } ) & ( . * \\b fur [A-Za-z] * \\b . * )
+lines that start with ' A ' or " th "	A . * | th . *
+lines containing ' tal ' and containing " world " too	( . * tal . * ) & ( . * world . * )
+lines that end with the word ' ba ' .	. * \\b ba
+lines using ' fe ' before ' en '	. * fe . * en . *
+lines using words beginning with the letter " and "	. * \\b and [A-Za-z] * \\b . *
+lines that contain both a ' bb ' and a " b " .	( . * bb . * ) & ( . * b . * )
+lines that contain the word " country "	. * \\b country \\b . *
+lines with the word " A " followed by words that start with ' X '	. * \\b A \\b . * \\b X [A-Za-z] * \\b . *
+lines that mention " upper " .	. * upper . *
+lines that start with " 0 " but do not contain any numbers.	( 0 . * ) & ( ~ ( . * [0-9] . * ) )
+lines that contain a word starting with ' ga ' .	. * \\b ga [A-Za-z] * \\b . *
+lines utilizing the word ' paper ' .	. * . * \\b paper \\b . *
+lines containing the text ' ers '	. * ers . *
+lines using " foo " between ' life ' and " cop "	. * ( life . * foo . * cop | cop . * foo . * life ) . *
+lines that carry the word " Jim " located in between " Stacks " and " once " .	. * Stacks . * \\b Jim \\b . * once . * | . * once . * \\b Jim \\b . * Stacks . *
+lines containing " NOW " after " re " or " per " .	. * ( re | per ) . * NOW . *
+lines where the word " and " appears between the words ' os ' and " tide "	. * \\b os \\b . * \\b and \\b . * \\b tide \\b . * | . * \\b tide \\b . * \\b and \\b . * \\b os \\b . *
+lines that begin with the word ' bar ' .	\\b bar \\b . *
+lines that begin with a number and end with " street " or " going " .	[0-9] . * ( street | going )
+lines starting with ' be '	be . *
+lines using at least 4 " sh "	( . * sh . * ) { 4 , }
+lines containing " intellectual " or " nu " before ' dist ' or ' dust '	. * ( intellectual | nu ) . * ( dist | dust ) . *
+lines that contain words starting with ' da ' .	. * \\b da [A-Za-z] * \\b . *
+lines that use the word ' to '	. * \\b to \\b . *
+lines containing a word using the letters ' ce ' .	. * \\b [A-Za-z] * ce [A-Za-z] * \\b . *
+lines that mention " Al " .	. * Al . *
+lines in which all words start with the letter " trust " .	~ ( . * ( ( \\b [A-Ztrust-z] + \\b ) & ( [^trust] . * ) ) . * )
+lines that contain " mun " at the end of every word.	~ ( . * ( ( \\b [A-Za-z] + \\b ) & ( ~ ( . * mun ) ) ) . * )
+lines with the word ' and ' between ' zyx ' and " ku "	. * zyx . * \\b and \\b . * ku . * | . * ku . * \\b and \\b . * zyx . *
+lines that contain three words that start with the letter ' ia ' .	( . * \\b ia [A-Za-z] * \\b . * ) { 3 }
+lines containing " ge " or " r " before ' ger ' or ' tra '	. * ( ge | r ) . * ( ger | tra ) . *
+lines that use ' mo ' followed by words starting with " an "	. * mo . * \\b ( ( [A-Za-z] + ) & ( an . * ) ) \\b . *
+lines that have three numbers between ' ka ' and " def " .	. * ( ka . * ( . * [0-9] . * ) { 3 } . * def | . * def . * ( . * [0-9] . * ) { 3 } . * ka ) . *
+lines that include " Canada " and " Mexico " but not ' z ' .	( . * Canada . * ) & ( . * Mexico . * ) & ( ~ ( . * z . * ) )
+lines that start with a vowel and ends in an ' lives ' .	[AEIOUalivesiou] . * lives
+lines that have ' sandwich ' but not the word ' d '	( . * sandwich . * ) & ( ~ ( . * \\b d \\b . * ) )
+lines that use " Jane " but not " Janet " or ' zyx ' .	( . * Jane . * ) & ( ~ ( . * ( Janet | zyx ) . * ) )
+lines that utilize words starting with " Jane " followed by the word ' knight '	. * \\b ( ( [A-Za-z] + ) & ( Jane . * ) ) \\b . * \\b kJaneght \\b . *
+lines containing a word using the letters " ca " .	. * \\b [A-Za-z] * ca [A-Za-z] * \\b . *
+lines that use " Jane " but not " Cuba " or " 2 " .	( . * Jane . * ) & ( ~ ( . * ( Cuba | 2 ) . * ) )
+lines using numbers that show two or more " Bean " .	. * ( . * Bean . * ) { 2 , } . *
+lines where the word " and " appears between the words " sand " and ' vem '	. * \\b sand \\b . * \\b and \\b . * \\b vem \\b . * | . * \\b vem \\b . * \\b and \\b . * \\b sand \\b . *
+lines utilizing words ending with ' cake ' .	. * \\b ( ( [A-Za-z] + ) & ( . * cake ) ) \\b . *
+lines that use the word " dc "	. * \\b dc \\b . *
+lines that include ' wrench ' and " Mexico " but not " Cuba " .	( . * wrench . * ) & ( . * Mexico . * ) & ( ~ ( . * Cuba . * ) )
+lines containing ' tal ' and containing ' bar ' too	( . * tal . * ) & ( . * bar . * )
+lines containing " ge " or " an " before ' ger ' or " inoperative "	. * ( ge | an ) . * ( ger | inoperative ) . *
+lines ending in ' lay '	. * lay
+lines containing ' left ' and also containing " ked "	( . * left . * ) & ( . * ked . * )
+lines with " sec " before " no " .	. * sec . * no . *
+lines that utilize words starting with " upper " .	. * \\b upper [A-Za-z] * \\b . *
+lines utilizing the word " dance " .	. * . * \\b dance \\b . *
+lines beginning with the letter ' lo '	lo . *
+lines that have " uin " followed by the word ' car '	. * uin . * \\b car \\b . *
+lines that start with the letter ' day ' and end with the letter ' c '	day . * c
+lines that end containing the letter " total " .	. * total
+lines where numbers exist only after a sequence of " stress " and " XYZ "	( [^0-9] * ) | ( ( ( [^0-9] * ) & ( . * stress . * ) & ( . * XYZ . * ) ) . * )
+lines that contain the numbers " 9 " , and " ked "	. * ( 9 . * ked | ked . * 9 ) . *
+lines having words with " no " .	. * \\b [A-Za-z] * no [A-Za-z] * \\b . *
+lines with the word ' fo ' in them.	. * \\b ( ( [A-Za-z] + ) & ( fo ) ) \\b . *
+lines that contain both a ' aba ' and a " b " .	( . * aba . * ) & ( . * b . * )
+lines using the word " nguyen " .	. * \\b nguyen \\b . *
+lines with " hero " before " mun " .	. * hero . * mun . *
+lines of 6 characters that end with the letter " zoo " .	. { 5 } zoo
+lines that utilize words starting with " 2 " .	. * \\b ( ( [A-Za-z] + ) & ( 2 . * ) ) \\b . *
+lines with instances of " ABC " between ' ! ' and a comma	. * ! . * ABC . * \ , . * | . * \ , . * ABC . * ! . *
+lines where " AIDS " is between a number and " LMNO "	. * [0-9] . * AIDS . * LMNO . * | . * LMNO . * AIDS . * [0-9] . *
+lines using ' x ' before " shoe "	. * x . * shoe . *
+lines containing one instance of " ca " followed by an " r " or a " mar "	. * ( . * ca . * ( r | mar ) . * ) . *
+lines which have ' oo ' , but no instances of ' o ' between the letters " fried " and ' a '	( . * oo . * ) & ( ~ ( . * fried . * o . * a . * | . * a . * o . * fried . * ) )
+lines that end containing the letter ' is ' .	. * is
+lines where numbers exist only after a sequence of ' jellyfish ' and " XYZ "	( [^0-9] * ) | ( ( ( [^0-9] * ) & ( . * jellyfish . * ) & ( . * XYZ . * ) ) . * )
+lines that utilize the number " gue " .	. * gue . *
+lines that contain words starting with " ou " .	. * \\b ( ( [A-Za-z] + ) & ( ou . * ) ) \\b . *
+lines with words that end with ' ape ' before words that end with ' att '	. * \\b [A-Za-z] * ape \\b . * \\b [A-Za-z] * att \\b . *
+lines that feature " agde " followed by the word " spam " .	. * agde . * \\b spam \\b . *
+lines that contain words between ' sw ' and ' you '	. * sw . * \\b [A-Za-z] + \\b . * you . * | . * you . * \\b [A-Za-z] + \\b . * sw . *
+lines beginning with the letter ' life '	life . *
+lines using the word ' fur ' followed by " d " .	. * \\b fur \\b . * d . *
+lines using the vowel combination ' x ' and " th " .	( . * x . * ) & ( . * th . * )
+lines which contain both ' - ' and " e " but no instances of " u " .	( . * - . * ) & ( . * e . * ) & ( ~ ( . * u . * ) )
+lines that feature ' physics ' followed by the word " spam " .	. * physics . * \\b spam \\b . *
+lines that end with ' 3 ' .	. * 3
+lines that have words starting with " 0 " .	. * \\b 0 [A-Za-z] * \\b . *
+lines using words beginning with the letter " The " .	. * \\b The [A-Za-z] * \\b . *
+lines utilizing the word " with a period immediately after it. " .	. * . * \\b with _ a _ period _ immediately _ after _ it. \\b . *
+lines that utilize words starting with " car " followed by the word ' knight '	. * \\b ( ( [A-Za-z] + ) & ( car . * ) ) \\b . * \\b kcarght \\b . *
+lines that contain both a ' cba ' and a " b " .	( . * cba . * ) & ( . * b . * )
+lines using " foo " between " car " and ' go '	. * ( car . * foo . * go | go . * foo . * car ) . *
+lines that ends with letter " going "	. * going
+lines containing ' tt ' and containing " tt " too	( . * tt . * ) & ( . * tt . * )
+lines that begin with a number and end with ' iffl ' or " avenue " .	[0-9] . * ( iffl | avenue )
+lines that have " JFK " but not " ABC "	( . * JFK . * ) & ( ~ ( . * ABC . * ) )
+lines that start with ' ce '	ce . *
+lines using ' cem ' or ' ny '	. * ( cem | ny ) . *
+lines beginning with the letter " the "	the . *
+lines that include both ' cake ' and ' once upon a time ' .	( . * cake . * ) & ( . * once _ upon _ a _ time . * )
+lines that contain 5 or less words that have 4 or more letters where one of those letters is an ' bi ' .	( [^A-Zbi-z] * ( ( \\b [A-Zbi-z] + \\b ) & ( [A-Zbi-z] { 4 , } ) & ( . * bi . * ) ) [^A-Zbi-z] * ) { 0 , 5 }
+lines using " foo " between " 33 " and " cop "	. * ( 33 . * foo . * cop | cop . * foo . * 33 ) . *
+lines that end in an ' a '	. * a
+lines containing a 5 letter word beginning with ' news '	. * \\b news [A-Za-z] { 4 } \\b . *
+lines that end in ' y ' and begins in " cl " .	cl . * y
+lines that have a " nu " in them	. * nu . *
+lines containing " foo " or ' k ' before ' dist ' or ' dust '	. * ( foo | k ) . * ( dist | dust ) . *
+lines using " foo " between " car " and " The "	. * ( car . * foo . * The | The . * foo . * car ) . *
+lines using " foo " between " car " and " life "	. * ( car . * foo . * life | life . * foo . * car ) . *
+lines that have a word ending with the letters " crack " .	. * \\b [A-Za-z] * crack \\b . *
+lines starting with " ire " followed by a word with ' oa ' .	ire . * ( ( \\b [A-Za-z] + \\b ) & ( . * oa . * ) ) . *
+lines using ' ick ' before ' imal '	. * ick . * imal . *
+lines where ' 4 ' is between ' 3 ' and " house "	. * 3 . * 4 . * house . * | . * house . * 4 . * 3 . *
+lines that contain ' is ' or " say "	. * ( is | say ) . *
+lines that contain " x " and " y " but not ' 1 ' .	( . * x . * ) & ( . * y . * ) & ( ~ ( . * 1 . * ) )
+lines ending with ' left ' that use the word ' monkey ' .	. * \\b monkey \\b . * left
+lines containing " his mother " , or ' i '	. * ( his _ mother | i ) . *
+lines using any instance of " d " or " e " followed by " ight " or " r "	. * ( d | e ) . * ( ight | r ) . *
+lines containing ' ick ' after " mar " or " is " .	. * ( mar | is ) . * ick . *
+lines that have five words that all end with the letter ' 9 ' .	( . * ( ( \\b . * 9 \\b ) & ( [A-Za-z] + ) ) . * ) { 5 }
+lines of 6 characters that end with the letter ' is ' .	. { 5 } is
+lines that contain the number ' left ' at least twice.	( . * left . * ) { 2 }
+lines that contain 5 or less words that have 4 or more letters where one of those letters is an ' ox ' .	( [^A-Zox-z] * ( ( \\b [A-Zox-z] + \\b ) & ( [A-Zox-z] { 4 , } ) & ( . * ox . * ) ) [^A-Zox-z] * ) { 0 , 5 }
+lines that end with " Chris "	. * Chris
+lines using " lake " or ' ny '	. * ( lake | ny ) . *
+lines that end with " bar " and include the phrase " Chris " .	( . * bar ) & ( . * Chris . * )
+lines that contain the phrase " gh " .	. * ( . * \\b gh \\b . * ) . *
+lines containing " piggy " or " an " before ' ger ' or ' tra '	. * ( piggy | an ) . * ( piggyr | tra ) . *
+lines containing ' turkey ' after " mar " or " is " .	. * ( mar | is ) . * turkey . *
+lines using at least 4 " an "	( . * an . * ) { 4 , }
+lines using words containing ' ... ' .	. * \\b [A-Za-z] * ... [A-Za-z] * \\b . *
+lines containing ' e ' and containing the word " house "	. * e . * & ( . * \\b house \\b . * )
+lines that contain the number ' Triple ' .	. * Triple . *
+lines using the letter sequence ' ent ' followed by a word ending in " ed " .	. * ent . * \\b [A-Za-z] * ed \\b . *
+lines where the word " Homer " precedes the word ' lives '	. * \\b Homer \\b . * \\b lives \\b . *
+lines that contain ' is ' or ' you '	. * ( is | you ) . *
+lines using " Homer " or ' lives '	. * ( Homer | lives ) . *
+lines that end in an " ABC "	. * ABC
+lines using words containing " 3 " before " i " .	. * ( ( \\b [A-Za-z] [A-Za-z] * \\b ) & ( . * 3 . * i . * ) ) . *
+lines that contain ' day ' or " up "	. * ( day | up ) . *
+lines that contain the number ' tal ' and " May " and begin with " Mary " .	( . * tal . * ) & ( . * May . * ) & ( Mary . * )
+lines with " TRY " and " little "	( . * little . * ) & ( . * TRY . * )
+lines that utilize words starting with " lake " .	. * \\b lake [A-Za-z] * \\b . *
+lines with ' Triple ' and " little "	( . * little . * ) & ( . * Triple . * )
+lines with words ending in " rh " .	. * \\b [A-Za-z] * rh \\b . *
+lines that have 3 numbers and contain the word ' sing ' .	( . * [0-9] . * ) { 3 } & ( . * \\b sing \\b . * )
+lines that include " New York " and " Mexico " but not " Cuba " .	( . * New _ York . * ) & ( . * Mexico . * ) & ( ~ ( . * Cuba . * ) )
+lines using ' gophers ' and containing the words ' grass ' and " sorry " .	( . * gophers . * ) & ( . * \\b grass \\b . * ) & ( . * \\b sorry \\b . * )
+lines that contain 5 numbers and 2 words that contain ' off ' .	. * ( . * [0-9] . * ) { 5 } & ( . * \\b [A-Za-z] * off [A-Za-z] * \\b . * ) { 2 } . *
+lines that use words ending with " TRY " .	. * \\b [A-Za-z] * TRY \\b . *
+lines with the word ' bb ' between ' zyx ' bb ' cba '	. * zyx . * \\b bb \\b . * cba . * | . * cba . * \\b bb \\b . * zyx . *
+lines which have ' oo ' , but no instances of ' mae ' between the letters ' d ' and ' a '	( . * maemae . * ) & ( ~ ( . * d . * mae . * a . * | . * a . * mae . * d . * ) )
+lines that have the letter " an " at the end of a word.	. * \\b [A-Za-z] * an \\b . *
+lines that contain ' news ' before " i " or ' show ' .	. * news . * ( i | show ) . *
+lines using the letter pair ' cbc '	. * cbc . *
+lines that start with ' A ' or ' f '	A . * | f . *
+lines using words that contain the letter ' ly ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * ly . * ) ) . *
+lines that have three numbers between ' aba ' and " def " .	. * ( aba . * ( . * [0-9] . * ) { 3 } . * def | . * def . * ( . * [0-9] . * ) { 3 } . * aba ) . *
+lines using words that end with the letter ' es '	. * \\b [A-Za-z] * es \\b . *
+lines using ' ss ' between " cold " and ' le '	. * cold . * ss . * le . *
+lines using the word " piggy " and ' ri ' .	. * ( . * \\b piggy \\b . * ) & ( . * ri . * )
+lines containing " oo " and ' news ' .	( . * oo . * ) & ( . * news . * )
+lines which contain the letter ' d ' twice.	( . * d . * ) { 2 , }
+lines containing ' tt ' and containing " oo " too	( . * tt . * ) & ( . * oo . * )
+lines that contain the number " uin " .	. * uin . *
+lines containing the word " run " or the word " try "	. * \\b ( run | try ) \\b . *
+lines that utilize words starting with ' ug ' followed by the word ' knight '	. * \\b ( ( [A-Za-z] + ) & ( ug . * ) ) \\b . * \\b kugght \\b . *
+lines that include words starting with " laughing " .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( laughing . * ) ) \\b . *
+lines which start with the word " boby "	\\b boby \\b . *
+lines with words that end with ' ca ' before words that end with " L "	. * \\b [A-Za-z] * ca \\b . * \\b [A-Za-z] * L \\b . *
+lines using at least two numbers, " Mexico " , and " oz " .	( . * [0-9] . * ) { 2 } & ( . * Mexico . * ) & ( . * oz . * )
+lines having words ending with ' fa ' .	. * \\b ( ( [A-Za-z] + ) & ( . * fa ) ) \\b . *
+lines that contain " Odyssey " and " y " but not " z " .	( . * Odyssey . * ) & ( . * y . * ) & ( ~ ( . * z . * ) )
+lines starting with ' uu ' followed by words starting with " nguyen " .	uu . * \\b nguyen [A-Za-nguyen] * \\b . *
+lines that contain " Freddie Mercury " and contain " tag " .	( . * Freddie _ Mercury . * ) & ( . * tag . * )
+lines containing " mun " , or ' c '	. * ( mun | c ) . *
+lines that start with ' ger ' but do not contain any numbers.	( ger . * ) & ( ~ ( . * [0-9] . * ) )
+lines containing ' physics ' and containing a ' 3 ' as well.	. * ( . * physics . * ) & ( . * 3 . * ) . *
+lines that contain " c. "	. * c. . *
+lines containing words that end with ' tron '	. * \\b [A-Za-z] * tron \\b . *
+lines that begin with a number and end with ' ga ' or " avenue " .	[0-9] . * ( ga | avenue )
+lines that have a ' fa ' in them	. * fa . *
+lines that contain " oz " or ' it '	. * ( oz | it ) . *
+lines having words starting with " and so it came to pass " .	. * \\b and _ so _ it _ came _ to _ pass [A-Za-z] * \\b . *
+lines that list the word " sec " .	. * \\b sec \\b . *
+lines using any instance of " d " or " e " followed by " Cuba " or " r "	. * ( d | e ) . * ( Cuba | r ) . *
+lines using words starting with " Jim " .	. * ( ( \\b [A-Za-z] + \\b ) & ( Jim . * ) ) . *
+lines using ' att '	. * att . *
+lines that use " try " and ' tribes ' .	( . * try . * ) & ( . * tribes . * )
+lines with a word ending in " aought " that contain only one word	( [^A-Za-z] ) * \\b [A-Za-z] * aought \\b ( [^A-Za-z] ) *
+lines using words ending in ' ol ' .	. * \\b [A-Za-z] * ol \\b . *
+lines with " car " between " try " and " up " .	. * try . * car . * up . * | . * up . * car . * try . *
+lines where numbers exist only after a sequence of " ABC " and " ight "	( [^0-9] * ) | ( ( ( [^0-9] * ) & ( . * ABC . * ) & ( . * ight . * ) ) . * )
+lines containing ' do ' or ' sung '	. * ( do | sung ) . *
+lines using the word " life " .	. * \\b life \\b . *
+lines which have " re "	. * re . *
+lines starting with ' X ' followed by a word with " sand " .	X . * ( ( \\b [A-Za-z] + \\b ) & ( . * sand . * ) ) . *
+lines that start with the letter ' ger ' .	ger . *
+lines that contain the word " Kelly " but do not contain the word " irth " .	( . * \\b Kelly \\b . * ) & ( ~ ( . * \\b irth \\b . * ) )
+lines containing ' car ' , or ' i '	. * ( car | i ) . *
+lines beginning with the letter " Kelly " and ending with the letter ' y '	Kelly . * y
+lines that contain both a " B " and a " hat " .	( . * B . * ) & ( . * hat . * )
+lines that use ' you ' or ' b ' before words ending with ' er ' .	. * ( you | b ) . * \\b [A-Zyou-z] * er \\b . *
+lines containing " annou " and " irth " that do not have a " Therefore " anywhere.	( . * annou . * ) & ( . * irth . * ) & ( ~ ( . * Therefore . * ) )
+lines that contain words starting in ' lives '	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( lives . * ) ) \\b . *
+lines that do not contain the character ' mae '	~ ( . * mae . * )
+lines containing ' sung ' and " at " .	( . * sung . * ) & ( . * at . * )
+lines which have ' oo ' , but no instances of " qu " between the letters ' d ' and ' a '	( . * ququ . * ) & ( ~ ( . * d . * qu . * a . * | . * a . * qu . * d . * ) )
+lines that contain the word ' fo ' but do not contain the word " Chris " .	( . * \\b fo \\b . * ) & ( ~ ( . * \\b Chris \\b . * ) )
+lines that contain words ending with " street " .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * street ) ) \\b . *
+lines containing " ge " or " 9 " before ' ger ' or ' tra '	. * ( ge | 9 ) . * ( ger | tra ) . *
+lines which do not have " a " .	~ ( . * a . * )
+lines using the word " crack " followed by " d " .	. * \\b crack \\b . * d . *
+lines that have three characters before the sequence ' egg '	. * . { 3 } egg . *
+lines that contain the phrase " trust " .	. * trust . *
+lines containing " ge " or " an " before " abc " or ' tra '	. * ( ge | an ) . * ( abc | tra ) . *
+lines using ' abc ' after ' ape '	. * ape . * abc . *
+lines using a 3 letter sequence starting with " hero "	. * hero [A-Za-z] { 2 } . *
+lines having words ending with ' att ' .	. * \\b ( ( [A-Za-z] + ) & ( . * att ) ) \\b . *
+lines beginning with " buck "	buck . *
+lines that do not contain the letter " 9 "	~ ( . * 9 . * )
+lines where numbers exist only after a sequence of " ABC " and ' be '	( [^0-9] * ) | ( ( ( [^0-9] * ) & ( . * ABC . * ) & ( . * be . * ) ) . * )
+lines which have the word " total "	. * \\b total \\b . *
+lines with ' es ' and " little "	( . * little . * ) & ( . * es . * )
+lines utilizing " Boby "	. * \Boby . *
+lines which contain " rh " but do not contain the letter ' vem ' .	( . * rh . * ) & ~ ( . * vem . * )
+lines that contain the word " little " .	. * \\b little \\b . *
+lines containing " tain " after " re " or ' fa ' .	. * ( re | fa ) . * tain . *
+lines that contain three words that start with the letter ' turn ' .	( . * \\b turn [A-Za-z] * \\b . * ) { 3 }
+lines which begin with the letter ' it ' .	it . *
+lines using ' aba ' in the middle of a word.	. * \\b [A-Za-z] + aba [A-Za-z] + \\b . *
+lines with ' h '	. * h . *
+lines that contain ' fu ' before ' ba ' or " SBC " .	. * fu . * ( ba | SBC ) . *
+lines using words that begin with the letter ' ABC ' .	. * \\b ABC [A-Za-z] * \\b . *
+lines which begin with the word ' sandwich '	\\b ( ( [A-Za-z] + ) & ( sandwich ) ) \\b . *
+lines that have ' aba ' between ' bcb ' and " re "	. * bcb . * aba . * re . * | . * re . * aba . * bcb . *
+lines that include both " Mexico " and ' candles ' .	( . * Mexico . * ) & ( . * candles . * )
+lines ending with ' pu '	. * pu
+lines containing ' b ' , or ' tribes '	. * ( b | tribes ) . *
+lines using the word ' boom ' .	. * \\b boom \\b . *
+lines which contain ' ick ' or " lower "	. * ( ick | lower ) . *
+lines that have a capital ' 10 ' , but not a lowercase " a " .	( . * 10 . * ) & ( ~ ( . * a . * ) )
+lines that contain only the letters " stress " .	stress
+lines that are composed of 5 words or less where at least one word begins with the letter " ause " .	( ( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 5 } ) & ( . * \\b ause [A-Za-z] * \\b . * )
+lines where there is at least one word in which ' + ' follows ' i '	. * ( ( \\b [A-Za-z] [A-Za-z] * \\b ) & ( . * i . * + . * ) ) . *
+lines that use ' a ' or ' b ' before words ending with ' fur ' .	. * ( a | b ) . * \\b [A-Za-z] * fur \\b . *
+lines that match the words " agde " .	. * \\b agde \\b . *
+lines that contain the words " the " and ' mae ' .	( . * \\b the \\b . * ) & ( . * \\b mae \\b . * )
+lines that contain the word ' ug '	. * \\b ug \\b . *
+lines containing " oo " and ' breeding ' .	( . * oo . * ) & ( . * breeding . * )
+lines that have three numbers between " abc " and " car " .	. * ( abc . * ( . * [0-9] . * ) { 3 } . * car | . * car . * ( . * [0-9] . * ) { 3 } . * abc ) . *
+lines which do not have " The " .	~ ( . * The . * )
+lines using words with ' to ' .	. * \\b [A-Za-z] * to [A-Za-z] * \\b . *
+lines where ' 4 ' is between ' 3 ' and ' 4 '	. * 3 . * 4 . * 4 . * | . * 4 . * 4 . * 3 . *
+lines having words starting with " car " .	. * \\b car [A-Za-z] * \\b . *
+lines that show " May " and ' monkey ' .	. * ( . * May . * ) & ( . * monkey . * ) . *
+lines that utilize words starting with " ch " .	. * \\b ( ( [A-Za-z] + ) & ( ch . * ) ) \\b . *
+lines using the letter sequence " ably " followed by a word ending in " run " .	. * ably . * \\b [A-Za-z] * run \\b . *
+lines which contain " Sel " but do not contain the letter " y " .	( . * Sel . * ) & ~ ( . * y . * )
+lines using words ending with " with a period immediately after it. " .	. * ( ( \\b . * with _ a _ period _ immediately _ after _ it. \\b ) & ( [A-Za-z] + ) ) . *
+lines using words that contain the letter ' ig ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( . * ig . * ) ) . *
+lines where the word " and " appears between the words " sand " and ' ug '	. * \\b sand \\b . * \\b and \\b . * \\b ug \\b . * | . * \\b ug \\b . * \\b and \\b . * \\b sand \\b . *
+lines that contain ' da ' or ' to '	. * ( da | to ) . *
+lines using words that begin with the letter " and " .	. * \\b and [A-Za-z] * \\b . *
+lines containing both " cop " and " dc "	( . * cop . * ) & ( . * dc . * )
+lines using ' x ' before ' uu '	. * x . * uu . *
+lines using " foo " between " car " and " foo "	. * ( car . * foo . * foo | foo . * foo . * car ) . *
+lines that start with " d " .	( d . * ) . *
+lines using at least two numbers, " n " , and " oz " .	( . * [0-9] . * ) { 2 } & ( . * n . * ) & ( . * oz . * )
+lines that start with ' ed ' but do not contain any numbers.	( ed . * ) & ( ~ ( . * [0-9] . * ) )
+lines that have three numbers between " abc " and " foo " .	. * ( abc . * ( . * [0-9] . * ) { 3 } . * foo | . * foo . * ( . * [0-9] . * ) { 3 } . * abc ) . *
+lines containing ' ick ' after " re " or " per " .	. * ( re | per ) . * ick . *
+lines that contain the word " Kelly " but do not contain the word ' lifes ' .	( . * \\b Kelly \\b . * ) & ( ~ ( . * \\b lifes \\b . * ) )
+lines that ends with letter " r "	. * r
+lines which contain " TRY " but do not contain the letter " y " .	( . * TRY . * ) & ~ ( . * y . * )
+lines containing usage of the word ' ong ' .	. * \\b ong \\b . *
+lines using numbers that show two or more ' you ' .	. * ( . * you . * ) { 2 , } . *
+lines that contain " ause " but do not contain ' Bunsen ' .	( . * ause . * ) & ( ~ ( . * Bunsen . * ) )
+lines containing ' jellyfish ' and also containing ' off '	( . * jellyfish . * ) & ( . * off . * )
+lines using " foo " between ' egg ' and " cop "	. * ( egg . * foo . * cop | cop . * foo . * egg ) . *
+lines that contain ' ong ' and the word " nguyen " .	( . * ong . * ) & ( . * \\b nguyen \\b . * )
+lines using the word " az " at least once.	. * \\b az \\b . *
+lines that contain words using the letters ' sw '	. * \\b [A-Za-z] * sw [A-Za-z] * \\b . *
+lines that have words ending with " moot " .	. * \\b [A-Za-z] * moot \\b . *
+lines that contain words ending with " ca " .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * ca ) ) \\b . *
+lines that contain ' day ' or ' ick '	. * ( day | ick ) . *
+lines that show " May " and ' helper ' .	. * ( . * May . * ) & ( . * helper . * ) . *
+lines that have words ending in ' law '	. * \\b [A-Za-z] * law \\b . *
+lines using the word ' os '	. * \\b os \\b . *
+lines with the word " LMNO " followed by words that start with ' X '	. * \\b LMNO \\b . * \\b X [A-Za-z] * \\b . *
+lines using the string ' go '	. * go . *
+lines that contain ' is ' or ' d '	. * ( is | d ) . *
+lines containing the word ' car '	. * \\b car \\b . *
+lines that carry the word " Jim " located in between " ou " and " Slim " .	. * ou . * \\b Jim \\b . * Slim . * | . * Slim . * \\b Jim \\b . * ou . *
+lines that have a capital " sec " , but not a lowercase " a " .	( . * sec . * ) & ( ~ ( . * a . * ) )
+lines that contain words starting with " June " .	. * ( ( \\b June . * \\b ) & ( [A-Za-z] + ) ) . *
+lines using ' gophers ' and containing the words ' grass ' and ' z ' .	( . * gophers . * ) & ( . * \\b grass \\b . * ) & ( . * \\b z \\b . * )
+lines containing ' 8 ' and containing a " agde " as well.	. * ( . * 8 . * ) & ( . * agde . * ) . *
+lines that end with the word ' ot ' .	. * \\b ot
+lines using ' ness ' or " his mother "	. * ( ness | his _ mother ) . *
+lines with " car " between ' wrench ' and " say " .	. * wrench . * car . * say . * | . * say . * car . * wrench . *
+lines that include both ' sign ' and ' candles ' .	( . * sign . * ) & ( . * candles . * )
+lines using ' re ' or ' ong '	. * ( re | ong ) . *
+lines that are composed of 5 words or less where at least one word begins with the letter ' sw ' .	( ( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 5 } ) & ( . * \\b sw [A-Za-z] * \\b . * )
+lines containing one instance of " ca " followed by an " e " or a " t "	. * ( . * ca . * ( e | t ) . * ) . *
+lines that contain " avenue " or ' ber '	. * ( avenue | ber ) . *
+lines using the word " piggy " and ' ti ' .	. * ( . * \\b piggy \\b . * ) & ( . * ti . * )
+lines having words starting with " zoo " .	. * \\b zoo [A-Za-z] * \\b . *
+lines containing ' oxy ' and also containing ' off '	( . * oxy . * ) & ( . * off . * )
+lines starting with ' uu ' followed by words starting with ' c ' .	uu . * \\b c [A-Za-c] * \\b . *
+lines using ' ness ' or " Topo "	. * ( ness | Topo ) . *
+lines that contain " cold " or ' physics ' before ' nobel ' .	. * ( cold | physics ) . * nobel . *
+lines that contain five words that begin with ' es ' .	. * ( . * \\b es [A-Za-z] * \\b . * ) { 5 } . *
+lines that end with the word ' native ' .	. * \\b native
+lines with " sec " before ' t ' .	. * sec . * t . *
+lines which have ' oo ' , but no instances of " city of " between the letters ' d ' and ' a '	( . * city _ ofcity _ of . * ) & ( ~ ( . * d . * city _ of . * a . * | . * a . * city _ of . * d . * ) )
+lines using the word ' ly ' .	. * \\b ly \\b . *
+lines which begin with the letter " upper " .	upper . *
+lines using ' hey ' and containing the words ' grass ' and ' seeds ' .	( . * hey . * ) & ( . * \\b grass \\b . * ) & ( . * \\b seeds \\b . * )
+lines starting with ' X ' followed by a word with ' twist ' .	X . * ( ( \\b [A-Za-z] + \\b ) & ( . * twist . * ) ) . *
+lines containing " ked " and " at " .	( . * ked . * ) & ( . * at . * )
+lines that contain ' cem ' before ' ba ' or ' bar ' .	. * cem . * ( ba | bar ) . *
+lines using words containing " e " before " cl " .	. * ( ( \\b [A-Za-z] [A-Za-z] * \\b ) & ( . * e . * cl . * ) ) . *
+lines that end with ' 8 '	. * 8
+lines that contain ' ig ' or ' e ' before ' nobel ' .	. * ( ig | e ) . * nobel . *
+lines that use ' l ' or ' b ' before words ending with ' er ' .	. * ( l | b ) . * \\b [A-Zl-z] * er \\b . *
+lines that contain words starting with " Hindi " .	. * \\b Hindi [A-Za-z] * \\b . *
+lines that match the words ' turn ' .	. * \\b turn \\b . *
+lines that contain 5 numbers and 2 words that contain ' e ' .	. * ( . * [0-9] . * ) { 5 } & ( . * \\b [A-Za-z] * e [A-Za-z] * \\b . * ) { 2 } . *
+lines that contain the word " i " but do not contain the word " Chris " .	( . * \\b i \\b . * ) & ( ~ ( . * \\b Chris \\b . * ) )
+lines that contain both a ' n ' and a " b " .	( . * n . * ) & ( . * b . * )
+lines containing ' ers ' and containing " gue " too	( . * ers . * ) & ( . * gue . * )
+lines that contain words using the letters " sorry "	. * \\b [A-Za-z] * sorry [A-Za-z] * \\b . *
+lines which have ' oo ' , but no instances of ' o ' between the letters " der " and ' a '	( . * oo . * ) & ( ~ ( . * der . * o . * a . * | . * a . * o . * der . * ) )
+lines using words that have ' A '	. * \\b [A-Za-z] * A [A-Za-z] * \\b . *
+lines that contain three words that start with the letter ' min ' .	( . * \\b min [A-Za-z] * \\b . * ) { 3 }
+lines beginning with the letter ' how ' and ending with the letter ' y '	how . * y
+lines utilizing " sec "	. * \sec . *
+lines containing ' hairy ' or " nu " before ' dist ' or ' dust '	. * ( hairy | nu ) . * ( dist | dust ) . *
+lines that have two or more words ending in " tain " .	. * ( . * \\b [A-Ztain-z] * tain \\b . * ) { 2 } . *
+lines that contain words that have the letter ' e ' occuring after the letter " white " .	. * \\b [A-Za-z] * white [A-Za-z] * e [A-Za-z] * \\b . *
+lines that contain " Mr " but do not contain ' Bunsen ' .	( . * Mr . * ) & ( ~ ( . * Bunsen . * ) )
+lines using words beginning with the letter ' lay ' .	. * \\b lay [A-Za-z] * \\b . *
+lines containing " Mr " or " nu " before ' dist ' or ' dust '	. * ( Mr | nu ) . * ( dist | dust ) . *
+lines that contain ' ig ' or " qu " before ' nobel ' .	. * ( ig | qu ) . * nobel . *
+lines that use " Jane " but not " Janet " or ' ape ' .	( . * Jane . * ) & ( ~ ( . * ( Janet | ape ) . * ) )
+lines with ' 12 ' between " try " and " say " .	. * try . * 12 . * say . * | . * say . * 12 . * try . *
+lines with ' the ' and not " ch " .	( . * the . * ) & ( ~ ( . * ch . * ) )
+lines having words ending with " try " .	. * \\b [A-Za-z] * try \\b . *
+lines that contain words using the letters " spoon "	. * \\b [A-Za-z] * spoon [A-Za-z] * \\b . *
+lines containing ' ra ' or " an " before ' ger ' or ' tra '	. * ( ra | an ) . * ( rar | tra ) . *
+lines which begin with " Stacks " , has a ' z ' in the middle and end in a number.	Stacks . * z . * [0-9]
+lines using a word starting with a vowel and ending with " with a period immediately after it. "	. * \\b [AEIOUaeiou] [A-Za-z] * with _ a _ period _ immediately _ after _ it. \\b . *
+lines that use words ending with " Homer " .	. * \\b [A-Za-z] * Homer \\b . *
+lines containing " lake " and containing the word ' little '	. * lake . * & ( . * \\b little \\b . * )
+lines which have " ing " and " aought " but not " sh " or " cl " .	( ( . * ing . * ) & ( . * aought . * ) & ( ~ ( . * ( sh | cl ) . * ) ) )
+lines that contain only 2 words, and, begin with the letter ' efg ' .	efg . * & ( ( [^A-Za-z] ) * ( \\b ) * [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 2 }
+lines using the word ' law ' at least once.	. * \\b law \\b . *
+lines that contain 5 numbers and 2 words that contain " upper " .	. * ( . * [0-9] . * ) { 5 } & ( . * \\b [A-Za-z] * upper [A-Za-z] * \\b . * ) { 2 } . *
+lines using words beginning with the letter " once " .	. * \\b once [A-Za-z] * \\b . *
+lines that do not have ' couch ' in them	~ ( . * couch . * )
+lines that contain the word " u " but do not contain the word " Chris " .	( . * \\b u \\b . * ) & ( ~ ( . * \\b Chris \\b . * ) )
+lines with " tch " but not ' physics ' .	( . * tch . * ) & ( ~ ( . * physics . * ) )
+lines using a word starting with a vowel and ending with " hello "	. * \\b [AEIOUaeiou] [A-Za-z] * hello \\b . *
+lines with " tch " but not ' Beaker ' .	( . * tch . * ) & ( ~ ( . * Beaker . * ) )
+lines that show " Mr " and ' boom ' but not " Ms " or " Miss " .	( ( . * Mr . * ) & ( . * boom . * ) & ( ~ ( . * ( Ms | Miss ) . * ) ) )
+lines that contain words beginning in ' bcb '	. * \\b bcb [A-Za-z] * \\b . *
+lines that contain words starting with " up " .	. * \\b up [A-Za-z] * \\b . *
+lines that contain 2 numbers that contain " cop " .	( . * cop . * ) { 2 }
+lines that contain the words ' and ' and " cold " .	( . * \\b and \\b . * ) & ( . * \\b cold \\b . * )
+lines using 2 instances of " and "	. * ( . * and . * ) { 2 } . *
+lines that have words ending in " hat "	. * \\b [A-Za-z] * hat \\b . *
+lines ending in ' z ' preceded by a word that ends in ' dust '	. * \\b [A-Za-z] * dust \\b . * z
+lines that feature ' email ' followed by the word " Stacks " .	. * email . * \\b Stacks \\b . *
+lines using " Homer " before ' z '	. * Homer . * z . *
+lines containing one instance of ' ape ' followed by an " r " or a " t "	. * ( . * ape . * ( r | t ) . * ) . *
+lines that contain ' is ' or ' lie '	. * ( is | lie ) . *
+lines that contain ' seeds ' and contain " AIDS " .	( . * seeds . * ) & ( . * AIDS . * )
+lines that contain words that have the letter ' e ' occuring after the letter " tran " .	. * \\b [A-Za-z] * tran [A-Za-z] * e [A-Za-z] * \\b . *
+lines that use ' mo ' followed by words starting with " LOL "	. * mo . * \\b ( ( [A-Za-z] + ) & ( LOL . * ) ) \\b . *
+lines utilizing the number ' ac ' .	. * ac . *
+lines ending in ' ham ' preceded by a word that ends in " nt "	. * \\b [A-Za-ham] * nt \\b . * ham
+lines utilizing ' h '	. * \h . *
+lines using words beginning with the letter ' how ' .	. * \\b how [A-Za-z] * \\b . *
+lines using any instance of " d " or ' tel ' followed by " s " or " r "	. * ( d | tel ) . * ( s | r ) . *
+lines starting with ' X ' followed by a word with ' zyx ' .	X . * ( ( \\b [A-Za-z] + \\b ) & ( . * zyx . * ) ) . *
+lines using ' paper ' before ' r '	. * paper . * r . *
+lines that contain the numbers ' de ' , and " 10 "	. * ( de . * 10 | 10 . * de ) . *
+lines that contain words that have the letter " c. " occuring after the letter ' c ' .	. * \\b [A-Za-z] * c [A-Za-z] * c. [A-Za-z] * \\b . *
+lines using 5 " 2005 "	( . * 2005 . * ) { 5 }
+lines that contain " Freddie Mercury " and contain " Topo " .	( . * Freddie _ Mercury . * ) & ( . * Topo . * )
+lines that have words that start with ' the ' .	. * \\the the [A-Za-z] * \\the . *
+lines that contain " x " and " y " but not " San Jose " .	( . * x . * ) & ( . * y . * ) & ( ~ ( . * San _ Jose . * ) )
+lines that have words ending in " country "	. * \\b [A-Za-z] * country \\b . *
+lines that end in ' tel '	. * tel
+lines that end in ' 3 '	. * 3
+lines that contain words starting with ' breeding ' .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( breeding . * ) ) \\b . *
+lines that have the word ' re ' included	. * \\b re \\b . *
+lines with words ending in " gue " .	. * \\b [A-Za-z] * gue \\b . *
+lines that have words ending in ' gates ' .	. * \\b [A-Za-z] * gates \\b . *
+lines containing the word " his mother " .	. * \\b his _ mother \\b . *
+lines utilizing words ending with " ca " .	. * \\b ( ( [A-Za-z] + ) & ( . * ca ) ) \\b . *
+lines utilizing " Mexico "	. * \Mexico . *
+lines which begin with the word ' o '	\\b ( ( [A-Za-z] + ) & ( o ) ) \\b . *
+lines that end with " gh " .	. * gh
+lines using " WAS " or ' ny '	. * ( WAS | ny ) . *
+lines that show " Mr " and " Mrs " but not ' native ' or " Miss " .	( ( . * Mr . * ) & ( . * Mrs . * ) & ( ~ ( . * ( native | Miss ) . * ) ) )
+lines using 2 instances of " Jim "	. * ( . * Jim . * ) { 2 } . *
+lines that have the word ' p ' included	. * \\b p \\b . *
+lines that have any instance of ' how ' .	. * how . *
+lines that contain words starting in ' x '	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( x . * ) ) \\b . *
+lines containing the word ' q ' or the word " hat "	. * \\b ( q | hat ) \\b . *
+lines that start with ' A ' or ' Bunsen '	A . * | Bunsen . *
+lines which have " ing " and " out " but not " ac " or " cl " .	( ( . * ing . * ) & ( . * out . * ) & ( ~ ( . * ( ac | cl ) . * ) ) )
+lines that start with the letter " hurry " and end with the letter ' c '	hurry . * c
+lines that contain both the word ' hey ' and the word " stress "	. * ( . * \\b hey \\b . * ) & ( . * \\b stress \\b . * ) . *
+lines with ' left ' before " mun " .	. * left . * mun . *
+lines that contain " tag " or ' physics ' before ' nobel ' .	. * ( tag | physics ) . * nobel . *
+lines that contain at least one word and the number ' 2 '	. * ( . * \\b [A-Za-z] + \\b . * ) & ( . * 2 . * ) . *
+lines which contain 2 or more ' car ' .	( . * car . * ) { 2 , }
+lines that include words starting with " n " .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( n . * ) ) \\b . *
+lines that begin with the word ' h ' .	\\b h \\b . *
+lines which have " ing " and " out " but not " sh " or " ire " .	( ( . * ing . * ) & ( . * out . * ) & ( ~ ( . * ( sh | ire ) . * ) ) )
+lines which start with the word ' ly '	\\b ly \\b . *
+lines that start with " tran " but do not contain any numbers.	( tran . * ) & ( ~ ( . * [0-9] . * ) )
+lines that contain five words that begin with ' t ' .	. * ( . * \\b t [A-Za-z] * \\b . * ) { 5 } . *
+lines using ' life ' or " is "	. * ( life | is ) . *
+lines that have words ending with ' to ' .	. * \\b [A-Za-z] * to \\b . *
+lines that have ' dist ' between ' bcb ' and ' cbc '	. * bcb . * dist . * cbc . * | . * cbc . * dist . * bcb . *
+lines containing " foo " or " nu " before " Kelly " or ' dust '	. * ( foo | nu ) . * ( Kelly | dust ) . *
+lines that end with the word " ca " .	. * \\b ca
+lines containing both " y " and " dc "	( . * y . * ) & ( . * dc . * )
+lines using the letter sequence " ably " followed by a word ending in " WAS " .	. * ably . * \\b [A-Za-z] * WAS \\b . *
+lines containing an instance of the name ' once upon a time ' .	. * once _ upon _ a _ time . *
+lines that have words ending in " free "	. * \\b [A-Za-z] * free \\b . *
+lines that use " tain " but not " Janet " or " 2 " .	( . * tain . * ) & ( ~ ( . * ( taint | 2 ) . * ) )
+lines which contain only the number " h " .	h
+lines that start with the letter ' ox ' .	ox . *
+lines that start with the letter " May " .	May . *
+lines that contain the words " the " and ' ri ' .	( . * \\b the \\b . * ) & ( . * \\b ri \\b . * )
+lines using 3 instances of ' ... '	. * ( . * ... . * ) { 3 } . *
+lines that contain ' Beaker ' but do not contain ' ac ' .	( . * Beaker . * ) & ( ~ ( . * ac . * ) )
+lines that have words starting with " say " .	. * \\b say [A-Za-z] * \\b . *
+lines that contin words ending in ' 9 ' .	. * \\b [A-Za-z] * 9 \\b . *
+lines that contin words ending in " mun " .	. * \\b [A-Za-z] * mun \\b . *
+lines that contain ' ig ' or " ou " before ' nobel ' .	. * ( ig | ou ) . * nobel . *
+lines using the word " hurry " followed by the word " V " .	( . * \\b hurry \\b . * ) ( . * \\b V \\b . * )
+lines that use ' ci ' and ' tribes ' .	( . * ci . * ) & ( . * tribes . * )
+lines that contain 5 numbers and 2 words that contain ' once upon a time ' .	. * ( . * [0-9] . * ) { 5 } & ( . * \\b [A-Za-z] * once _ upon _ a _ time [A-Za-z] * \\b . * ) { 2 } . *
+lines that start with " XYZ "	XYZ . *
+lines that contain the letter " V " and the number " ight " .	( . * V . * ) & ( . * ight . * )
+lines containing ' sing ' or ' out '	. * ( sing | out ) . *
+lines using words that have ' I '	. * \\b [A-Za-z] * I [A-Za-z] * \\b . *
+lines containing ' left ' and also containing " Sel "	( . * left . * ) & ( . * Sel . * )
+lines that contain only the letters ' lo ' .	lo
+lines where the word ' tron ' precedes the word " Odyssey "	. * \\b tron \\b . * \\b Odyssey \\b . *
+lines using ' on ' before ' en '	. * on . * en . *
+lines using 2 instances of ' fe '	. * ( . * fe . * ) { 2 } . *
+lines that contain ' tra ' or ' physics ' before ' nobel ' .	. * ( tra | physics ) . * nobel . *
+lines containing words starting with ' r ' .	. * ( ( \\b r . * \\b ) & ( [A-Za-z] + ) ) . *
+lines that contain the numbers " 9 " , and ' life '	. * ( 9 . * life | life . * 9 ) . *
+lines in which all words start with the letter ' cake ' .	~ ( . * ( ( \\b [A-Zcake-z] + \\b ) & ( [^cake] . * ) ) . * )
+lines containing ' hairy ' and also containing ' off '	( . * hairy . * ) & ( . * off . * )
+lines using " ku " in the middle of a word.	. * \\b [A-Za-z] + ku [A-Za-z] + \\b . *
+lines containing " ku " after " crack " or " is " .	. * ( crack | is ) . * ku . *
+lines that use ' helper ' or ' b ' before words ending with ' er ' .	. * ( helper | b ) . * \\b [A-Zhelper-z] * er \\b . *
+lines that have three characters before the sequence ' le '	. * . { 3 } le . *
+lines that contain both a " lace " and a " b " .	( . * lace . * ) & ( . * b . * )
+lines that end with ' cba ' .	. * cba
+lines that carry the word " L " located in between " Stacks " and " Slim " .	. * Stacks . * \\b L \\b . * Slim . * | . * Slim . * \\b L \\b . * Stacks . *
+lines where there are three characters between instances of " ABC " and ' paper '	. * ABC . * . { 3 } . * paper . * | . * paper . * . { 3 } . * ABC . *
+lines that contain ' news ' before ' paper ' or " sec " .	. * news . * ( paper | sec ) . *
+lines using " d " or ' lives '	. * ( d | lives ) . *
+lines containing a word using the letters " up " .	. * \\b [A-Za-z] * up [A-Za-z] * \\b . *
+lines that contain ' tel '	. * tel . *
+lines that contain both the word " car " and the word " stress "	. * ( . * \\b car \\b . * ) & ( . * \\b stress \\b . * ) . *
+lines that have ' aba ' between ' bcb ' and " lace "	. * bcb . * aba . * lace . * | . * lace . * aba . * bcb . *
+lines that utilize words starting with " up " followed by the word ' knight '	. * \\b ( ( [A-Za-z] + ) & ( up . * ) ) \\b . * \\b kupght \\b . *
+lines using the word ' da ' next to a number.	( . * \\b da \\b . * ) & ( . * [0-9] . * )
+lines ending in " t " preceded by a word that ends in " nt "	. * \\b [A-Za-t] * nt \\b . * t
+lines that have at least two words that start with ' le ' .	( . * \\b le [A-Za-z] * \\b . * ) { 2 }
+lines that contain the letter ' efg ' and the number " 33 " .	( . * efg . * ) & ( . * 33 . * )
+lines using ' ss ' between ' aba ' and ' le '	. * aba . * ss . * le . *
+lines containing one instance of " ca " followed by an ' k ' or a " t "	. * ( . * ca . * ( k | t ) . * ) . *
+lines using " r " or ' lives '	. * ( r | lives ) . *
+lines beginning with " 0 "	0 . *
+lines that use " mun " or ' b ' before words ending with ' er ' .	. * ( mun | b ) . * \\b [A-Zmun-z] * er \\b . *
+lines which contain ' itch ' at the start	itch . *
+lines that use " Jane " but not " New York " or " 2 " .	( . * Jane . * ) & ( ~ ( . * ( New _ York | 2 ) . * ) )
+lines that contain " 254 " and contain " AIDS " .	( . * 254 . * ) & ( . * AIDS . * )
+lines containing " foo " or " city of " before ' dist ' or ' dust '	. * ( foo | city _ of ) . * ( dist | dust ) . *
+lines with words that end in " Al " .	. * \\b [A-Za-z] * Al \\b . *
+lines that contain " x " and ' oa ' but not " z " .	( . * x . * ) & ( . * oa . * ) & ( ~ ( . * z . * ) )
+lines where there are three characters between instances of " spoon " and " WEX "	. * spoon . * . { 3 } . * WEX . * | . * WEX . * . { 3 } . * spoon . *
+lines where there is at least one word in which ' e ' follows ' boom '	. * ( ( \\b [A-Za-z] [A-Za-z] * \\b ) & ( . * boom . * e . * ) ) . *
+lines that use words starting with " b " .	. * \\b b [A-Za-z] * \\b . *
+lines containing ' g ' and containing ' oxy ' too	( . * g . * ) & ( . * oxy . * )
+lines that contain ' news ' before ' paper ' or " annou " .	. * news . * ( paper | annou ) . *
+lines that contain " abc " and " y " but not " z " .	( . * abc . * ) & ( . * y . * ) & ( ~ ( . * z . * ) )
+lines having words ending with ' cem ' .	. * \\b ( ( [A-Za-z] + ) & ( . * cem ) ) \\b . *
+lines where the word " annou " precedes the word " Odyssey "	. * \\b annou \\b . * \\b Odyssey \\b . *
+lines which have " buck "	. * buck . *
+lines that contain ' fa ' and " y " but not " z " .	( . * fa . * ) & ( . * y . * ) & ( ~ ( . * z . * ) )
+lines where the word ' sung ' appears between the words " sand ' sung ' tide "	. * \\b ssung \\b . * \\b sung \\b . * \\b tide \\b . * | . * \\b tide \\b . * \\b sung \\b . * \\b ssung \\b . *
+lines containing the word " der "	. * \\b der \\b . *
+lines containing ' knight ' and also containing ' off '	( . * knight . * ) & ( . * off . * )
+lines with words that end with ' oo ' before words that end with ' att '	. * \\b [A-Za-z] * oo \\b . * \\b [A-Za-z] * att \\b . *
+lines containg the number " der " .	. * der . *
+lines with ' 9 ' where the word ' little ' comes before ' 9 ' .	( . * 9 . * ) & ( . * \\b little \\b . * 9 . * )
+lines using words beginning with the letter ' gi ' .	. * \\b gi [A-Za-z] * \\b . *
+lines containing " ge " or " lower " before ' ger ' or ' tra '	. * ( ge | lower ) . * ( ger | tra ) . *
+lines that contain 2 numbers that contain ' right ' .	( . * right . * ) { 2 }
+lines ending with ' ss ' that use the word ' monkey ' .	. * \\b monkey \\b . * ss
+lines containing " Canada " or " an " before ' ger ' or ' tra '	. * ( Canada | an ) . * ( Canadar | tra ) . *
+lines that use ' native ' and ' oa ' .	( . * native . * ) & ( . * oa . * )
+3 letter lines starting with ' fu '	fu [A-Za-z] { 2 }
+lines that contain the word " hello " within 5 characters of the word " crack " .	. * ( \\b hello \\b . { 1 , 5 } \\b crack \\b | \\b crack \\b . { 1 , 5 } \\b hello \\b ) . *
+lines that contain the number ' jellyfish ' and " May " and begin with " Mary " .	( . * jellyfish . * ) & ( . * May . * ) & ( Mary . * )
+lines that contain at least two words beginging with ' life ' .	( . * \\b life [A-Za-z] * \\b . * ) { 2 }
+lines that start with a ' att ' and end with an ' a ' .	att . * a
+lines that contain 2 repetitions of the word " avenue "	( . * \\b avenue \\b . * ) { 2 }
+lines ending in ' z ' preceded by a word that ends in ' gu '	. * \\b [A-Za-z] * gu \\b . * z
+lines that have words ending in " Mary "	. * \\b [A-Za-z] * Mary \\b . *
+lines using a 3 letter sequence starting with " avenue "	. * avenue [A-Za-z] { 2 } . *
+lines that contain words ending in " Odyssey " .	. * ( . * \\b [A-Za-z] * Odyssey \\b . * ) . *
+lines which have " Chris "	. * Chris . *
+lines using the word ' vem ' followed by the word " up " .	( . * \\b vem \\b . * ) ( . * \\b up \\b . * )
+lines using ' abc ' after ' do '	. * do . * abc . *
+lines where " PQR " is between a number and " avenue "	. * [0-9] . * PQR . * avenue . * | . * avenue . * PQR . * [0-9] . *
+lines which contain ' le ' at the start	le . *
+lines using a word that ends in ' efg '	. * \\b ( ( [A-Za-z] + ) & ( . * efg ) ) \\b . *
+lines ending with " zoo " that use the word ' monkey ' .	. * \\b monkey \\b . * zoo
+lines that show " Mr " and " Mrs " but not ' fu ' or " Miss " .	( ( . * Mr . * ) & ( . * Mrs . * ) & ( ~ ( . * ( fu | Miss ) . * ) ) )
+lines using any instance of " d " or " e " followed by " s " or ' ia '	. * ( d | e ) . * ( s | ia ) . *
+lines containing ' h ' , or ' hula '	. * ( h | hula ) . *
+lines that have ' aba ' between " little " and ' cbc '	. * little . * aba . * cbc . * | . * cbc . * aba . * little . *
+lines that have a capital " a " , but not a lowercase " a " .	( . * a . * ) & ( ~ ( . * a . * ) )
+lines containing " annou " and ' 10 ' that do not have a " c " anywhere.	( . * annou . * ) & ( . * 10 . * ) & ( ~ ( . * c . * ) )
+lines which contain a word ending in " once " .	. * \\b [A-Za-z] * once \\b . *
+lines beginning with " bar "	bar . *
+lines that have words with ' native ' .	. * \\b [A-Za-z] * native [A-Za-z] * \\b . *
+lines using words starting with ' hula ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( hula . * ) ) . *
+lines that include " Canada " and ' ent ' but not " Cuba " .	( . * Canada . * ) & ( . * ent . * ) & ( ~ ( . * Cuba . * ) )
+lines with words that end with " i " before words that end with ' att '	. * \\b [A-Za-z] * i \\b . * \\b [A-Za-z] * att \\b . *
+lines using the vowel combination " ou " and " G " .	( . * ou . * ) & ( . * G . * )
+lines that contain " free " and mention ' breeding ' .	( . * free . * ) & ( . * breeding . * )
+lines that start with the letter ' a ' and end with the letter " d "	a . * d
+lines that have three numbers between " street " and " def " .	. * ( street . * ( . * [0-9] . * ) { 3 } . * def | . * def . * ( . * [0-9] . * ) { 3 } . * street ) . *
+lines beginning with the letter ' a '	a . *
+lines with " nt " and not " ch " .	( . * nt . * ) & ( ~ ( . * ch . * ) )
+lines using words containing " e " before " once " .	. * ( ( \\b [A-Za-z] [A-Za-z] * \\b ) & ( . * e . * once . * ) ) . *
+lines where ' ger ' is between ' 3 ' and ' 5 '	. * 3 . * ger . * 5 . * | . * 5 . * ger . * 3 . *
+lines that use " y " and ' tribes ' .	( . * y . * ) & ( . * tribes . * )
+lines that contain at least one word and the number ' P '	. * ( . * \\b [A-Za-z] + \\b . * ) & ( . * P . * ) . *
+lines that contain three words that start with the letter ' dre ' .	( . * \\b dre [A-Za-z] * \\b . * ) { 3 }
+lines with " car " between " try " and ' once upon a time ' .	. * try . * car . * once _ upon _ a _ time . * | . * once _ upon _ a _ time . * car . * try . *
+lines that contain words ending in " tran "	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * tran ) ) \\b . *
+lines that use the word " this is it " followed by words starting with ' ka '	. * \\b this _ is _ it \\b . * \\b ka [A-Za-z] * \\b . *
+lines that ends with ' P ' and contain two numbers.	( . * [0-9] . * ) { 2 } P
+lines that have ' sandwich ' but not the word " ku "	( . * sandwich . * ) & ( ~ ( . * \\b ku \\b . * ) )
+lines that contain a number ending with " ing "	. * [ing-9] * ing . *
+lines containing one instance of " ca " followed by an ' cake ' or a " t "	. * ( . * ca . * ( cake | t ) . * ) . *
+lines which have " ing " and " NOW " but not " sh " or " cl " .	( ( . * ing . * ) & ( . * NOW . * ) & ( ~ ( . * ( sh | cl ) . * ) ) )
+lines that end in ' y ' and begins in " per " .	per . * y
+lines containing " fried " and containing ' oxy ' too	( . * fried . * ) & ( . * oxy . * )
+lines that have the letter " nguyen " at the end of a word.	. * \\b [A-Za-z] * nguyen \\b . *
+lines having words starting with " Stacks " .	. * \\b Stacks [A-Za-z] * \\b . *
+lines that include both " his mother " and ' candles ' .	( . * his _ mother . * ) & ( . * candles . * )
+lines using the letter sequence ' off ' followed by a word ending in " ed " .	. * off . * \\b [A-Za-z] * ed \\b . *
+lines using a word that ends in ' pu '	. * \\b ( ( [A-Za-z] + ) & ( . * pu ) ) \\b . *
+lines using words containing " Mexico " before " i " .	. * ( ( \\b [A-Za-z] [A-Za-z] * \\b ) & ( . * Mexico . * i . * ) ) . *
+lines with instances of ' bi ' between " XYX " and a comma	. * XYX . * bi . * \ , . * | . * \ , . * bi . * XYX . *
+lines that contain both the word " B " and the word " stress "	. * ( . * \\b B \\b . * ) & ( . * \\b stress \\b . * ) . *
+lines with a word ending in ' 8 ' that contain only one word	( [^A-Za-z] ) * \\b [A-Za-z] * 8 \\b ( [^A-Za-z] ) *
+lines that contain words starting with " piggy " .	. * \\b piggy [A-Za-z] * \\b . *
+lines containing ' bu ' and " irth " that do not have a " c " anywhere.	( . * bu . * ) & ( . * irth . * ) & ( ~ ( . * c . * ) )
+lines containing " lake " and containing the word " s "	. * lake . * & ( . * \\b s \\b . * )
+lines utilizing the word " t " .	. * . * \\b t \\b . *
+lines using " piggy " or ' ny '	. * ( piggy | ny ) . *
+lines that end with " 9 "	. * 9
+lines using the vowel combination " irth " and " th " .	( . * irth . * ) & ( . * th . * )
+lines that contin words ending in ' ka ' .	. * \\b [A-Za-z] * ka \\b . *
+lines using the word " mar "	. * \\b mar \\b . *
+lines containing two or more words containing ' ia ' .	( . * \\b [A-Za-z] * ia [A-Za-z] * \\b . * ) { 2 , }
+lines ending with ' - '	. * -
+lines that have words ending in " fried " .	. * \\b [A-Za-z] * fried \\b . *
+lines that include " trust " and " Mexico " but not " Cuba " .	( . * trust . * ) & ( . * Mexico . * ) & ( ~ ( . * Cuba . * ) )
+lines that contain " tran " and the word " avenue " .	( . * tran . * ) & ( . * \\b avenue \\b . * )
+lines that start with the letter ' a ' and end with the letter " ch "	a . * ch
+lines that contain words ending in ' An ' .	. * ( . * \\b [A-Za-z] * An \\b . * ) . *
+lines that contain words between ' I ' and " P "	. * I . * \\b [A-Za-z] + \\b . * P . * | . * P . * \\b [A-Za-z] + \\b . * I . *
+lines containing " ku " after " mar " or " hat " .	. * ( mar | hat ) . * ku . *
+lines that contain the text ' oo '	. * oo . *
+lines where the word " cold " appears between the words " sand " cold " tide "	. * \\b scold \\b . * \\b cold \\b . * \\b tide \\b . * | . * \\b tide \\b . * \\b cold \\b . * \\b scold \\b . *
+lines using 2 instances of " at "	. * ( . * at . * ) { 2 } . *
+lines using ' ol ' after ' def '	. * def . * ol . *
+lines that end in ' y ' and begins in " oo " .	oo . * y
+lines with ' helper ' where the word " Columbia " comes before ' helper ' .	( . * helper . * ) & ( . * \\b Columbia \\b . * helper . * )
+lines which contain ' i ' and " u "	. * i . * u . * | . * u . * i . *
+lines containing ' tt ' after " re " or " per " .	. * ( re | per ) . * tt . *
+lines using the word ' sandwich ' at least once.	. * \\b sandwich \\b . *
+lines which have ' oo ' , but no instances of " ou " between the letters ' d ' and ' a '	( . * ouou . * ) & ( ~ ( . * d . * ou . * a . * | . * a . * ou . * d . * ) )
+lines that contain words ending in " ing "	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * ing ) ) \\b . *
+lines which contain " x " and " dc " .	( . * x . * ) & ( . * dc . * )
+lines containing " foo " or ' b ' before ' dist ' or ' dust '	. * ( foo | b ) . * ( dist | dust ) . *
+lines containing " blog " after " re " or " per " .	. * ( re | per ) . * blog . *
+lines using at least 4 ' bb '	( . * bb . * ) { 4 , }
+lines with the word ' Triple ' followed by words that start with ' sing '	. * \\b Triple \\b . * \\b sing [A-Za-z] * \\b . *
+lines that begins with the word " az " .	az \\b . *
+lines that contain the phrase ' nobel ' .	. * nobel . *
+lines using the letter sequence " ably " followed by a word ending in ' de ' .	. * ably . * \\b [A-Za-z] * de \\b . *
+lines where ' h ' is separated from " LOL " with a comma	. * h . * \ , . * LOL . * | . * LOL . * \ , . * h . *
+3 letter lines starting with " Odyssey "	Odyssey [A-Za-z] { 2 }
+lines using 2 instances of ' b '	. * ( . * b . * ) { 2 } . *
+lines that end with " life " and contain words that begin with " Sel "	. * \\b Sel [A-Za-z] * \\b . * life
+lines that end with " 2 " and contain words that begin with ' uu '	. * \\b uu [A-Za-z] * \\b . * 2
+lines that have a number, but only if it is followed by " LMNO "	. * [0-9] . * LMNO . *
+lines with " bit " and not ' t ' .	( . * bit . * ) & ( ~ ( . * t . * ) )
+lines containing the word ' def ' .	. * \\b def \\b . *
+lines that contain the text " trust "	. * trust . *
+lines with " helper " and " 2005 "	( . * 2005 . * ) & ( . * helper . * )
+lines that contain words starting with " oz " .	. * \\b oz [A-Za-z] * \\b . *
+lines that end in " d " and begins in ' a ' .	a . * d
+lines starting with ' uu ' followed by words starting with ' lay ' .	uu . * \\b lay [A-Za-lay] * \\b . *
+lines using 3 instances of ' 1 '	. * ( . * 1 . * ) { 3 } . *
+lines that have " cl " but not " WAS "	( . * cl . * ) & ( ~ ( . * WAS . * ) )
+lines that end with " bar " and include the phrase " Homer " .	( . * bar ) & ( . * Homer . * )
+lines that have words that start with " piggy " .	. * \\piggy piggy [A-Za-z] * \\piggy . *
+lines that contain 4 letter words ending in ' seeds '	. * \\b [A-Za-z] { 3 } seeds \\b . *
+lines that begins with the word " white " .	white \\b . *
+lines with ' en ' and not " ch " .	( . * en . * ) & ( ~ ( . * ch . * ) )
+lines that end with " b " .	. * b
+lines which contain " x " and ' ne ' .	( . * x . * ) & ( . * ne . * )
+lines containing " ge " or " hello " before ' ger ' or ' tra '	. * ( ge | hello ) . * ( ger | tra ) . *
+lines where ' r ' is between a number and " LMNO "	. * [0-9] . * r . * LMNO . * | . * LMNO . * r . * [0-9] . *
+lines having words ending with ' ig ' .	. * \\b ( ( [A-Za-z] + ) & ( . * ig ) ) \\b . *
+lines that start with ' hairy ' and end in a number.	hairy . * [0-9]
+lines which contain " re " .	. * re . *
+lines containing an instance of the name ' ant ' .	. * ant . *
+lines that using the symbol ' + ' or ' life ' .	. * ( \ + | life ) . *
+lines that start with " at "	at . *
+lines using ' ness ' or ' candles '	. * ( ness | candles ) . *
+lines that feature ' email ' followed by the word ' p ' .	. * email . * \\b p \\b . *
+lines using the word " piggy " and ' k ' .	. * ( . * \\b piggy \\b . * ) & ( . * k . * )
+lines that use ' p ' but not " Janet " or " 2 " .	( . * p . * ) & ( ~ ( . * ( pt | 2 ) . * ) )
+lines that use ' native ' and " ant " .	( . * native . * ) & ( . * ant . * )
+lines which contain only the number ' grass ' .	grass
+lines that contain ' news ' before ' en ' or ' show ' .	. * news . * ( en | show ) . *
+lines that have ' ong ' followed by the word ' car '	. * ong . * \\b car \\b . *
+lines with " re "	. * re . *
+lines that end with " bar " and include the phrase " Ms " .	( . * bar ) & ( . * Ms . * )
+lines that start with ' A ' or ' sw '	A . * | sw . *
+lines that use words ending with ' g ' .	. * \\b [A-Za-z] * g \\b . *
+lines that contain ' day ' or ' ABC '	. * ( day | ABC ) . *
+lines utilizing words ending with ' er ' .	. * \\b ( ( [A-Za-z] + ) & ( . * er ) ) \\b . *
+lines containing ' sign ' and containing the word " house "	. * sign . * & ( . * \\b house \\b . * )
+lines that have ' efg ' followed by the word " revolution "	. * efg . * \\b revolution \\b . *
+lines that contain " Transport One " or ' ber '	. * ( Transport _ One | ber ) . *
+lines containing the word ' ness ' and containing the word " lace "	( . * \\b ness \\b . * ) & ( . * \\b lace \\b . * )
+lines using words that have " d "	. * \\b [A-Za-z] * d [A-Za-z] * \\b . *
+lines that start with the letter " say " and end with the letter ' c '	say . * c
+lines containing the word ' fo ' and containing the word " lace "	( . * \\b fo \\b . * ) & ( . * \\b lace \\b . * )
+lines which begin with " life " , has a ' z ' in the middle and end in a number.	life . * z . * [0-9]
+lines using at least two numbers, " aby " , and ' h ' .	( . * [0-9] . * ) { 2 } & ( . * aby . * ) & ( . * h . * )
+lines using ' ness ' or " PQR "	. * ( ness | PQR ) . *
+lines that begin with the word ' ger ' .	ger \\b . *
+lines that have at least two words that start with " avenue " .	( . * \\b avenue [A-Za-z] * \\b . * ) { 2 }
+lines utilizing words starting with " with a period immediately after it. " .	. * \\with _ a _ period _ immediately _ after _ it. with _ a _ period _ immediately _ after _ it. [A-Za-z] * \\with _ a _ period _ immediately _ after _ it. . *
+lines using the vowel combination " ou " and ' def ' .	( . * ou . * ) & ( . * def . * )
+lines that do not contain the letter " 19 " .	~ ( . * 19 . * )
+lines using words ending in ' helper ' .	. * \\b [A-Za-z] * helper \\b . *
+lines starting with ' little '	little . *
+lines starting with ' uu ' followed by words starting with ' s ' .	uu . * \\b s [A-Za-s] * \\b . *
+lines that have words ending with a " ked "	. * ( ( \\b . * ked \\b ) & ( [A-Za-z] + ) ) . *
+lines containing " oo " and " ked " .	( . * oo . * ) & ( . * ked . * )
+lines containing ' ger '	. * ger . *
+lines using ' ly ' or " Mary "	. * ( ly | Mary ) . *
+lines that contain three words that start with the letter ' cbc ' .	( . * \\b cbc [A-Za-z] * \\b . * ) { 3 }
+lines that have the letter " L " at the end of a word.	. * \\b [A-Za-z] * L \\b . *
+lines containing " lake " and containing the word " ing "	. * lake . * & ( . * \\b ing \\b . * )
+lines using words starting with ' turkey ' .	. * ( ( \\b [A-Za-z] + \\b ) & ( turkey . * ) ) . *
+lines containing one instance of " ca " followed by an " r " or a ' how '	. * ( . * ca . * ( r | how ) . * ) . *
+lines that have words ending with " z " .	. * \\b [A-Za-z] * z \\b . *
+lines having words starting with " ause " .	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( ause . * ) ) \\b . *
+lines that contain " Freddie Mercury " and contain " once " .	( . * Freddie _ Mercury . * ) & ( . * once . * )
+lines that contain instances of " B " , but only if its one of the first three words.	( [^A-Za-z] * \\b [A-Za-z] + \\b [^A-Za-z] * ) { 0 , 2 } [^A-Za-z] * \\b B \\b . *
+lines containing usage of the word " ant " .	. * \\b ant \\b . *
+lines using the letter sequence ' ong ' followed by a word ending in " ed " .	. * ong . * \\b [A-Za-z] * ed \\b . *
+lines containing ' left ' and also containing " Ms "	( . * left . * ) & ( . * Ms . * )
+lines starting with ' uu ' followed by words starting with ' wrench ' .	uu . * \\b wrench [A-Za-wrench] * \\b . *
+lines using " foo " between " car " and ' ham '	. * ( car . * foo . * ham | ham . * foo . * car ) . *
+lines that contain ' is ' or ' 1 '	. * ( is | 1 ) . *
+lines using the word ' art ' .	. * \\b art \\b . *
+lines that utilize words starting with " fried " .	. * \\b fried [A-Za-z] * \\b . *
+lines that contain words ending in ' monkey '	. * \\b ( ( [A-Za-z] [A-Za-z] * ) & ( . * monkey ) ) \\b . *
+lines using any instance of " d " or " e " followed by ' life ' or " r "	. * ( d | e ) . * ( life | r ) . *
+lines where there are three characters between instances of " ABC " and ' oa '	. * ABC . * . { 3 } . * oa . * | . * oa . * . { 3 } . * ABC . *
+lines that start with a ' z ' and end with an " c " .	z . * c
+lines that contain ' 2 ' but do not contain ' Bunsen ' .	( . * 2 . * ) & ( ~ ( . * Bunsen . * ) )
+lines with " tch " but not " Topo " .	( . * tch . * ) & ( ~ ( . * Topo . * ) )
+lines containing " bar " after " mar " or " is " .	. * ( mar | is ) . * bar . *
+lines containing " spoon "	( . * spoon . * ) . *
+lines that contain words that have the letter " I am mad " occuring after the letter ' c ' .	. * \\b [A-Za-z] * c [A-Za-z] * I _ am _ mad [A-Za-z] * \\b . *
+lines that carry the word " Jim " located in between " az " and " Slim " .	. * az . * \\b Jim \\b . * Slim . * | . * Slim . * \\b Jim \\b . * az . *
+lines that list the word ' 33 ' .	. * \\b 33 \\b . *
+lines containing " annou " and ' irl ' that do not have a " c " anywhere.	( . * annou . * ) & ( . * irl . * ) & ( ~ ( . * c . * ) )
+lines that contain words ending in " tt "	. * \\b [A-Za-z] * tt \\b . *
+lines that have 3 numbers and contain the word " a " .	( . * [0-9] . * ) { 3 } & ( . * \\b a \\b . * )
+lines using the word " ly " next to a number.	( . * \\b ly \\b . * ) & ( . * [0-9] . * )
+lines which begin with the word ' news '	\\b ( ( [A-Za-z] + ) & ( news ) ) \\b . *
+lines that contain the text, ' iffl ' .	. * iffl . *
+lines utilizing words ending with ' mae ' .	. * \\b ( ( [A-Za-z] + ) & ( . * mae ) ) \\b . *
+lines that have words that start with ' trolls ' .	. * \\trolls trolls [A-Za-z] * \\trolls . *
+lines that contain words beginning in ' 7 '	. * \\b 7 [A-Za-z] * \\b . *
+lines ending with " ked "	. * ked
+lines that contain words starting with " Chris " .	. * \\b ( ( [A-Za-z] + ) & ( Chris . * ) ) \\b . *
+lines that contain only 2 words, and, begin with the letter " run " .	run . * & ( ( [^A-Za-z] ) * ( \\b ) * [A-Za-z] + \\b ( [^A-Za-z] ) * ) { 2 }
+lines using ' x ' before " Sel "	. * x . * Sel . *
+lines that contain 2 numbers that contain ' ca ' .	( . * ca . * ) { 2 }
+lines containing one instance of " ca " followed by an ' Triple ' or a " t "	. * ( . * ca . * ( Triple | t ) . * ) . *
+lines that contain 4 letter words ending in ' os '	. * \\b [A-Za-z] { 3 } os \\b . *
+lines that have the letter " boby " at the end of a word.	. * \\b [A-Za-z] * boby \\b . *
+lines that contain ' fu ' before ' ba ' or ' fo ' .	. * fu . * ( ba | fo ) . *
+lines using the word ' 4 ' at least once.	. * \\b 4 \\b . *
+lines that have a word containing the string " a "	. * \\b [A-Za-z] * a [A-Za-z] * \\b . *
+lines which contain " t "	. * t . *
+lines of words whose last letters are ' knight ' .	. * \\b [A-Za-z] * knight \\b . *
+lines that feature " az " followed by the word " spam " .	. * az . * \\b spam \\b . *
+lines using the word ' lives ' followed by the word " up " .	( . * \\b lives \\b . * ) ( . * \\b up \\b . * )
+lines which have ' oo ' , but no instances of ' o ' between the letters ' d ' and ' you '	( . * oo . * ) & ( ~ ( . * d . * o . * you . * | . * you . * o . * d . * ) )
+lines that contain the numbers ' oa ' , and " 10 "	. * ( oa . * 10 | 10 . * oa ) . *
+lines that start with ' A ' or ' start '	A . * | start . *
+lines that use ' ness ' but not " Janet " or " 2 " .	( . * ness . * ) & ( ~ ( . * ( nesst | 2 ) . * ) )
+lines that contain the letter " 9 " and the number " 33 " .	( . * 9 . * ) & ( . * 33 . * )
+lines that contain 2 repetitions of the word ' right '	( . * \\b right \\b . * ) { 2 }
+lines using at least 3 ' sign '	( . * sign . * ) { 3 , }
+lines which have instances of " hello " .	. * hello . *
+lines using words ending in ' nobel ' .	. * \\b [A-Za-z] * nobel \\b . *
+lines containing words which begin with " oz " and end with " d "	. * \\b oz [A-Za-z] * d \\b . *
+lines using any instance of ' p ' or " e " followed by " s " or " r "	. * ( p | e ) . * ( s | r ) . *
+lines that contain " Freddie Mercury " and contain " and so it came to pass " .	( . * Freddie _ Mercury . * ) & ( . * and _ so _ it _ came _ to _ pass . * )
+lines that contain the word ' abc ' within 5 characters of the word " world " .	. * ( \\b abc \\b . { 1 , 5 } \\b world \\b | \\b world \\b . { 1 , 5 } \\b abc \\b ) . *
+lines that contain ' ig ' or ' physics ' before ' law ' .	. * ( ig | physics ) . * law . *
+lines that use ' mo ' followed by words starting with ' ol '	. * mo . * \\b ( ( [A-Za-z] + ) & ( ol . * ) ) \\b . *
+lines that contain " c "	. * c . *
+lines with " car " between " Mrs " and " say " .	. * Mrs . * car . * say . * | . * say . * car . * Mrs . *
+lines using " foo " between " car " and " eleven "	. * ( car . * foo . * eleven | eleven . * foo . * car ) . *
+lines that contain the words " the " and ' oon ' .	( . * \\b the \\b . * ) & ( . * \\b oon \\b . * )
+lines with words that end with ' bu ' before words that end with ' att '	. * \\b [A-Za-z] * bu \\b . * \\b [A-Za-z] * att \\b . *
+lines containing ' tron ' and containing ' oxy ' too	( . * tron . * ) & ( . * oxy . * )
+lines with words matching the word ' law ' .	. * \\b law \\b . *
+lines which have ' art ' and " out " but not " sh " or " cl " .	( ( . * art . * ) & ( . * out . * ) & ( ~ ( . * ( sh | cl ) . * ) ) )
+lines with " car " between " try " and " hero " .	. * try . * car . * hero . * | . * hero . * car . * try . *
+lines that begin with a number and end with ' ug ' or " avenue " .	[0-9] . * ( ug | avenue )
+lines that contain the phrase " going " .	. * going . *
+lines that start with a ' z ' and end with an " G " .	z . * G
+lines that contain both a " B " and a " Columbia " .	( . * B . * ) & ( . * Columbia . * )
+lines containing ' fur ' and also containing ' right '	( . * fur . * ) & ( . * right . * )
+lines that contain words that have the letter ' e ' occuring after the letter ' + ' .	. * \\b [A-Za-z] * + [A-Za-z] * e [A-Za-z] * \\b . *
+lines that use the word ' oon ' followed by words starting with ' ka '	. * \\b oon \\b . * \\b ka [A-Za-z] * \\b . *
+lines containing " annou " and " irth " that do not have a " trust " anywhere.	( . * annou . * ) & ( . * irth . * ) & ( ~ ( . * trust . * ) )
+lines using the word " wi " next to a number.	( . * \\b wi \\b . * ) & ( . * [0-9] . * )
+lines that list the word ' ug ' .	. * \\b ug \\b . *
+lines containing two or more words containing " up " .	( . * \\b [A-Za-z] * up [A-Za-z] * \\b . * ) { 2 , }
+lines containing " ku " after " mar " or " AIDS " .	. * ( mar | AIDS ) . * ku . *
+lines using 5 ' n '	( . * n . * ) { 5 }
+3 letter lines starting with " WAS "	WAS [A-Za-z] { 2 }
+lines utilizing the word ' gophers ' .	. * . * \\b gophers \\b . *
+lines which contain ' 9 ' and " y " .	( . * 9 . * ) & ( . * y . * )
+lines which contain both ' r ' and " e " but no instances of " u " .	( . * r . * ) & ( . * e . * ) & ( ~ ( . * u . * ) )
+lines that contain both the word " bar " and the word ' r '	. * ( . * \\b bar \\b . * ) & ( . * \\b r \\b . * ) . *
+lines containing " Jane " and also containing ' off '	( . * Jane . * ) & ( . * off . * )
+lines that feature ' email ' followed by the word " nt " .	. * email . * \\b nt \\b . *
+lines starting and ending with ' ber '	ber ( . * ber ) ?
+lines that contain the phrase ' you ' .	. * you . *
+lines which contain five or more ' breeding '	( . * breeding . * ) { 5 , }
+lines that contain the letter ' Bunsen ' and the number " 33 " .	( . * Bunsen . * ) & ( . * 33 . * )
+lines that end containing the letter ' no ' .	. * no
+lines using at least two numbers, " aby " , and ' art ' .	( . * [0-9] . * ) { 2 } & ( . * aby . * ) & ( . * art . * )
+lines that contain words using " New York "	. * \\b [A-Za-z] * New _ York [A-Za-z] * \\b . *
+lines containing " revolution " or " an " before ' ger ' or ' tra '	. * ( revolution | an ) . * ( revolutionr | tra ) . *
+lines containing words that end with ' do '	. * \\b [A-Za-z] * do \\b . *
+lines containing ' tt ' and containing ' lie ' too	( . * tt . * ) & ( . * lie . * )
+lines that contain words that have the letter ' little ' occuring after the letter ' c ' .	. * \\b [A-Za-z] * c [A-Za-z] * little [A-Za-z] * \\b . *
+lines that have ' fu ' but not the word ' ham '	( . * fu . * ) & ( ~ ( . * \\b ham \\b . * ) )
+lines that feature " cold " followed by the word " spam " .	. * cold . * \\b spam \\b . *
+lines that have words with " Cuba " .	. * \\b [A-Za-z] * Cuba [A-Za-z] * \\b . *
+lines using the word " hurry " followed by the word ' Bunsen ' .	( . * \\b hurry \\b . * ) ( . * \\b Bunsen \\b . * )
+lines that contain ' dre ' or ' ti '	. * ( dre | ti ) . *
+lines having words ending with " th " .	. * \\b ( ( [A-Za-z] + ) & ( . * th ) ) \\b . *
+lines starting with ' paper '	paper . *
+lines that contain words ending in ' oocl ' .	. * ( . * \\b [A-Za-z] * oocl \\b . * ) . *
+lines containing " ight " or ' sung '	. * ( ight | sung ) . *
+lines containing ' left ' and also containing ' pa '	( . * left . * ) & ( . * pa . * )
+lines with " helper " and " irth "	( . * irth . * ) & ( . * helper . * )
+lines which have " gue " , but no instances of ' o ' between the letters ' d ' and ' a '	( . * gue . * ) & ( ~ ( . * d . * o . * a . * | . * a . * o . * d . * ) )
+lines that contain 5 numbers and 2 words that contain ' n ' .	. * ( . * [0-9] . * ) { 5 } & ( . * \\b [A-Za-z] * n [A-Za-z] * \\b . * ) { 2 } . *
+lines that contain the number " sorry " .	. * sorry . *
+lines using ' ness ' or ' tron '	. * ( ness | tron ) . *
+lines starting with ' An ' followed by a word with ' oa ' .	An . * ( ( \\b [A-Za-z] + \\b ) & ( . * oa . * ) ) . *
+lines that use " Jane " but not ' de ' or " 2 " .	( . * Jane . * ) & ( ~ ( . * ( de | 2 ) . * ) )
+lines with a word ending in ' fe ' that contain only one word	( [^A-Za-z] ) * \\b [A-Za-z] * fe \\b ( [^A-Za-z] ) *
+lines containing ' Y '	. * Y . *
+lines that contain the number " 2005 " and " New York " and begin with " Mary " .	( . * 2005 . * ) & ( . * New _ York . * ) & ( Mary . * )
+lines using the vowel combination " 254 " and " th " .	( . * 254 . * ) & ( . * th . * )
+lines containing " y " before ' b '	. * y . * b . *
+lines that end with ' tra ' and contain words that begin with " Sel "	. * \\b Sel [A-Za-z] * \\b . * tra
+3 letter lines starting with ' breeding '	breeding [A-Za-z] { 2 }
+lines that utilize words starting with ' art ' .	. * \\b ( ( [A-Za-z] + ) & ( art . * ) ) \\b . *
+lines using any instance of " d " or " e " followed by " up " or " r "	. * ( d | e ) . * ( up | r ) . *
+lines containing words that begin with " G " and end with " mun "	. * \\b G [A-Za-z] * mun \\b . *
+lines that use " Jane " but not ' mo ' or " 2 " .	( . * Jane . * ) & ( ~ ( . * ( mo | 2 ) . * ) )
+lines where the word " and " appears between the words " sand " and ' - '	. * \\b sand \\b . * \\b and \\b . * \\b - \\b . * | . * \\b - \\b . * \\b and \\b . * \\b sand \\b . *
+lines which have " mun " and " out " but not " sh " or " cl " .	( ( . * mun . * ) & ( . * out . * ) & ( ~ ( . * ( sh | cl ) . * ) ) )
+lines that do not contain the letter " city of "	~ ( . * city _ of . * )
+lines that contain at least one word and the number ' min '	. * ( . * \\b [A-Za-z] + \\b . * ) & ( . * min . * ) . *
+lines using ' abc ' after ' Triple '	. * Triple . * abc . *
+lines containing ' er ' and containing ' oxy ' too	( . * er . * ) & ( . * oxy . * )
