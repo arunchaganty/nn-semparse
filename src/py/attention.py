@@ -137,7 +137,7 @@ class AttentionModel(NeuralModel):
     h_t, annotations = self._encode(ex.x_inds)
     beam = [[Derivation(ex, 1, [], hidden_state=h_t, 
                         attention_list=[], copy_list=[])]]
-    finished = []  # Finished entires are (prob, token_list)
+    finished = []
     for i in range(1, max_len):
       new_beam = []
       for deriv in beam[i-1]:

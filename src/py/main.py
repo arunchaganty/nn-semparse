@@ -328,7 +328,10 @@ def make_heatmap(x_str, y_str, attention_list, copy_list):
     return 'rgb(%d,%d,%d)' % (r2, g2, b2)
 
   x_toks = x_str.split(' ') + ['EOS']
-  y_toks = y_str.split(' ') + ['EOS']
+  if y_str == '':
+    y_toks = ['EOS']
+  else:
+    y_toks = y_str.split(' ') + ['EOS']
   lines = ['<table>', '<tr>', '<td/>']
   for w in y_toks:
     lines.append('<td>%s</td>' % w)
