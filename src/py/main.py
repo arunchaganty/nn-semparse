@@ -48,8 +48,8 @@ def _parse_args():
                       help='Dimension of input vectors.')
   parser.add_argument('--output-embedding-dim', '-o', type=int,
                       help='Dimension of output word vectors.')
-  parser.add_argument('--lexicon', '-l', default=None,
-                      help='Use a lexicon to copy words (options: [copy]).')
+  parser.add_argument('--copy', '-p', default=None,
+                      help='Way to copy words (options: [lexicon, attention]).')
   parser.add_argument('--unk-cutoff', '-u', type=int, default=0,
                       help='Treat input words with <= this many occurrences as UNK.')
   parser.add_argument('--num_epochs', '-t', type=int, default=0,
@@ -152,7 +152,7 @@ def get_output_vocabulary(dataset):
     return constructor(sentences, OPTIONS.output_embedding_dim)
 
 def get_lexicon(dataset):
-  if OPTIONS.lexicon == 'copy':
+  if OPTIONS.copy == 'lexicon':
     sentences = [x[0] for x in dataset]
     # TODO(robinjia): load lexicon entries for test data too
     return Lexicon.from_sentences(sentences, OPTIONS.hidden_size,

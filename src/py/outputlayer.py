@@ -19,7 +19,10 @@ class OutputLayer(object):
     self.de = vocab.emb_size
     self.nh = hidden_size
     self.nw = vocab.size()
-    self.nl = lexicon.num_embeddings
+    if lexicon:
+      self.nl = lexicon.num_embeddings
+    else:
+      self.nl = 0
     self.create_vars()
 
   def create_vars(self):
@@ -27,11 +30,13 @@ class OutputLayer(object):
         name='w_out', 
         value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nw, self.nh)).astype(theano.config.floatX))
         # Each row is one word
+    self.params = [self.w_out]
 
-    self.w_lex = theano.shared(
-        name='w_lex', 
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nl, self.nh)).astype(theano.config.floatX))
-    self.params = [self.w_out, self.w_lex]
+    if self.lexicon:
+      self.w_lex = theano.shared(
+          name='w_lex', 
+          value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nl, self.nh)).astype(theano.config.floatX))
+      self.params.append(self.w_lex)
 
   def write(self, h_t, cur_lex_entries):
     """Get a distribution over words to write.

@@ -76,7 +76,8 @@ class AttentionModel(NeuralModel):
     c_t = self.spec.get_context(alpha, annotations)
     write_dist = self.spec.f_write(h_for_write, c_t, cur_lex_entries)
     self._decoder_write = theano.function(inputs=[annotations, h_prev, cur_lex_entries],
-                                          outputs=[write_dist, c_t, alpha])
+                                          outputs=[write_dist, c_t, alpha],
+                                          on_unused_input='warn')  # For lexicon
 
   def setup_backprop(self):
     x = T.lvector('x_for_backprop')
