@@ -15,3 +15,9 @@
 # Temporary files
 tmp*
 *.tmp
+
+# Output/param files
+out/*
+out_*
+params/*
+params_*
