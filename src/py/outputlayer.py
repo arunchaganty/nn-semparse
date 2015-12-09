@@ -38,7 +38,7 @@ class OutputLayer(object):
           value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nl, self.nh)).astype(theano.config.floatX))
       self.params.append(self.w_lex)
 
-  def write(self, h_t, cur_lex_entries):
+  def write(self, h_t, cur_lex_entries, attn_scores=None):
     """Get a distribution over words to write.
     
     We allow the output layer to write an output word or use a lexicon entry.
@@ -56,17 +56,22 @@ class OutputLayer(object):
     Args:
       h_t: theano vector representing hidden state
       cur_lex_entries: theano lvector that lists which lexicon entries are active
-        for the current example.
-        Each element of cur_lex_entries should be in [0, lexicon.size())
+          for the current example.
+          Each element of cur_lex_entries should be in [0, lexicon.size())
+      attn_scores: unnormalized scores from the attention module, if doing 
+          attention-based copying.
     """
-    # Concatenate embeddings of all lexicon entries in cur_lex_entries
     def f(i, *params):
+      # Concatenate embeddings of all lexicon entries in cur_lex_entries
       return self.w_lex[i]
     if self.lexicon:
       lex_embs, _ = theano.scan(f, sequences=[cur_lex_entries],
                                 non_sequences=self.w_lex)
       big_mat = T.concatenate([self.w_out, lex_embs])  # total_num_words x self.nh
       mat = ifelse(T.eq(cur_lex_entries.shape[0], 0), self.w_out, big_mat)
+      return T.nnet.softmax(T.dot(h_t, mat.T))[0]
+    elif attn_scores:
+      scores = T.dot(h_t, self.w_out.T)
+      return T.nnet.softmax(T.concatenate([scores, attn_scores]))[0]
     else:
-      mat = self.w_out
-    return T.nnet.softmax(T.dot(h_t, mat.T))[0]
+      return T.nnet.softmax(T.dot(h_t, self.w_out.mat.T))[0]

@@ -17,6 +17,9 @@ class AttentionSpec(Spec):
   Concrete subclasses must implement the following method:
   - self.create_rnn_layer(vocab, hidden_size): Create an RNN layer.
   """
+  def _process_init_kwargs(self, attention_copying=False):
+    self.attention_copying = attention_copying
+  
   def create_vars(self):
     # TODO: move this into lstm.py
     if self.rnn_type == 'lstm':
@@ -78,8 +81,11 @@ class AttentionSpec(Spec):
     input_t = T.concatenate([y_emb_t, c_prev])
     return self.decoder.step(input_t, h_prev)
 
-  def get_alpha(self, h_for_write, annotations):
+  def get_attention_scores(self, h_for_write, annotations):
     scores = T.dot(T.dot(self.w_attention, annotations.T).T, h_for_write)
+    return scores
+
+  def get_alpha(self, scores):
     alpha = T.nnet.softmax(scores)[0]
     return alpha
 
@@ -87,7 +93,9 @@ class AttentionSpec(Spec):
     c_t = T.dot(alpha, annotations)
     return c_t
 
-  def f_write(self, h_t, c_t, cur_lex_entries):
+  def f_write(self, h_t, c_t, cur_lex_entries, scores):
     """Gives the softmax output distribution."""
     input_t = T.concatenate([h_t, c_t])
-    return self.writer.write(input_t, cur_lex_entries)
+    if not self.attention_copying:
+      scores = None
+    return self.writer.write(input_t, cur_lex_entries, scores)

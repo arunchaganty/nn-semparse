@@ -16,7 +16,7 @@ class Spec(object):
   - self.get_local_params(): Get all local parameters (excludes vocabulary).
   """
   def __init__(self, in_vocabulary, out_vocabulary, lexicon, hidden_size,
-               rnn_type='lstm'):
+               rnn_type='lstm', **kwargs):
     """Initialize.
 
     Args:
@@ -31,6 +31,11 @@ class Spec(object):
     self.hidden_size = hidden_size
     self.rnn_type = rnn_type
     self.create_vars()
+    self._process_init_kwargs(**kwargs)
+
+  def _process_init_kwargs(self, kwargs):
+    """Optionally override this to process special kwargs at __init__()."""
+    pass
 
   def set_in_vocabulary(self, in_vocabulary):
     # TODO: make this work

@@ -199,9 +199,16 @@ def preprocess_data(in_vocabulary, out_vocabulary, lexicon, raw):
   return data
 
 def get_spec(in_vocabulary, out_vocabulary, lexicon):
+  kwargs = {'rnn_type': OPTIONS.rnn_type}
+  if OPTIONS.copy == 'attention':
+    if OPTIONS.model == 'attention':
+      kwargs['attention_copying'] = True
+    else:
+      print >> sys.stderr, "Can't use use attention-based copying without attention model"
+      sys.exit(1)
   constructor = MODELS[OPTIONS.model].get_spec_class()
-  return constructor(in_vocabulary, out_vocabulary, lexicon,
-                     OPTIONS.hidden_size, rnn_type=OPTIONS.rnn_type)
+  return constructor(in_vocabulary, out_vocabulary, lexicon, 
+                     OPTIONS.hidden_size, **kwargs)
 
 def get_model(spec):
   constructor = MODELS[OPTIONS.model]

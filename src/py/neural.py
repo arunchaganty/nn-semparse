@@ -68,7 +68,7 @@ class NeuralModel(object):
       objective: the current objective value
       gradients: map from parameter to gradient
     """
-    info = self._backprop(ex.x_inds, ex.y_inds, ex.lex_inds, ex.y_lex_inds)
+    info = self._backprop(ex.x_inds, ex.y_inds, ex.lex_inds, ex.y_lex_inds, ex.y_in_x_inds)
     p_y_seq = info[0]
     log_p_y = info[1]
     gradients_list = info[2:]

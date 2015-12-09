@@ -51,3 +51,9 @@ class Example(object):
       self.lex_entries = []
       self.lex_inds = []
       self.y_lex_inds = [[] for i in range(len(self.y_toks)+1)]
+
+    self.y_in_x_inds = (
+        [[int(x_tok == y_tok) for x_tok in self.x_toks] + [0] for y_tok in self.y_toks] +
+        [[0] * (len(self.x_toks) + 1)])
+        # Make sure to add EOS tags for both x and y
+
