@@ -1,4 +1,5 @@
 #Compiled files
+classes/
 *.jar
 *.o
 *.pyc
