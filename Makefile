@@ -1,6 +1,6 @@
 default: jar
 
-DEPS := $(shell ls lib/*.jar) $(shell find src -name "*.java")
+DEPS := $(shell ls lib/*.jar) $(shell find src -name "*.java") $(shell find src -name "*.scala")
 
 classes: $(DEPS)
 	mkdir -p classes
