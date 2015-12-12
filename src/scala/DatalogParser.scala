@@ -9,7 +9,6 @@ http://www.codecommit.com/blog/scala/formal-language-processing-in-scala
 http://www.codecommit.com/blog/scala/the-magic-behind-parser-combinators
 http://debasishg.blogspot.com/2008/04/external-dsls-made-easy-with-scala.html
 */
-
 import scala.util.parsing.combinator.lexical.StdLexical
 import scala.util.parsing.combinator.RegexParsers
 import scala.util.parsing.combinator.syntactical.StandardTokenParsers
@@ -160,10 +159,25 @@ object DatalogParser extends StandardTokenParsers {
 
   def load(path:String) : List[StatementItem] = {
     val tokens = new lexical.Scanner(new PagedSeqReader(PagedSeq fromFile path))
-    /*var t = tokens; while (!t.atEnd) { println(t.first) t = t.rest }*/
     phrase(program)(tokens) match {
       case Success(statements, _) => statements
-      case e:NoSuccess => throw Utils.fails("%s", e)
+      case e:NoSuccess => loadSafe(path)
     }
+  }
+
+  def loadSafe(path:String) : List[StatementItem] = {
+    // load one line at a time, catch exceptions
+    Utils.logs("DatalogParser.loadSafe(): start");
+    val list = scala.collection.mutable.ListBuffer.empty[StatementItem]
+    for(line <- io.Source.fromFile(path).getLines()) {
+      Utils.logs(line);
+      val tokens = new lexical.Scanner(line)
+      phrase(program)(tokens) match {
+        case Success(statements, _) => list += statements(0)
+        case e:NoSuccess => list += null
+      }
+    } 
+    Utils.logs("DatalogParser.loadSafe(): end");
+    list.toList
   }
 }

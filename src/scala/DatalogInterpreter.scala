@@ -565,7 +565,7 @@ class DatalogInterpreter(U:Universe) {
         if (source == null || currWorldInt.executeQuery(source).size > 0)
           processSpecialStatement(path, statement, name, args)
       case rule:Rule => currWorldInt.executeRule(rule)
-      case _ => throw Utils.impossible
+      case _ => Utils.logs("Example FAILED TO PARSE")
     }
   }
 
@@ -621,7 +621,7 @@ class DatalogInterpreter(U:Universe) {
   def process(path:String, continue: =>Boolean) : Unit = {
     val statements = Utils.track("Parsing %s", path) {
       if ((new File(path)).exists)
-        MyUtils.cache(path, DatalogParser.load(path))
+        DatalogParser.load(path)
       else {
         Utils.warnings("File doesn't exist: %s", path)
         Nil

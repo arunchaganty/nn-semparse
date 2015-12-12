@@ -193,10 +193,14 @@ class DataManager(U:Universe) extends BaseDataManager[Example] {
               }
               val words = wordItems.map(toString)
               if (words.size <= maxSentenceLength) {
-                val ex = new BaseExample(newId, words, U.currWorld, new Answer(currWorldInt.executeQuerySafe(trueExpr)), groupId)
-                ex.trueExpr = trueExpr
-                printEx(ex)
-                add(ex)
+                try { 
+                  val ex = new BaseExample(newId, words, U.currWorld, new Answer(currWorldInt.executeQuerySafe(trueExpr)), groupId)
+                  ex.trueExpr = trueExpr
+                  printEx(ex)
+                  add(ex)
+                } catch {
+                  case e: Exception => Utils.logs("Example FAILED TO EXECUTE")
+                }
               }
             case _ => invalidUsage(statement)
           }

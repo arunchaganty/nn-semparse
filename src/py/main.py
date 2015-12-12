@@ -7,8 +7,10 @@ import math
 import numpy
 import os
 import random
+import re
 import subprocess
 import sys
+import tempfile
 import theano
 
 # Local imports
@@ -265,18 +267,82 @@ def decode(model, ex):
   else:
     return model.decode_beam(ex, beam_size=OPTIONS.beam_size)
 
+def compare_answers_geoquery(true_answers, pred_answers):
+  def format_lf(s):
+    # Strip underscores, collapse spaces when not inside quotation marks
+    toks = []
+    in_quotes = False
+    quoted_toks = []
+    for t in s.split():
+      if in_quotes:
+        if t == "'":
+          in_quotes = False
+          toks.append('"%s"' % ' '.join(quoted_toks))
+          quoted_toks = []
+        else:
+          quoted_toks.append(t)
+      else:
+        if t == "'":
+          in_quotes = True
+        else:
+          if len(t) > 1 and t.startswith('_'):
+            toks.append(t[1:])
+          else:
+            toks.append(t)
+    lf = ''.join(toks)
+
+    # Balance parentheses
+    num_left_paren = sum(1 for c in lf if c == '(')
+    num_right_paren = sum(1 for c in lf if c == ')')
+    diff = num_left_paren - num_right_paren
+    if diff > 0:
+      lf = lf + ')' * diff
+    return lf
+
+  all_lfs = ([format_lf(s) for s in true_answers] +
+             [format_lf(s) for s in pred_answers])
+  tf_lines = ['_parse([query], %s).' % lf for lf in all_lfs]
+  tf = tempfile.NamedTemporaryFile(suffix='.dlog')
+  for line in tf_lines:
+    print >>tf, line
+    print line
+  tf.flush()
+  msg = subprocess.check_output(['evaluator/geoquery', tf.name])
+  tf.close()
+
+  def get_denotation(line):
+    m = re.search('\{[^}]*\}', line)
+    if m: 
+      return m.group(0)
+    else:
+      return line.strip()
+  denotations = [get_denotation(line)
+                 for line in msg.split('\n')
+                 if line.startswith('        Example')]
+
+  def print_failures(dens, name):
+    num_syntax_error = sum(d == 'Example FAILED TO PARSE' for d in dens)
+    num_exec_error = sum(d == 'Example FAILED TO EXECUTE' for d in dens)
+    print '%s: %d syntax errors, %d executor errors' % (
+        name, num_syntax_error, num_exec_error)
+
+  true_dens = denotations[:len(true_answers)]
+  pred_dens = denotations[len(true_answers):]
+  print_failures(true_dens, 'gold')
+  print_failures(pred_dens, 'predicted')
+  return [t == p for t, p in zip(true_dens, pred_dens)]
+
 def compare_answers_regex(true_answers, pred_answers):
   def format_regex(r):
     return ''.join(r.split()).replace('_', ' ')
   ret = []
 
   for true_ans, pred_ans in zip(true_answers, pred_answers):
-    is_equiv = subprocess.check_output([
+    msg = subprocess.check_output([
         'evaluator/regex', 
         '(%s)' % format_regex(true_ans), 
         '(%s)' % format_regex(pred_ans)])
-    print is_equiv
-    ret.append(is_equiv.strip().endswith('true'))
+    ret.append(msg.strip().endswith('true'))
   return ret
 
 def compare_answers(true_answers, pred_answers):
