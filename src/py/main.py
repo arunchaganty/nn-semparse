@@ -5,10 +5,11 @@ import itertools
 import json
 import math
 import numpy
+import os
 import random
+import subprocess
 import sys
 import theano
-import os
 
 # Local imports
 from encoderdecoder import EncoderDecoderModel
@@ -49,7 +50,7 @@ def _parse_args():
   parser.add_argument('--output-embedding-dim', '-o', type=int,
                       help='Dimension of output word vectors.')
   parser.add_argument('--copy', '-p', default=None,
-                      help='Way to copy words (options: [lexicon, attention]).')
+                      help='Way to copy words (options: [lexicon, attention, attention-logistic]).')
   parser.add_argument('--unk-cutoff', '-u', type=int, default=0,
                       help='Treat input words with <= this many occurrences as UNK.')
   parser.add_argument('--num_epochs', '-t', type=int, default=0,
@@ -80,6 +81,7 @@ def _parse_args():
   parser.add_argument('--dev-data', help='Path to dev data.')
   parser.add_argument('--save-file', help='Path to save parameters.')
   parser.add_argument('--load-file', help='Path to load parameters, will ignore other passed arguments.')
+  parser.add_argument('--domain', help='Domain to evaluate (options: [geoquery,regex])')
   parser.add_argument('--stats-file', help='Path to save statistics (JSON format).')
   parser.add_argument('--shell', action='store_true', 
                       help='Start an interactive shell.')
@@ -200,9 +202,9 @@ def preprocess_data(in_vocabulary, out_vocabulary, lexicon, raw):
 
 def get_spec(in_vocabulary, out_vocabulary, lexicon):
   kwargs = {'rnn_type': OPTIONS.rnn_type}
-  if OPTIONS.copy == 'attention':
+  if OPTIONS.copy.startswith('attention'):
     if OPTIONS.model == 'attention':
-      kwargs['attention_copying'] = True
+      kwargs['attention_copying'] = OPTIONS.copy
     else:
       print >> sys.stderr, "Can't use use attention-based copying without attention model"
       sys.exit(1)
@@ -219,7 +221,7 @@ def get_model(spec):
   return model
 
 def print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
-                           x_len_list, y_len_list):
+                           x_len_list, y_len_list, denotation_correct_list):
   # Overall metrics
   num_examples = len(is_correct_list)
   num_correct = sum(is_correct_list)
@@ -227,18 +229,6 @@ def print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
   num_tokens = sum(y_len_list)
   seq_accuracy = float(num_correct) / num_examples
   token_accuracy = float(num_tokens_correct) / num_tokens
-
-  # Per-length metrics
-  num_correct_per_len = collections.defaultdict(int)
-  tokens_correct_per_len = collections.defaultdict(int)
-  num_per_len = collections.defaultdict(int)
-  tokens_per_len = collections.defaultdict(int)
-  for is_correct, tokens_correct, x_len, y_len in itertools.izip(
-      is_correct_list, tokens_correct_list, x_len_list, y_len_list):
-    num_correct_per_len[x_len] += is_correct
-    tokens_correct_per_len[x_len] += tokens_correct
-    num_per_len[x_len] += 1
-    tokens_per_len[x_len] += y_len
 
   STATS[name] = {}
 
@@ -249,12 +239,6 @@ def print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
       'accuracy': seq_accuracy,
   }
   print 'Sequence-level accuracy: %d/%d = %g' % (num_correct, num_examples, seq_accuracy)
-  for i in sorted(num_correct_per_len):
-    cur_num_correct = num_correct_per_len[i]
-    cur_num_examples = num_per_len[i]
-    cur_accuracy = float(cur_num_correct) / cur_num_examples
-    print '  input length = %d: %d/%d = %g correct' % (
-        i - 1, cur_num_correct, cur_num_examples, cur_accuracy)
 
   # Print token-level accuracy
   STATS[name]['token'] = {
@@ -263,18 +247,45 @@ def print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
       'accuracy': token_accuracy,
   }
   print 'Token-level accuracy: %d/%d = %g' % (num_tokens_correct, num_tokens, token_accuracy)
-  for i in sorted(tokens_correct_per_len):
-    cur_num_tokens_correct = tokens_correct_per_len[i]
-    cur_num_tokens = tokens_per_len[i]
-    cur_accuracy = float(cur_num_tokens_correct) / cur_num_tokens
-    print '  input length = %d: %d/%d = %g correct' % (
-        i - 1, cur_num_tokens_correct, cur_num_tokens, cur_accuracy)
+
+  # Print denotation-level accuracy
+  if denotation_correct_list:
+    denotation_correct = sum(denotation_correct_list)
+    denotation_accuracy = float(denotation_correct)/num_examples
+    STATS[name]['denotation'] = {
+        'correct': denotation_correct,
+        'total': num_examples,
+        'accuracy': denotation_accuracy
+    }
+    print 'Denotation-level accuracy: %d/%d = %g' % (denotation_correct, num_examples, denotation_accuracy)
 
 def decode(model, ex):
   if OPTIONS.beam_size == 0:
     return model.decode_greedy(ex, max_len=100)
   else:
     return model.decode_beam(ex, beam_size=OPTIONS.beam_size)
+
+def compare_answers_regex(true_answers, pred_answers):
+  def format_regex(r):
+    return ''.join(r.split()).replace('_', ' ')
+  ret = []
+
+  for true_ans, pred_ans in zip(true_answers, pred_answers):
+    is_equiv = subprocess.check_output([
+        'evaluator/regex', 
+        '(%s)' % format_regex(true_ans), 
+        '(%s)' % format_regex(pred_ans)])
+    print is_equiv
+    ret.append(is_equiv.strip().endswith('true'))
+  return ret
+
+def compare_answers(true_answers, pred_answers):
+  if OPTIONS.domain == 'geoquery':
+    return compare_answers_geoquery(true_answers, pred_answers)
+  elif OPTIONS.domain == 'regex':
+    return compare_answers_regex(true_answers, pred_answers)
+  else:
+    raise ValueError('Unrecognized domain %s' % OPTIONS.domain)
 
 def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
   """Evaluate the model.
@@ -287,12 +298,19 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
   x_len_list = []
   y_len_list = []
 
-  for example_num, ex in enumerate(dataset):
-    print 'Example %d' % example_num
+  preds = [decode(model, ex)[0] for ex in dataset]
+  if OPTIONS.domain:
+    true_answers = [ex.y_str for ex in dataset]
+    pred_answers = [' '.join(p[1]) for p in preds]
+    denotation_correct_list = compare_answers(true_answers, pred_answers)
+  else:
+    denotation_correct_list = None
+
+  for i, ex in enumerate(dataset):
+    print 'Example %d' % i
     print '  x      = "%s"' % ex.x_str
     print '  y      = "%s"' % ex.y_str
-    preds = decode(model, ex)
-    prob, y_pred_toks = preds[0]
+    prob, y_pred_toks = preds[i]
     y_pred_str = ' '.join(y_pred_toks)
 
     # Compute accuracy metrics
@@ -306,8 +324,11 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
     print '  sequence correct = %s' % is_correct
     print '  token accuracy = %d/%d = %g' % (
         tokens_correct, len(ex.y_toks), float(tokens_correct) / len(ex.y_toks))
+    if denotation_correct_list:
+      denotation_correct = denotation_correct_list[i]
+      print '  denotation correct = %s' % denotation_correct
   print_accuracy_metrics(name, is_correct_list, tokens_correct_list,
-                         x_len_list, y_len_list)
+                         x_len_list, y_len_list, denotation_correct_list)
 
 def run_shell(model):
   print '==== Neural Network Semantic Parsing REPL ===='
@@ -436,7 +457,7 @@ def run():
     dev_data = preprocess_data(dev_model.in_vocabulary,
                                dev_model.out_vocabulary, 
                                dev_model.lexicon, dev_raw)
-    print 'Testing data:'
+    print 'Dev data:'
     evaluate('dev', dev_model, in_vocabulary, out_vocabulary, lexicon, dev_data)
 
   if OPTIONS.stats_file:

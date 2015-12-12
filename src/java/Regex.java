@@ -13,16 +13,30 @@ public class Regex implements Runnable {
   public static String regex1;
   public static String regex2;
 
+  public RegExp makeRegex(String s) {
+    try {
+      return new RegExp(s);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   public void checkIfEqual(String s1, String s2) {
-    RegExp r1 = new RegExp(s1);
-    RegExp r2 = new RegExp(s2);
-    Automaton a1 = r1.toAutomaton();
-    Automaton a2 = r2.toAutomaton();
-    System.out.println(s1 + " and " + s2 + " are equal? " + a1.equals(a2));
+    RegExp r1 = makeRegex(s1);
+    RegExp r2 = makeRegex(s2);
+    if (r1 == null) {
+      System.out.println("Error converting " + s1 + " to regex");
+    } else if (r2 == null) {
+      System.out.println("Error converting " + s2 + " to regex");
+    } else {
+      Automaton a1 = r1.toAutomaton();
+      Automaton a2 = r2.toAutomaton();
+      System.out.println(s1 + " and " + s2 + " are equal? " + a1.equals(a2));
+    }
   }
 
   public void run() {
-    checkIfEqual(".*", ".*.*");
     checkIfEqual(regex1, regex2);
   }
 
