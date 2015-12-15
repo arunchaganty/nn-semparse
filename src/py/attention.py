@@ -137,8 +137,9 @@ class AttentionModel(NeuralModel):
         y_tok = self.out_vocabulary.get_word(y_t)
       else:
         new_ind = y_t - self.out_vocabulary.size()
+        augmented_x_toks = ex.x_toks + [Vocabulary.END_OF_SENTENCE]
         if self.spec.attention_copying:
-          y_tok = ex.x_toks[new_ind]
+          y_tok = augmented_x_toks[new_ind]
         else:
           lex_entry = ex.lex_entries[new_ind]
           y_tok = lex_entry[1]
