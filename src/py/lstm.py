@@ -20,7 +20,7 @@ class LSTMLayer(RNNLayer):
     if create_init_state:
       self.h0 = theano.shared(
           name='h0', 
-          value=0.2 * numpy.random.uniform(-1.0, 1.0, 2 * self.nh).astype(theano.config.floatX))
+          value=0.1 * numpy.random.uniform(-1.0, 1.0, 2 * self.nh).astype(theano.config.floatX))
       init_state_params = [self.h0]
     else:
       init_state_params = []
@@ -28,28 +28,28 @@ class LSTMLayer(RNNLayer):
     # Recurrent layer 
     self.wi = theano.shared(
         name='wi',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
     self.ui = theano.shared(
         name='ui',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
     self.wf = theano.shared(
         name='wf',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
     self.uf = theano.shared(
         name='uf',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
     self.wo = theano.shared(
         name='wo',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
     self.uo = theano.shared(
         name='uo',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
     self.wc = theano.shared(
         name='wc',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
     self.uc = theano.shared(
         name='uc',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
     recurrence_params = [
         self.wi, self.ui, self.wf, self.uf,
         self.wo, self.uo, self.wc, self.uc,

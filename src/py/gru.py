@@ -18,7 +18,7 @@ class GRULayer(RNNLayer):
     if create_init_state:
       self.h0 = theano.shared(
           name='h0', 
-          value=0.2 * numpy.random.uniform(-1.0, 1.0, self.nh).astype(theano.config.floatX))
+          value=0.1 * numpy.random.uniform(-1.0, 1.0, self.nh).astype(theano.config.floatX))
       init_state_params = [self.h0]
     else:
       init_state_params = []
@@ -26,22 +26,22 @@ class GRULayer(RNNLayer):
     # Encoder hidden state updates
     self.wz = theano.shared(
         name='wz',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
     self.uz = theano.shared(
         name='uz',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
     self.wr = theano.shared(
         name='wr',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
     self.ur = theano.shared(
         name='ur',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
     self.w = theano.shared(
         name='w',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.de, self.nh)).astype(theano.config.floatX))
     self.u = theano.shared(
         name='u',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
     recurrence_params = [self.wz, self.uz, self.wr, self.ur, self.w, self.u]
 
     # Params

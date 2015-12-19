@@ -43,10 +43,10 @@ class AttentionSpec(Spec):
 
     self.w_enc_to_dec = theano.shared(
         name='w_enc_to_dec',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (dec_full_size, annotation_size)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (dec_full_size, annotation_size)).astype(theano.config.floatX))
     self.w_attention = theano.shared(
         name='w_attention',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.hidden_size, annotation_size)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.hidden_size, annotation_size)).astype(theano.config.floatX))
 
   def get_local_params(self):
     return (self.fwd_encoder.params + self.bwd_encoder.params + 

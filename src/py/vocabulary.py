@@ -105,7 +105,7 @@ class RawVocabulary(Vocabulary):
     # Embedding matrix
     self.emb_mat = theano.shared(
         name='vocab_emb_mat',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.size(), emb_size)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.size(), emb_size)).astype(theano.config.floatX))
 
   def get_theano_embedding(self, i):
     return self.emb_mat[i]
@@ -143,10 +143,10 @@ class GloveVocabulary(Vocabulary):
     # Keep separate embeddings for </s> and UNK ("special" words)
     self.eos_vec = theano.shared(
         name='vocab_eos',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, self.emb_size).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, self.emb_size).astype(theano.config.floatX))
     self.unk_vec = theano.shared(
         name='vocab_unk',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, self.emb_size).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, self.emb_size).astype(theano.config.floatX))
 
     # Check if GloVe vectors of this dimension exist
     glove_file = os.path.join(self.GLOVE_DIR, 'glove.6B.%dd.txt' % emb_size)

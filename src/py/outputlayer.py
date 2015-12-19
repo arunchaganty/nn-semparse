@@ -28,14 +28,14 @@ class OutputLayer(object):
   def create_vars(self):
     self.w_out = theano.shared(
         name='w_out', 
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nw, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nw, self.nh)).astype(theano.config.floatX))
         # Each row is one word
     self.params = [self.w_out]
 
     if self.lexicon:
       self.w_lex = theano.shared(
           name='w_lex', 
-          value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nl, self.nh)).astype(theano.config.floatX))
+          value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nl, self.nh)).astype(theano.config.floatX))
       self.params.append(self.w_lex)
 
   def write(self, h_t, cur_lex_entries, attn_scores=None):

@@ -15,7 +15,7 @@ class VanillaRNNLayer(RNNLayer):
     if create_init_state:
       self.h0 = theano.shared(
           name='h0', 
-          value=0.2 * numpy.random.uniform(-1.0, 1.0, self.nh).astype(theano.config.floatX))
+          value=0.1 * numpy.random.uniform(-1.0, 1.0, self.nh).astype(theano.config.floatX))
       init_state_params = [self.h0]
     else:
       init_state_params = []
@@ -23,10 +23,10 @@ class VanillaRNNLayer(RNNLayer):
     # Recurrent layer
     self.u_x = theano.shared(
         name='u_x',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.de_in, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.de_in, self.nh)).astype(theano.config.floatX))
     self.u_h = theano.shared(
         name='u_h',
-        value=0.2 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
+        value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nh, self.nh)).astype(theano.config.floatX))
     recurrence_params = [self.u_x, self.u_h]
 
     # Params
