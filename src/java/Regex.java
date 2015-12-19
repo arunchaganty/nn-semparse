@@ -13,9 +13,11 @@ public class Regex implements Runnable {
   public static String regex1;
   public static String regex2;
 
-  public RegExp makeRegex(String s) {
+  public Automaton makeAutomaton(String s) {
     try {
-      return new RegExp(s);
+      RegExp r = new RegExp(s);
+      Automaton a = r.toAutomaton();
+      return a;
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -23,15 +25,17 @@ public class Regex implements Runnable {
   }
 
   public void checkIfEqual(String s1, String s2) {
-    RegExp r1 = makeRegex(s1);
-    RegExp r2 = makeRegex(s2);
-    if (r1 == null) {
-      System.out.println("Error converting " + s1 + " to regex");
-    } else if (r2 == null) {
-      System.out.println("Error converting " + s2 + " to regex");
+    Automaton a1 = makeAutomaton(s1);
+    Automaton a2 = makeAutomaton(s2);
+    if (a1 == null) {
+      String msg = "Error converting argument 1 = " + s1 + " to automaton";
+      System.out.println(msg);
+      System.err.println(msg);
+    } else if (a2 == null) {
+      String msg = "Error converting argument 2 = " + s2 + " to automaton";
+      System.out.println(msg);
+      System.err.println(msg);
     } else {
-      Automaton a1 = r1.toAutomaton();
-      Automaton a2 = r2.toAutomaton();
       System.out.println(s1 + " and " + s2 + " are equal? " + a1.equals(a2));
     }
   }

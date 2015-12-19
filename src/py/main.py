@@ -330,6 +330,8 @@ def compare_answers_geoquery(true_answers, pred_answers):
   pred_dens = denotations[len(true_answers):]
   print_failures(true_dens, 'gold')
   print_failures(pred_dens, 'predicted')
+  for t, p in zip(true_dens, pred_dens):
+    print '%s: %s == %s' % (t == p, t, p)
   return [t == p for t, p in zip(true_dens, pred_dens)]
 
 def compare_answers_regex(true_answers, pred_answers):
