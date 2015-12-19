@@ -97,7 +97,6 @@ def _parse_args():
                       help='Run Theano in fast compile mode.')
   parser.add_argument('--theano-profile', action='store_true',
                       help='Turn on profiling in Theano.')
-  parser.add_argument('--gpu', action='store_true', help='Use GPU.')
   if len(sys.argv) == 1:
     parser.print_help()
     sys.exit(1)
@@ -130,8 +129,6 @@ def configure_theano():
     theano.config.linker='cvm'
   if OPTIONS.theano_profile:
     theano.config.profile = True
-  if OPTIONS.float32 or OPTIONS.gpu:
-    theano.config.floatX = 'float32'
 
 def load_dataset(filename):
   with open(filename) as f:
