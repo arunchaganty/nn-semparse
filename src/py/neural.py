@@ -94,23 +94,29 @@ class NeuralModel(object):
     for p in self.params:
       print '%s: %s' % (p.name, p.get_value())
 
-  def train(self, dataset, eta=0.1, T=10, verbose=False, batch_size=1):
+  def train(self, dataset, eta=0.1, T=[], verbose=False, batch_size=1):
     # batch_size = size for mini batch.  Defaults to SGD.
-    for it in range(T):
+    cur_lr = eta
+    max_iters = sum(T)
+    lr_changes = set([sum(T[:i]) for i in range(1, len(T))])
+    for it in range(max_iters):
+      if it in lr_changes:
+        # Halve the learning rate
+        cur_lr = 0.5 * cur_lr
       t0 = time.time()
       total_nll = 0
       random.shuffle(dataset)
       for i in range(0, len(dataset), batch_size):
         do_update = i + batch_size <= len(dataset)
         cur_examples = dataset[i:(i+batch_size)]
-        nll = self._train_batch(cur_examples, eta, do_update=do_update)
+        nll = self._train_batch(cur_examples, cur_lr, do_update=do_update)
         total_nll += nll
         if verbose:
           print 'NeuralModel.train(): iter %d, example = %s: nll = %g' % (
               it, str(ex), nll)
       t1 = time.time()
-      print 'NeuralModel.train(): iter %d: total nll = %g (%g seconds)' % (
-          it, total_nll, t1 - t0)
+      print 'NeuralModel.train(): iter %d (lr = %g): total nll = %g (%g seconds)' % (
+          it, cur_lr, total_nll, t1 - t0)
       self.on_train_epoch(it)
 
   def _train_batch(self, examples, eta, do_update=True):

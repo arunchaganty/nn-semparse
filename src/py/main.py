@@ -55,10 +55,12 @@ def _parse_args():
                       help='Way to copy words (options: [lexicon, attention, attention-logistic]).')
   parser.add_argument('--unk-cutoff', '-u', type=int, default=0,
                       help='Treat input words with <= this many occurrences as UNK.')
-  parser.add_argument('--num_epochs', '-t', type=int, default=0,
-                      help='Number of epochs to train (default is no training).')
+  parser.add_argument('--num-epochs', '-t', default=[],
+                      type=lambda s: [int(x) for x in s.split(',')], 
+                      help=('Number of epochs to train (default is no training).'
+                            'If comma-separated list, will run for some epochs, halve learning rate, etc.'))
   parser.add_argument('--learning-rate', '-r', type=float, default=0.1,
-                      help='Learning rate (default = 0.1).')
+                      help='Initial learning rate (default = 0.1).')
   parser.add_argument('--batch-size', '-b', type=int, default=1,
                       help='Size of mini-batch (default is SGD).')
   parser.add_argument('--rnn-type', '-c',
