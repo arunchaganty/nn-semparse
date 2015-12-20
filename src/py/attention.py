@@ -8,11 +8,12 @@ import itertools
 import numpy
 import theano
 from theano import tensor as T
+from theano.ifelse import ifelse
 import sys
 
 from attnspec import AttentionSpec
 from derivation import Derivation
-from neural import NeuralModel
+from neural import NeuralModel, CLIP_THRESH
 from vocabulary import Vocabulary
 
 class AttentionModel(NeuralModel):
@@ -81,6 +82,7 @@ class AttentionModel(NeuralModel):
                                           on_unused_input='warn')  # For lexicon
 
   def setup_backprop(self):
+    eta = T.scalar('eta_for_backprop')
     x = T.lvector('x_for_backprop')
     y = T.lvector('y_for_backprop')
     cur_lex_entries = T.lvector('cur_lex_entries_for_backprop')
@@ -115,9 +117,19 @@ class AttentionModel(NeuralModel):
     p_y_seq = dec_results[1]
     log_p_y = T.sum(T.log(p_y_seq))
     gradients = T.grad(log_p_y, self.params)
+
+    # Do the updates here
+    updates = []
+    for p, g in zip(self.params, gradients):
+      grad_norm = g.norm(2)
+      clipped_grad = ifelse(grad_norm >= CLIP_THRESH, 
+                            g * CLIP_THRESH / grad_norm, g)
+      updates.append((p, p + eta * clipped_grad))
+
     self._backprop = theano.function(
-        inputs=[x, y, cur_lex_entries, y_lex_inds, y_in_x_inds],
-        outputs=[p_y_seq, log_p_y] + [-g for g in gradients])
+        inputs=[x, y, eta, cur_lex_entries, y_lex_inds, y_in_x_inds],
+        outputs=[p_y_seq, log_p_y],
+        updates=updates)
 
   def decode_greedy(self, ex, max_len=100):
     # TODO: make this have the same interface as decode_beam

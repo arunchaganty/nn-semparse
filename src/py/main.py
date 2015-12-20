@@ -61,8 +61,6 @@ def _parse_args():
                             'If comma-separated list, will run for some epochs, halve learning rate, etc.'))
   parser.add_argument('--learning-rate', '-r', type=float, default=0.1,
                       help='Initial learning rate (default = 0.1).')
-  parser.add_argument('--batch-size', '-b', type=int, default=1,
-                      help='Size of mini-batch (default is SGD).')
   parser.add_argument('--rnn-type', '-c',
                       help='type of continuous RNN model (options: [%s])' % (
                           ', '.join(specutil.RNN_TYPES)))
@@ -505,8 +503,7 @@ def run():
 
   if OPTIONS.train_data:
     train_data = preprocess_data(in_vocabulary, out_vocabulary, lexicon, train_raw)
-    model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate,
-                batch_size=OPTIONS.batch_size)
+    model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate)
 
   if OPTIONS.save_file:
     print >> sys.stderr, 'Saving parameters...'
