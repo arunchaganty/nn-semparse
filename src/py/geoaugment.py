@@ -184,6 +184,18 @@ def process(filename):
   sampled_data = random.sample(augmented_data, 5000)
   write_data('geo880_train500_augment5k.tsv', in_data + sampled_data)
 
+  # Write a sample of augmented data
+  sampled_data = random.sample(augmented_data, 2000)
+  write_data('geo880_train500_augment2k.tsv', in_data + sampled_data)
+
+  # Write a sample of augmented data
+  sampled_data = random.sample(augmented_data, 4000)
+  write_data('geo880_train500_augment4k.tsv', in_data + sampled_data)
+
+  # Write a sample of augmented data
+  sampled_data = random.sample(augmented_data, 500)
+  write_data('geo880_train500_augment500.tsv', in_data + sampled_data)
+
 def main():
   process(IN_FILE)
 
