@@ -55,27 +55,26 @@ class NeuralModel(object):
     """Do all necessary setup (e.g. compile theano functions)."""
     raise NotImplementedError
 
-  def get_objective_and_gradients(self, ex):
-    """Get objective and gradients.
+  def sgd_step(self, ex, eta):
+    """Perform an SGD step.
 
     This is a default implementation, which assumes
-    a function called self._backprop().
+    a function called self._backprop() which updates parameters.
 
     Override if you need a more complicated way of computing the 
-    objective and gradient.
+    objective or updating parameters.
 
-    Returns: tuple (objective, gradients) where
-      objective: the current objective value
-      gradients: map from parameter to gradient
+    Returns: the current objective value
     """
-    info = self._backprop(ex.x_inds, ex.y_inds, ex.lex_inds, ex.y_lex_inds, ex.y_in_x_inds)
+    print 'x: %s' % ex.x_str
+    print 'y: %s' % ex.y_str
+    info = self._backprop(ex.x_inds, ex.y_inds, eta, ex.lex_inds, 
+                          ex.y_lex_inds, ex.y_in_x_inds)
     p_y_seq = info[0]
     log_p_y = info[1]
-    gradients_list = info[2:]
     objective = -log_p_y
-    gradients = dict(itertools.izip(self.params, gradients_list))
     print 'P(y_i): %s' % p_y_seq
-    return (objective, gradients)
+    return objective
 
   def decode_greedy(self, ex, max_len=100):
     """Decode input greedily.
@@ -94,65 +93,22 @@ class NeuralModel(object):
     for p in self.params:
       print '%s: %s' % (p.name, p.get_value())
 
-  def train(self, dataset, eta=0.1, T=[], verbose=False, batch_size=1):
-    # batch_size = size for mini batch.  Defaults to SGD.
+  def train(self, dataset, eta=0.1, T=[], verbose=False):
+    # train with SGD (batch size = 1)
     cur_lr = eta
     max_iters = sum(T)
     lr_changes = set([sum(T[:i]) for i in range(1, len(T))])
     for it in range(max_iters):
+      t0 = time.time()
       if it in lr_changes:
         # Halve the learning rate
         cur_lr = 0.5 * cur_lr
-      t0 = time.time()
       total_nll = 0
       random.shuffle(dataset)
-      for i in range(0, len(dataset), batch_size):
-        do_update = i + batch_size <= len(dataset)
-        cur_examples = dataset[i:(i+batch_size)]
-        nll = self._train_batch(cur_examples, cur_lr, do_update=do_update)
+      for ex in dataset:
+        nll = self.sgd_step(ex, eta)
         total_nll += nll
-        if verbose:
-          print 'NeuralModel.train(): iter %d, example = %s: nll = %g' % (
-              it, str(ex), nll)
+      self.on_train_epoch(it)
       t1 = time.time()
       print 'NeuralModel.train(): iter %d (lr = %g): total nll = %g (%g seconds)' % (
           it, cur_lr, total_nll, t1 - t0)
-      self.on_train_epoch(it)
-
-  def _train_batch(self, examples, eta, do_update=True):
-    """Run training given a batch of training examples.
-    
-    Returns negative log-likelihood.
-    If do_update is False, compute nll but don't do the gradient step.
-    """
-    objective = 0
-    gradients = {}
-    for ex in examples:
-      print 'x: %s' % ex.x_str
-      print 'y: %s' % ex.y_str
-      cur_objective, cur_gradients = self.get_objective_and_gradients(ex)
-      objective += cur_objective
-      for p in self.params:
-        if p in gradients:
-          gradients[p] += cur_gradients[p] / len(examples)
-        else:
-          gradients[p] = cur_gradients[p] / len(examples)
-    if do_update:
-      for p in self.params:
-        self._perform_sgd_step(p, gradients[p], eta)
-    return objective
-
-  def _perform_sgd_step(self, param, gradient, eta):
-    """Do a gradient descent step."""
-    #print param.name
-    #print param.get_value()
-    #print gradient
-    old_value = param.get_value()
-    grad_norm = numpy.sqrt(numpy.sum(gradient**2))
-    if grad_norm >= CLIP_THRESH:
-      gradient = gradient * CLIP_THRESH / grad_norm
-      new_norm = numpy.sqrt(numpy.sum(gradient**2))
-      print 'Clipped norm of %s from %g to %g' % (param, grad_norm, new_norm)
-    new_value = old_value - eta * gradient
-    param.set_value(new_value)
-
