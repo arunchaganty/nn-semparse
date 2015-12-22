@@ -132,7 +132,6 @@ class AttentionModel(NeuralModel):
         updates=updates)
 
   def decode_greedy(self, ex, max_len=100):
-    # TODO: make this have the same interface as decode_beam
     h_t, annotations = self._encode(ex.x_inds)
     y_tok_seq = []
     p_y_seq = []  # Should be handy for error analysis
@@ -158,7 +157,7 @@ class AttentionModel(NeuralModel):
         y_t = self.out_vocabulary.get_index(y_tok)
       y_tok_seq.append(y_tok)
       h_t = self._decoder_step(y_t, c_t, h_t)
-    return [(p, y_tok_seq)]
+    return [Derivation(ex, p, y_tok_seq)]
 
   def decode_beam(self, ex, beam_size=1, max_len=100):
     h_t, annotations = self._encode(ex.x_inds)
@@ -166,6 +165,14 @@ class AttentionModel(NeuralModel):
                         attention_list=[], copy_list=[])]]
     finished = []
     for i in range(1, max_len):
+      #print >> sys.stderr, 'decode_beam: length = %d' % i
+      if len(beam[i-1]) == 0: break
+      # See if beam_size-th finished deriv is best than everything on beam now.
+      if len(finished) >= beam_size:
+        finished_p = finished[beam_size-1].p
+        cur_best_p = beam[i-1][0].p
+        if cur_best_p < finished_p:
+          break
       new_beam = []
       for deriv in beam[i-1]:
         cur_p = deriv.p
@@ -205,4 +212,5 @@ class AttentionModel(NeuralModel):
           new_beam.append(new_entry)
       new_beam.sort(key=lambda x: x.p, reverse=True)
       beam.append(new_beam[:beam_size])
+      finished.sort(key=lambda x: x.p, reverse=True)
     return sorted(finished, key=lambda x: x.p, reverse=True)

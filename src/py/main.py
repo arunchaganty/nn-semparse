@@ -264,40 +264,57 @@ def decode(model, ex):
   else:
     return model.decode_beam(ex, beam_size=OPTIONS.beam_size)
 
-def compare_answers_geoquery(true_answers, pred_answers):
-  def format_lf(s):
-    # Strip underscores, collapse spaces when not inside quotation marks
-    toks = []
-    in_quotes = False
-    quoted_toks = []
-    for t in s.split():
-      if in_quotes:
-        if t == "'":
-          in_quotes = False
-          toks.append('"%s"' % ' '.join(quoted_toks))
-          quoted_toks = []
-        else:
-          quoted_toks.append(t)
+def geo_format_lf(s):
+  # Strip underscores, collapse spaces when not inside quotation marks
+  toks = []
+  in_quotes = False
+  quoted_toks = []
+  for t in s.split():
+    if in_quotes:
+      if t == "'":
+        in_quotes = False
+        toks.append('"%s"' % ' '.join(quoted_toks))
+        quoted_toks = []
       else:
-        if t == "'":
-          in_quotes = True
+        quoted_toks.append(t)
+    else:
+      if t == "'":
+        in_quotes = True
+      else:
+        if len(t) > 1 and t.startswith('_'):
+          toks.append(t[1:])
         else:
-          if len(t) > 1 and t.startswith('_'):
-            toks.append(t[1:])
-          else:
-            toks.append(t)
-    lf = ''.join(toks)
+          toks.append(t)
+  lf = ''.join(toks)
+  # Balance parentheses
+  num_left_paren = sum(1 for c in lf if c == '(')
+  num_right_paren = sum(1 for c in lf if c == ')')
+  diff = num_left_paren - num_right_paren
+  if diff > 0:
+    lf = lf + ')' * diff
+  return lf
 
-    # Balance parentheses
-    num_left_paren = sum(1 for c in lf if c == '(')
-    num_right_paren = sum(1 for c in lf if c == ')')
-    diff = num_left_paren - num_right_paren
-    if diff > 0:
-      lf = lf + ')' * diff
-    return lf
+def geo_get_denotation(line):
+  m = re.search('\{[^}]*\}', line)
+  if m: 
+    return m.group(0)
+  else:
+    return line.strip()
 
-  all_lfs = ([format_lf(s) for s in true_answers] +
-             [format_lf(s) for s in pred_answers])
+def geo_print_failures(dens, name):
+  num_syntax_error = sum(d == 'Example FAILED TO PARSE' for d in dens)
+  num_exec_error = sum(d == 'Example FAILED TO EXECUTE' for d in dens)
+  num_join_error = sum('Join failed syntactically' in d for d in dens)
+  print '%s: %d syntax errors, %d executor errors' % (
+      name, num_syntax_error, num_exec_error)
+
+def geo_is_error(d):
+  return 'FAILED' in d or 'Join failed syntactically' in d
+
+def compare_answers_geoquery(true_answers, all_derivs):
+  all_lfs = ([geo_format_lf(s) for s in true_answers] +
+             [geo_format_lf(' '.join(d.y_toks)) 
+              for x in all_derivs for d in x])
   tf_lines = ['_parse([query], %s).' % lf for lf in all_lfs]
   tf = tempfile.NamedTemporaryFile(suffix='.dlog')
   for line in tf_lines:
@@ -306,49 +323,53 @@ def compare_answers_geoquery(true_answers, pred_answers):
   tf.flush()
   msg = subprocess.check_output(['evaluator/geoquery', tf.name])
   tf.close()
-
-  def get_denotation(line):
-    m = re.search('\{[^}]*\}', line)
-    if m: 
-      return m.group(0)
-    else:
-      return line.strip()
-  denotations = [get_denotation(line)
+  denotations = [geo_get_denotation(line)
                  for line in msg.split('\n')
                  if line.startswith('        Example')]
-
-  def print_failures(dens, name):
-    num_syntax_error = sum(d == 'Example FAILED TO PARSE' for d in dens)
-    num_exec_error = sum(d == 'Example FAILED TO EXECUTE' for d in dens)
-    print '%s: %d syntax errors, %d executor errors' % (
-        name, num_syntax_error, num_exec_error)
-
   true_dens = denotations[:len(true_answers)]
-  pred_dens = denotations[len(true_answers):]
-  print_failures(true_dens, 'gold')
-  print_failures(pred_dens, 'predicted')
+  all_pred_dens = denotations[len(true_answers):]
+
+  # Find the top-scoring derivation that executed without error
+  derivs = []
+  pred_dens = []
+  cur_start = 0
+  for deriv_set in all_derivs:
+    for i in range(len(deriv_set)):
+      cur_denotation = all_pred_dens[cur_start + i]
+      if not geo_is_error(cur_denotation):
+        derivs.append(deriv_set[i])
+        pred_dens.append(cur_denotation)
+        break
+    else:
+      derivs.append(deriv_set[0])  # Default to first derivation
+      pred_dens.append(all_pred_dens[cur_start])
+    cur_start += len(deriv_set)
+
+  geo_print_failures(true_dens, 'gold')
+  geo_print_failures(pred_dens, 'predicted')
   for t, p in zip(true_dens, pred_dens):
     print '%s: %s == %s' % (t == p, t, p)
-  return [t == p for t, p in zip(true_dens, pred_dens)]
+  return derivs, [t == p for t, p in zip(true_dens, pred_dens)]
 
-def compare_answers_regex(true_answers, pred_answers):
+def compare_answers_regex(true_answers, all_derivs):
   def format_regex(r):
     return ''.join(r.split()).replace('_', ' ')
-  ret = []
-
+  pred_derivs = [x[0] for x in all_derivs]
+  pred_answers = [d[0] for d in pred_derivs]
+  is_correct_list = []
   for true_ans, pred_ans in zip(true_answers, pred_answers):
     msg = subprocess.check_output([
         'evaluator/regex', 
         '(%s)' % format_regex(true_ans), 
         '(%s)' % format_regex(pred_ans)])
-    ret.append(msg.strip().endswith('true'))
-  return ret
+    is_correct_list.append(msg.strip().endswith('true'))
+  return derivs, is_correct_list
 
-def compare_answers(true_answers, pred_answers):
+def compare_answers(true_answers, all_derivs):
   if OPTIONS.domain == 'geoquery':
-    return compare_answers_geoquery(true_answers, pred_answers)
+    return compare_answers_geoquery(true_answers, all_derivs)
   elif OPTIONS.domain == 'regex':
-    return compare_answers_regex(true_answers, pred_answers)
+    return compare_answers_regex(true_answers, all_derivs)
   else:
     raise ValueError('Unrecognized domain %s' % OPTIONS.domain)
 
@@ -363,19 +384,20 @@ def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
   x_len_list = []
   y_len_list = []
 
-  preds = [decode(model, ex)[0] for ex in dataset]
   if OPTIONS.domain:
+    all_derivs = [decode(model, ex) for ex in dataset]
     true_answers = [ex.y_str for ex in dataset]
-    pred_answers = [' '.join(p[1]) for p in preds]
-    denotation_correct_list = compare_answers(true_answers, pred_answers)
+    derivs, denotation_correct_list = compare_answers(true_answers, all_derivs)
   else:
+    derivs = [decode(model, ex)[0] for ex in dataset]
     denotation_correct_list = None
 
   for i, ex in enumerate(dataset):
     print 'Example %d' % i
     print '  x      = "%s"' % ex.x_str
     print '  y      = "%s"' % ex.y_str
-    prob, y_pred_toks = preds[i]
+    prob = derivs[i].p
+    y_pred_toks = derivs[i].y_toks
     y_pred_str = ' '.join(y_pred_toks)
 
     # Compute accuracy metrics
