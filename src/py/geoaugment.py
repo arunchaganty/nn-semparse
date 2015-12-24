@@ -9,9 +9,9 @@ import random
 import re
 import sys
 
-IN_FILE = os.path.join(
+IN_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-    'data/geo880/processed-lesscopy/geo880_train500.tsv')
+    'data/geo880/processed-lesscopy')
 OUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/geo880/processed-augmented')
@@ -166,38 +166,42 @@ def write_data(basename, data):
     for x, y in data:
       print >>f, '%s\t%s' % (x, y)
 
+def write_sample(in_data, augmented_data, k):
+  n = len(in_data)
+  if k > len(augmented_data):
+    print >> sys.stderr, 'Trying to sample %d from dataset of size %d' % (
+        k, len(augmented_data))
+    return
+  sampled_data = random.sample(augmented_data, k)
+  if k % 1000 == 0:
+    out_num = '%dk' % (k / 1000)
+  else:
+    out_num = '%d' % k
+  write_data('geo880_train%d_augment%s.tsv' % (n, out_num), in_data + sampled_data)
+
 def process(filename):
   random.seed(1)
   print >> sys.stderr, 'Processing %s' % filename
   basename = os.path.basename(filename)
   in_data = read_examples(filename)
+  n = len(in_data)
   augmented_data = augment_data(in_data)
 
   # Write everything
-  write_data('geo880_train500_augmentAll.tsv', in_data + augmented_data)
+  write_data('geo880_train%d_augmentAll.tsv' % n, in_data + augmented_data)
 
-  # Write a sample of augmented data
-  sampled_data = random.sample(augmented_data, 1000)
-  write_data('geo880_train500_augment1k.tsv', in_data + sampled_data)
-
-  # Write a sample of augmented data
-  sampled_data = random.sample(augmented_data, 5000)
-  write_data('geo880_train500_augment5k.tsv', in_data + sampled_data)
-
-  # Write a sample of augmented data
-  sampled_data = random.sample(augmented_data, 2000)
-  write_data('geo880_train500_augment2k.tsv', in_data + sampled_data)
-
-  # Write a sample of augmented data
-  sampled_data = random.sample(augmented_data, 4000)
-  write_data('geo880_train500_augment4k.tsv', in_data + sampled_data)
-
-  # Write a sample of augmented data
-  sampled_data = random.sample(augmented_data, 500)
-  write_data('geo880_train500_augment500.tsv', in_data + sampled_data)
+  # Use a weird order to make sure randomness is same as previous
+  write_sample(in_data, augmented_data, 1000)
+  write_sample(in_data, augmented_data, 5000)
+  write_sample(in_data, augmented_data, 2000)
+  write_sample(in_data, augmented_data, 4000)
+  write_sample(in_data, augmented_data, 500)
+  write_sample(in_data, augmented_data, 3000)
 
 def main():
-  process(IN_FILE)
+  for n in (500, 100, 200, 300, 400):
+    filename = os.path.join(IN_DIR, 'geo880_train%d.tsv' % n)
+    process(filename)
 
 if __name__ == '__main__':
   main()
