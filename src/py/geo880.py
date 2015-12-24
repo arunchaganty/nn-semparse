@@ -59,6 +59,17 @@ def reduce_copying(lf):
   toks = ['_' + w if w in PREDS else w for w in lf.split()]
   return ' '.join(toks)
 
+def write(out_basename, out_data, stemmer, less_copy):
+  if stemmer:
+    out_path = os.path.join(STEM_DIR, out_basename)
+  elif less_copy:
+    out_path = os.path.join(LESS_COPY_DIR, out_basename)
+  else:
+    out_path = os.path.join(OUT_DIR, out_basename)
+  with open(out_path, 'w') as f:
+    for x, y in out_data:
+      print >> f, '%s\t%s' % (x, y)
+
 def process(filename, stemmer=None, less_copy=False):
   print >> sys.stderr, 'Processing %s' % filename
   basename = os.path.basename(filename)
@@ -76,15 +87,12 @@ def process(filename, stemmer=None, less_copy=False):
     out_data.append((utterance, y))
 
   out_basename = '%s_%s.tsv' % (domain, stage)
-  if stemmer:
-    out_path = os.path.join(STEM_DIR, out_basename)
-  elif less_copy:
-    out_path = os.path.join(LESS_COPY_DIR, out_basename)
-  else:
-    out_path = os.path.join(OUT_DIR, out_basename)
-  with open(out_path, 'w') as f:
-    for x, y in out_data:
-      print >> f, '%s\t%s' % (x, y)
+  write(out_basename, out_data, stemmer, less_copy)
+  if stage == 'train500':
+    for n in (100, 200, 300, 400):
+      cur_data = out_data[:n]
+      cur_basename = '%s_train%d.tsv' % (domain, n)
+      write(cur_basename, cur_data, stemmer, less_copy)
 
 def main():
   if not os.path.exists(OUT_DIR):
