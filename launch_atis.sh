@@ -7,7 +7,7 @@ fi
 d=$1
 i=$2 
 device=gpu1
-queue='host=jagupard7'
+queue='host=jagupard11'
 num_cpu=1
 flags='--request-docker-image codalab/theano-cuda7.0-352.39'
 cl run :src :lib :evaluator :atis "OMP_NUM_THREADS=4 THEANO_FLAGS=blas.ldflags=-lopenblas,device=${device},floatX=float32,cuda.root=/usr/local/cuda-7.0 python src/py/main.py -d $d -i $i -o $i -p attention -u 1 -t 25,5,5 -c lstm -m attention --stats-file stats.json --train-data atis/atis_train.tsv --dev-data atis/atis_dev.tsv --save-file params" --request-queue $queue --request-cpus $num_cpu -n atis_tune $flags
