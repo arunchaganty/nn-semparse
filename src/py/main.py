@@ -354,8 +354,8 @@ def compare_answers_geoquery(true_answers, all_derivs):
 def compare_answers_regex(true_answers, all_derivs):
   def format_regex(r):
     return ''.join(r.split()).replace('_', ' ')
-  pred_derivs = [x[0] for x in all_derivs]
-  pred_answers = [d[0] for d in pred_derivs]
+  derivs = [x[0] for x in all_derivs]
+  pred_answers = [' '.join(d.y_toks) for d in derivs]
   is_correct_list = []
   for true_ans, pred_ans in zip(true_answers, pred_answers):
     msg = subprocess.check_output([
