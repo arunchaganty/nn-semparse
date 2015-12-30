@@ -2,6 +2,7 @@
 \usepackage{naaclhlt2016}
 \usepackage{times}
 \usepackage{latexsym}
+\usepackage{color}
 
 % More packages
 \usepackage{amsmath}
@@ -40,6 +41,8 @@
 % below and set accordingly.
 % \addtolength\titlebox{.5in}    
 
+\newcommand\pl[1]{\textcolor{red}{[PL: #1]}}
+
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
 
@@ -60,6 +63,8 @@ with Compositional Data Augmentation}
 \begin{document}
 
 \maketitle
+
+\pl{hide authors!}
 
 \begin{abstract}
 Current semantic parsers require complex machinery and
@@ -123,6 +128,24 @@ for compositional data augmentation that encourages
 the model to learn the compositional structure of language, 
 and prevents overfitting.
 
+\pl{
+Overall good - flows well and well-motivated, generally like the writing style.
+Currently, you do a good job of giving background about RNNs
+and the challenges that arise when applying to semnatic parsing.
+But the main thing that you need to do more of is highlight our contributions
+and connect it directly with challenges.
+Make it really crisp - don't go for subtlety here: for example,
+say there are two challenges, A, and B.  We tackle A using C and B using D.
+Make our contributions sound as exciting as the challenges!
+}
+
+\pl{
+  We should take care to make 'compositional data augmentation'
+  an official thing - and distinguish it from the usual data augmentation methods
+  (modify inputs, keep the output); we're constructing Frankenstein examples
+  (maybe there's even a fun name / analogy we can play off of).
+}
+
 \cite{liang2013lambdadcs}.
 
 \section{Related Work}
@@ -154,6 +177,12 @@ To parse an utterance, lexicon rules are applied to
 small parts, and then these pieces are combined to form a full
 logical form.
 
+\pl{need to argue the fact that current semantic parsers involve substantial
+  work more convincingly and quantitatively;
+  I don't think this is a fair comparison - but of the right flavor - number of lines
+  of code in SEMPRE versus in nn-semparse
+}
+
 Data augmentation has been shown to help neural networks,
 particularly in the field of computer vision.
 AlexNet, which won COMPETITION, was trained on 
@@ -166,12 +195,23 @@ for the new input.
 - AlexNet (http://www.cs.toronto.edu/~fritz/absps/imagenet.pdf) 
 - Another nice analysis (http://arxiv.org/pdf/1405.3531.pdf) 
 
+\pl{I personally like putting the related work at the end with the discussion
+we can get into more of an in-depth comparison and have more meaningful,
+higher-level comparisions, rather than just being a cite-fest.
+}
+
 \section{Task}
 We model semantic parsing as a generic sequence-to-sequence task.
 The input utterance $x$ is tokenized into words $x_1, \dotsc, x_m
 \in \vocabin$, the input vocabulary;
 similarly, the output logical form $y$ is tokenized
 into tokens $y_1, \dotsc, y_n \in \vocabout$, the output vocabulary.
+
+\pl{this requires some brief discussion / justification: people
+naturally think of output sequence as tree structure.
+}
+
+\pl{need FIGURE with a concrete example}
 
 \subsection{Datasets}
 \begin{table}[t]
@@ -220,6 +260,9 @@ which prevents us from using some other datasets,
 such as FREEBASE (CITE).
 We explore this more in the Discussion section.
 
+\pl{no intrinsic reason why we can't have denotations;
+state in a more neutral way}
+
 \subsection{Implementation Details}
 We tokenize logical forms in a domain-specific manner,
 as this depends on the syntax of the formal language being used.
@@ -236,6 +279,23 @@ to output.
 Our neural semantic parser is based closely on existing
 attention-based neural machine translation models (CITE).
 In particular, we closely follow THANG.
+
+\pl{
+Think about good software engineering principles when you're defining the
+model.  What I mean is start by the abstract interfaces
+with modules Encode, Decode, etc.
+Define their types (sequence to vector, distribution over tokens, etc.)
+and give intuition about what they are supposed to do;
+forward reference the sections that talk about the modules.
+Absolutely don't just start jumping into model details.
+Start top-down.
+}
+
+\pl{
+  Also need at least one (probably two) figure(s)
+  to illustrate (i) the abstract model framework,
+  and (ii) a concrete example.  Use the same example as in Figure 1.
+}
 
 \subsection{Core Model} 
 First, we describe the core of our semantic parser,
@@ -340,6 +400,12 @@ denotation.
 We train the model using simple stochastic gradient descent.
 Gradients are computed automatically using Theano (CITE).
 
+\pl{
+  At some point, should contrast with existing semantic parsing systems
+  which are heavily constrained by the grammar, whereas everything here is soft.
+  Pros and cons?
+}
+
 \section{Data Augmentation}
 Semantic parsers are often trained from very small datasets.
 Both the \geo and \regex domains have only about $600$ training examples.
@@ -358,6 +424,17 @@ recursively from smaller sub-units.  In contrast,
 our neural semantic parser generates logical forms in a linear fashion,
 left-to-right.  It has no prior expectation that language should
 exhibit compositionality.
+
+\pl{need an example / FIGURE illustrating compositionality - this is too abstract
+}
+
+\pl{This section to be written with more gravity / authority,
+  and make it seem like the data augmentation that we're doing is \textbf{a thing}
+  based on principles, not just some random thing we made up.
+  Spend more time talking about the general procedure,
+  and less time on the nitty-gritty of Regex and Geo,
+  which are kind of boring.
+}
 
 Therefore, we augment our small training datasets with 
 more examples generated from a compositional data augmentation scheme.
@@ -499,6 +576,8 @@ to two related baselines:
   \item \textbf{\attn}.  The LSTM model with attention described in section (LINK),
      but with no copying module.
 \end{itemize}
+\pl{these models should probably be defined in the model section as you build up to our
+real model}
 
 \subsection{Implementation Details}
 We ran all experiments with a hidden size of $400$ units,
@@ -559,7 +638,7 @@ converting the regular expression to a DFA.
     \attncopy & & $79.0$ & $84.0$ \\
     \hline
   \end{tabular}
-  \caption{Results.}
+  \caption{Results. \pl{make these citations so that they have et al.}}
   \label{tab:results}
 \end{table}
 
@@ -672,6 +751,21 @@ deal better with utterances that contain quoted strings
 but hurts performance on other examples.
 Pooling both sources of augmented data improves performance
 across the board.
+
+\pl{I think we need to have more explicit top-down text saying what we're
+  trying to accomplish from these experiments, and what we learned.  You do
+  this to some extent already - just need more.
+  Maybe the problem is that there's just a lot of boring experimental detail/setup
+  that kind of gets in the way, and maybe can be compartmentalized more.
+}
+
+\pl{
+  Try to connect the experiments more directly with our contributions / claims
+  / intuitions that we built up over the course of the paper.
+  We have a new model - ok - does it help?
+  We have a new data augmentation scheme - does it help?
+  etc.
+}
 
 \section{Discussion}
 In this paper, we have presented the first RNN sequence-to-seqeunce
