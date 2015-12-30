@@ -72,8 +72,8 @@ class AttentionSpec(Spec):
     return self.bwd_encoder.step(input_t, h_prev)
 
   def get_dec_init_state(self, enc_last_state):
-    return T.dot(self.w_enc_to_dec, enc_last_state)
-    #return T.tanh(T.dot(self.w_enc_to_dec, enc_last_state))
+    #return T.dot(self.w_enc_to_dec, enc_last_state)
+    return T.tanh(T.dot(self.w_enc_to_dec, enc_last_state))
 
   def f_dec(self, y_t, c_prev, h_prev):
     """Returns the next hidden state for decoder."""

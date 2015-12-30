@@ -137,6 +137,13 @@ def process(filename):
   # Write sample of str data + int data
   write_data('regex_train_sm_augment1kStrPlusInt.tsv', in_data + sampled_str + int_data)
 
+  # Write 500 int data, str data, and combined
+  sampled_int = random.sample(int_data, 500)
+  write_data('regex_train_sm_augment500Int.tsv', in_data + sampled_int)
+  sampled_str = random.sample(str_data, 500)
+  write_data('regex_train_sm_augment500Str.tsv', in_data + sampled_str)
+  write_data('regex_train_sm_augment500Both.tsv', in_data + sampled_int + sampled_str)
+
 def main():
   process(IN_FILE)
 
