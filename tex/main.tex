@@ -6,6 +6,7 @@
 % More packages
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{framed}
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{xspace}
@@ -18,6 +19,13 @@
 \newcommand{\atis}{\textsc{ATIS}\xspace}
 \newcommand{\regex}{\textsc{Regex}\xspace}
 \newcommand{\geo}{\textsc{Geo}\xspace}
+
+\newcommand{\catroot}{\texttt{\$ROOT}\xspace}
+\newcommand{\catquotstr}{\texttt{\$QuotStr}\xspace}
+\newcommand{\catint}{\texttt{\$Int}\xspace}
+\newcommand{\catstate}{\texttt{\$State}\xspace}
+\newcommand{\catriver}{\texttt{\$River}\xspace}
+\newcommand{\catcity}{\texttt{\$City}\xspace}
 
 %% Mathematical Notation
 \newcommand{\vocabin}{\mathcal{V}^{\text{(in)}}}
@@ -35,7 +43,8 @@
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
 
-\title{Compositional Data Augmentation for Semantic Parsing with Recurrent Neural Networks}
+\title{Recurrent Neural Network Semantic Parsing
+with Compositional Data Augmentation}
 \author{Robin Jia\\
 	    Computer Science Department\\
       Stanford University\\
@@ -53,8 +62,6 @@
 \maketitle
 
 \begin{abstract}
-Semantic parsing is an important sequence-to-sequence task
-with wide-ranging applications.
 Current semantic parsers require complex machinery and
 extensive feature engineering to achieve good performance.
 Recurrent neural networks (RNNs)
@@ -66,6 +73,14 @@ including new state-of-the-art numbers on the \regex domain.
 \end{abstract}
 
 \section{Introduction}
+\begin{figure}[t] 
+\begin{center} 
+  \includegraphics[scale=0.4]{fig-overview.pdf}
+\end{center} 
+\caption{An overview of our system.}
+\label{fig:overview}
+\end{figure}
+
 Today, there exist a wide variety of applications that 
 require semantic parsing--the precise translation of
 natural language utterances into logical forms (CITE).
@@ -74,14 +89,6 @@ that require extensive hand-tuning and feature engineering.
 This state of affairs has motivated some efforts
 to make semantic parsing a general purpose technology (OVERNIGHT),
 but the performance of these systems leaves much to be desired.
-
-\begin{figure}[ht] 
-\begin{center} 
-  \includegraphics[scale=0.4]{fig-overview.pdf}
-\end{center} 
-\caption{An overview of our system.}
-\label{fig:overview}
-\end{figure}
 
 Recently, recurrent neural networks (RNNs) have emerged
 as a general-purpose technology for processing sequential data.
@@ -167,7 +174,7 @@ similarly, the output logical form $y$ is tokenized
 into tokens $y_1, \dotsc, y_n \in \vocabout$, the output vocabulary.
 
 \subsection{Datasets}
-\begin{table}[ht]
+\begin{table}[t]
   \centering
   \small
   \begin{tabular}{|l|c|c|c|}
@@ -366,6 +373,35 @@ and add these to our original training dataset.
 This process is described in more detail for both domains.
 
 \subsection{Augmentation for \regex}
+\begin{figure*}[t] 
+\begin{framed}
+\subsubsection*{Basic Rules}
+\catint $\to (0, 0) \mid (1, 1) \mid \dotsb \mid (9, 9)$
+
+\subsubsection*{Induced Rules}
+Example: (``lines beginning with `Therefore' '', \texttt{"Therefore.*"})\\
+Induced rules:
+
+\qquad \catroot $\to$ (``lines beginning with ` \catquotstr ' '', \texttt{"}\catquotstr\texttt{.*"})
+
+\qquad \catquotstr $\to$ (``therefore'', \texttt{"therefore"}) \\
+
+Example: (``lines using more than 4 characters'', \texttt{".*.\{5,\}.*"})\\
+Induced rules:
+
+\qquad \catroot $\to$ (``lines using more than \catint characters'', \texttt{".*.\{(\catint + 1),\}.*"})
+
+\subsubsection*{Generated Examples} 
+(``lines beginning with `free' '', \texttt{"free.*"})
+
+(``lines using more than 6 characters'', \texttt{".*.\{7,\}.*"})
+
+\dots
+\end{framed}
+\caption{Augmentation on \regex.}
+\label{fig:overview}
+\end{figure*}
+
 For \regex, our basic strategy is to find small pieces of 
 utterances and regular expressions that we can align with high confidence.
 We write two rules that capture the primary cases:
@@ -385,11 +421,41 @@ Our grammar therefore has three categories:
 FIGURE provides more detail about data augmentation on \regex.
 
 \subsection{Augmentation for \geo}
+\begin{figure*}[t] 
+\begin{framed}
+\subsubsection*{Induced Rules}
+Example: ``what is the highest mountain in alaska ?''\\
+Induced rules:
+
+\qquad \catroot $\to$ ``what is the highest mountain in \catstate ''\\
+
+Example: ``what is the state with the lowest population ?''\\
+Induced rules:
+
+\qquad \catstate $\to$ ``state with the lowest population''\\
+
+Example: ``what river runs through illinois ?''\\
+Induced rules:
+
+\qquad \catroot $\to$ ``what river runs through \catstate ?''
+
+\qquad \catriver $\to$ ``river runs through illinois''
+
+\subsubsection*{Generated Examples} 
+``what is the highest mountain in state with the lowest population ?'' \\
+``what river runs through state with the lowest population ?'' \\
+\dots
+\end{framed}
+\caption{Augmentation on \geo.  Due to lack of space,
+we only show the grammar over the natural language utterances.}
+\label{fig:overview}
+\end{figure*}
+
 The \geo domain exhibits a greater degree of compositionality
 than \regex, which presents an opportunity to use a more sophisticated
 data augmentation strategy.
 In particular, the more difficult \geo queries tend to have
-nested sub-queries (e.g. ``states that border states that border texas'').
+nested sub-queries (e.g. ``states that border states that border colorado'').
 % TODO: get a real example
 
 To generate examples with similar nesting structure,
@@ -434,8 +500,6 @@ to two related baselines:
      but with no copying module.
 \end{itemize}
 
-Name mangling and copying when comparing to Liang 2011
-
 \subsection{Implementation Details}
 We ran all experiments with a hidden size of $400$ units,
 and $50$-dimensional word embeddings.
@@ -473,21 +537,7 @@ on \regex, this means that no error is thrown when
 converting the regular expression to a DFA.
 
 \subsection{Main Results}
-First, we evaluate our system trained on the original dataset alone,
-and no new examples generated by our data augmentation approach.
-Our results are summarized in the second group of rows of Table \ref{tab:results}.
-Note that even without data augmentation, we are able to nearly
-match the state-of-art on the \regex dataset.
-However, we lag significantly behind on \geo.
-
-Next, we now rerun our system and all baselines on our
-augmented training datasets.  These results are shown in the
-third and final group of rows of Table \ref{tab:results}.
-With data augmentation, we achieve a new state-of-art level performance
-on \regex, by a considerable margin.  We are also much more competitive
-with state-of-art on \geo.
-
-\begin{table}
+\begin{table}[t]
   \centering
   \small
   \begin{tabular}{|l|c|c|c|}
@@ -513,15 +563,48 @@ with state-of-art on \geo.
   \label{tab:results}
 \end{table}
 
+We compare our system to state-of-art results
+achieved on all three datasets (first group of rows of Table \ref{tab:results}).
+For \atis and \regex, we compare to just a single state-of-art system.
+On \geo, we list both Liang 2011 and Kwiatkowski.
+The Liang 2011 system achieved the higher accuracy,
+but it also was given as input an extended lexicon that
+provided prior information about alignments between 
+English words and predicates.  We explicitly take
+care to avoid including such prior knowledge in our system.
 
-\subsection{Learning Compositionality via Alignments}
-TODO: look at attention weights
+First, we evaluate our system trained on the original dataset alone,
+and no new examples generated by our data augmentation approach.
+Our results are summarized in the second section of Table \ref{tab:results}.
+Note that even without data augmentation, we are able to nearly
+match the state-of-art on the \regex dataset.
+However, we lag significantly behind on \geo.
 
-We know that the attention-based copying results in
-better attention alignments.
-Adding the augmented data makes this even better.
+Next, we now rerun our system and all baselines on our
+augmented training datasets.  These results are shown in the
+third and final section of Table \ref{tab:results}.
+With data augmentation, we achieve a new state-of-art level performance
+on \regex, by a considerable margin.  We are also much more competitive
+with state-of-art on \geo.
+
+% RJ: Omitting this section for now.  The pictures don't look _that_ convincing
+% I settled on using a large hidden state, which I think makes it
+% less necessary to attend to exactly the right place.
+% In particular, you see many instances where the network chooses to attend to the word
+% after you would expect it to attend to.
+% \subsection{Learning Compositionality via Alignments}
 
 \subsection{Real vs. Augmented Data}
+\begin{figure}[t] 
+\begin{center} 
+  \includegraphics[scale=0.4]{fig-geo-augment.pdf}
+\end{center} 
+\caption{Accuracy on \geo as a function of number of training examples.
+  Data augmentation gives a consistent performance boost,
+regardless of original dataset size.}
+\label{fig:overview}
+\end{figure}
+
 We ran additional experiments on \geo to characterize
 the extent to which data augmentation helps our system.
 In particular, we wanted to compare the increase in performance
@@ -545,6 +628,23 @@ provides a significant boost that could not be replicated
 by annotating a few more examples.
 
 \subsection{Data Augmentation and Covariate Shift}
+\begin{table*}[t]
+  \centering
+  \small
+  \begin{tabular}{|l|c|c|c|}
+    \hline
+    Dataset & Accuracy & Accuracy on Int Examples & Accuracy on String Examples \\
+    \hline
+    Original & $65.0$ & $11/19$ & $54/82$ \\
+    Int-Augmented & $67.0$ & $15/19$ & $52/82$ \\
+    String-Augmented & $65.0$ & $8/19$ & $56/82$\\
+    All Augmented & $79.0$ & $17/19$ & $62/82$ \\
+    \hline
+  \end{tabular}
+  \caption{Performance on \regex using different data augmentation strategies.}
+  \label{tab:regex-shift}
+\end{table*}
+
 We have shown that data augmentation can yield significant improvements
 for our model, as it encourages the model to learn good alignments,
 a simple form of compositionality.  Nonetheless,
@@ -572,23 +672,6 @@ deal better with utterances that contain quoted strings
 but hurts performance on other examples.
 Pooling both sources of augmented data improves performance
 across the board.
-
-\begin{table*}
-  \centering
-  \small
-  \begin{tabular}{|l|c|c|c|}
-    \hline
-    Dataset & Accuracy & Accuracy on Int Examples & Accuracy on String Examples \\
-    \hline
-    Original & $65.0$ & $11/19$ & $54/82$ \\
-    Int-Augmented & $67.0$ & $15/19$ & $52/82$ \\
-    String-Augmented & $65.0$ & $8/19$ & $56/82$\\
-    All Augmented & $79.0$ & $17/19$ & $62/82$ \\
-    \hline
-  \end{tabular}
-  \caption{Results.}
-  \label{tab:regex-shift}
-\end{table*}
 
 \section{Discussion}
 In this paper, we have presented the first RNN sequence-to-seqeunce
