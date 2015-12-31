@@ -26,7 +26,7 @@ def launch(filename):
   subprocess.call([
       'cl', 'run', ':src', ':lib', ':evaluator', ':geo880-lesscopy', ':geo880-augmented',
       'OMP_NUM_THREADS=%(num_cpu)d THEANO_FLAGS=blas.ldflags=-lopenblas,device=%(device)s,floatX=float32 python src/py/main.py -d %(d)d -i %(i)d -o %(i)d -p attention -u 1 -t 25,5,5 -c lstm -m attention --stats-file stats.json --domain geoquery --train-data %(filename)s --dev-data geo880-lesscopy/geo880_dev100.tsv --save-file params' % vals,
-      '--request-queue', 'john', '--request-cpus', str(num_cpu), '-n', 'geo_more', '-d', description])
+      '--request-queue', 'jag', '--request-cpus', str(num_cpu), '-n', 'geo_more', '-d', description])
   time.sleep(5)
 
 filenames = [
@@ -37,33 +37,33 @@ filenames = [
     'geo880-lesscopy/geo880_train200.tsv',
     'geo880-augmented/geo880_train200_augment500.tsv',
     'geo880-augmented/geo880_train200_augment1k.tsv',
-    'geo880-augmented/geo880_train200_augment2k.tsv',
-    'geo880-augmented/geo880_train200_augment3k.tsv',
-    'geo880-augmented/geo880_train200_augment4k.tsv',
+#    'geo880-augmented/geo880_train200_augment2k.tsv',
+#    'geo880-augmented/geo880_train200_augment3k.tsv',
+#    'geo880-augmented/geo880_train200_augment4k.tsv',
 
     'geo880-lesscopy/geo880_train300.tsv',
     'geo880-augmented/geo880_train300_augment500.tsv',
     'geo880-augmented/geo880_train300_augment1k.tsv',
-    'geo880-augmented/geo880_train300_augment2k.tsv',
-    'geo880-augmented/geo880_train300_augment3k.tsv',
-    'geo880-augmented/geo880_train300_augment4k.tsv',
-    'geo880-augmented/geo880_train300_augment5k.tsv',
+#    'geo880-augmented/geo880_train300_augment2k.tsv',
+#    'geo880-augmented/geo880_train300_augment3k.tsv',
+#    'geo880-augmented/geo880_train300_augment4k.tsv',
+#    'geo880-augmented/geo880_train300_augment5k.tsv',
 
     'geo880-lesscopy/geo880_train400.tsv',
     'geo880-augmented/geo880_train400_augment500.tsv',
     'geo880-augmented/geo880_train400_augment1k.tsv',
-    'geo880-augmented/geo880_train400_augment2k.tsv',
-    'geo880-augmented/geo880_train400_augment3k.tsv',
-    'geo880-augmented/geo880_train400_augment4k.tsv',
-    'geo880-augmented/geo880_train400_augment5k.tsv',
+#    'geo880-augmented/geo880_train400_augment2k.tsv',
+#    'geo880-augmented/geo880_train400_augment3k.tsv',
+#    'geo880-augmented/geo880_train400_augment4k.tsv',
+#    'geo880-augmented/geo880_train400_augment5k.tsv',
 
     'geo880-lesscopy/geo880_train500.tsv',
     'geo880-augmented/geo880_train500_augment500.tsv',
     'geo880-augmented/geo880_train500_augment1k.tsv',
-    'geo880-augmented/geo880_train500_augment2k.tsv',
-    'geo880-augmented/geo880_train500_augment3k.tsv',
-    'geo880-augmented/geo880_train500_augment4k.tsv',
-    'geo880-augmented/geo880_train500_augment5k.tsv',
+#    'geo880-augmented/geo880_train500_augment2k.tsv',
+#    'geo880-augmented/geo880_train500_augment3k.tsv',
+#    'geo880-augmented/geo880_train500_augment4k.tsv',
+#    'geo880-augmented/geo880_train500_augment5k.tsv',
 ]
 
 for fn in filenames:
