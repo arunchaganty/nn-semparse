@@ -8,7 +8,7 @@ import sys
 VERSION = 1  # Increment when updating
 OUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-    'data/artificial/version%02d' % VERSION)
+    'data/artificial')
 
 ENTITIES = ['ent:%02d' % x for x in range(30)]
 RELATIONS = ['rel:%02d' % x for x in range(30)]
@@ -59,6 +59,7 @@ def write_data(basename, data):
       print >>f, '%s\t%s' % (x, y)
 
 def main():
+  random.seed(0)
   base = gen_base()
   simple = gen_simple()
   nested = gen_nested()
@@ -67,7 +68,7 @@ def main():
   nested_train, nested_test = nested[:500], nested[500:1000]
   union_train, union_test = union[:500], union[500:1000]
 
-  def write_train(**kwargs):
+  def write_train(dirname, **kwargs):
     sets = collections.OrderedDict([
         ('num_simple', simple),
         ('num_nested', nested_train),
@@ -78,17 +79,29 @@ def main():
     #data_lists = [base] + [sets[k][:num] for k, num in kwargs.iteritems()]
     data_lists = [sets[k][:num] for k, num in kwargs.iteritems()]
     data = [x for z in data_lists for x in z]
-    write_data(basename, data)
+    write_data(os.path.join(dirname, basename), data)
 
-  write_data('simple.tsv', simple)
-  write_data('nested_test500.tsv', nested_test)
-  write_data('union_test500.tsv', union_test)
+  write_data('simple/simple_test500.tsv', simple_test)
+  write_data('nested/nested_test500.tsv', nested_test)
+  write_data('union/union_test500.tsv', union_test)
 
-  write_train(num_nested=100)
+  write_train('nested', num_nested=100)
   for i in (25, 50, 75, 100, 150, 200, 250, 300):
-    write_train(num_nested=100, num_simple=i)
-    write_train(num_nested=100, num_union=i)
-    write_train(num_nested=100+i)
+    write_train('nested', num_nested=100, num_simple=i)
+    write_train('nested', num_nested=100, num_union=i)
+    write_train('nested', num_nested=100+i)
+
+  write_train('simple', num_simple=100)
+  for i in (25, 50, 75, 100, 150, 200, 250, 300):
+    write_train('simple', num_simple=100, num_nested=i)
+    write_train('simple', num_simple=100, num_union=i)
+    write_train('simple', num_simple=100+i)
+
+  write_train('union', num_union=100)
+  for i in (25, 50, 75, 100, 150, 200, 250, 300):
+    write_train('union', num_union=100, num_nested=i)
+    write_train('union', num_union=100, num_simple=i)
+    write_train('union', num_union=100+i)
 
 if __name__ == '__main__':
   main()
