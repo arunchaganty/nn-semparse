@@ -467,26 +467,24 @@ that have small training datasets, as
 it may be difficult to discover the desired domain knowledge
 from the data alone.
 
-Our solution to this problem is to generate synthetic examples
-in order to inject prior knowledge into our system.
-This paradigm can be thought of as a form of ``data engineering,''
-as opposed to the more common ``feature engineering.''
-This approach allows us to continue using
-a flexible, domain-general neural model.
+Our solution to this problem is to
+augment the original training datasets with synthetic examples.
+This approach allows us to inject prior knowledge into our system,
+as the synthetic examples can be generated 
+in a way that leverages domain knowledge.
+Furthermore, we can continue to use a flexible, domain-general neural model.
 
-For the semantic parsing domain, one important phenomenon
-to model is \emph{compositionality}.
+For semantic parsing, one important phenomenon to model is compositionality.
 We therefore use a \emph{compositional data augmentation} scheme
-to teach the model about compositionality, on the \regex and \geo domains,
-In both cases, we cast the problem as one of grammar induction.
+based on grammar induction.
 We use the existing training examples to induce a
 synchronous context-free grammar (SCFG) over utterances and logical forms.
-The grammar is designed to be high-precision, 
-in that most utterance-logical form pairs generated from the grammar
-do in fact match each other.
 We then generate new examples from this grammar,
 and add these to our original training dataset.
-This process is described in more detail for both domains.
+
+We apply compositional data augmentation to both the \regex and \geo domains,
+using a different grammar for each.
+We describe our approach for each domain in more detail below.
 
 %For example, the Washington SPF (CITE), 
 %which uses combinatory categorial grammar (CCG),
@@ -501,13 +499,13 @@ This process is described in more detail for both domains.
 \pl{need an example / FIGURE illustrating compositionality - this is too abstract
 }
 
-%\pl{This section to be written with more gravity / authority,
-%  and make it seem like the data augmentation that we're doing is \textbf{a thing}
-%  based on principles, not just some random thing we made up.
-%  Spend more time talking about the general procedure,
-%  and less time on the nitty-gritty of Regex and Geo,
-%  which are kind of boring.
-%}
+\pl{This section to be written with more gravity / authority,
+  and make it seem like the data augmentation that we're doing is \textbf{a thing}
+  based on principles, not just some random thing we made up.
+  Spend more time talking about the general procedure,
+  and less time on the nitty-gritty of Regex and Geo,
+  which are kind of boring.
+}
 
 
 \subsection{Augmentation for \regex}
@@ -557,7 +555,7 @@ We write two rules that capture the primary cases:
 \end{itemize}
 
 Our grammar therefore has three categories: 
-\texttt{\$ROOT}, \texttt{\$QuotedStr}, and \texttt{\$Int}
+\texttt{\$ROOT}, \texttt{\$QuotedStr}, and \texttt{\$Int}.
 Figure \ref{fig:augment-regex}
 provides more detail about data augmentation on \regex.
 
@@ -705,8 +703,9 @@ converting the regular expression to a DFA.
 We compare our system to state-of-art results
 achieved on all three datasets (first group of rows of Table \ref{tab:results}).
 For \atis and \regex, we compare to just a single state-of-art system.
-On \geo, we list both Liang 2011 and Kwiatkowski.
-The Liang 2011 system achieved the higher accuracy,
+On \geo, we list both Liang et. al.~\shortcite{liang11dcs}
+and Kwiatkowski et. al.~\shortcite{kwiatkowski10ccg}.
+The former system achieved the higher accuracy,
 but it also was given as input an extended lexicon that
 provided prior information about alignments between 
 English words and predicates.  We explicitly take
