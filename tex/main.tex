@@ -672,7 +672,7 @@ on \regex, this means that no error is thrown when
 converting the regular expression to a DFA.
 
 \subsection{Main Results}
-\begin{table}[t]
+\begin{table*}[t]
   \centering
   \small
   \begin{tabular}{|l|c|c|c|}
@@ -698,7 +698,7 @@ converting the regular expression to a DFA.
   \end{tabular}
   \caption{Results.}
   \label{tab:results}
-\end{table}
+\end{table*}
 
 We compare our system to state-of-art results
 achieved on all three datasets (first group of rows of Table \ref{tab:results}).
@@ -750,6 +750,18 @@ In particular, we wanted to compare the increase in performance
 caused by adding synthetic data to the 
 increase in performance caused by adding more actual examples.
 
+\begin{figure*}[t] 
+\small
+\begin{center} 
+  \includegraphics[scale=0.55]{fig-artificial.pdf}
+\end{center} 
+\caption{Results of our experiments on artificial data.
+For each of the three artificial domains,
+we train on a small training set of 100 examples from the domain,
+plus additional examples drawn from one of the three domains.}
+\label{fig:artificial}
+\end{figure*}
+
 In Figure~\ref{fig:geo-augment}, we plot dev accuracy as a function of
 the number of real training examples.  The red line
 shows results without data augmentation;
@@ -768,22 +780,24 @@ by annotating a few more examples.
 \subsection{Experiments on Artificial Data}
 % RJ: We can add more of these sorts of experiments, of course.
 % These preliminary runs looked promising so I wrote this section.
-\begin{table}[t]
-  \centering
-  \small
-  \begin{tabular}{|l|c|}
-    \hline
-    Training Data & Accuracy (on Nested) \\
-    \hline
-    100 Nested (baseline) & $20.2\%$ \\
-    100 Nested + 100 Simple & $91.4\%$ \\
-    100 Nested + 100 Union & $95.0\%$ \\
-    200 Nested & $97.2\%$ \\
-    \hline
-  \end{tabular}
-  \caption{Results of the experiments on artificial data.}
-  \label{tab:artificial}
-\end{table}
+
+
+%\begin{table}[t]
+%  \centering
+%  \small
+%  \begin{tabular}{|l|c|}
+%    \hline
+%    Training Data & Accuracy (on Nested) \\
+%    \hline
+%    100 Nested (baseline) & $20.2\%$ \\
+%    100 Nested + 100 Simple & $91.4\%$ \\
+%    100 Nested + 100 Union & $95.0\%$ \\
+%    200 Nested & $97.2\%$ \\
+%    \hline
+%  \end{tabular}
+%  \caption{Results of the experiments on artificial data.}
+%  \label{tab:artificial}
+%\end{table}
 
 To further understand the effects of compositional data augmentation,
 we conducted additional experiments on artificial data.
@@ -801,7 +815,7 @@ Our world contains a set of entities and a set of binary relations
 on entities; we can think of entities as people
 and the relations as relationships between two people, such as ``are friends,''
 ``are neighbors,'' etc.  
-We generate the following sets of synthetic examples:
+We generate synthetic examples from each of these three domains:
 \begin{itemize}
   \item \textbf{Simple}: One relation and one entity, 
     e.g. ``friends of alice.''
@@ -812,15 +826,20 @@ We generate the following sets of synthetic examples:
 \end{itemize} 
 We train our semantic parser to map utterances to logical forms,
 varying the source of training data.
-We evaluate on $500$ examples of the ``Nested'' variety.
 
 To test our hypothesis that training examples that do not resemble
 the examples at test time can still help the system learn,
-we try training the model with examples drawn from the other two sets.
-The results of our experiments are in Table~\ref{tab:artificial}.
-We see that these out-of-domain examples
-do help test-time performance greatly.
+we try training the model with a mixture of examples from
+multiple sets, then evaluate the model only on one of the domains.
+In particular, for each of the three domains,
+we create a small initial training set of 100 random examples.
+We then add varying numbers of additional examples from
+each of the three domains, and plot the resulting 
+performance on the test set of the first domain.
 
+The results of our experiments are summarized in Figure~\ref{fig:artificial}.
+We see that these out-of-domain examples do help test-time performance greatly;
+in fact, they help nearly as much as in-domain examples.
 We can conclude from these experiments that there are many regimes
 in which data augmentation can be helpful.
 Clearly, if we augment the training dataset with examples that
