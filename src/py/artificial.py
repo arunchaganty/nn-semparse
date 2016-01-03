@@ -50,6 +50,43 @@ def gen_union():
   random.shuffle(data)
   return data
 
+# Augmentation Routines
+# Don't use any external information besides what's in the datsaet
+# and entity alignments
+# Assume that there's a single entity in each example.
+def get_templates(dataset):
+  def create_template(ex):
+    x, y = ex
+    x_new = re.sub('ent:[0-9]{2}', '%s', x)
+    y_new = re.sub('_ent:[0-9]{2}', '%s', y)
+    return (x_new, y_new)
+  templates = [create_template(ex) for ex in dataset]
+  return templates
+
+def augment_nesting(dataset):
+  # Augment by ensting one thing within another
+  def combine(template, ex):
+    x_t, y_t = template
+    x_e, y_e = ex
+    x_new = x_t % x_e
+    y_new = y_t % y_e
+    return (x_new, y_new)
+  templates = get_templates(dataset)
+  new_examples = [combine(t, ex) for t in templates for ex in dataset]
+  return new_examples
+
+def augment_entities(dataset):
+  # Augment by swapping in new entity names
+  def replace(template, ent):
+    x_t, y_t = template
+    x_new = x_t % ent
+    y_new = y_t % ('_' + ent)
+    return (x_new, y_new)
+  entities = sorted(list(set(re.search('ent:[0-9]{2}', x).group(0)
+                             for x, y in dataset)))
+  templates = get_templates(dataset)
+  new_examples = [replace(t, e) for t in templates for e in entities]
+  return new_examples
 
 def write_data(basename, data):
   print >> sys.stderr, 'Writing %s' % basename
@@ -84,6 +121,7 @@ def main():
   write_data('simple/simple_test500.tsv', simple_test)
   write_data('nested/nested_test500.tsv', nested_test)
   write_data('union/union_test500.tsv', union_test)
+  write_data('augNested/augNested_test500.tsv', nested_test)
 
   write_train('nested', num_nested=100)
   for i in (25, 50, 75, 100, 150, 200, 250, 300):
@@ -102,6 +140,38 @@ def main():
     write_train('union', num_union=100, num_nested=i)
     write_train('union', num_union=100, num_simple=i)
     write_train('union', num_union=100+i)
+
+  # Augmented datasets
+  def write_augmented(dirbase, dataset, aug_method, nums=None):
+    if aug_method == 'none':
+      new_data = []
+    elif aug_method == 'nesting':
+      new_data = augment_nesting(dataset)
+    elif aug_method == 'entities':
+      new_data = augment_entities(dataset)
+    elif aug_method == 'both':
+      new_data = augment_entities(augment_nesting(dataset))
+    else:
+      raise ValueError('Unrecognzied augmentation method "%s"' % aug_method)
+    print >> sys.stderr, 'Augmentation mode "%s": %d new examples' % (
+        aug_method, len(new_data))
+    random.shuffle(new_data)
+    if nums:
+      for n in nums:
+        cur_data = new_data[:n]
+        filename = '%s_aug%s%03d.tsv' % (dirbase, aug_method.title(), n)
+        write_data(filename, dataset + cur_data)
+    else:
+      filename = '%s_aug%s.tsv' % (dirbase, aug_method.title())
+      write_data(filename, dataset + new_data)
+
+  nested_train100 = nested_train[:100]
+  aug_nums = (25, 50, 75, 100, 150, 200, 250, 300, 400, 500)
+  dirbase = 'augNested/train_nested100'
+  write_augmented(dirbase, nested_train100, 'none')
+  write_augmented(dirbase, nested_train100, 'nesting', aug_nums)
+  write_augmented(dirbase, nested_train100, 'entities', aug_nums)
+  write_augmented(dirbase, nested_train100, 'both', aug_nums)
 
 if __name__ == '__main__':
   main()

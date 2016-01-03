@@ -6,7 +6,7 @@ then
 fi
 d=$1
 i=$2 
-device=gpu1
+device=gpu0
 queue='host=jagupard11'
 num_cpu=1
 flags='--request-docker-image codalab/theano-cuda7.0-352.39'
