@@ -272,6 +272,7 @@ def process(filename):
   write_sublist(in_data, augpcfg_data, 1000)
   write_sublist(in_data, augpcfg_data, 1500)
   write_sublist(in_data, augpcfg_data, 2000)
+  write_sublist(in_data, augpcfg_data, len(in_data) / 2)
 
 def main():
   for n in (500, 100, 200, 300, 400, 600):
