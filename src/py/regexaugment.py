@@ -20,7 +20,6 @@ def read_examples(filename):
   print >> sys.stderr, 'Read %d examples' % len(data)
   return data
 
-SYNTHETIC_WORDS = ['synth:%02d' % i for i in range(100)]
 INTS = range(1, 10)  # Use integers from 1 to 9 inclusive
 
 def swap_in(old_list, index, new_val):
@@ -48,15 +47,24 @@ def get_templates(in_data):
 
     # Handle quoted stuff
     quoted_strs = get_quoted_strs(x)
-    for x_quot in quoted_strs:
+    if len(quoted_strs) == 0: continue 
+    x_new = x
+    y_new = y
+    for i, x_quot in enumerate(quoted_strs):
       y_quot = x_quot[2:-2].replace(' ', ' _ ') 
       pattern = '(^| )%s($| )' % re.escape(y_quot)
-      if not re.search(pattern, y):
-        print >> sys.stderr, 'Quoted string "%s" not found in y = "%s"' % (y_quot, y)
-        continue
-      x_new = x.replace(x_quot, '%(w)s')
-      y_new = re.sub(pattern, lambda m: m.group(1) + '%(w)s' + m.group(2), y)
-      str_templates.add((x_new, y_new))
+      all_y_matches = re.findall(pattern, y)
+      if len(all_y_matches) < 1:
+        print >> sys.stderr, 'Quoted string "%s" found %d times in y = "%s"' % (
+            y_quot, len(all_y_matches), y)
+        x_new = None
+        y_new = None
+        break
+      replacement_str = '%(w' + str(i) + ')s'
+      x_new = x_new.replace(x_quot, replacement_str)
+      y_new = re.sub(pattern, lambda m: m.group(1) + replacement_str + m.group(2), y_new)
+    if x_new is None: continue
+    str_templates.add((x_new, y_new, len(quoted_strs)))
 
     # Handle ints
     # For high precision, only handle case where both x and y have 1 int
@@ -70,20 +78,15 @@ def get_templates(in_data):
       y_new = ' '.join(swap_in(y_toks, y_ind, '%d'))
       int_templates.add((x_new, y_new, diff))
 
-  #for x, y in sorted(list(str_templates)):
-  #  print (x, y)
+  #for x, y, n in sorted(list(str_templates)):
+  #  print (x, y, n)
 
   print >> sys.stderr, 'Extracted %d string templates' % len(str_templates)  
   print >> sys.stderr, 'Extracted %d int templates' % len(int_templates)
   return str_templates, int_templates
 
-def augment_data(in_data):
-  """Align based on words in quotes and numbers.
-  
-  To avoid combinatorial explosion, only swap in one thing at a time.
-  """
-  str_augmented_data = []
-  int_augmented_data = []
+def augment_data(in_data, num_str=0, num_int=0):
+  """Align based on words in quotes and numbers."""
 
   # Create unknown strings
   def new_unk_replacement():
@@ -92,22 +95,28 @@ def augment_data(in_data):
     return (s, s)
   new_unk_replacement.cur_unk = 0
 
+  # Strings
+  str_augmented_data = set()
   replacements = get_replacements(in_data)
   str_templates, int_templates = get_templates(in_data)
-
-  for x_template, y_template in str_templates:
-    #cur_replacements = replacements | set([new_unk_replacement()])
-    cur_replacements = replacements
-    for x_rep, y_rep in cur_replacements:
-      str_augmented_data.append((x_template % {'w': x_rep},
-                                 y_template % {'w': y_rep}))
+  while len(str_augmented_data) < num_str:
+    x_t, y_t, n = random.sample(str_templates, 1)[0]
+    cur_reps = random.sample(replacements, n)
+    x_reps = dict(('w%d' % i, cur_reps[i][0]) for i in range(n))
+    y_reps = dict(('w%d' % i, cur_reps[i][1]) for i in range(n))
+    x_new = x_t % x_reps
+    y_new = y_t % y_reps
+    str_augmented_data.add((x_new, y_new))
+  str_augmented_data = list(str_augmented_data)
  
+  # Ints
+  int_augmented_data = []
   for x_template, y_template, diff in int_templates:
     for i in INTS:
       int_augmented_data.append((x_template % i, y_template % (i + diff)))
+  random.shuffle(int_augmented_data)
+  int_augmented_data = int_augmented_data[:num_int]
 
-  print >> sys.stderr, 'Generated %d new str examples' % len(str_augmented_data)
-  print >> sys.stderr, 'Generated %d new int examples' % len(int_augmented_data)
   return str_augmented_data, int_augmented_data
 
 def write_data(basename, data):
@@ -122,27 +131,17 @@ def process(filename):
   print >> sys.stderr, 'Processing %s' % filename
   basename = os.path.basename(filename)
   in_data = read_examples(filename)
-  str_data, int_data = augment_data(in_data)
+  str_data, int_data = augment_data(in_data, num_str=1000, num_int=1000)
 
-  # Write everything
-  write_data('regex_train_sm_augmentAll.tsv', in_data + str_data + int_data)
+  def write_subset(num_str=0, num_int=0):
+    cur_str = str_data[:num_str]
+    cur_int = int_data[:num_int]
+    basename = 'regex_train_sm_%dstr_%dint.tsv' % (len(cur_str), len(cur_int))
+    write_data(basename, in_data + cur_str + cur_int)
 
-  # Write a sample of str data
-  sampled_str = random.sample(str_data, 1000)
-  write_data('regex_train_sm_augment1kStr.tsv', in_data + sampled_str)
-
-  # Write int data only
-  write_data('regex_train_sm_augmentInt.tsv', in_data + int_data)
-
-  # Write sample of str data + int data
-  write_data('regex_train_sm_augment1kStrPlusInt.tsv', in_data + sampled_str + int_data)
-
-  # Write 500 int data, str data, and combined
-  sampled_int = random.sample(int_data, 500)
-  write_data('regex_train_sm_augment500Int.tsv', in_data + sampled_int)
-  sampled_str = random.sample(str_data, 500)
-  write_data('regex_train_sm_augment500Str.tsv', in_data + sampled_str)
-  write_data('regex_train_sm_augment500Both.tsv', in_data + sampled_int + sampled_str)
+  for i in (0, 100, 200, 300):
+    for j in (0, 100, 200):
+      write_subset(num_str=i, num_int=j)
 
 def main():
   process(IN_FILE)
