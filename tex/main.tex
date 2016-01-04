@@ -112,8 +112,8 @@ little hand-engineering of features.
 However, there are at least two significant barriers to applying these 
 RNN models directly to semantic parsing.
 First, semantic parsers are commonly trained from small datasets,
-with possibly only hundreds of utterances paired with annotated logical forms.
-At the same time, to perform well, semantic parsers
+often consisting of only hundreds of examples.
+At the same time, semantic parsers
 must be able to generalize to a large set of 
 domain-specific entities which, due to the limited
 amount of training data, may occur rarely or not at all
@@ -161,13 +161,14 @@ finding convex hulls \cite{vinyals2015pointer}, with impressive results on each.
 
 Nonetheless, there has yet to be a successful application of
 neural networks for semantic parsing.
-We are only aware of one previous effort 
-by Grefenstette et al.~\shortcite{grefenstette2014deep},
-though their model was not a sequence-to-sequence model,
+The closest related work we are aware of is
+by Grefenstette et al.~\shortcite{grefenstette2014deep};
+however, their model was not a sequence-to-sequence model,
 and they had yet to achieve good results.
 
 Current semantic parsing systems are complex pieces of software 
 and have a great deal of prior knowledge baked into their internal structure.
+% TODO: argue this better
 
 \pl{need to argue the fact that current semantic parsers involve substantial
   work more convincingly and quantitatively;
@@ -185,7 +186,7 @@ to the input images that did not change the output label.
 The data augmentation scheme we propose has a more general flavor,
 as it is not constrained to keep the output label fixed.
 We are able to generate synthetic examples $(x, y)$
-where both $x$ and $y$ are not seen in the training dataset.
+where neither $x$ nor $y$ occur in the training dataset.
 % Another nice analysis (http://arxiv.org/pdf/1405.3531.pdf) 
 
 \pl{I personally like putting the related work at the end with the discussion
@@ -542,22 +543,24 @@ Induced rules:
 
 For \regex, our basic strategy is to find small pieces of 
 utterances and regular expressions that we can align with high confidence.
-We write two rules that capture the primary cases:
-\begin{itemize}
-  \item Quoted strings.  If a string appears inside quotation marks
-    in the utterance, and is found verbatim in the corresponding
-    regular expression, we assume that these align directly.
-  \item Integers.  If exactly one integer occurs in both the 
-    utterance and regular expression, we assume they should be aligned.
-    If the integers are not equal, we assume that there should be
-    a constant difference between them 
-    (see Figure \ref{fig:augment-regex} for an example).
-\end{itemize}
-
+We focus on two cases: quoted strings and integers.
 Our grammar therefore has three categories: 
 \texttt{\$ROOT}, \texttt{\$QuotedStr}, and \texttt{\$Int}.
 Figure \ref{fig:augment-regex}
 provides more detail about data augmentation on \regex.
+
+%We write two rules that capture the primary cases:
+%\begin{itemize}
+%  \item Quoted strings.  If a string appears inside quotation marks
+%    in the utterance, and is found verbatim in the corresponding
+%    regular expression, we assume that these align directly.
+%  \item Integers.  If exactly one integer occurs in both the 
+%    utterance and regular expression, we assume they should be aligned.
+%    If the integers are not equal, we assume that there should be
+%    a constant difference between them 
+%    (see Figure \ref{fig:augment-regex} for an example).
+%\end{itemize}
+
 
 \subsection{Augmentation for \geo}
 \begin{figure}[t] 
@@ -595,21 +598,21 @@ we only show the grammar over the natural language utterances.}
 The \geo domain exhibits a greater degree of compositionality
 than \regex, which presents an opportunity to use a more sophisticated
 data augmentation strategy.
-In particular, the more difficult \geo queries tend to have
+In particular, some of the more difficult \geo queries have
 nested sub-queries (e.g. ``states that border states that border colorado'').
 
 To generate examples with multiple levels of nesting,
 we induce a grammar that can combine two training examples into one.
-We crucially leverage the fact that entity names are
-easy to identify, and it is easy to align occurrences of entities
-in the utterance and logical form.
+As in \regex, we rely on a set of high-precision alignment rules--in this case,
+we align city, state, and river entity mentions in the input and output.
+We also extract type information from the logical forms.
 Therefore, we can replace individual entity mentions
 with entire phrases that evaluate to a set of entities of the same type.
 
-We choose to focus on three types of entities--states, cities, 
-and rivers--as they are the most common entity types in the dataset.
-Therefore, our grammar has four categories:
-\texttt{\$ROOT}, \texttt{\$State}, \texttt{\$City}, and \texttt{\$River}.
+%We choose to focus on three types of entities--states, cities, 
+%and rivers--as they are the most common entity types in the dataset.
+%Therefore, our grammar has four categories:
+%\texttt{\$ROOT}, \texttt{\$State}, \texttt{\$City}, and \texttt{\$River}.
 Figure \ref{fig:augment-geo}
 provides more detail about data augmentation on \geo.
 
@@ -636,8 +639,9 @@ to two related baselines:
 real model}
 
 \subsection{Implementation Details}
-We ran all experiments with a hidden size of $400$ units,
-and $100$-dimensional word embeddings.
+We ran all experiments with a hidden size of $400$ units.
+The word vector sizes were chosen individually for each domain:
+we used $50$ for \regex, $100$ for \geo, and $200$ for \atis.
 We initialized all parameters uniformly at random 
 within the interval $[-0.1, 0.1]$.
 We used a simple learning rate schedule:
@@ -646,17 +650,16 @@ then for $5$ more epochs with a learning rate of $0.05$,
 and finally $5$ additional epochs with a learning rate of $0.025$.
 For the \attncopy model, we replace word vectors for words
 that occur only once in the training set 
-with a universal \texttt{<unk>} word vector;
-we do not do this for the baselines, as without the copying mechanism,
-replacing rare words with \texttt{<unk>} hurts performance.
+with a universal \texttt{<unk>} word vector.
+% TODO: do this or not on baselines?
 
 Another important hyperparameter for \regex and \geo is the
 extent to which we perform data augmentation.
 For \regex, we train on the original dataset,
-plus all NUMBER examples generated by the integer-based scheme
-and $1000$ randomly sampled new examples generated by the string-based scheme.
+plus $NUMBER$ examples generated by the integer-based scheme
+and $NUMBER$ randomly sampled new examples generated by the string-based scheme.
 For \geo, we train on the original dataset,
-plus $500$ randomly sampled new examples.
+plus $300$ randomly sampled new examples.
 All hyperparameters were tuned by training on a subset of the
 training set, and evaluating on the remaining examples.
 
@@ -688,12 +691,12 @@ converting the regular expression to a DFA.
     \textbf{Original Dataset} & & & \\
     \encdec & - & - & - \\
     \attn & - & - & - \\
-    \attncopy & $78.3$ & $65.0$ & $75.0$ \\
+    \attncopy & $79.5$ & $65.0$ & $85.4$ \\
     \hline
     \textbf{With Data Augmentation} & & & \\
     \encdec & & - & - \\
     \attn & & - & - \\
-    \attncopy & & $79.0$ & $84.0$ \\
+    \attncopy & $80.9$ & $79.0$ & $87.9$ \\
     \hline
   \end{tabular}
   \caption{Results.}
@@ -716,14 +719,14 @@ and no new examples generated by our data augmentation approach.
 Our results are summarized in the second section of Table \ref{tab:results}.
 Note that even without data augmentation, we are able to nearly
 match the state-of-art on the \regex dataset.
-However, we lag significantly behind on \geo.
+However, we lag significantly behind on \geo and \atis.
 
 Next, we now rerun our system and all baselines on our
 augmented training datasets.  These results are shown in the
 third and final section of Table \ref{tab:results}.
 With data augmentation, we achieve a new state-of-art level performance
-on \regex, by a considerable margin.  We are also much more competitive
-with state-of-art on \geo.
+on \regex, by a considerable margin.  We are also more competitive
+with state-of-art on \geo.  Our \atis performance still lags further behind.
 
 % RJ: Omitting this section for now.  The pictures don't look _that_ convincing
 % I settled on using a large hidden state, which I think makes it
@@ -750,6 +753,26 @@ In particular, we wanted to compare the increase in performance
 caused by adding synthetic data to the 
 increase in performance caused by adding more actual examples.
 
+In Figure~\ref{fig:geo-augment}, we plot dev accuracy as a function of
+the number of real training examples.  
+The red line shows results without data augmentation;
+the blue line shows results when data augmentation was 
+performed on the available training examples.
+When training on $n$ examples, we added $\frac{n}2$ synthetic examples
+when doing data augmentation.
+
+From this plot, we see that data augmentation consistently boosts performance.
+In many cases, the augmented examples prove to be
+almost as helpful as getting new original examples:
+performance using $200$ real and $100$ synthetic examples
+is nearly that of using $300$ real examples,
+and performance using $300$ real and $150$ synthetic examples 
+is greater than that of using $400$ real examples.
+
+\subsection{Experiments on Artificial Data}
+% RJ: We can add more of these sorts of experiments, of course.
+% These preliminary runs looked promising so I wrote this section.
+
 \begin{figure*}[t] 
 \small
 \begin{center} 
@@ -761,26 +784,6 @@ we train on a small training set of 100 examples from the domain,
 plus additional examples drawn from one of the three domains.}
 \label{fig:artificial}
 \end{figure*}
-
-In Figure~\ref{fig:geo-augment}, we plot dev accuracy as a function of
-the number of real training examples.  The red line
-shows results without data augmentation;
-the blue line shows results when data augmentation was 
-performed on the available training examples.
-From this plot, we see that the effect of 
-data augmentation is relatively constant regardless
-of original training set size.
-On the other hand, there are clear diminishing marginal returns
-to adding real training examples, and the curve appears to level out
-significantly below the curve for augmented data,
-suggesting that the compositionally-generated data
-provides a significant boost that could not be replicated
-by annotating a few more examples.
-
-\subsection{Experiments on Artificial Data}
-% RJ: We can add more of these sorts of experiments, of course.
-% These preliminary runs looked promising so I wrote this section.
-
 
 %\begin{table}[t]
 %  \centering
@@ -814,51 +817,73 @@ logical form written in a variant of lambda-DCS \cite{liang2013lambdadcs}.
 Our world contains a set of entities and a set of binary relations
 on entities; we can think of entities as people
 and the relations as relationships between two people, such as ``are friends,''
-``are neighbors,'' etc.  
-We generate synthetic examples from each of these three domains:
-\begin{itemize}
-  \item \textbf{Simple}: One relation and one entity, 
-    e.g. ``friends of alice.''
-  \item \textbf{Nested}: Two relations nested and one entity, 
-    e.g. ``neighbors of friends of alice.''
-  \item \textbf{Union}: One relation and the disjunction of two entities,
-    e.g. ``friends of alice or bob.''
-\end{itemize} 
-We train our semantic parser to map utterances to logical forms,
-varying the source of training data.
+``are neighbors,'' etc.  All the synthetic examples
+we generate involve the composition of relations to some depth,
+plus a single entity.  For example, ``neighbors of friends of alice''
+would be a depth-$2$ example.
 
-To test our hypothesis that training examples that do not resemble
-the examples at test time can still help the system learn,
-we try training the model with a mixture of examples from
-multiple sets, then evaluate the model only on one of the domains.
-In particular, for each of the three domains,
-we create a small initial training set of 100 random examples.
-We then add varying numbers of additional examples from
-each of the three domains, and plot the resulting 
-performance on the test set of the first domain.
+We train our model to be able to understand depth-$2$ examples.
+The model is given small training set of $100$ such examples.
+We try augmenting this dataset in three ways:
+\begin{enumerate}
+  \item \textbf{Entity-based}.  Swap out entity mentions for different entity mentions.
+    Our strategy on \regex was most similar to this strategy.
+  \item \textbf{Nesting-based}.  Swap out one entity mention for another complete example,
+    thereby nesting two examples and creating a depth-$4$ example.
+  \item \textbf{Both}.  Apply (2) followed by (1).
+    Our strategy on \geo was most similar to this strategy.
+\end{enumerate}
+Note that only the first strategy generates examples
+that are in the support of the test distribution.
+By contrast, the other two only generate examples that are
+outside the support of the test distribution,
+and hence are \emph{out-of-domain} augmentation strategies.
 
-The results of our experiments are summarized in Figure~\ref{fig:artificial}.
-We see that these out-of-domain examples do help test-time performance greatly;
-in fact, they help nearly as much as in-domain examples.
-We can conclude from these experiments that there are many regimes
-in which data augmentation can be helpful.
-Clearly, if we augment the training dataset with examples that
-are very similar to the test examples, we should expect performance to increase.
-Furthermore, even if the synthetic examples are not that similar
-to the test examples, they can still be beneficial.
+In Figure \ref{fig:artificial}, we plot the accuracy on a test set 
+of depth-$2$ examples versus the number of synthetic examples added
+using each of the three augmentation strategies.
+While all three augmentation strategies help,
+the entity-based augmentation strategy
+proves to be the least helpful of the three.
+It is the only one that never achieves accuracy of $99\%$ or higher,
+maxing out at $92.8\%$.
+The best strategy is the combined one, which thrice achieves $100\%$ accuracy
+on the test set.
+Overall, we see that, at least in some cases,
+\emph{out-of-domain} data augmentation can be very beneficial
+to learning.
 
-It is interesting to compare this out-of-domain data augmentation
-to multitask learning.
-In multitask learning, a model is made to predict multiple outputs for a given input.
-Even if one only cares about one of these outputs,
-multitask learning can be helpful because it can act as a regularizer,
-forcing the model to learn intermediate representations that generalize
-better (TODO: find citations, I'm not actually sure how I know this).
-Similarly, out-of-domain data augmentation may encourage
-the model to learn better representations.
-
-TODO: Also talk about covariate shift, find an artificial
-setting where the covariate shift issue dominates.
+%We generate synthetic examples from each of these three domains:
+%\begin{itemize}
+%  \item \textbf{Simple}: One relation and one entity, 
+%    e.g. ``friends of alice.''
+%  \item \textbf{Nested}: Two relations nested and one entity, 
+%    e.g. ``neighbors of friends of alice.''
+%  \item \textbf{Union}: One relation and the disjunction of two entities,
+%    e.g. ``friends of alice or bob.''
+%\end{itemize} 
+%We train our semantic parser to map utterances to logical forms,
+%varying the source of training data.
+%
+%To test our hypothesis that training examples that do not resemble
+%the examples at test time can still help the system learn,
+%we try training the model with a mixture of examples from
+%multiple sets, then evaluate the model only on one of the domains.
+%In particular, for each of the three domains,
+%we create a small initial training set of 100 random examples.
+%We then add varying numbers of additional examples from
+%each of the three domains, and plot the resulting 
+%performance on the test set of the first domain.
+%
+%The results of our experiments are summarized in Figure~\ref{fig:artificial}.
+%We see that these out-of-domain examples do help test-time performance greatly;
+%in fact, they help nearly as much as in-domain examples.
+%We can conclude from these experiments that there are many regimes
+%in which data augmentation can be helpful.
+%Clearly, if we augment the training dataset with examples that
+%are very similar to the test examples, we should expect performance to increase.
+%Furthermore, even if the synthetic examples are not that similar
+%to the test examples, they can still be beneficial.
 
 %\subsection{Data Augmentation and Covariate Shift}
 %\begin{table*}[t]
@@ -926,19 +951,30 @@ In this paper, we have presented the first RNN sequence-to-seqeunce
 model for semantic parsing.  Our model is easy to train
 and gives good performance on a wide variety of semantic parsing
 datasets, when trained with logical form supervision.
+
 Additionally, we describe a compositional data augmentation approach that 
 further boosts performance.
+Interestingly, our experiments on artificial data show that
+our data augmentation strategy can help the model learn
+even when the new examples look different than the examples seen at test time.  
+We hypothesize that adding these \emph{out-of-domain} synthetic examples
+may act as a regularizer that encourages the model
+to learn good representations of the data.
+Much further work is needed to explore the potential of
+similar data augmentation techniques in other domains
+and for other types of machine learning mdoels.
 
 While our data augmentation techniques are effective,
 they unfortunately require non-trivial manual processing.
+One possible extension 
 One line of potential future work would be to
-perform data augmentation using a grammar
-that was induced automatically, in a domain-general manner.
-We could leverage existing work on semantic parsing
+automatically induce a grammar for data augmentation
+using a domain-general method.
+We could, for example, leverage existing work on semantic parsing
 using higher-order unification \cite{kwiatkowski10ccg}.
 
 One limitation of our current approach is that it 
-requires annotated logical forms.
+uses annotated logical forms as supervision.
 In the last few years, there has been an emergence of
 semantic parsers that can learn from denotations 
 \cite{liang11dcs,berant2013freebase}.
@@ -947,9 +983,9 @@ syntactically valid logical forms, which our RNN semantic parser lacks.
 In order to train our system from denotation information alone,
 we would need to somehow teach it this information ahead of time.
 Building on the data augmentation described in this paper,
-we could use synthetic data with logical form supervision
+we could synthetically generate examples
 to teach our system about the logical language.
-For example, we could generate
+For example, we could automatically generate
 pairs of ``canonical'' utterances and logical forms,
 as in \cite{wang2015overnight}.  
 We would first train the system to map
@@ -971,7 +1007,7 @@ whose memories encode all the relations in the database.
 Do not number the acknowledgment section.
 
 \section*{Reproducibility}
-All experiments will be available on 
+All experiments will be available on Codalab. 
 %\url{http://www.codalab.org}
 
 \bibliography{all}
