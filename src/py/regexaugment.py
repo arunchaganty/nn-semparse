@@ -2,10 +2,13 @@
 
 Very simple, just replace things in quotes and numbers.
 """
+import collections
 import os
 import random
 import re
 import sys
+
+from vocabulary import Vocabulary
 
 IN_FILE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
@@ -85,23 +88,46 @@ def get_templates(in_data):
   print >> sys.stderr, 'Extracted %d int templates' % len(int_templates)
   return str_templates, int_templates
 
+def get_true_vocab(in_data, unk_cutoff):
+  sentences = [x for x, y in in_data]
+  counts = collections.Counter()
+  for s in sentences:
+    counts.update(s.split(' '))
+  vocab = set(w for w in counts if counts[w] > unk_cutoff)
+  return vocab
+
 def augment_data(in_data, num_str=0, num_int=0):
   """Align based on words in quotes and numbers."""
 
   # Create unknown strings
   def new_unk_replacement():
-    s = 'synth:%03d' % new_unk_replacement.cur_unk
+    s = 'synth:%04d' % new_unk_replacement.cur_unk
     new_unk_replacement.cur_unk += 1
-    return (s, s)
+    return s
   new_unk_replacement.cur_unk = 0
 
   # Strings
+  vocab = get_true_vocab(in_data, 1)
   str_augmented_data = set()
   replacements = get_replacements(in_data)
   str_templates, int_templates = get_templates(in_data)
   while len(str_augmented_data) < num_str:
     x_t, y_t, n = random.sample(str_templates, 1)[0]
     cur_reps = random.sample(replacements, n)
+    for i in range(len(cur_reps)):
+      x_r, y_r = cur_reps[i]
+      x_toks = x_r.split(' ')
+      new_toks = []
+      for t in x_toks:
+        if t in vocab:
+          new_toks.append(t)
+        else:
+          new_toks.append(new_unk_replacement())
+      print new_toks
+      x_new = ' '.join(new_toks)
+      y_new = x_new[2:-2].replace(' ', ' _ ')
+      cur_reps[i] = (x_new, y_new)
+
     x_reps = dict(('w%d' % i, cur_reps[i][0]) for i in range(n))
     y_reps = dict(('w%d' % i, cur_reps[i][1]) for i in range(n))
     x_new = x_t % x_reps
