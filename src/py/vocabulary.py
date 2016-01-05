@@ -103,6 +103,7 @@ class RawVocabulary(Vocabulary):
     self.float_type = float_type
 
     # Embedding matrix
+    numpy.random.seed(0)
     self.emb_mat = theano.shared(
         name='vocab_emb_mat',
         value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.size(), emb_size)).astype(theano.config.floatX))
@@ -141,6 +142,7 @@ class GloveVocabulary(Vocabulary):
     self.float_type = float_type
 
     # Keep separate embeddings for </s> and UNK ("special" words)
+    numpy.random.seed(0)
     self.eos_vec = theano.shared(
         name='vocab_eos',
         value=0.1 * numpy.random.uniform(-1.0, 1.0, self.emb_size).astype(theano.config.floatX))

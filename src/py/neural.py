@@ -94,6 +94,7 @@ class NeuralModel(object):
       print '%s: %s' % (p.name, p.get_value())
 
   def train(self, dataset, eta=0.1, T=[], verbose=False):
+    random.seed(0)
     # train with SGD (batch size = 1)
     cur_lr = eta
     max_iters = sum(T)

@@ -14,6 +14,8 @@ class GRULayer(RNNLayer):
   Parameter names follow convention in Richard Socher's CS224D slides.
   """
   def create_vars(self, create_init_state):
+    numpy.random.seed(0)
+
     # Initial state
     if create_init_state:
       self.h0 = theano.shared(

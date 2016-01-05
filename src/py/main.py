@@ -6,7 +6,6 @@ import json
 import math
 import numpy
 import os
-import random
 import re
 import subprocess
 import sys

@@ -21,6 +21,8 @@ class AttentionSpec(Spec):
     self.attention_copying = attention_copying
   
   def create_vars(self):
+    numpy.random.seed(0)
+
     # TODO: move this into lstm.py
     if self.rnn_type == 'lstm':
       annotation_size = 4 * self.hidden_size
