@@ -14,7 +14,7 @@ condition = sys.argv[1]
 d = int(sys.argv[2])
 i = int(sys.argv[3])
 device = 'cpu'
-num_cpu = 1
+num_cpu = 2
 
 def launch(filename):
   # Filenames are like train_nested150.tsv
@@ -26,7 +26,7 @@ def launch(filename):
   subprocess.call([
       'cl', 'run', ':src', ':artificial',
       'OMP_NUM_THREADS=%(num_cpu)d THEANO_FLAGS=blas.ldflags=-lopenblas,device=%(device)s,floatX=float32 python src/py/main.py -d %(d)d -i %(i)d -o %(i)d -p attention -u 0 -t 30 -c lstm -m attention --stats-file stats.json --train-data %(filename)s --dev-data artificial/%(condition)s/%(condition)s_test500.tsv --save-file params' % vals,
-      '--request-queue', 'jag', '--request-cpus', str(num_cpu), '-n', 'artificial-%s' % condition, '-d', description])
+      '--request-queue', 'john', '--request-cpus', str(num_cpu), '-n', 'artificial-%s' % condition, '-d', description])
   time.sleep(1)
 
 filenames = sorted(glob.glob('data/artificial/%s/train_*.tsv' % condition))
