@@ -59,30 +59,34 @@ def get_replacements():
 def get_templates(in_data, replacements):
   templates = []
   for x, y in in_data:
+    x_new = x
+    y_new = y
+    r_types = []
     for r_type in replacements:
       for x_rep, y_rep in replacements[r_type]:
         if x_rep in x and y_rep in y:
-          x_template = x.replace(x_rep, '%(w)s')
-          y_template = y.replace(y_rep, '%(w)s')
-          templates.append((x_template, y_template, r_type))
-  for k in replacements:
-    num_templates = sum(1 for x, y, t in templates if t == k)
-    print >> sys.stderr, 'Found %d templates of type %s' % (num_templates, k)
+          x_new = x_new.replace(x_rep, '%(w' + str(len(r_types)) + ')s')
+          y_new = y_new.replace(y_rep, '%(w' + str(len(r_types)) + ')s')
+          r_types.append(r_type)
+    if x_new != x:
+      templates.append((x_new, y_new, r_types))
   return templates
 
-def augment_data(in_data):
+def augment_data(in_data, num):
   replacements = get_replacements()
   templates = get_templates(in_data, replacements)
-  augmented_data = collections.defaultdict(list)
-  for x_template, y_template, r_type in templates:
-    cur_reps = replacements[r_type]
-    for x_rep, y_rep in replacements[r_type]:
-      augmented_data[r_type].append(
-          (x_template % {'w': x_rep}, y_template % {'w': y_rep}))
+  augmented_data = set()
 
-  for z in augmented_data:
-    print >> sys.stderr, 'Generated %d new %s examples' % (len(augmented_data[z]), z)
-  return [(x, y) for z in augmented_data for x, y in augmented_data[z]]
+  while len(augmented_data) < num:
+    template = random.sample(templates, 1)[0]
+    x_t, y_t, r_types = template
+    cur_reps = [random.sample(replacements[r_type], 1)[0] for r_type in r_types]
+    x_reps = dict(('w%d' % i, cur_reps[i][0]) for i in range(len(r_types)))
+    y_reps = dict(('w%d' % i, cur_reps[i][1]) for i in range(len(r_types)))
+    x_new = x_t % x_reps
+    y_new = y_t % y_reps
+    augmented_data.add((x_new, y_new))
+  return list(augmented_data)
 
 def write_data(basename, data):
   out_path = os.path.join(OUT_DIR, basename)
@@ -95,15 +99,10 @@ def process(filename):
   print >> sys.stderr, 'Processing %s' % filename
   basename = os.path.basename(filename)
   in_data = read_examples(filename)
-  augmented_data = augment_data(in_data)
+  augmented_data = augment_data(in_data, 4000)
 
-  # Write a sample of augmented data
-  sampled_data = random.sample(augmented_data, 2000)
-  write_data('atis_train_augment2k.tsv', in_data + sampled_data)
-
-  # Write a sample of augmented data
-  sampled_data = random.sample(augmented_data, 4000)
-  write_data('atis_train_augment4k.tsv', in_data + sampled_data)
+  write_data('atis_train_augment2k.tsv', in_data + augmented_data[:2000])
+  write_data('atis_train_augment4k.tsv', in_data + augmented_data[:4000])
 
 def main():
   process(IN_FILE)
