@@ -1,5 +1,6 @@
 """Artificial data."""
 import collections
+import itertools
 import os
 import random
 import re
@@ -10,8 +11,8 @@ OUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/artificial')
 
-ENTITIES = ['ent:%02d' % x for x in range(30)]
-RELATIONS = ['rel:%02d' % x for x in range(30)]
+ENTITIES = ['ent:%02d' % x for x in range(20)]
+RELATIONS = ['rel:%02d' % x for x in range(50)]
 
 def gen_base():
   entities = [(e, '_' + e) for e in ENTITIES]
@@ -28,16 +29,26 @@ def gen_simple():
   random.shuffle(data)
   return data
 
-def gen_nested():
+def gen_nested(depth=2):
   data = []
   for e in ENTITIES:
-    for r1 in RELATIONS:
-      for r2 in RELATIONS:
-        x = '%s of %s of %s' % (r1, r2, e)
-        y = '( _%s ( _%s _%s ) )' % (r1, r2, e)
-        data.append((x, y))
+    for rels in itertools.product(RELATIONS, repeat=depth):
+      rels = list(rels)
+      x = ' of '.join(rels + [e])
+      y = '( ' + ' ( '.join(['_%s' % r for r in rels]) + ' _%s' % e + ' )' * depth
+      data.append((x, y))
   random.shuffle(data)
   return data
+
+def sample_nested(depth=2, num=0):
+  data = set()
+  while len(data) < num:
+    rels = [random.sample(RELATIONS, 1)[0] for i in range(depth)]
+    e = random.sample(ENTITIES, 1)[0]
+    x = ' of '.join(rels + [e])
+    y = '( ' + ' ( '.join(['_%s' % r for r in rels]) + ' _%s' % e + ' )' * depth
+    data.add((x, y))
+  return list(data)
 
 def gen_union():
   data = []
@@ -172,6 +183,10 @@ def main():
   write_augmented(dirbase, nested_train100, 'nesting', aug_nums)
   write_augmented(dirbase, nested_train100, 'entities', aug_nums)
   write_augmented(dirbase, nested_train100, 'both', aug_nums)
+  depth4 = sample_nested(depth=4, num=1000)
+  for i in aug_nums:
+    write_data('augNested/train_nested%d.tsv' % (100 + i), nested_train[:100+i])
+    write_data('augNested/train_nested100_deeper%d.tsv' % i, nested_train100 + depth4[:i])
 
 if __name__ == '__main__':
   main()
