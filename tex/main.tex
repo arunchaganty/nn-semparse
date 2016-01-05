@@ -281,7 +281,7 @@ We evaluate our system on three standard semantic parsing datasets:
 
 It is notable that these datasets are many orders of magnitude smaller
 than the datasets used to train neural machine translation systems
-(CITE).
+\cite{sutskever2014sequence,bahdanau2014neural}.
 
 In this work, we only explore learning from logical forms.
 We therefore do not use any semantic parsing datasets
@@ -836,14 +836,17 @@ is greater than that of using $400$ real examples.
 %  \caption{Results of the experiments on artificial data.}
 %  \label{tab:artificial}
 %\end{table}
-
-To further understand the effects of compositional data augmentation,
-we conducted additional experiments on artificial data.
-The main question we wished to investigate was whether
-data augmentation can be beneficial even if the examples generated
+Our data augmentation on \geo helped performance
+even though the generated examples were not guaranteed
+to be in the support of the test distribution.
+One possible explanation is that generating examples with nesting
+forces the model focus on examples that are similar to the harder examples
+in the test set.
+However, we also wanted to explore the possibility that
+data augmentation can be beneficial even if the exmaples generated
 do not match the test distribution.
-When a dataset is augmented in this fashion, we refer to it
-as \emph{out-of-domain} data augmentation.
+To investigate the effects of such \emph{out-of-domain} data augmentation,
+we conducted additional experiments on artificial data.
 
 To this end, we generated synthetic examples from a simple grammar.
 Each example is an input-output pair $(x, y)$, where
@@ -873,9 +876,12 @@ We try augmenting this dataset in three ways:
     Apply (2) followed by (1).
     This is similar to our strategy for \geo.
 \end{enumerate}
-Note that only the first strategy generates examples
-that are in the support of the test distribution.
-By contrast, the other two only generate examples that are
+Note that the first strategy generates new examples
+from the same distribution as the training distribution;
+since the test examples are also drawn from this distribution,
+the distribution of the synthetic examples is exactly the test distribution
+(though not iid).
+By contrast, the other two strategies only generate examples that are
 outside the support of the test distribution,
 and hence are out-of-domain augmentation strategies.
 
@@ -883,7 +889,7 @@ In Figure \ref{fig:artificial}, we plot the accuracy on a test set
 of $500$ depth-$2$ examples versus the number of synthetic examples added
 using each of the three augmentation strategies.
 While all three augmentation strategies help,
-the entity-based augmentation strategy is the least successful.
+the same-domain entity-based augmentation strategy is the least successful.
 It is the only one that never achieves accuracy of $99\%$ or higher,
 maxing out at $92.8\%$.
 The nesting-based strategy alone is capable of attaining
@@ -894,6 +900,7 @@ dependably leads the model to perfect or near-perfect test accuracy.
 Overall, we see that, at least in some cases,
 out-of-domain data augmentation can be very beneficial
 to learning.
+
 
 %We generate synthetic examples from each of these three domains:
 %\begin{itemize}
