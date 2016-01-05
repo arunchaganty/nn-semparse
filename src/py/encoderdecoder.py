@@ -3,10 +3,12 @@ import itertools
 import numpy
 import theano
 from theano import tensor as T
+from theano.ifelse import ifelse
 import sys
 
 from encdecspec import EncoderDecoderSpec
-from neural import NeuralModel
+from derivation import Derivation
+from neural import NeuralModel, CLIP_THRESH
 from vocabulary import Vocabulary
 
 class EncoderDecoderModel(NeuralModel):
@@ -50,10 +52,12 @@ class EncoderDecoderModel(NeuralModel):
                                           on_unused_input='warn')
 
   def setup_backprop(self):
+    eta = T.scalar('eta_for_backprop')
     x = T.lvector('x_for_backprop')
     y = T.lvector('y_for_backprop')
     cur_lex_entries = T.lvector('cur_lex_entries_for_backprop')
     y_input_inds = T.lmatrix('y_input_inds_for_backprop')
+    y_in_x_inds = T.lmatrix('y_in_x_inds_for_backprop')
     def enc_recurrence(x_t, h_prev, *params):
       return self.spec.f_enc(x_t, h_prev)
     enc_results, _ = theano.scan(fn=enc_recurrence,
@@ -78,9 +82,19 @@ class EncoderDecoderModel(NeuralModel):
     p_y_seq = dec_results[1]
     log_p_y = T.sum(T.log(p_y_seq))
     gradients = T.grad(log_p_y, self.params)
+
+    # Do the updates here
+    updates = []
+    for p, g in zip(self.params, gradients):
+      grad_norm = g.norm(2)
+      clipped_grad = ifelse(grad_norm >= CLIP_THRESH, 
+                            g * CLIP_THRESH / grad_norm, g)
+      updates.append((p, p + eta * clipped_grad))
+
     self._backprop = theano.function(
-        inputs=[x, y, cur_lex_entries, y_input_inds],
-        outputs=[p_y_seq, log_p_y] + [-g for g in gradients])
+        inputs=[x, y, eta, cur_lex_entries, y_input_inds, y_in_x_inds],
+        outputs=[p_y_seq, log_p_y],
+        updates=updates, on_unused_input='warn')
 
   def get_objective_and_gradients(self, ex):
     # TODO(robinjia): Only pass x for cur_lex_entries if lexicon is simple.
@@ -115,16 +129,19 @@ class EncoderDecoderModel(NeuralModel):
         y_t = self.out_vocabulary.get_index(y_tok)
       y_tok_seq.append(y_tok)
       h_t = self._decoder_step(y_t, h_t)
-    return [(p, y_tok_seq)]
+    return [Derivation(ex, p, y_tok_seq)]
 
   def decode_beam(self, ex, beam_size=1, max_len=100):
     h_t = self._encode(ex.x_inds)
-    beam = [[(1, h_t, [])]]  
-        # Beam entries are (prob, hidden_state, token_list)
-    finished = []  # Finished entires are (prob, token_list)
+    beam = [[Derivation(ex, 1, [], hidden_state=h_t,
+                        attention_list=[], copy_list=[])]]
+    finished = []
     for i in range(1, max_len):
       new_beam = []
-      for cur_p, h_t, y_tok_seq in beam[i-1]:
+      for deriv in beam[i-1]:
+        cur_p = deriv.p
+        h_t = deriv.hidden_state
+        y_tok_seq = deriv.y_toks
         write_dist = self._decoder_write(h_t, ex.lex_inds)
         sorted_dist = sorted([(p_y_t, y_t) for y_t, p_y_t in enumerate(write_dist)],
                              reverse=True)
@@ -132,7 +149,7 @@ class EncoderDecoderModel(NeuralModel):
           p_y_t, y_t = sorted_dist[j]
           new_p = cur_p * p_y_t
           if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
-            finished.append((new_p, y_tok_seq))
+            finished.append(Derivation(ex, new_p, y_tok_seq))
             continue
           if y_t < self.out_vocabulary.size():
             y_tok = self.out_vocabulary.get_word(y_t)
@@ -142,8 +159,10 @@ class EncoderDecoderModel(NeuralModel):
             y_tok = lex_entry[1]
             y_t = self.out_vocabulary.get_index(y_tok)
           new_h_t = self._decoder_step(y_t, h_t)
-          new_entry = (new_p, new_h_t, y_tok_seq + [y_tok])
+          new_entry = Derivation(ex, new_p, y_tok_seq + [y_tok],
+                                 hidden_state=new_h_t)
           new_beam.append(new_entry)
-      new_beam.sort(key=lambda x: x[0], reverse=True)
+      new_beam.sort(key=lambda x: x.p, reverse=True)
       beam.append(new_beam[:beam_size])
-    return sorted(finished, key=lambda x: x[0], reverse=True)
+      finished.sort(key=lambda x: x.p, reverse=True)
+    return sorted(finished, key=lambda x: x.p, reverse=True)

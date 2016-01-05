@@ -75,4 +75,4 @@ class OutputLayer(object):
       scores = T.dot(h_t, self.w_out.T)
       return T.nnet.softmax(T.concatenate([scores, attn_scores]))[0]
     else:
-      return T.nnet.softmax(T.dot(h_t, self.w_out.mat.T))[0]
+      return T.nnet.softmax(T.dot(h_t, self.w_out.T))[0]

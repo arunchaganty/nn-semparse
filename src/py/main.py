@@ -50,8 +50,8 @@ def _parse_args():
                       help='Dimension of input vectors.')
   parser.add_argument('--output-embedding-dim', '-o', type=int,
                       help='Dimension of output word vectors.')
-  parser.add_argument('--copy', '-p', default=None,
-                      help='Way to copy words (options: [lexicon, attention, attention-logistic]).')
+  parser.add_argument('--copy', '-p', default='none',
+                      help='Way to copy words (options: [none, lexicon, attention, attention-logistic]).')
   parser.add_argument('--unk-cutoff', '-u', type=int, default=0,
                       help='Treat input words with <= this many occurrences as UNK.')
   parser.add_argument('--num-epochs', '-t', default=[],
@@ -352,16 +352,32 @@ def compare_answers_geoquery(true_answers, all_derivs):
 
 def compare_answers_regex(true_answers, all_derivs):
   def format_regex(r):
-    return ''.join(r.split()).replace('_', ' ')
-  derivs = [x[0] for x in all_derivs]
-  pred_answers = [' '.join(d.y_toks) for d in derivs]
+    r = ''.join(r.split()).replace('_', ' ')
+    # Balance parenthese
+    num_left_paren = sum(1 for c in r if c == '(')
+    num_right_paren = sum(1 for c in r if c == ')')
+    diff = num_left_paren - num_right_paren
+    if diff > 0:
+      r = r + ')' * diff
+    elif diff < 0:
+      r = ('(' * (-diff)) + r
+    return r
+  derivs = []
   is_correct_list = []
-  for true_ans, pred_ans in zip(true_answers, pred_answers):
-    msg = subprocess.check_output([
-        'evaluator/regex', 
-        '(%s)' % format_regex(true_ans), 
-        '(%s)' % format_regex(pred_ans)])
-    is_correct_list.append(msg.strip().endswith('true'))
+  for true_ans, deriv_list in zip(true_answers, all_derivs):
+    for deriv in deriv_list:
+      pred_ans = ' '.join(deriv.y_toks)
+      msg = subprocess.check_output([
+          'evaluator/regex', 
+          '(%s)' % format_regex(true_ans), 
+          '(%s)' % format_regex(pred_ans)])
+      if msg.startswith('Error converting'): continue
+      derivs.append(deriv)
+      is_correct_list.append(msg.strip().endswith('true'))
+      break
+    else:
+      derivs.append(deriv_list[0])  # Default to first derivation
+      is_correct_list.append(False)
   return derivs, is_correct_list
 
 def compare_answers(true_answers, all_derivs):

@@ -33,7 +33,7 @@ class Spec(object):
     self.create_vars()
     self._process_init_kwargs(**kwargs)
 
-  def _process_init_kwargs(self, kwargs):
+  def _process_init_kwargs(self, **kwargs):
     """Optionally override this to process special kwargs at __init__()."""
     pass
 
