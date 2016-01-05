@@ -69,10 +69,14 @@
 \begin{abstract}
 Current semantic parsers require complex machinery and
 extensive feature engineering to achieve high accuracy.
-Recurrent neural networks (RNNs)
+This complexity motivates the use of 
+models like recurrent neural networks (RNNs),
+which require less engineering effort and 
 have been shown to perform well at a wide range of sequence-to-sequence tasks.
-In this work, we present a neural semantic parser
-backed by a novel RNN model that allows the parser
+In this work, we present two contributions that
+together constitute a practical system for 
+neural semantic parsing.
+First, we propose a novel RNN model that allows the parser
 to generalize to unseen entities.
 In addition, we introduce
 compositional data augmentation,
@@ -82,15 +86,6 @@ about compositionality from limited amounts of training data.
 Our system achieves good performance on a variety of semantic parsing tasks,
 including new state-of-the-art numbers on the \regex domain.
 \end{abstract}
-
-\pl{
-first two sentences need better transition
-}
-
-\pl{still feel the data augmentation is playing a subordinate role here;
-at least the RNN and data augmentation should be on equal footing;
-easy way is to say there are two contributions.
-}
 
 \section{Introduction}
 \begin{figure}[t] 
@@ -111,43 +106,58 @@ natural language utterances into logical forms
 question answering, robot control, etc. even localizing citations after each application
 }
 Modern semantic parsers are complex pieces of software
-that require extensive hand-tuning and feature engineering.
+that have a great deal of prior knowledge baked into their internal structure,
+and require extensive hand-tuning and domain-specific feature engineering.
+Frameworks like CCG must deal with complex lambda calculus expressions,
+and systems like SEMPRE \cite{berant2013freebase}
+require large amounts of code that define the parser's grammar and features.
+% TODO: argue this better
+
+% Comment about our model being general-purpose, maybe delete
 Some recent work has tried to make semantic parsing
 into a general purpose technology \cite{wang2015overnight},
-but the performance of these systems leaves much to be desired.
+but the accuracy of these systems leaves much to be desired.
 \pl{the main complaint should be about complexity, not accuracy,
 since in the end, we don't really gain on that}
+\rj{The idea of this sentence was to foreshadow improvements on overnight.
+I'll take it out if we wind up not running those experiments.}
 \pl{in general, use 'accuracy' rather than 'performance' since it's more precise;
 systems people use performance to talk about speed}
-% RJ: is this too harsh?
 
 % RNNs are great!
-Recently, recurrent neural networks (RNNs) have emerged
-as a general-purpose technology for processing sequential data.
-\pl{cite?  well, technically, not recently, RNNs are old; I'd just drop the first sentence
-and lead with impact in NLP; cite!}
-In particular, sequence-to-sequence RNN models
-have achieved impressive results on a variety of natural language processing
-tasks, including machine translation and syntactic parsing.
+RNN models have achieved impressive results on a variety of 
+sequence-to-sequence tasks, such as
+machine translation \cite{sutskever2014sequence,bahdanau2014neural}, 
+syntactic parsing \cite{vinyals2015grammar}, and 
+computing convex hulls \cite{vinyals2015pointer}.
 RNNs are also appealing for their simplicity, as they require 
 little hand-engineering of features.
+Even though RNNs generate their output in a linear fashion,
+work on syntactic parsing has demonstrated that they can learn
+to generate linearized representations of tree-structured outputs as well
+\cite{vinayls2015grammar}.
 
 % Datasets small, RNNs don't have built in compositionality
-However, there are two significant barriers to applying RNNs to semantic parsing.
-First, semantic parsers are commonly trained from small datasets,
-often consisting of only hundreds of examples.
-Semantic parsers
-must be able to generalize to a large set of 
+The drawback of these RNN models is that they require
+large amounts of data to achieve good accuracy.
+LIST NUMBERS OF EXAMPLES.
+Meanwhile, semantic parsing datasets often consist of only 
+hundreds of labeled examples.
+This limited amount of training data
+creates two major barriers to applying RNNs to semantic parsing.
+First, semantic parsers must be able to generalize to a large set of 
 domain-specific entities which, due to the limited
 amount of training data, may occur rarely or not at all
 in the training dataset.
 Second, while most semantic parsers have built-in
 prior knowledge about the compositional structure of language \cite{zettlemoyer05ccg},
-RNNs can only learn about compositionality
-through observations of the data.
-\pl{be careful - I think we need to explain what we mean by 'compositionality'}
+RNNs can only learn about compositionality through observations of the data.
+Existing semantic parsers have built-in prior knowledge
+to handle both of these challenges, but a more generic
+RNN architecture might be unable to generalize properly due to these challenges.
 With this paltry amount of supervision,
 RNN models are in danger of severely overfitting the training data.
+\pl{be careful - I think we need to explain what we mean by 'compositionality'}
 \pl{in general, can tighten this paragraph;
 somehow the 'datasets are small, models are generic' message needs to come out more}
 \pl{I'd carve up the two problems as follows:
@@ -158,17 +168,18 @@ somehow the 'datasets are small, models are generic' message needs to come out m
 In this paper, we present the first (to our knowledge)
 semantic parser that uses a sequence-to-sequence RNN model to generate
 logical forms.  
+The closest related work of which we are aware is
+by Grefenstette et al.~\shortcite{grefenstette2014deep};
+however, their model was not a sequence-to-sequence model,
+and they had yet to achieve good results.
+\rj{Here-ish?  Need to transition better}
 Our contributions are two-fold:
-First, to address the issue of unseen entities,
-we introduce a new RNN sequence-to-sequence model that uses 
-attention to handle rare words.
-\pl{this sounds too bland - immediately people will think - oh, didn't Thang
-  write a paper about rare words and attention;
-}
-Second, to prevent overfitting and teach the model about compositionality,
+First, we introduce an attention-based copying mechanism 
+that allows our RNN sequence-to-sequence model to generalize to unseen entities.
+Second, to teach the model about compositionality,
 we introduce compositional data augmentation,
-which induces a high-precision grammar from the given training data
-and generates synthetic data by sampling from this grammar.
+which induces a high-precision grammar from the training data
+and augments the training data with synthetic examples sampled from this grammar.
 
 %\pl{
 %Overall good - flows well and well-motivated, generally like the writing style.
@@ -183,80 +194,6 @@ and generates synthetic data by sampling from this grammar.
 
 
 \section{Related Work}
-
-\pl{I really think all of this section could either be moved into the rest of
-  the intro (mostly the citations)
-  or into the discussion.
-}
-
-Much excitement currently surrounds sequence-to-sequence RNNs.
-Such models have been trained on such diverse tasks as
-machine translation \cite{sutskever2014sequence,bahdanau2014neural}, 
-syntactic parsing \cite{vinyals2015grammar}, and 
-computing convex hulls \cite{vinyals2015pointer}, 
-with impressive results on each.
-\pl{move citations into intro}
-%In particular, the recent work on syntactic parsing showed that
-%even though RNNs are constrained to generate their output in a linear fashion,
-%they can in fact learn to produce tree structures.
-
-Nonetheless, there has yet to be a successful application of
-neural networks for semantic parsing.
-The closest related work of which we are aware is
-by Grefenstette et al.~\shortcite{grefenstette2014deep};
-however, their model was not a sequence-to-sequence model,
-and they had yet to achieve good results.
-\pl{move into intro paragraph 'In this paper...'}
-
-Current semantic parsing systems are complex pieces of software 
-and have a great deal of prior knowledge baked into their internal structure.
-Frameworks like CCG must deal with complex lambda calculus expressions,
-and systems like SEMPRE \cite{berant2013freebase}
-require large amounts of code that define the parser's grammar and features.
-% TODO: argue this better
-\pl{move into intro}
-
-\pl{need to argue the fact that current semantic parsers involve substantial
-  work more convincingly and quantitatively;
-  I don't think this is a fair comparison - but of the right flavor - number of lines
-  of code in SEMPRE versus in nn-semparse
-}
-
-Data augmentation has been shown to help neural networks,
-particularly in the field of computer vision.
-AlexNet \cite{krizhevsky2012imagenet}, 
-which at the time drastically improved
-the state-of-art on ImageNet,
-was trained on augmented data generated by applying various transformations
-to the input images that did not change the output label.
-The data augmentation scheme we propose has a more general flavor,
-as it is not constrained to keep the output label fixed.
-We are able to generate synthetic examples $(x, y)$
-where neither $x$ nor $y$ occur in the training dataset.
-% Another nice analysis (http://arxiv.org/pdf/1405.3531.pdf) 
-\pl{move into discussion}
-
-Previous work on neural machine translation has
-tackled the problem of rare words.
-In particular, Luong et al.~\shortcite{luong2015rare}
-proposed models for copying unknown
-tokens from the input to the output.
-Their proposed techniques require preprocessing the dataset
-with a separate tool to align words between the input and output,
-which we do not need.
-Furthermore, during training, their method is only activated when the model
-wants to write a rare output word. 
-In contrast, our attention-based copying can be used for 
-both rare and common words,
-so our model can learn when it is best to perform copying.
-\pl{move citation to intro when talk about model;
-  no need to explain it in full detail;
-defer that to model section or discussion}
-
-\pl{I personally like putting the related work at the end with the discussion
-we can get into more of an in-depth comparison and have more meaningful,
-higher-level comparisions, rather than just being a cite-fest.
-}
 
 \section{Task}
 We model semantic parsing as a generic sequence-to-sequence task.
@@ -273,10 +210,6 @@ in a linear fashion for syntactic parsing.
 Figure FIG shows example input-output pairs for the different
 datasets used in this paper.
 % TODO: make this figure
-
-%\pl{this requires some brief discussion / justification: people
-%naturally think of output sequence as tree structure.
-%}
 
 \pl{need FIGURE with a concrete example}
 
@@ -354,15 +287,16 @@ of the predicate ``\texttt{city}'' to ``\texttt{\_city}''
 so that the model cannot directly copy the word ``city'' from the input 
 to output.
 
-\section{Neural Semantic Parser}
-\pl{do we want to pitch this as a general sequence-to-sequence tool as opposed to neural semantic parser?}
-Our neural semantic parser is based closely on existing
-attention-based neural machine translation models.
-In particular, we closely follow \newcite{luong2015translation}.
-\pl{not clear what 'follow' means; we should have a paragraph after our description
+\section{RNN Model}
+Our neural semantic parser is backed by a generic sequence-to-sequence RNN model.
+This model is based closely on existing 
+attention-based neural machine translation models
+\cite{luong2015translation},
+but also includes a novel attention-based copying mechanism.
+
+\pl{we should have a paragraph after our description
   or in discussion comparing our model with neural MT models;
-  doing a careful diff is important
-}
+  doing a careful diff is important }
 
 At a high level, our system consists of two main modules:
 \begin{enumerate}
@@ -398,7 +332,7 @@ The decoder itself can be decomposed into three modules:
     It takes in the current decoder state $s_{j}$,
     the annotations $b_1, \dotsc, b_m$, and the most recently
     written token $y_{j+1}$, and outputs the new state $s_{j+1}$.
-  \item \textbf{Decoder Ouptut Module}.  This module
+  \item \textbf{Decoder Output Module}.  This module
     describes how the decoder generates the next token of the 
     output sequence.
     It takes in the current decoder hidden state $s_{j}$,
@@ -459,6 +393,7 @@ $i$-th state vector for the forward RNN and
 the $m-i$-th state vector for the backward RNN.  
 \pl{the mis-match in indexing is kind of annoying;
 can't you just have $b_i^\text{F}$ and $b_i^\text{B}$ be the forward and backward vectors at time step $i$?}
+\rj{Sure, but then the backward recurrence has to start at time $n+1$ and go down to $1$}
 
 In other words, $b_i$ is the concatenation of the forward
 and backward hidden states that were generated
@@ -524,13 +459,12 @@ where $U$ is a matrix with rows indexed by elements of $\vocabout$.
 
 \subsubsection{Attention-based Copying}
 \pl{say this is new part of model?}
-
 Semantic parsers must be able to handle a large set of entity names,
 including ones that were not seen at training time.
 Often times, these entity names
 can be copied directly from the input to the output.
 \pl{give concrete example}
-This observation motivates our attention-based copying output module.
+This observation motivates our novel attention-based copying output module.
 We allow the network to copy a word directly from input to output,
 with probability determined by the amount of attention paid to that input word.
 More formally, we have
@@ -717,13 +651,12 @@ nested sub-queries (e.g. ``states that border states that border colorado'').
 To generate examples with multiple levels of nesting,
 we induce a grammar that can combine two training examples into one.
 As in \regex, we rely on a set of high-precision alignment rules--in this case,
-we align city, state, and river entity mentions in the input and output.
-\pl{need to say that this is not very much work;
-  currently, it looks like a fair amount of engineering work
-}
+we match city, state, and river entity mentions in the input and output
+based on simple string matching.
 We also extract type information from the logical forms.
 With this information, we can replace individual entity mentions
-with entire phrases that evaluate to a set of entities of the same type.
+with entire phrases that evaluate to a set of entities of the same type,
+or with other entities of the same type.
 
 %We choose to focus on three types of entities--states, cities, 
 %and rivers--as they are the most common entity types in the dataset.
@@ -748,6 +681,10 @@ examples.
 \pl{wait, (dallas, dallas:ci) is an standalone example?
 there's no combination of examples?
 }
+\rj{Yes.} 
+\rj{I tried this because it was something we mentioned a while ago,
+  and it turned out this did better than the other augmentation strategies I tried.  
+But yeah, it's not very satisfying}
 
 \pl{at a high-level, it seems a bit unsatisfactory that you needed
   different augmentation schemes for each domain;
@@ -838,7 +775,7 @@ converting the regular expression to a DFA.
     \textbf{Original Dataset} & & & \\
     \encdec & - & - & - \\
     \attn & - & - & - \\
-    \attncopy & $79.5$ & $65.0$ & $85.4$ \\
+    \attncopy & $79.5$ & $65.0$ & $85.7$ \\
     \hline
     \textbf{With Data Augmentation} & & & \\
     \encdec & & - & - \\
@@ -919,7 +856,7 @@ is greater than that of using $400$ real examples.
 \begin{figure}[t] 
 \small
 \begin{center} 
-  \includegraphics[scale=0.5]{fig-artificial-aug.pdf}
+  \includegraphics[scale=0.65]{fig-artificial-aug.pdf}
 \end{center} 
 \caption{Comparing augmentation methods on artificial data.}
 \label{fig:artificial}
@@ -1112,15 +1049,36 @@ model for semantic parsing.  Our model is easy to train
 and gives good performance on several semantic parsing
 datasets, when trained with logical form supervision.
 
+% Augmentation
+Data augmentation has been shown to help neural networks,
+particularly in the field of computer vision.
+AlexNet \cite{krizhevsky2012imagenet}, 
+which at the time drastically improved
+the state-of-art on ImageNet,
+was trained on augmented data generated by applying various transformations
+to the input images that did not change the output label.
+The data augmentation scheme we propose has a more general flavor,
+as it is not constrained to keep the output label fixed.
+We are able to generate synthetic examples $(x, y)$
+where neither $x$ nor $y$ occur in the training dataset.
+
 % Rare words
 Our model includes a novel attention-based copying mechanism
 \pl{should use this phrase earlier and motivate it more crisply with examples!}
-to deal with 
-unseen words such as entity names that are found in many semantic parsing datasets.
-Existing neural machine translation systems have also had
-difficulties with rare words \cite{luong2015rare}. \pl{from sentence, unclear whether this citation
-solves the problem or presents it}
-Our attention-based copying mechanism could prove useful in this setting too.
+to deal with unseen words such as entity names that are found in many semantic parsing datasets.
+Previous work on neural machine translation has
+tackled the problem of rare words.
+In particular, Luong et al.~\shortcite{luong2015rare}
+proposed models for copying unknown
+tokens from the input to the output.
+Their proposed techniques require preprocessing the dataset
+with a separate tool to align words between the input and output,
+which we do not need.
+Furthermore, during training, their method is only activated when the model
+wants to write a rare output word. 
+In contrast, our attention-based copying can be used for 
+both rare and common words,
+so our model can learn when it is best to perform copying.
 
 Additionally, we describe a compositional data augmentation approach that 
 further boosts performance.
