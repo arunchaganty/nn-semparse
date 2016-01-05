@@ -13,6 +13,9 @@ from vocabulary import Vocabulary
 IN_FILE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/regex/processed/regex_train_sm.tsv')
+ALL_FILE = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    'data/regex/processed/regex_train_all.tsv')
 OUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/regex/processed-augmented')
@@ -162,7 +165,11 @@ def process(filename):
   def write_subset(num_str=0, num_int=0):
     cur_str = str_data[:num_str]
     cur_int = int_data[:num_int]
-    basename = 'regex_train_sm_%dstr_%dint.tsv' % (len(cur_str), len(cur_int))
+    if filename == IN_FILE:
+      mode = 'sm'
+    else:
+      mode = 'all'
+    basename = 'regex_train_%s_%dstr_%dint.tsv' % (mode, len(cur_str), len(cur_int))
     write_data(basename, in_data + cur_str + cur_int)
 
   for i in (0, 100, 200, 300):
@@ -171,6 +178,7 @@ def process(filename):
 
 def main():
   process(IN_FILE)
+  process(ALL_FILE)
 
 if __name__ == '__main__':
   main()
