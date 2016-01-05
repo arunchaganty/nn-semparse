@@ -234,49 +234,54 @@ datasets used in this paper.
 \pl{need FIGURE with a concrete example}
 
 \subsection{Datasets}
-\begin{table}[t]
-  \centering
-  \small
-  \begin{tabular}{|l|c|c|c|}
-    \hline
-    Dataset & Training Examples & Test Examples \\
-    \hline
-    \atis & 4473 & 448 \\
-    \regex & 660 & 164 \\
-    \geo & 600 & 280 \\
-    \hline
-  \end{tabular}
-  \caption{Overview of the datasets used in this paper.  
-  For \geo, we use the standard 600/280 split first used by
-  \protect\cite{zettlemoyer05ccg}.
-  For \regex, we create our own split by randomly partitioning the dataset.}
-  \label{tab:datasets}
-  % TODO: better explanation of this
-\end{table}
+%\begin{table}[t]
+%  \centering
+%  \small
+%  \begin{tabular}{|l|c|c|c|}
+%    \hline
+%    Dataset & Training Examples & Test Examples \\
+%    \hline
+%    \atis & 4473 & 448 \\
+%    \regex & 660 & 164 \\
+%    \geo & 600 & 280 \\
+%    \hline
+%  \end{tabular}
+%  \caption{Overview of the datasets used in this paper.  
+%  Note that For \regex, we create our own split by randomly partitioning the dataset.}
+%  \label{tab:datasets}
+%\end{table}
 
-We present results on a few different standard semantic parsing datasets.
-
+We evaluate our system on three standard semantic parsing datasets:
 \begin{itemize}
   \item \textbf{ATIS} (\atis).  The ATIS domain contains 
     natural language queries for an airplane flight database
     paired with corresponding database queries written in a 
-    lambda calculus-based language.
+    lambda calculus-based language.  
+    We train on $4473$ examples and evaluate on the $448$
+    test examples used by Zettlemoyer and 
+    Collins~\shortcite{zettlemoyer07relaxed}.
 
   \item \textbf{Regular Expressions} (\regex).  The regular expressions domain
   contains natural language descriptions of regular expressions
   paired with associated regular expressions.
+  Unlike Kushman and Barzilay~\shortcite{kushman2013regex}, 
+  we primarily evaluate
+  on a test set of $164$ examples we selected randomly
+  from the dataset;
+  however, to compare with their results, we also evaluate
+  with 3-fold cross-validation.
 
   \item \textbf{Geoquery} (\geo).  The geoquery domain
   contains natural language questions about US geography
   paired with corresponding database queries written in a prolog-based
   query language.
+  We use the 600/280 split first used by
+  Zetlemoyer and Collins~\shortcite{zettlemoyer05ccg}.
 \end{itemize}
-% RJ: is it worth describing these?  Could delete if need space
 
 It is notable that these datasets are many orders of magnitude smaller
-than the datasets used to train neural machine translation systems (CITE).
-Similar work on syntactic parsing achieved good results
-when trained on tens of thousands of parse trees.
+than the datasets used to train neural machine translation systems
+(CITE).
 
 In this work, we only explore learning from logical forms.
 We therefore do not use any semantic parsing datasets
@@ -666,6 +671,7 @@ to two related baselines:
 \begin{itemize}
   \item \textbf{\encdec}.  An encoder-decoder LSTM model (no attention)
     that uses the baseline decoder output module.
+    % RJ: Do we really want to have encdec?  Where do we define it?
   \item \textbf{\attn}.  The same as \attncopy, except with the baseline decoder
     output module described in section~\ref{sec:baseline-output}.
 \end{itemize}
@@ -804,17 +810,14 @@ and performance using $300$ real and $150$ synthetic examples
 is greater than that of using $400$ real examples.
 
 \subsection{Experiments on Artificial Data}
-\begin{figure*}[t] 
+\begin{figure}[t] 
 \small
 \begin{center} 
-  \includegraphics[scale=0.55]{fig-artificial.pdf}
+  \includegraphics[scale=0.5]{fig-artificial-aug.pdf}
 \end{center} 
-\caption{Results of our experiments on artificial data.
-For each of the three artificial domains,
-we train on a small training set of 100 examples from the domain,
-plus additional examples drawn from one of the three domains.}
+\caption{Comparing augmentation methods on artificial data.}
 \label{fig:artificial}
-\end{figure*}
+\end{figure}
 % TODO: update this figure for the new experiments
 
 %\begin{table}[t]
@@ -844,7 +847,7 @@ as \emph{out-of-domain} data augmentation.
 
 To this end, we generated synthetic examples from a simple grammar.
 Each example is an input-output pair $(x, y)$, where
-$x$ is an english-like utterance and $y$ is a corresponding
+$x$ is an English-like utterance and $y$ is a corresponding
 logical form written in a variant of lambda-DCS \cite{liang2013lambdadcs}.
 Our world contains a set of entities and a set of binary relations
 on entities; we can think of entities as people
@@ -874,7 +877,7 @@ Note that only the first strategy generates examples
 that are in the support of the test distribution.
 By contrast, the other two only generate examples that are
 outside the support of the test distribution,
-and hence are \emph{out-of-domain} augmentation strategies.
+and hence are out-of-domain augmentation strategies.
 
 In Figure \ref{fig:artificial}, we plot the accuracy on a test set 
 of $500$ depth-$2$ examples versus the number of synthetic examples added
@@ -883,10 +886,13 @@ While all three augmentation strategies help,
 the entity-based augmentation strategy is the least successful.
 It is the only one that never achieves accuracy of $99\%$ or higher,
 maxing out at $92.8\%$.
-The best strategy is the combined one, which thrice achieves $100\%$ accuracy
-on the test set.
+The nesting-based strategy alone is capable of attaining
+$99.8\%$ accuracy, but suffers from high variance.
+The best strategy is the combined one, which 
+consistently outperforms the other two and 
+dependably leads the model to perfect or near-perfect test accuracy.
 Overall, we see that, at least in some cases,
-\emph{out-of-domain} data augmentation can be very beneficial
+out-of-domain data augmentation can be very beneficial
 to learning.
 
 %We generate synthetic examples from each of these three domains:
