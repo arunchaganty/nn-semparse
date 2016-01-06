@@ -170,8 +170,8 @@ def process(filename):
     cur_int = int_data[:num_int]
     if 'nkushman' in filename:
       # basename is like regex_train_nkushman_fold0.tsv
-      mode = os.path.basename(filename)[6:-4]
-    if 'fold' in filename:
+      mode = os.path.basename(filename)[12:-4]
+    elif 'fold' in filename:
       # basename is like regex_fold1of3_train440.tsv
       mode = os.path.basename(filename)[6:-4]
     elif filename == IN_FILE:
