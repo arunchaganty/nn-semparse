@@ -109,10 +109,10 @@ def process_raw(filename):
       stage, x_raw, y_raw = line.strip().split('\t')
       x = split_input(x_raw)
       y = split_regex(y_raw)
-    if stage == 'train':
-      train_data.append((x, y))
-    else:
-      test_data.append((x, y))
+      if stage == 'train':
+        train_data.append((x, y))
+      else:
+        test_data.append((x, y))
 
   train_file = 'regex_train_nkushman_fold%d.tsv' % fold
   test_file = 'regex_test_nkushman_fold%d.tsv' % fold
