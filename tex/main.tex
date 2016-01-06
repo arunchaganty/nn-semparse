@@ -74,20 +74,20 @@
 \maketitle
 
 \begin{abstract}
-Current semantic parsers require complex machinery and
-extensive feature engineering to achieve high accuracy.
-Recurrent neural network (RNN) models 
-provide an appealing alternative to these systems,
-as they require less engineering effort and 
-have been shown to perform well at a wide range of sequence-to-sequence tasks.
-In this work, we present two contributions that
-together constitute a practical system for neural semantic parsing.
-First, we propose a novel RNN model that allows the parser
-to generalize to unseen entities.
-In addition, we introduce compositional data augmentation,
-a new technique which helps our system to learn
-about compositionality from limited amounts of training data.
-Our system achieves good accuracy on a variety of semantic parsing tasks.
+Building accurate semantic parsers currently require substantial effort
+with lexicons, grammars, and feature engineering.
+This paper presents a much simpler approach to semantic parsing based on
+recurrent neural networks (RNNs).
+%which has shown promise for many other NLP tasks.
+Vanilla RNNs are insufficient to capture the crisp structural regularities of
+semantic parsing,
+so we propose two mechanisms to address this:
+First, we introduce a new attention-based copying mechanism that
+allows the parser to generalize to unseen entities.
+Second, we introduce a new data augmentation scheme
+that injects prior knowledge about compositionality into the parser.
+Our system achieves accuracy competitive with state-of-the-art
+on three semantic parsing datasets.
 %including new state-of-the-art numbers on the \regex domain.
 \end{abstract}
 
@@ -107,17 +107,19 @@ My biggest issue with this figure is that there's no picture of an RNN.}
 \end{figure}
 
 % Semantic parsing is useful, but complicated
-Today, semantic parsing---the precise translation of natural language utterances into 
-logical forms---has a wide variety of applications,
+Semantic parsing---the precise translation of natural language utterances into 
+logical forms---has many applications,
 including question answering \cite{zelle96geoquery,zettlemoyer05ccg,zettlemoyer07relaxed,liang11dcs,artzi2013weakly,berant2013freebase},
 instruction following \cite{artzi2013weakly},
 and regular expression generation \cite{kushman2013regex}.
-Modern semantic parsers are complex pieces of software
-that have a great deal of prior knowledge baked into their internal structure,
-and require extensive hand-tuning and domain-specific feature engineering.
-Frameworks like CCG must deal with complex lambda calculus expressions,
-and systems like SEMPRE \cite{berant2013freebase}
-require large amounts of code that define the parser's grammar and features.
+Modern semantic parsers \cite{artzi2013uw,berant2013freebase} are complex pieces of software,
+not just requiring hand-crafted features,
+but the definition of lexicons and grammars,
+which is both important and fragile.
+%with a great deal of hand-crafted knowledge baked into their internal structure;
+%Frameworks like CCG \citep{zettlemoyer05ccg} must deal with complex lambda calculus expressions,
+%and systems like SEMPRE \cite{berant2013freebase}
+%require large amounts of code that define the parser's grammar and features.
 % TODO: argue this better
 
 % Comment about our model being general-purpose, maybe delete
@@ -132,28 +134,32 @@ require large amounts of code that define the parser's grammar and features.
 %systems people use performance to talk about speed}
 
 % RNNs are great!
-RNN models have achieved impressive results on a variety of 
-sequence-to-sequence tasks, such as
-machine translation \cite{sutskever2014sequence,bahdanau2014neural}, 
-syntactic parsing \cite{vinyals2015grammar}, and 
-computing convex hulls \cite{vinyals2015pointer}.
-RNNs are also appealing for their simplicity, as they require 
-little hand-engineering of features.
+Meanwhile, recurrent neural networks have made swift inroads into 
+many structured prediction tasks in NLP,
+including machine translation
+\cite{sutskever2014sequence,bahdanau2014neural}, 
+syntactic parsing \cite{vinyals2015grammar,dyer2015transition},
+achieving state-of-the-art results with minimal feature engineering.
+So the natural question is can we leverage RNNs for semantic parsing?
+%computing convex hulls \cite{vinyals2015pointer}.
+%RNNs are also appealing for their simplicity, as they require 
+%little hand-engineering of features.
 %Even though RNNs generate their output in a linear fashion,
 %work on syntactic parsing has demonstrated that they can learn
 %to generate linearized representations of tree-structured outputs as well
 %\cite{vinyals2015grammar}.
 
 % Datasets small, RNNs don't have built in compositionality
-The drawback of these RNN models is that they require
-large amounts of data to achieve good accuracy.
-\newcite{sutskever2014sequence} trained their
-neural machine translation model on 12 million sentences;
-\newcite{vinyals2015grammar} trained their
-neural syntactic parser on datasets of at least 40 thousand sentences,
-and used millions of sentences to achieve their best results.
-In contrast, semantic parsing datasets often consist of only 
-hundreds of labeled examples.
+% PL: let's not emphasize that our datasets are small, but the modeling challenges
+%The drawback of these RNN models is that they require
+%large amounts of data to achieve good accuracy.
+%\newcite{sutskever2014sequence} trained their
+%neural machine translation model on 12 million sentences;
+%\newcite{vinyals2015grammar} trained their
+%neural syntactic parser on datasets of at least 40 thousand sentences,
+%and used millions of sentences to achieve their best results.
+%In contrast, semantic parsing datasets often consist of only 
+%hundreds of labeled examples.
 
 This limited amount of training data
 creates two major barriers to applying RNNs to semantic parsing.
