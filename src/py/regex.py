@@ -10,6 +10,9 @@ import sys
 IN_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/regex/json')
+RAW_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    'data/regex/raw')
 OUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/regex/processed')
@@ -87,11 +90,43 @@ def process(filename):
         print >> f, '%s\t%s' % (x, y)
 
 
+def write_data(basename, data):
+  out_path = os.path.join(OUT_DIR, basename)
+  with open(out_path, 'w') as f:
+    for x, y in data:
+      print >>f, '%s\t%s' % (x, y)
+
+def process_raw(filename):
+  print >> sys.stderr, 'Processing %s' % filename
+  basename = os.path.basename(filename)
+  # Filenames are like out_fold0.tsv
+  fold = int(basename[8])
+
+  train_data = []
+  test_data = []
+  with open(filename) as f:
+    for line in f:
+      stage, x_raw, y_raw = line.strip().split('\t')
+      x = split_input(x_raw)
+      y = split_regex(y_raw)
+    if stage == 'train':
+      train_data.append((x, y))
+    else:
+      test_data.append((x, y))
+
+  train_file = 'regex_train_nkushman_fold%d.tsv' % fold
+  test_file = 'regex_test_nkushman_fold%d.tsv' % fold
+  write_data(train_file, train_data)
+  write_data(test_file, test_data)
+
 def main():
   if not os.path.exists(OUT_DIR):
     os.makedirs(OUT_DIR)
   for filename in sorted(glob.glob(os.path.join(IN_DIR, '*.json'))):
     process(filename)
+  for filename in sorted(glob.glob(os.path.join(RAW_DIR, '*.tsv'))):
+    process_raw(filename)
+
 
 
 if __name__ == '__main__':
