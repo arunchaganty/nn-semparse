@@ -13,8 +13,8 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
-   sodipodi:docname="New document 1">
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="fig-overview.svg">
   <defs
      id="defs4">
     <marker
@@ -92,15 +92,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.95686773"
-     inkscape:cx="347.0882"
+     inkscape:cx="162.10966"
      inkscape:cy="504.36148"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1025"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-width="1615"
+     inkscape:window-height="1026"
+     inkscape:window-x="65"
+     inkscape:window-y="146"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -110,7 +110,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -119,14 +119,14 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#000000;fill-opacity:0;stroke:#0000dc;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2985"
        width="398.18021"
        height="51.16077"
        x="198.03897"
        y="816.97192" />
     <rect
-       style="fill:#000000;fill-opacity:0;stroke:#0000dc;stroke-width:3.10105467;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:3.10105466999999990;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2987"
        width="613.55499"
        height="210.62146"
@@ -143,12 +143,12 @@
          x="169.0529"
          y="232.36218"
          id="tspan2993"
-         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman">what are the major cities in missouri ?</tspan><tspan
+         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman;fill:#ff0000;fill-opacity:1">what are the major cities in missouri ?</tspan><tspan
          sodipodi:role="line"
          x="169.0529"
          y="269.86218"
          id="tspan2995"
-         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman">what states border texas ?</tspan><tspan
+         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman;fill:#0000ff;fill-opacity:1">what states border texas ?</tspan><tspan
          sodipodi:role="line"
          x="169.0529"
          y="307.36218"
@@ -165,17 +165,19 @@
          x="109.96111"
          y="557.64355"
          id="tspan2993-7"
-         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman">what are the major cities in missouri ?</tspan><tspan
+         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman;fill:#ff0000;fill-opacity:1">what are the major cities in missouri ?</tspan><tspan
          sodipodi:role="line"
          x="109.96111"
          y="595.14355"
          id="tspan2995-8"
-         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman">what states border texas ?</tspan><tspan
+         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman;fill:#0000ff;fill-opacity:1">what states border texas ?</tspan><tspan
          sodipodi:role="line"
          x="109.96111"
          y="632.64355"
-         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
-         id="tspan3026">what are the major cities in states border texas ?</tspan><tspan
+         style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman;fill:#ff0000;fill-opacity:1"
+         id="tspan3026">what are the major cities in <tspan
+   style="fill:#0000ff;fill-opacity:1"
+   id="tspan3822">states border texas</tspan> ?</tspan><tspan
          sodipodi:role="line"
          x="109.96111"
          y="670.14355"
@@ -266,7 +268,7 @@
            y="168.07646" /></flowRegion><flowPara
          id="flowPara4258-4-9"
          style="font-weight:bold;text-align:center;text-anchor:middle;font-family:Times New Roman;-inkscape-font-specification:Times New Roman">RNN Semantic Parser</flowPara></flowRoot>    <rect
-       style="fill:#000000;fill-opacity:0;stroke:#0000dc;stroke-width:3.34596372;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:3.34600000000000009;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect2985-5"
        width="494.8707"
        height="162.48232"
