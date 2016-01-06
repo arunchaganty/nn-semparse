@@ -380,30 +380,39 @@ def compare_answers_regex(true_answers, all_derivs):
       is_correct_list.append(False)
   return derivs, is_correct_list
 
-def compare_answers_atis(true_answers, all_derivs):
-  def normalize_vars(ans):
-    """atis_test uses weird variable names, normalize here."""
-    toks = ans.split(' ')
-    varnames = {}
-    new_toks = []
-    for t in toks:
-      if t == 'x' or t.startswith('$'):
-        # t is a variable name
-        if t in varnames:
-          new_toks.append(varnames[t])
-        else:
-          new_varname = '$v%d' % len(varnames)
-          varnames[t] = new_varname
-          new_toks.append(new_varname)
+def atis_normalize_vars(ans):
+  """atis_test uses weird variable names, normalize here."""
+  toks = ans.split(' ')
+  varnames = {}
+  new_toks = []
+  for t in toks:
+    if t == 'x' or t.startswith('$'):
+      # t is a variable name
+      if t in varnames:
+        new_toks.append(varnames[t])
       else:
-        new_toks.append(t)
-    ret = ' '.join(new_toks)
-    return ret
+        new_varname = '$v%d' % len(varnames)
+        varnames[t] = new_varname
+        new_toks.append(new_varname)
+    else:
+      new_toks.append(t)
+  ret = ' '.join(new_toks)
+  # Balance parentheses
+  # In particular, atis_test gold lf's have unbalanced parens...
+  num_left_paren = sum(1 for c in ret if c == '(')
+  num_right_paren = sum(1 for c in ret if c == ')')
+  diff = num_left_paren - num_right_paren
+  if diff > 0:
+    ret = ret + ' )' * diff
+  return ret
+
+def compare_answers_atis(true_answers, all_derivs):
   derivs = [x[0] for x in all_derivs]
   pred_answers = [' '.join(d.y_toks) for d in derivs]
   is_correct_list = []
   for true_ans, pred_ans in zip(true_answers, pred_answers):
-    is_correct_list.append(normalize_vars(true_ans) == normalize_vars(pred_ans))
+    is_correct_list.append(
+        atis_normalize_vars(true_ans) == atis_normalize_vars(pred_ans))
   return derivs, is_correct_list
 
 def compare_answers(true_answers, all_derivs):
