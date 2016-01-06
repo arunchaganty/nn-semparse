@@ -82,7 +82,7 @@ def _parse_args():
   parser.add_argument('--dev-data', help='Path to dev data.')
   parser.add_argument('--save-file', help='Path to save parameters.')
   parser.add_argument('--load-file', help='Path to load parameters, will ignore other passed arguments.')
-  parser.add_argument('--domain', help='Domain to evaluate (options: [geoquery,regex])')
+  parser.add_argument('--domain', help='Domain to evaluate (options: [geoquery,regex,atis])')
   parser.add_argument('--stats-file', help='Path to save statistics (JSON format).')
   parser.add_argument('--shell', action='store_true', 
                       help='Start an interactive shell.')
@@ -380,11 +380,39 @@ def compare_answers_regex(true_answers, all_derivs):
       is_correct_list.append(False)
   return derivs, is_correct_list
 
+def compare_answers_atis(true_answers, all_derivs):
+  def normalize_vars(ans):
+    """atis_test uses weird variable names, normalize here."""
+    toks = ans.split(' ')
+    varnames = {}
+    new_toks = []
+    for t in toks:
+      if t == 'x' or t.startswith('$'):
+        # t is a variable name
+        if t in varnames:
+          new_toks.append(varnames[t])
+        else:
+          new_varname = '$v%d' % len(varnames)
+          varnames[t] = new_varname
+          new_toks.append(new_varname)
+      else:
+        new_toks.append(t)
+    ret = ' '.join(new_toks)
+    return ret
+  derivs = [x[0] for x in all_derivs]
+  pred_answers = [' '.join(d.y_toks) for d in derivs]
+  is_correct_list = []
+  for true_ans, pred_ans in zip(true_answers, pred_answers):
+    is_correct_list.append(normalize_vars(true_ans) == normalize_vars(pred_ans))
+  return derivs, is_correct_list
+
 def compare_answers(true_answers, all_derivs):
   if OPTIONS.domain == 'geoquery':
     return compare_answers_geoquery(true_answers, all_derivs)
   elif OPTIONS.domain == 'regex':
     return compare_answers_regex(true_answers, all_derivs)
+  elif OPTIONS.domain == 'atis':
+    return compare_answers_atis(true_answers, all_derivs)
   else:
     raise ValueError('Unrecognized domain %s' % OPTIONS.domain)
 
