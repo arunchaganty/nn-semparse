@@ -10,6 +10,9 @@ import sys
 
 from vocabulary import Vocabulary
 
+IN_DIR = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    'data/regex/processed')
 IN_FILE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/regex/processed/regex_train_sm.tsv')
@@ -165,7 +168,10 @@ def process(filename):
   def write_subset(num_str=0, num_int=0):
     cur_str = str_data[:num_str]
     cur_int = int_data[:num_int]
-    if filename == IN_FILE:
+    if 'fold' in filename:
+      # basename is like regex_fold1of3_train440.tsv
+      mode = os.path.basename(filename)[6:-4]
+    elif filename == IN_FILE:
       mode = 'sm'
     else:
       mode = 'all'
@@ -179,6 +185,9 @@ def process(filename):
 def main():
   process(IN_FILE)
   process(ALL_FILE)
+  process(os.path.join(IN_DIR, 'regex_fold1of3_train440.tsv'))
+  process(os.path.join(IN_DIR, 'regex_fold2of3_train440.tsv'))
+  process(os.path.join(IN_DIR, 'regex_fold3of3_train440.tsv'))
 
 if __name__ == '__main__':
   main()
