@@ -13,7 +13,7 @@
    height="1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.3.1 r9886"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="fig-overview.pdf">
   <defs
      id="defs4">
@@ -97,10 +97,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1615"
-     inkscape:window-height="1026"
-     inkscape:window-x="65"
-     inkscape:window-y="146"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -235,7 +235,7 @@
          x="440.31625"
          y="418.80502"
          style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
-         id="tspan5283">(Section 5)</tspan></text>
+         id="tspan5283">(Section 4)</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:30px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -252,7 +252,7 @@
          x="439.92075"
          y="771.06671"
          style="font-family:Times New Roman;-inkscape-font-specification:Times New Roman"
-         id="tspan5283-1">(Section 4)</tspan></text>
+         id="tspan5283-1">(Section 3)</tspan></text>
     <flowRoot
        transform="translate(-1.4920197,653.12328)"
        xml:space="preserve"
