@@ -548,3 +548,503 @@ lines using ' x ' before ' z '	. * x . * z . *
 lines beginning with the letter ' f '	f . *
 4 letter lines	( ( [A-Z] | [a-z] ) ) { 4 }
 lines using numbers that show two or more " 0 " .	. * ( . * 0 . * ) { 2 , } . *
+lines containing ' synth:0225 ' and containing " synth:0226 " too	( . * synth:0226 . * & . * synth:0225 . * )
+lines containing a word using " tch "	. * \\b ( ( [A-Z] | [a-z] ) ) * tch ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that use the number " c " .	. * c . *
+lines that feature the word " synth:0758 " , and at least 3 words of 6 letters or more.	( ( . * \\b ( ( [A-Z] | [a-z] ) ) { 6 , } \\b . * ) { 3 , } & . * \\b synth:0758 \\b . * )
+lines containing words ending with ' synth:0728 ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0728 \\b . *
+lines that have words ending in " tch " .	. * \\b ( ( [A-Z] | [a-z] ) ) * tch \\b . *
+lines ending with the letter " ly "	. * ly
+lines that have words starting with " synth:0140 " .	. * \\b synth:0140 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain the text, " synth:0379 " .	. * synth:0379 . *
+lines that contain words ending with " synth:0484 " .	. * ( . * synth:0484 & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines which end with " synth:0330 "	. * synth:0330
+lines containing ' synth:0572 ' and also containing ' an '	( . * an . * & . * synth:0572 . * )
+lines containing the country name " synth:0775 " .	. * synth:0775 . *
+lines that include the string ' synth:0290 '	. * synth:0290 . *
+lines that start with a ' synth:0397 ' and end with an " synth:0398 " .	synth:0397 . * synth:0398
+lines which start with ' synth:0560 '	synth:0560 . *
+lines utilizing the word " synth:0049 " .	. * . * \\b synth:0049 \\b . *
+lines using " synth:0955 " in the middle of a word.	. * \\b ( ( [A-Z] | [a-z] ) ) { 1 , } synth:0955 ( ( [A-Z] | [a-z] ) ) { 1 , } \\b . *
+lines which contain the letter " you " and the letter " synth:0912 "	( . * you . * & . * synth:0912 . * )
+lines that have six letter words ending in " synth:0821 " .	. * \\b ( ( [A-Z] | [a-z] ) ) { 4 } synth:0821 \\b . *
+lines that end with the number ' synth:0845 ' .	. * synth:0845
+lines that have the word " st " .	. * \\b st \\b . *
+lines using 3 instances of " u "	. * ( . * u . * ) { 3 } . *
+lines containing ' synth:0344 ' and containing ' synth:0345 ' too	( . * synth:0344 . * & . * synth:0345 . * )
+lines that begin with the word " New synth:0780 "	\\b New _ synth:0780 \\b . *
+lines that mention " 5 " .	. * 5 . *
+lines containing the word ' synth:0439 ' .	. * \\b synth:0439 \\b . *
+lines which contain a word starting with the letter ' 1 ' and a word starting with the letter ' synth:0238 ' .	( . * \\b 1 ( ( [A-Z] | [a-z] ) ) * \\b . * & . * \\b synth:0238 ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines that contain the phrase " synth:0508 " or ' synth:0509 ' .	. * ( synth:0508 | synth:0509 ) . *
+lines having words starting with " bar " .	. * \\b bar ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain words ending with ' synth:0202 ' .	. * ( . * synth:0202 & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines that do not contain the character ' synth:0804 '	~ ( . * synth:0804 . * )
+lines that have words that start with " synth:0293 " .	. * \\b synth:0293 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that have words ending in ' synth:0621 ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0621 \\b . *
+lines that using the symbol ' synth:0069 ' or ' synth:0070 ' .	. * ( synth:0070 | \ synth:0069 ) . *
+lines using words ending in " ing "	. * \\b ( ( [A-Z] | [a-z] ) ) * ing \\b . *
+lines that start with the letter " oo " and end with the letter " 3 "	oo . * 3
+lines that contain words ending in ' synth:0288 ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0288 \\b . *
+lines that contain a word starting with ' after ' and ending with ' after '	. * \\b after ( ( ( [A-Z] | [a-z] ) ) * after ) { 0 , 1 } \\b . *
+lines containing the word " synth:0006 of " at the end.	. * \\b synth:0006 _ of
+lines which do not have ' to ' .	~ ( . * to . * )
+lines that contain words ending with " synth:0073 " .	. * ( . * synth:0073 & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines using 3 instances of " synth:0195 "	. * ( . * synth:0195 . * ) { 3 } . *
+lines which begin with the word " synth:0151 "	( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & synth:0151 ) . *
+lines using the word " synth:0297 "	. * \\b synth:0297 \\b . *
+lines that contain the word ' to ' within 5 characters of the word " wi " .	. * ( \\b to \\b ( . ) { 1 , 5 } \\b wi \\b | \\b wi \\b ( . ) { 1 , 5 } \\b to \\b ) . *
+lines that include words starting with ' synth:0089 ' .	. * \\b synth:0089 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines using words ending with ' An ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * An \\b . *
+lines ending with ' synth:0196 ' that use the word ' or synth:0197 ' .	. * \\b or _ synth:0197 \\b . * synth:0196
+lines using an instance of " synth:0056 "	. * synth:0056 . *
+lines that start with " w " .	w . * . *
+lines using the word ' synth:0832 ' followed by the word " synth:0833 " .	. * \\b synth:0832 \\b . * . * \\b synth:0833 \\b . *
+lines in which all words start with the letter " synth:0755 " .	~ ( . * ( ( . & ~ ( synth:0755 ) ) . * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . * )
+lines that contain at least one word starting with " synth:0491 " .	. * \\b synth:0491 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain words ending in " synth:0250 "	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0250 \\b . *
+lines that include the string " synth:0453 "	. * synth:0453 . *
+lines that have ' out ' after ' @ '	. * @ . * out . *
+lines that contain the text, " synth:0474 " .	. * synth:0474 . *
+lines which contain a word starting with " synth:0507 "	. * \\b synth:0507 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines using words starting with ' synth:0554 ' .	. * ( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & synth:0554 . * ) . *
+lines using a word that ends in ' synth:0232 '	. * ( . * synth:0232 & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines that start with the word " New synth:0389 "	New _ synth:0389 \\b . *
+lines that contain words starting with the letter ' followed by synth:0520 '	. * \\b followed _ by _ synth:0520 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines containing " synth:0638 "	. * synth:0638 . * . *
+lines that mention " synth:0921 " in the same line as " synth:0922 " .	( . * synth:0921 . * synth:0922 . * | . * synth:0922 . * synth:0921 . * )
+lines using " synth:0668 " or " May "	. * ( synth:0668 | May ) . *
+lines that contain words ending in ' q '	. * \\b ( ( [A-Z] | [a-z] ) ) * q \\b . *
+lines which begin with the word " synth:0611 "	( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & synth:0611 ) . *
+lines any words beginning with the letter ' la ' .	. * ( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & la . * ) . *
+lines containing 3 letter words starting with ' synth:0242 '	. * \\b synth:0242 ( ( [A-Z] | [a-z] ) ) { 2 } \\b . *
+lines containing words ending with ' synth:0478 ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0478 \\b . *
+lines that contain the phrase ' to ' or " synth:0042 " .	. * ( to | synth:0042 ) . *
+lines that contain words starting with " synth:0360 " .	. * \\b synth:0360 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines which contain " synth:0170 "	. * synth:0170 . *
+lines that contain the word " synth:0756 " but do not contain the word " an " .	( . * \\b synth:0756 \\b . * & ~ ( . * \\b an \\b . * ) )
+lines ending with the letter " y "	. * y
+lines containing " h " and ' to ' .	( . * to . * & . * h . * )
+lines using 6 instances of ' synth:0306 '	. * ( . * synth:0306 . * ) { 6 } . *
+lines that have the number ' synth:0313 ' .	. * synth:0313 . *
+lines using the word " synth:0055 "	. * \\b synth:0055 \\b . *
+lines with " out "	. * out . *
+lines with words matching the word ' and containing the word synth:0908 ' .	. * \\b and _ containing _ the _ word _ synth:0908 \\b . *
+lines that contain " synth:0848 " or ' I ' before ' synth:0849 ' .	. * ( synth:0848 | I ) . * synth:0849 . *
+lines that start with ' synth:0378 '	synth:0378 . *
+lines using words ending with ' car ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * car \\b . *
+lines using the word ' synth:0276 '	. * \\b synth:0276 \\b . *
+lines in which all words start with the letter ' pray ' .	~ ( . * ( ( . & ~ ( pray ) ) . * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . * )
+lines using 6 " synth:0432 "	( . * synth:0432 . * ) { 6 }
+lines that end in an ' la '	. * la
+lines that contain the word ' show ' .	. * \\b show \\b . *
+lines that have words with ' synth:0877 ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0877 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines having words ending with ' synth:0539 ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0539 \\b . *
+lines with a word ending in ' I ' that contain only one word	( ( . & ~ ( ( [A-Z] | [a-z] ) ) ) ) * \\b ( ( [A-Z] | [a-z] ) ) * I \\b ( ( . & ~ ( ( [A-Z] | [a-z] ) ) ) ) *
+lines that mention ' synth:0592 ' in the same line as " synth:0593 " .	( . * synth:0592 . * synth:0593 . * | . * synth:0593 . * synth:0592 . * )
+lines containing " synth:0503 " and " synth:0504 " .	( . * synth:0504 . * & . * synth:0503 . * )
+lines which contain five or more ' synth:0610 '	( . * synth:0610 . * ) { 5 , }
+lines with ' synth:0281 ' but not ' A ' .	( . * synth:0281 . * & ~ ( . * A . * ) )
+lines containing 3 letter words starting with ' bar '	. * \\b bar ( ( [A-Z] | [a-z] ) ) { 2 } \\b . *
+lines which contain ' synth:0550 '	. * synth:0550 . *
+lines utilizing words starting with ' fireflies ' .	. * \\b fireflies ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines containing the letter ' y ' but not the letter ' on ' .	( . * y . * & ~ ( . * on . * ) )
+lines containing any mention of the word ' after synth:0664 ' .	. * \\b after _ synth:0664 \\b . *
+lines that contain words using ' day ' in them.	. * \\b ( ( [A-Z] | [a-z] ) ) * day ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines ending with " synth:0619 " that use the word ' oo ' .	. * \\b oo \\b . * synth:0619
+lines that feature the word ' synth:0144 ' , and at least 3 words of 6 letters or more.	( ( . * \\b ( ( [A-Z] | [a-z] ) ) { 6 , } \\b . * ) { 3 , } & . * \\b synth:0144 \\b . * )
+lines using the word ' synth:0891 ' and " synth:0892 " .	( . * . * \\b synth:0891 \\b . * & . * synth:0892 . * )
+lines that end in " synth:0522 " and begins in " synth:0523 " .	synth:0523 . * synth:0522
+lines which have instances of ' synth:0437 ' .	. * synth:0437 . *
+lines that begin with the word " synth:0578 "	\\b synth:0578 \\b . *
+lines using the word " synth:0816 " followed by the letters ' synth:0817 '	. * \\b synth:0816 \\b . * synth:0817 . *
+lines that start with the letter " synth:0430 " and end with the letter " synth:0431 "	synth:0430 . * synth:0431
+lines containing ' xyz ' , but not " synth:0119 "	( . * xyz . * & ~ ( . * synth:0119 . * ) )
+lines that have a word beginning with th and a number that begins in " synth:0960 "	( . * synth:0960 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines starting with a ' synth:0791 ' .	synth:0791 . *
+lines using a word that ends in " and synth:0212 it synth:0213 to synth:0214 "	. * ( . * and _ synth:0212 _ it _ synth:0213 _ to _ synth:0214 & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines that contain the word " z " but do not contain the word ' synth:0805 ' .	( . * \\b z \\b . * & ~ ( . * \\b synth:0805 \\b . * ) )
+lines that start with the letter ' on ' .	on . *
+lines that have ' synth:0096 ' between ' synth:0097 ' and " synth:0098 "	( . * synth:0097 . * synth:0096 . * synth:0098 . * | . * synth:0098 . * synth:0096 . * synth:0097 . * )
+lines that begins with the word " synth:0075 " .	synth:0075 \\b . *
+lines that contain " synth:0142 " before " synth:0143 " or ' do ' .	. * synth:0142 . * ( synth:0143 | do ) . *
+lines that end in an ' synth:0551 '	. * synth:0551
+lines that contain words starting with " synth:0423 synth:0424 " .	. * ( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & synth:0423 _ synth:0424 . * ) . *
+lines containing a word using ' z '	. * \\b ( ( [A-Z] | [a-z] ) ) * z ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines with words that end with ' synth:0530 ' before words that end with ' synth:0531 '	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0530 \\b . * \\b ( ( [A-Z] | [a-z] ) ) * synth:0531 \\b . *
+lines which feature the word ' synth:0679 ' .	. * \\b synth:0679 \\b . *
+lines which end with " synth:0476 "	. * synth:0476
+lines where the word ' synth:0598 ' appears between the words " sand ' synth:0598 ' tide "	( . * \\b I _ synth:0599 _ synth:0600 \\b . * \\b synth:0598 \\b . * \\b synth:0601 \\b . * | . * \\b synth:0601 \\b . * \\b synth:0598 \\b . * \\b I _ synth:0599 _ synth:0600 \\b . * )
+lines that have " synth:0794 "	. * synth:0794 . *
+lines with words matching the word ' I ' .	. * \\b I \\b . *
+lines that begins with the word " synth:0810 " .	synth:0810 \\b . *
+lines with the word " synth:0324 " followed by words that start with ' synth:0325 '	. * \\b synth:0324 \\b . * \\b synth:0325 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that have words that start with ' i ' .	. * \\b i ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain the text, ' synth:0803 ' .	. * synth:0803 . *
+lines that have within them words ending in ' synth:0470 ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0470 \\b . *
+lines with " synth:0825 " before " synth:0826 " .	. * synth:0825 . * synth:0826 . *
+lines ending with " synth:0764 " that use the word ' synth:0765 ' .	. * \\b synth:0765 \\b . * synth:0764
+lines that start with the letter ' synth:0436 ' .	synth:0436 . *
+lines containing a 5 letter word beginning with " synth:0337 "	. * \\b synth:0337 ( ( [A-Z] | [a-z] ) ) { 4 } \\b . *
+lines where numbers exist only after a sequence of " synth:0463 " and " synth:0464 "	( ( ( ( . & ~ ( [0-9] ) ) ) * & ( . * synth:0463 . * & . * synth:0464 . * ) ) . * | ( ( . & ~ ( [0-9] ) ) ) * )
+lines that start with a ' b ' and end with an ' synth:0844 ' .	b . * synth:0844
+lines using ' synth:0744 ' or ' synth:0745 '	. * ( synth:0744 | synth:0745 ) . *
+lines that contain words ending with " sh " .	. * ( . * sh & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines containing the text ' do '	. * do . *
+lines that have 3 numbers and contain the word ' car ' .	( ( . * [0-9] . * ) { 3 } & . * \\b car \\b . * )
+lines that start with ' i ' or An	( i . * | An . * )
+lines that have at least three " u " .	( . * u . * ) { 3 }
+lines ending with the letter " st "	. * st
+lines which contain ' synth:0753 ' and " synth:0754 "	( . * synth:0753 . * synth:0754 . * | . * synth:0754 . * synth:0753 . * )
+lines containing the letter ' n ' but not the letter ' An ' .	( . * n . * & ~ ( . * An . * ) )
+lines utilizing words with ' h ' .	. * ( . * h . * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines with an ' car ' that comes after a ' after synth:0361 ' .	. * after _ synth:0361 . * car . *
+lines that have words ending in " synth:0460 " .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0460 \\b . *
+lines that start with " synth:0150 "	synth:0150 . *
+lines that use words with " synth:0546 " .	. * ( . * synth:0546 . * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines using at least two numbers, ' oo ' , and ' synth:0536 ' .	( ( . * [0-9] . * ) { 2 } & ( . * oo . * & . * synth:0536 . * ) )
+lines using 6 instances of ' i '	. * ( . * i . * ) { 6 } . *
+lines using words with " synth:0812 " .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0812 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain the text " c " .	. * c . *
+lines that have within them words ending in " 0 " .	. * \\b ( ( [A-Z] | [a-z] ) ) * 0 \\b . *
+lines using words ending in " sh "	. * \\b ( ( [A-Z] | [a-z] ) ) * sh \\b . *
+lines containing ' 5 ' and containing a ' synth:0543 ' as well.	( . * . * 5 . * & . * synth:0543 . * . * )
+lines that mention both " synth:0605 " and " synth:0606 " .	( . * synth:0605 . * & . * synth:0606 . * )
+lines in which all words start with the letter ' synth:0148 ' .	~ ( . * ( ( . & ~ ( synth:0148 ) ) . * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . * )
+lines using ' synth:0918 ' before ' synth:0919 '	. * synth:0918 . * synth:0919 . *
+lines using words that begin with the letter ' synth:0090 ' .	. * \\b synth:0090 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain words that end in ' synth:0074 ' that do not begin with " P "	. * ( . * synth:0074 & ( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & ~ ( P . * ) ) ) . *
+lines that contain 5 numbers and 2 words that contain ' synth:0842 ' .	( ( . * \\b ( ( [A-Z] | [a-z] ) ) * synth:0842 ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 2 } . * & . * ( . * [0-9] . * ) { 5 } )
+lines that start with the letter " synth:0841 " .	synth:0841 . *
+lines having words starting with " synth:0591 " .	. * \\b synth:0591 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines using a 3 letter sequence starting with " synth:0260 "	. * synth:0260 ( ( [A-Z] | [a-z] ) ) { 2 } . *
+lines that have words that start with ' do ' .	. * \\b do ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines using ' xyz ' and containing the words ' synth:0181 ' and ' synth:0182 ' .	( . * \\b synth:0181 \\b . * & ( . * \\b synth:0182 \\b . * & . * xyz . * ) )
+lines that start with a " synth:0666 " and end with an ' synth:0667 ' .	synth:0666 . * synth:0667
+lines that start with " synth:0815 "	synth:0815 . *
+lines containing words that start with " New synth:0696 "	. * \\b New _ synth:0696 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines in which there are words that begin with " mix " .	. * \\b mix ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain words with ' or synth:0743 ' .	. * ( . * or _ synth:0743 . * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines that match ' synth:0093 ' or ' synth:0094 ' .	. * ( synth:0093 | synth:0094 ) . *
+lines with " synth:0639 " but not " synth:0640 " .	( . * synth:0639 . * & ~ ( . * synth:0640 . * ) )
+lines containing words ending in " synth:0965 "	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0965 \\b . *
+lines with ' synth:0778 ' and not ' x ' .	( . * synth:0778 . * & ~ ( . * x . * ) )
+lines that contain at least one word starting with ' synth:0962 ' .	. * \\b synth:0962 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that start with ' synth:0905 '	synth:0905 . *
+lines containing ' synth:0717 ' and containing ' news ' too	( . * synth:0717 . * & . * news . * )
+lines that have words that start with " synth:0577 " .	. * \\b synth:0577 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain the word ' synth:0280 ' .	. * \\b synth:0280 \\b . *
+lines that include words starting with " synth:0838 " .	. * \\b synth:0838 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain words starting with ' synth:0041 ' .	. * ( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & synth:0041 . * ) . *
+lines ending with " wi " that use the word " g " .	. * \\b g \\b . * wi
+lines which feature the word " synth:0450 " .	. * \\b synth:0450 \\b . *
+lines utilizing words starting with ' no ' .	. * \\b no ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines utilizing words with " i " .	. * ( . * i . * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines that have the numbers " synth:0720 " and ' synth:0721 ' .	( . * synth:0720 . * & . * synth:0721 . * )
+lines with instances of " synth:0783 " .	. * synth:0783 . *
+lines that use words ending in " synth:0589 "	. * ( . * synth:0589 & \\b ( [A-Z] | [a-z] ) ( ( [A-Z] | [a-z] ) ) * \\b ) . *
+lines that contain words starting with ' synth:0890 ' .	. * ( ( ( [A-Z] | [a-z] ) ) { 1 , } & \\b synth:0890 . * \\b ) . *
+lines using 4 instances of ' bar '	. * ( . * bar . * ) { 4 } . *
+lines that utilize words starting with ' synth:0038 ' .	. * ( ( ( [A-Z] | [a-z] ) ) { 1 , } & \\b synth:0038 . * \\b ) . *
+lines with the word ' synth:0707 ' followed by words that start with ' synth:0708 '	. * \\b synth:0707 \\b . * \\b synth:0708 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines which do not contain the letter ' synth:0405 ' .	~ ( . * synth:0405 . * )
+lines with an " synth:0031 " that comes after a " synth:0032 of " .	. * synth:0032 _ of . * synth:0031 . *
+lines that contain either of ' synth:0691 ' or " s "	. * ( synth:0691 | s ) . *
+lines that contain both a " synth:0792 " and a " synth:0793 " .	( . * synth:0792 . * & . * synth:0793 . * )
+lines which begin with the word ' synth:0155 '	( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & synth:0155 ) . *
+lines that match " country " or " f " .	. * ( country | f ) . *
+lines that utilize words starting with ' f ' .	. * ( ( ( [A-Z] | [a-z] ) ) { 1 , } & \\b f . * \\b ) . *
+lines with words ending in " synth:0354 synth:0355 " .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0354 _ synth:0355 \\b . *
+lines containing " synth:0963 " or ' synth:0964 '	. * ( synth:0963 | synth:0964 ) . *
+lines that have the word ' synth:0473 ' .	. * \\b synth:0473 \\b . *
+lines that have " synth:0537 " after ' synth:0538 '	. * synth:0538 . * synth:0537 . *
+lines that include words starting with " synth:0519 " .	. * ( \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b & synth:0519 . * ) . * . *
+lines using words that begin with the letter ' synth:0866 ' .	. * \\b synth:0866 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines which have instances of ' on ' .	. * on . *
+lines that contain the phrase ' synth:0586 ' .	. * . * \\b synth:0586 \\b . * . *
+lines containing words that start with and end with " synth:0925 "	synth:0925 ( . * synth:0925 ) { 0 , 1 }
+lines containing the word " synth:0448 " .	. * \\b synth:0448 \\b . *
+lines that contain at least one word starting with ' 3 ' .	. * \\b 3 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines ending with " synth:0777 "	. * synth:0777
+lines that include words starting with ' synth:0092 ' .	. * ( \\b ( [A-Z] | [a-z] ) ( ( [A-Z] | [a-z] ) ) * \\b & synth:0092 . * ) . *
+lines which contain " wi " and ' synth:0779 '	( . * wi . * synth:0779 . * | . * synth:0779 . * wi . * )
+lines which have " synth:0617 "	. * synth:0617 . *
+lines that have three characters before the sequence " 5 "	. * ( . ) { 3 } 5 . *
+lines that contain the word " synth:0831 " but not ' k ' .	( . * synth:0831 . * & ~ ( . * k . * ) )
+lines that include the string " synth:0481 "	. * synth:0481 . *
+lines that have ' synth:0331 ' after " sh "	. * sh . * synth:0331 . *
+lines that contain the word ' an ' but not " synth:0714 " .	( . * an . * & ~ ( . * synth:0714 . * ) )
+lines that feature " synth:0412 " followed by the word ' synth:0413 ' .	. * synth:0412 . * \\b synth:0413 \\b . *
+lines using an instance of " w "	. * w . *
+lines that contain ' synth:0773 ' or " synth:0774 " .	( . * synth:0773 . * | . * synth:0774 . * )
+lines that have the letter ' synth:0910 ' at the end of a word.	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0910 \\b . *
+lines using a 3 letter sequence starting with ' synth:0671 '	. * synth:0671 ( ( [A-Z] | [a-z] ) ) { 2 } . *
+lines that contain words with ' synth:0060 ' .	. * ( . * synth:0060 . * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . *
+lines ending with ' synth:0310 ' that use the word " synth:0311 " .	. * \\b synth:0311 \\b . * synth:0310
+lines using the word ' synth:0013 ' .	. * . * \\b synth:0013 \\b . * . *
+lines that use ' synth:0850 ' or " synth:0851 " before words ending with ' synth:0852 ' .	. * ( synth:0850 | synth:0851 ) . * \\b ( ( [A-Z] | [a-z] ) ) * synth:0852 \\b . *
+lines that start with ' synth:0527 '	synth:0527 . *
+lines ending with ' t '	. * t
+lines that contain the phrase " the " or ' synth:0045 ' .	. * ( the | synth:0045 ) . *
+lines with instances of ' 2 ' .	. * 2 . *
+lines that include words starting with ' at ' .	. * ( \\b ( [A-Z] | [a-z] ) ( ( [A-Z] | [a-z] ) ) * \\b & at . * ) . *
+lines that contain the word ' synth:0663 '	. * \\b synth:0663 \\b . *
+lines which have instances of ' synth:0787 ' .	. * synth:0787 . *
+lines that ends with letter ' synth:0643 '	. * synth:0643
+lines that do not contain the character " st "	~ ( . * st . * )
+lines using the word ' synth:0781 ' and the number ' or synth:0782 ' .	( . * . * \\b synth:0781 \\b . * & . * or _ synth:0782 . * . * )
+lines ending in " I synth:0258 synth:0259 "	. * I _ synth:0258 _ synth:0259
+lines using the letter pair ' synth:0004 '	. * synth:0004 . *
+lines containing ' if ' and also containing ' synth:0125 '	( . * synth:0125 . * & . * if . * )
+lines utilizing words starting with " synth:0012 " .	. * ( \\b ( [A-Z] | [a-z] ) ( ( [A-Z] | [a-z] ) ) * \\b & synth:0012 . * ) . *
+lines where there is at least one word in which " synth:0190 " follows ' an '	. * ( . * an . * synth:0190 . * & \\b ( [A-Z] | [a-z] ) ( ( [A-Z] | [a-z] ) ) * \\b ) . *
+lines that contain ' an ' in each word.	~ ( . * ( ( ( . & ~ ( an ) ) ) * & \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ) . * )
+lines which contain " synth:0275 "	. * synth:0275 . *
+lines containing ' synth:0284 ' , or " synth:0285 "	. * ( synth:0284 | synth:0285 ) . *
+lines using at least 2 instances of ' an '	( . * an . * ) { 2 , }
+lines that have " synth:0724 is it " between ' synth:0725 ' and " synth:0726 "	( . * synth:0725 . * synth:0724 _ is _ it . * synth:0726 . * | . * synth:0726 . * synth:0724 _ is _ it . * synth:0725 . * )
+lines that contain 5 numbers and 2 words that contain " synth:0173 " .	( ( . * \\b ( ( [A-Z] | [a-z] ) ) * synth:0173 ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 2 } . * & . * ( . * [0-9] . * ) { 5 } )
+lines that use " w " or " synth:0033 " before words ending with ' synth:0034 ' .	. * ( w | synth:0033 ) . * \\b ( ( [A-Z] | [a-z] ) ) * synth:0034 \\b . *
+lines using three character words begining with the letters ' synth:0716 ' .	. * \\b synth:0716 ( [A-Z] | [a-z] ) \\b . *
+lines using at least 5 " synth:0455 "	( . * synth:0455 . * ) { 5 , }
+lines containing the word ' synth:0571 '	. * \\b synth:0571 \\b . *
+lines which have instances of " synth:0243 " .	. * synth:0243 . *
+lines that have three characters before the sequence " JFK "	. * ( . ) { 3 } JFK . *
+lines using three character words begining with the letters ' art ' .	. * \\b art ( [A-Z] | [a-z] ) \\b . *
+lines which contain a word starting with the letter ' synth:0123 ' and a word starting with the letter " synth:0124 " .	( . * \\b synth:0123 ( ( [A-Z] | [a-z] ) ) * \\b . * & . * \\b synth:0124 ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines which contain ' news ' and " synth:0333 "	( . * news . * synth:0333 . * | . * synth:0333 . * news . * )
+lines that contain the text, " xyz " .	. * xyz . *
+lines that contain words with ' synth:0711 ' .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0711 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that have words ending with " synth:0061 " .	. * ( ( ( [A-Z] | [a-z] ) ) { 1 , } & \\b . * synth:0061 \\b ) . *
+lines with a word ending in ' synth:0235 ' that contain only one word	( ( . & ~ ( ( [A-Z] | [a-z] ) ) ) ) * \\b ( ( [A-Z] | [a-z] ) ) * synth:0235 \\b ( ( . & ~ ( ( [A-Z] | [a-z] ) ) ) ) *
+lines that show " g " and ' k ' .	( . * . * g . * & . * k . * . * )
+lines that feature the word ' synth:0352 ' , and at least 3 words of 6 letters or more.	( ( . * \\b ( ( [A-Z] | [a-z] ) ) { 6 , } \\b . * ) { 3 , } & . * \\b synth:0352 \\b . * )
+lines that start with the letter ' synth:0857 ' and end with the letter " an "	synth:0857 . * an
+lines that have " synth:0419 " but not the word " synth:0420 "	( . * synth:0419 . * & ~ ( . * \\b synth:0420 \\b . * ) )
+lines using words ending with " b " .	. * \\b ( ( [A-Z] | [a-z] ) ) * b \\b . *
+lines containing a word using " synth:0245 "	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0245 ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines which have words beginning with " an " .	. * \\b an ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that contain at least one word and the number " y "	( . * . * \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b . * & . * y . * . * )
+lines that start with " synth:0048 " and end in a number.	synth:0048 . * [0-9]
+lines containing ' helper ' before ' synth:0883 '	. * helper . * synth:0883 . *
+lines that have the number " a " .	. * a . *
+lines that contain the phrase ' synth:0596 ' or " synth:0597 " .	. * ( synth:0596 | synth:0597 ) . *
+lines that mention " synth:0263 " in the same line as ' synth:0264 ' .	( . * synth:0263 . * synth:0264 . * | . * synth:0264 . * synth:0263 . * )
+lines that contain instances of ' car ' , but only if its one of the first three words.	( ( ( . & ~ ( ( [A-Z] | [a-z] ) ) ) ) * \\b ( ( [A-Z] | [a-z] ) ) { 1 , } \\b ( ( . & ~ ( ( [A-Z] | [a-z] ) ) ) ) * ) { 0 , 2 } ( ( . & ~ ( ( [A-Z] | [a-z] ) ) ) ) * \\b car \\b . *
+lines that do not have the letter ' synth:0246 '	~ ( . * synth:0246 . * )
+lines that begin with a number and end with " synth:0335 " or " f " .	[0-9] . * ( f | synth:0335 )
+lines that contain the number " synth:0110 " and " 3 " and begin with " ly " .	( . * synth:0110 . * & ( . * 3 . * & ly . * ) )
+lines that have words starting with ' after synth:0414 ' .	. * ( \\b ( [A-Z] | [a-z] ) ( ( [A-Z] | [a-z] ) ) * \\b & after _ synth:0414 . * ) . *
+lines using ' synth:0418 ' in the middle of a word.	. * \\b ( ( [A-Z] | [a-z] ) ) { 1 , } synth:0418 ( ( [A-Z] | [a-z] ) ) { 1 , } \\b . *
+lines that have " synth:0678 "	. * synth:0678 . *
+lines containing ' synth:0958 '	. * synth:0958 . * . *
+lines that contain ' synth:0409 ' or ' synth:0410 '	. * ( synth:0409 | synth:0410 ) . *
+lines that contain words starting with ' synth:0364 ' .	. * ( ( ( [A-Z] | [a-z] ) ) { 1 , } & \\b synth:0364 . * \\b ) . *
+lines that feature the word " and synth:0930 it synth:0931 to synth:0932 " , and at least 3 words of 6 letters or more.	( ( . * \\b ( ( [A-Z] | [a-z] ) ) { 6 , } \\b . * ) { 3 , } & . * \\b and _ synth:0930 _ it _ synth:0931 _ to _ synth:0932 \\b . * )
+lines that use words starting with ' k ' .	. * \\b k ( ( [A-Z] | [a-z] ) ) * \\b . *
+lines that mention both ' synth:0316 ' and ' synth:0317 ' .	( . * synth:0316 . * & . * synth:0317 . * )
+lines that use words ending with " synth:0846 " .	. * \\b ( ( [A-Z] | [a-z] ) ) * synth:0846 \\b . *
+lines which contain five or more ' synth:0054 '	( . * synth:0054 . * ) { 5 , }
+lines with ' synth:0629 ' as a stand alone word.	. * \\b synth:0629 \\b . *
+lines that start with ' synth:0400 ' and end in a number.	synth:0400 . * [0-9]
+lines where there are three characters between instances of ' synth:0342 ' and " out "	( . * synth:0342 . * ( . ) { 3 } . * out . * | . * out . * ( . ) { 3 } . * synth:0342 . * )
+lines that have 7 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 7 } & . * \\b Columbia \\b . * )
+lines that have the number " 1 " .	. * 1 . *
+lines using the word " George " and the number " 9 " .	( . * . * \\b George \\b . * & . * 9 . * . * )
+lines containing any number with an ' 1 ' in it.	. * 1 . *
+lines utilizing the number ' 7 ' .	. * 7 . *
+lines using 9 instances of ' ug '	. * ( . * ug . * ) { 9 } . *
+lines that have a word beginning with th and a number that begins in " 1 "	( . * 1 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines that show the letter " a " and number " 8 " .	( . * 8 . * & . * a . * )
+lines containing any number with an ' 2 ' in it.	. * 2 . *
+lines containing 3 or more " ; "	( . * ; . * ) { 3 , }
+lines that contain the number " 6 " and " May " and begin with " Mary " .	( . * 6 . * & ( . * May . * & Mary . * ) )
+lines that utilize the number ' 5 '	. * 5 . *
+lines using the word " George " and the number " 1 " .	( . * . * \\b George \\b . * & . * 1 . * . * )
+lines using 5 ' e '	( . * e . * ) { 5 }
+lines that contain 6 or more " b "	( . * b . * ) { 6 }
+lines using 7 instances of ' sw '	. * ( . * sw . * ) { 7 } . *
+lines using at least 3 instances of " ly "	( . * ly . * ) { 3 , }
+lines using 9 instances of ' sw '	. * ( . * sw . * ) { 9 } . *
+lines that contain 4 or more " b "	( . * b . * ) { 4 }
+lines that have a word beginning with th and a number that begins in " 5 "	( . * 5 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 3 instances of ' irl '	. * ( . * irl . * ) { 3 } . *
+lines of 6 characters that end with the letter " s " .	( . ) { 5 } s
+lines using at least 6 instances of " ly "	( . * ly . * ) { 6 , }
+lines using 4 instances of ' fu '	. * ( . * fu . * ) { 4 } . *
+lines where the number ' 4 ' appears	. * 4 . *
+lines using 4 instances of ' irl '	. * ( . * irl . * ) { 4 } . *
+lines that have a word beginning with th and a number that begins in " 7 "	( . * 7 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 1 instances of ' b '	. * ( . * b . * ) { 1 } . *
+lines utilizing the number ' 9 ' .	. * 9 . *
+lines that utilize the number ' 5 ' .	. * 5 . *
+lines utilizing the number ' 3 ' .	. * 3 . *
+lines that contain the number " 9 " and " May " and begin with " Mary " .	( . * 9 . * & ( . * May . * & Mary . * ) )
+lines that use the number ' 7 ' .	. * 7 . *
+lines using 5 instances of ' irl '	. * ( . * irl . * ) { 5 } . *
+lines which contain only the number " 9 " .	9
+lines that end with the number " 9 " .	. * 9
+lines containing 2 or more " ; "	( . * ; . * ) { 2 , }
+lines that contain the number " 5 " and " May " and begin with " Mary " .	( . * 5 . * & ( . * May . * & Mary . * ) )
+lines that utilize the number ' 9 ' .	. * 9 . *
+lines using 8 ' d '	( . * d . * ) { 8 }
+lines containing any number with an ' 6 ' in it.	. * 6 . *
+lines that have a ' 9 ' in them	. * 9 . *
+lines using 2 instances of ' ug '	. * ( . * ug . * ) { 2 } . *
+lines using 7 instances of ' fu '	. * ( . * fu . * ) { 7 } . *
+lines using a 6 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 5 } . *
+lines using 4 instances of ' ug '	. * ( . * ug . * ) { 4 } . *
+lines that use the number ' 6 ' .	. * 6 . *
+lines that have a ' 4 ' in them	. * 4 . *
+lines that have 9 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 9 } & . * \\b Columbia \\b . * )
+lines containing any number with an ' 5 ' in it.	. * 5 . *
+lines using 2 ' d '	( . * d . * ) { 2 }
+lines using at least 8 instances of " ly "	( . * ly . * ) { 8 , }
+lines of 4 characters that end with the letter " s " .	( . ) { 3 } s
+lines using 1 instances of ' sw '	. * ( . * sw . * ) { 1 } . *
+lines using the word " George " and the number " 4 " .	( . * . * \\b George \\b . * & . * 4 . * . * )
+lines using at least 4 ' d '	( . * d . * ) { 4 , }
+lines using a 4 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 3 } . *
+lines that utilize the number ' 6 ' .	. * 6 . *
+lines using at least 9 instances of " ly "	( . * ly . * ) { 9 , }
+lines which contain only the number " 5 " .	5
+lines using a 2 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 1 } . *
+lines that end with the number " 7 " .	. * 7
+lines using a 5 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 4 } . *
+lines containing any number with an ' 9 ' in it.	. * 9 . *
+lines containing any number with an ' 3 ' in it.	. * 3 . *
+lines using a 8 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 7 } . *
+lines that have 4 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 4 } & . * \\b Columbia \\b . * )
+lines that contain 5 or more " b "	( . * b . * ) { 5 }
+lines that have 6 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 6 } & . * \\b Columbia \\b . * )
+lines using 1 ' e '	( . * e . * ) { 1 }
+lines that have a word beginning with th and a number that begins in " 8 "	( . * 8 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 5 instances of ' fu '	. * ( . * fu . * ) { 5 } . *
+lines using a 1 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 0 } . *
+lines that contain the number " 4 " and " May " and begin with " Mary " .	( . * 4 . * & ( . * May . * & Mary . * ) )
+lines using 2 ' e '	( . * e . * ) { 2 }
+lines using 3 ' d '	( . * d . * ) { 3 }
+lines using 9 ' e '	( . * e . * ) { 9 }
+lines containing a 1 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 0 } \\b . *
+lines that have the number " 6 " .	. * 6 . *
+lines that contain 7 or more " b "	( . * b . * ) { 7 }
+lines that utilize the number ' 8 ' .	. * 8 . *
+lines that show the letter " a " and number " 2 " .	( . * 2 . * & . * a . * )
+lines containing 9 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 8 } \\b . *
+lines that utilize the number ' 2 ' .	. * 2 . *
+lines using 8 ' f '	( . * f . * ) { 8 }
+lines using 9 instances of ' b '	. * ( . * b . * ) { 9 } . *
+lines that utilize the number ' 3 ' .	. * 3 . *
+lines utilizing the number ' 2 ' .	. * 2 . *
+lines using 5 ' f '	( . * f . * ) { 5 }
+lines where the number ' 7 ' appears	. * 7 . *
+lines using at least 3 ' d '	( . * d . * ) { 3 , }
+lines which contain only the number " 1 " .	1
+lines using 7 ' f '	( . * f . * ) { 7 }
+lines containing a 5 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 4 } \\b . *
+lines using the word " George " and the number " 6 " .	( . * . * \\b George \\b . * & . * 6 . * . * )
+lines that have a ' 6 ' in them	. * 6 . *
+lines using a 9 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 8 } . *
+lines that utilize the number ' 9 '	. * 9 . *
+lines that have a word beginning with th and a number that begins in " 9 "	( . * 9 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 1 ' d '	( . * d . * ) { 1 }
+lines using 3 instances of ' sw '	. * ( . * sw . * ) { 3 } . *
+lines that have a ' 8 ' in them	. * 8 . *
+lines using 8 instances of ' sw '	. * ( . * sw . * ) { 8 } . *
+lines that have a word beginning with th and a number that begins in " 4 "	( . * 4 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 9 instances of ' irl '	. * ( . * irl . * ) { 9 } . *
+lines using 7 instances of ' irl '	. * ( . * irl . * ) { 7 } . *
+lines using 4 instances of ' b '	. * ( . * b . * ) { 4 } . *
+lines using 8 instances of ' ug '	. * ( . * ug . * ) { 8 } . *
+lines that have a word beginning with th and a number that begins in " 3 "	( . * 3 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using the word " George " and the number " 5 " .	( . * . * \\b George \\b . * & . * 5 . * . * )
+lines using 9 ' d '	( . * d . * ) { 9 }
+lines that have 8 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 8 } & . * \\b Columbia \\b . * )
+lines using at least 5 instances of " ly "	( . * ly . * ) { 5 , }
+lines that have a ' 3 ' in them	. * 3 . *
+lines containing 1 or more " ; "	( . * ; . * ) { 1 , }
+lines that show the letter " a " and number " 3 " .	( . * 3 . * & . * a . * )
+lines that have a ' 5 ' in them	. * 5 . *
+lines containing a 2 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 1 } \\b . *
+lines where the number ' 1 ' appears	. * 1 . *
+lines containing any number with an ' 7 ' in it.	. * 7 . *
+lines of 9 characters that end with the letter " s " .	( . ) { 8 } s
+lines using at least 4 instances of " ly "	( . * ly . * ) { 4 , }
+lines that contain the number " 3 " and " May " and begin with " Mary " .	( . * 3 . * & ( . * May . * & Mary . * ) )
+lines that have 2 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 2 } & . * \\b Columbia \\b . * )
+lines where the number ' 3 ' appears	. * 3 . *
+lines using 9 instances of ' fu '	. * ( . * fu . * ) { 9 } . *
+lines which contain only the number " 4 " .	4
+lines using at least 8 ' d '	( . * d . * ) { 8 , }
+lines using at least 7 instances of " ly "	( . * ly . * ) { 7 , }
+lines using 6 instances of ' ug '	. * ( . * ug . * ) { 6 } . *
+lines using 1 instances of ' irl '	. * ( . * irl . * ) { 1 } . *
+lines using at least 2 instances of " ly "	( . * ly . * ) { 2 , }
+lines containing 7 or more " ; "	( . * ; . * ) { 7 , }
+lines that have a word beginning with th and a number that begins in " 6 "	( . * 6 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines that use the number ' 5 ' .	. * 5 . *
+lines using 1 instances of ' fu '	. * ( . * fu . * ) { 1 } . *
+lines utilizing the number ' 8 ' .	. * 8 . *
+lines using 1 instances of ' ug '	. * ( . * ug . * ) { 1 } . *
+lines using 8 ' e '	( . * e . * ) { 8 }
+lines using at least 5 ' d '	( . * d . * ) { 5 , }
+lines where the number ' 8 ' appears	. * 8 . *
+lines that have the number " 7 " .	. * 7 . *
+lines containing any number with an ' 4 ' in it.	. * 4 . *
+lines containing 5 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 4 } \\b . *
+lines using 2 instances of ' b '	. * ( . * b . * ) { 2 } . *
+lines that contain the number " 1 " and " May " and begin with " Mary " .	( . * 1 . * & ( . * May . * & Mary . * ) )
+lines where the number ' 5 ' appears	. * 5 . *
+lines that contain the number " 7 " and " May " and begin with " Mary " .	( . * 7 . * & ( . * May . * & Mary . * ) )
+lines that show the letter " a " and number " 7 " .	( . * 7 . * & . * a . * )
+lines that show the letter " a " and number " 5 " .	( . * 5 . * & . * a . * )
+lines containing 8 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 7 } \\b . *
+lines where the number ' 9 ' appears	. * 9 . *
+lines which contain only the number " 7 " .	7
+lines using 2 ' f '	( . * f . * ) { 2 }
+lines using at least 2 ' d '	( . * d . * ) { 2 , }
+lines that have the number " 9 " .	. * 9 . *
+lines that have the number " 4 " .	. * 4 . *
+lines containing a 3 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 2 } \\b . *
+lines using 7 ' d '	( . * d . * ) { 7 }
+lines containing 2 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 1 } \\b . *
+lines containing a 6 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 5 } \\b . *
+lines that contain 1 or more " b "	( . * b . * ) { 1 }
+lines using 6 instances of ' b '	. * ( . * b . * ) { 6 } . *
+lines using 7 instances of ' b '	. * ( . * b . * ) { 7 } . *
+lines that have the number " 5 " .	. * 5 . *
+lines that have 5 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 5 } & . * \\b Columbia \\b . * )
+lines using 4 instances of ' sw '	. * ( . * sw . * ) { 4 } . *
+lines using 4 ' e '	( . * e . * ) { 4 }
+lines using 7 ' e '	( . * e . * ) { 7 }
+lines using 3 instances of ' ug '	. * ( . * ug . * ) { 3 } . *
+lines containing 7 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 6 } \\b . *
+lines of 8 characters that end with the letter " s " .	( . ) { 7 } s
+lines containing any number with an ' 8 ' in it.	. * 8 . *
+lines containing a 8 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 7 } \\b . *
+lines that show the letter " a " and number " 6 " .	( . * 6 . * & . * a . * )
+lines that use the number ' 8 ' .	. * 8 . *
+lines containing 8 or more " ; "	( . * ; . * ) { 8 , }
+lines using 2 instances of ' fu '	. * ( . * fu . * ) { 2 } . *
+lines of 2 characters that end with the letter " s " .	( . ) { 1 } s
+lines containing 6 or more " ; "	( . * ; . * ) { 6 , }
+lines using 6 ' d '	( . * d . * ) { 6 }
+lines that have a ' 1 ' in them	. * 1 . *
+lines of 5 characters that end with the letter " s " .	( . ) { 4 } s
+lines that utilize the number ' 8 '	. * 8 . *
+lines containing a 7 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 6 } \\b . *
+lines using 8 instances of ' irl '	. * ( . * irl . * ) { 8 } . *
+lines that utilize the number ' 7 ' .	. * 7 . *
+lines that end with the number " 2 " .	. * 2
+lines that utilize the number ' 4 '	. * 4 . *
+lines that have a ' 2 ' in them	. * 2 . *
+lines which contain only the number " 6 " .	6
+lines using 2 instances of ' irl '	. * ( . * irl . * ) { 2 } . *
+lines that use the number ' 3 ' .	. * 3 . *
+lines using 5 ' d '	( . * d . * ) { 5 }
+lines that show the letter " a " and number " 4 " .	( . * 4 . * & . * a . * )
+lines using 2 instances of ' sw '	. * ( . * sw . * ) { 2 } . *
+lines using the word " George " and the number " 7 " .	( . * . * \\b George \\b . * & . * 7 . * . * )
+lines of 7 characters that end with the letter " s " .	( . ) { 6 } s
+lines utilizing the number ' 4 ' .	. * 4 . *
+lines using 6 instances of ' sw '	. * ( . * sw . * ) { 6 } . *

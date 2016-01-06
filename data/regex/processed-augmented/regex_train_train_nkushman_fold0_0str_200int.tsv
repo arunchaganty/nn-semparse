@@ -548,3 +548,203 @@ lines using ' x ' before ' z '	. * x . * z . *
 lines beginning with the letter ' f '	f . *
 4 letter lines	( ( [A-Z] | [a-z] ) ) { 4 }
 lines using numbers that show two or more " 0 " .	. * ( . * 0 . * ) { 2 , } . *
+lines using a 2 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 1 } . *
+lines using at least 7 instances of " ly "	( . * ly . * ) { 7 , }
+lines using at least 4 ' b '	( . * b . * ) { 4 , }
+lines that contain 1 letter words beginning with the letter ' y ' .	. * \\b y ( ( [A-Z] | [a-z] ) ) { 0 } \\b . *
+lines that utilize the number ' 7 '	. * 7 . *
+lines that end with " 3 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 3
+lines using at least 3 ' b '	( . * b . * ) { 3 , }
+lines that use " Jane " but not " Janet " or " 6 " .	( . * Jane . * & ~ ( . * ( 6 | Janet ) . * ) )
+lines that end with " 5 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 5
+lines that contain 9 letter words ending in ' s '	. * \\b ( ( [A-Z] | [a-z] ) ) { 8 } s \\b . *
+lines that contain a number ending with " 5 "	. * ( [0-9] ) * 5 . *
+lines that contain 7 repetitions of the word " a "	( . * \\b a \\b . * ) { 7 }
+lines that contain 2 letter words ending in ' s '	. * \\b ( ( [A-Z] | [a-z] ) ) { 1 } s \\b . *
+lines that contain a number ending with " 2 "	. * ( [0-9] ) * 2 . *
+lines that contain the letter " V " and the number " 2 " .	( . * 2 . * & . * V . * )
+lines containing 2 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 1 } \\b . *
+lines which contain 2 words starting with " f "	( . * \\b f ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 2 , }
+lines using a 5 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 4 } . *
+lines that contain the number ' 8 ' .	. * 8 . *
+lines which contain 7 or more " q " .	( . * q . * ) { 7 , }
+lines using 8 instances of ' irl '	. * ( . * irl . * ) { 8 } . *
+lines that contain 9 or more " b "	( . * b . * ) { 9 }
+lines that contain 2 repetitions of the word " a "	( . * \\b a \\b . * ) { 2 }
+lines where the letter ' b ' appears exactly 7 times	( ( ( . & ~ ( b ) ) ) * b ( ( . & ~ ( b ) ) ) * ) { 7 }
+lines using 7 instances of ' ug '	. * ( . * ug . * ) { 7 } . *
+lines where the letter ' b ' appears exactly 5 times	( ( ( . & ~ ( b ) ) ) * b ( ( . & ~ ( b ) ) ) * ) { 5 }
+lines that contain the number ' 5 ' .	. * 5 . *
+lines that contain the letter " V " and the number " 5 " .	( . * 5 . * & . * V . * )
+lines that end with " 4 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 4
+2 letter lines starting with ' x '	x ( ( [A-Z] | [a-z] ) ) { 1 }
+lines utilizing the number ' 1 ' .	. * 1 . *
+lines using a 1 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 0 } . *
+lines that contain 8 or more " b "	( . * b . * ) { 8 }
+lines using at least 5 ' b '	( . * b . * ) { 5 , }
+lines using 1 instances of ' fu '	. * ( . * fu . * ) { 1 } . *
+lines using 4 ' e '	( . * e . * ) { 4 }
+lines using at least 2 ' b '	( . * b . * ) { 2 , }
+7 letter lines starting with ' x '	x ( ( [A-Z] | [a-z] ) ) { 6 }
+lines which contain 8 words starting with " f "	( . * \\b f ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 8 , }
+lines using 7 instances of ' b '	. * ( . * b . * ) { 7 } . *
+lines that use the number ' 7 ' .	. * 7 . *
+lines that utilize the number ' 2 ' .	. * 2 . *
+lines which contain 3 or more " q " .	( . * q . * ) { 3 , }
+3 letter lines starting with ' x '	x ( ( [A-Z] | [a-z] ) ) { 2 }
+lines containing 1 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 0 } \\b . *
+lines using 8 ' f '	( . * f . * ) { 8 }
+lines containing the number 2 and the word " eleven " .	( . * 2 . * & . * eleven . * )
+lines that contain 2 letter words beginning with the letter ' y ' .	. * \\b y ( ( [A-Z] | [a-z] ) ) { 1 } \\b . *
+lines using 3 instances of ' irl '	. * ( . * irl . * ) { 3 } . *
+lines that contain the number ' 6 ' .	. * 6 . *
+lines containing 1 or more " ; "	( . * ; . * ) { 1 , }
+lines that end with " 8 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 8
+lines using a 4 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 3 } . *
+lines using a 3 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 2 } . *
+lines using 3 instances of ' fu '	. * ( . * fu . * ) { 3 } . *
+lines that contain 6 or more " b "	( . * b . * ) { 6 }
+lines that contain a number ending with " 3 "	. * ( [0-9] ) * 3 . *
+lines that contain the number ' 4 ' .	. * 4 . *
+lines using at least 5 instances of " ly "	( . * ly . * ) { 5 , }
+lines that contain 5 repetitions of the word " a "	( . * \\b a \\b . * ) { 5 }
+lines which contain 3 words starting with " f "	( . * \\b f ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 3 , }
+lines that utilize the number ' 4 '	. * 4 . *
+lines which contain 9 words starting with " f "	( . * \\b f ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 9 , }
+8 letter lines starting with ' x '	x ( ( [A-Z] | [a-z] ) ) { 7 }
+lines that end with " 6 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 6
+lines utilizing the number ' 2 ' .	. * 2 . *
+lines containing the number 3 and the word " eleven " .	( . * 3 . * & . * eleven . * )
+lines of 6 characters that end with the letter " s " .	( . ) { 5 } s
+lines using at least 8 ' c '	( . * c . * ) { 8 , }
+lines using 1 instances of ' irl '	. * ( . * irl . * ) { 1 } . *
+lines that contain 1 letter words ending in ' s '	. * \\b ( ( [A-Z] | [a-z] ) ) { 0 } s \\b . *
+lines that utilize the number ' 3 '	. * 3 . *
+lines that use the number ' 1 ' .	. * 1 . *
+lines containing 9 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 8 } \\b . *
+lines where the letter ' b ' appears exactly 1 times	( ( ( . & ~ ( b ) ) ) * b ( ( . & ~ ( b ) ) ) * ) { 1 }
+lines that use " Jane " but not " Janet " or " 7 " .	( . * Jane . * & ~ ( . * ( 7 | Janet ) . * ) )
+lines utilizing the number ' 4 ' .	. * 4 . *
+lines that end with " 7 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 7
+lines containing a 7 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 6 } \\b . *
+lines containg the number ' 8 ' .	. * 8 . *
+lines that end with " 9 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 9
+lines using a 8 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 7 } . *
+lines that utilize the number ' 1 '	. * 1 . *
+lines using a 7 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 6 } . *
+lines using at least 3 ' c '	( . * c . * ) { 3 , }
+lines using 9 instances of ' fu '	. * ( . * fu . * ) { 9 } . *
+lines using 5 ' e '	( . * e . * ) { 5 }
+lines that contain 4 or more " b "	( . * b . * ) { 4 }
+lines containing a 9 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 8 } \\b . *
+lines that contain the letter " V " and the number " 8 " .	( . * 8 . * & . * V . * )
+lines that contain 9 repetitions of the word " a "	( . * \\b a \\b . * ) { 9 }
+lines using 4 ' f '	( . * f . * ) { 4 }
+4 letter lines starting with ' x '	x ( ( [A-Z] | [a-z] ) ) { 3 }
+lines containing 7 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 6 } \\b . *
+lines that contain 8 letter words ending in ' s '	. * \\b ( ( [A-Z] | [a-z] ) ) { 7 } s \\b . *
+lines using at least 8 instances of " ly "	( . * ly . * ) { 8 , }
+lines that use the number ' 5 ' .	. * 5 . *
+lines using 6 instances of ' fu '	. * ( . * fu . * ) { 6 } . *
+lines that contain the letter " V " and the number " 1 " .	( . * 1 . * & . * V . * )
+lines of 8 characters that end with the letter " s " .	( . ) { 7 } s
+lines that contain the number ' 1 ' .	. * 1 . *
+lines that contain the letter " V " and the number " 7 " .	( . * 7 . * & . * V . * )
+lines that use " Jane " but not " Janet " or " 1 " .	( . * Jane . * & ~ ( . * ( 1 | Janet ) . * ) )
+lines that utilize the number ' 8 ' .	. * 8 . *
+lines that contain a number ending with " 1 "	. * ( [0-9] ) * 1 . *
+lines using at least 7 ' c '	( . * c . * ) { 7 , }
+lines using 2 ' f '	( . * f . * ) { 2 }
+lines that utilize the number ' 6 ' .	. * 6 . *
+lines containing a 1 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 0 } \\b . *
+lines where the letter ' b ' appears exactly 6 times	( ( ( . & ~ ( b ) ) ) * b ( ( . & ~ ( b ) ) ) * ) { 6 }
+lines that use " Jane " but not " Janet " or " 3 " .	( . * Jane . * & ~ ( . * ( 3 | Janet ) . * ) )
+lines containg the number ' 5 ' .	. * 5 . *
+lines containing the number 7 and the word " eleven " .	( . * 7 . * & . * eleven . * )
+lines using 2 instances of ' b '	. * ( . * b . * ) { 2 } . *
+lines using 9 instances of ' b '	. * ( . * b . * ) { 9 } . *
+lines using 9 instances of ' ug '	. * ( . * ug . * ) { 9 } . *
+lines using at least 4 instances of " ly "	( . * ly . * ) { 4 , }
+lines that utilize the number ' 9 ' .	. * 9 . *
+lines that contain a number ending with " 7 "	. * ( [0-9] ) * 7 . *
+lines containg the number ' 4 ' .	. * 4 . *
+lines which contain 5 words starting with " f "	( . * \\b f ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 5 , }
+lines using 4 instances of ' fu '	. * ( . * fu . * ) { 4 } . *
+lines that utilize the number ' 6 '	. * 6 . *
+lines that contain the letter " V " and the number " 3 " .	( . * 3 . * & . * V . * )
+5 letter lines starting with ' x '	x ( ( [A-Z] | [a-z] ) ) { 4 }
+lines using a 6 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 5 } . *
+lines which contain 6 or more " q " .	( . * q . * ) { 6 , }
+lines that contain 8 letter words beginning with the letter ' y ' .	. * \\b y ( ( [A-Z] | [a-z] ) ) { 7 } \\b . *
+lines containg the number ' 3 ' .	. * 3 . *
+lines using at least 2 instances of " ly "	( . * ly . * ) { 2 , }
+lines which contain 9 or more " q " .	( . * q . * ) { 9 , }
+lines that contain 7 or more " b "	( . * b . * ) { 7 }
+lines that utilize the number ' 4 ' .	. * 4 . *
+lines that utilize the number ' 7 ' .	. * 7 . *
+lines using 9 ' f '	( . * f . * ) { 9 }
+lines using 8 ' e '	( . * e . * ) { 8 }
+lines that use the number ' 9 ' .	. * 9 . *
+lines of 5 characters that end with the letter " s " .	( . ) { 4 } s
+lines using 8 instances of ' b '	. * ( . * b . * ) { 8 } . *
+lines that contain a number ending with " 6 "	. * ( [0-9] ) * 6 . *
+lines that contain the number ' 3 ' .	. * 3 . *
+lines using 6 instances of ' ug '	. * ( . * ug . * ) { 6 } . *
+lines that contain 5 letter words ending in ' s '	. * \\b ( ( [A-Z] | [a-z] ) ) { 4 } s \\b . *
+lines containing a 3 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 2 } \\b . *
+lines using at least 7 ' b '	( . * b . * ) { 7 , }
+lines using 1 ' e '	( . * e . * ) { 1 }
+lines using at least 9 ' c '	( . * c . * ) { 9 , }
+lines of 9 characters that end with the letter " s " .	( . ) { 8 } s
+lines that utilize the number ' 3 ' .	. * 3 . *
+lines using 3 instances of ' b '	. * ( . * b . * ) { 3 } . *
+lines using at least 3 instances of " ly "	( . * ly . * ) { 3 , }
+lines containing 6 or more " ; "	( . * ; . * ) { 6 , }
+lines containing a 8 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 7 } \\b . *
+lines where the letter ' b ' appears exactly 9 times	( ( ( . & ~ ( b ) ) ) * b ( ( . & ~ ( b ) ) ) * ) { 9 }
+lines using at least 9 instances of " ly "	( . * ly . * ) { 9 , }
+lines containing 2 or more " ; "	( . * ; . * ) { 2 , }
+lines that contain 2 or more " b "	( . * b . * ) { 2 }
+lines that contain 6 letter words beginning with the letter ' y ' .	. * \\b y ( ( [A-Z] | [a-z] ) ) { 5 } \\b . *
+lines that contain the letter " V " and the number " 9 " .	( . * 9 . * & . * V . * )
+lines where the letter ' b ' appears exactly 4 times	( ( ( . & ~ ( b ) ) ) * b ( ( . & ~ ( b ) ) ) * ) { 4 }
+lines using 6 instances of ' irl '	. * ( . * irl . * ) { 6 } . *
+lines using 7 instances of ' fu '	. * ( . * fu . * ) { 7 } . *
+lines using 8 instances of ' ug '	. * ( . * ug . * ) { 8 } . *
+lines of 1 characters that end with the letter " s " .	( . ) { 0 } s
+lines that end with " 2 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 2
+lines utilizing the number ' 5 ' .	. * 5 . *
+lines containing a 2 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 1 } \\b . *
+lines using 6 ' f '	( . * f . * ) { 6 }
+lines containing a 6 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 5 } \\b . *
+lines that end with " 1 " and contain words that begin with " Sel "	. * \\b Sel ( ( [A-Z] | [a-z] ) ) * \\b . * 1
+lines which contain 1 words starting with " f "	( . * \\b f ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 1 , }
+lines that contain the letter " V " and the number " 4 " .	( . * 4 . * & . * V . * )
+lines which contain 4 words starting with " f "	( . * \\b f ( ( [A-Z] | [a-z] ) ) * \\b . * ) { 4 , }
+lines containing 8 or more " ; "	( . * ; . * ) { 8 , }
+lines containing 6 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 5 } \\b . *
+lines where the letter ' b ' appears exactly 3 times	( ( ( . & ~ ( b ) ) ) * b ( ( . & ~ ( b ) ) ) * ) { 3 }
+lines that contain 3 or more " b "	( . * b . * ) { 3 }
+lines using at least 2 ' c '	( . * c . * ) { 2 , }
+lines that use the number ' 3 ' .	. * 3 . *
+lines containing the number 8 and the word " eleven " .	( . * 8 . * & . * eleven . * )
+lines containg the number ' 7 ' .	. * 7 . *
+lines that contain 7 letter words ending in ' s '	. * \\b ( ( [A-Z] | [a-z] ) ) { 6 } s \\b . *
+lines using 2 ' e '	( . * e . * ) { 2 }
+lines that use the number ' 2 ' .	. * 2 . *
+6 letter lines starting with ' x '	x ( ( [A-Z] | [a-z] ) ) { 5 }
+lines using 6 instances of ' b '	. * ( . * b . * ) { 6 } . *
+lines of 2 characters that end with the letter " s " .	( . ) { 1 } s
+lines which contain 4 or more " q " .	( . * q . * ) { 4 , }
+lines using 9 ' e '	( . * e . * ) { 9 }
+lines that contain a number ending with " 9 "	. * ( [0-9] ) * 9 . *
+lines of 7 characters that end with the letter " s " .	( . ) { 6 } s
+lines containing the number 9 and the word " eleven " .	( . * 9 . * & . * eleven . * )
+lines of 4 characters that end with the letter " s " .	( . ) { 3 } s
+lines using at least 8 ' b '	( . * b . * ) { 8 , }
+lines containing 8 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 7 } \\b . *
+lines containing 4 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 3 } \\b . *
+lines using 5 instances of ' ug '	. * ( . * ug . * ) { 5 } . *
+lines where the letter ' b ' appears exactly 8 times	( ( ( . & ~ ( b ) ) ) * b ( ( . & ~ ( b ) ) ) * ) { 8 }
+lines using 3 ' e '	( . * e . * ) { 3 }
+lines utilizing the number ' 3 ' .	. * 3 . *

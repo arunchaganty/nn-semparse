@@ -20,13 +20,14 @@ OUT_DIR = os.path.join(
 random.seed(0)
 
 def split_regex(r):
-  r = r[9:-2]
   replacements = [
       (' ', ' _ '),
       ('(', ' ( '),
       (')', ' ) '),
       ('[', ' ['),
       (']', '] '),
+      (r'\b', r'\\b'),
+      (r'\\\b', r' \\b '),
       (r'\\b', r' \\b '),
       ('.', ' . '),
       ('*', ' * '),
@@ -41,7 +42,7 @@ def split_regex(r):
   for a, b in replacements:
     r = r.replace(a, b)
   r = ' '.join(r.split())
-  print r
+  #print r
   return r
 
 def split_input(s):
@@ -67,7 +68,7 @@ def process(filename):
     utterance = ex['utterance'].strip()
     x = split_input(utterance)
     regex = ex['targetValue']
-    y = split_regex(regex)
+    y = split_regex(regex[9:-2])
     out_data.append((x, y))
 
   if stage == 'train':
@@ -89,6 +90,14 @@ def process(filename):
       for x, y in dev_data:
         print >> f, '%s\t%s' % (x, y)
 
+def read_x_to_y():
+  x_to_y = {}
+  for basename in ('regex_train_all.tsv', 'regex_test.tsv'):
+    with open(os.path.join(OUT_DIR, basename)) as f:
+      for line in f:
+        x, y = line.strip().split('\t')
+        x_to_y[x] = y
+  return x_to_y
 
 def write_data(basename, data):
   out_path = os.path.join(OUT_DIR, basename)
@@ -96,7 +105,7 @@ def write_data(basename, data):
     for x, y in data:
       print >>f, '%s\t%s' % (x, y)
 
-def process_raw(filename):
+def process_raw(filename, x_to_y):
   print >> sys.stderr, 'Processing %s' % filename
   basename = os.path.basename(filename)
   # Filenames are like out_fold0.tsv
@@ -124,8 +133,9 @@ def main():
     os.makedirs(OUT_DIR)
   for filename in sorted(glob.glob(os.path.join(IN_DIR, '*.json'))):
     process(filename)
+  x_to_y = read_x_to_y()
   for filename in sorted(glob.glob(os.path.join(RAW_DIR, '*.tsv'))):
-    process_raw(filename)
+    process_raw(filename, x_to_y)
 
 
 

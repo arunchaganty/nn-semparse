@@ -168,6 +168,9 @@ def process(filename):
   def write_subset(num_str=0, num_int=0):
     cur_str = str_data[:num_str]
     cur_int = int_data[:num_int]
+    if 'nkushman' in filename:
+      # basename is like regex_train_nkushman_fold0.tsv
+      mode = os.path.basename(filename)[6:-4]
     if 'fold' in filename:
       # basename is like regex_fold1of3_train440.tsv
       mode = os.path.basename(filename)[6:-4]
@@ -188,6 +191,9 @@ def main():
   process(os.path.join(IN_DIR, 'regex_fold1of3_train440.tsv'))
   process(os.path.join(IN_DIR, 'regex_fold2of3_train440.tsv'))
   process(os.path.join(IN_DIR, 'regex_fold3of3_train440.tsv'))
+  process(os.path.join(IN_DIR, 'regex_train_nkushman_fold0.tsv'))
+  process(os.path.join(IN_DIR, 'regex_train_nkushman_fold1.tsv'))
+  process(os.path.join(IN_DIR, 'regex_train_nkushman_fold2.tsv'))
 
 if __name__ == '__main__':
   main()

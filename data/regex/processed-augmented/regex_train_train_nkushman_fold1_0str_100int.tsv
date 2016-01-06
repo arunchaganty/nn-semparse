@@ -548,3 +548,103 @@ lines using ' x ' before ' z '	. * x . * z . *
 lines beginning with the letter ' f '	f . *
 4 letter lines	( ( [A-Z] | [a-z] ) ) { 4 }
 lines using numbers that show two or more " 0 " .	. * ( . * 0 . * ) { 2 , } . *
+lines that have 7 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 7 } & . * \\b Columbia \\b . * )
+lines that have the number " 1 " .	. * 1 . *
+lines using the word " George " and the number " 9 " .	( . * . * \\b George \\b . * & . * 9 . * . * )
+lines containing any number with an ' 1 ' in it.	. * 1 . *
+lines utilizing the number ' 7 ' .	. * 7 . *
+lines using 9 instances of ' ug '	. * ( . * ug . * ) { 9 } . *
+lines that have a word beginning with th and a number that begins in " 1 "	( . * 1 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines that show the letter " a " and number " 8 " .	( . * 8 . * & . * a . * )
+lines containing any number with an ' 2 ' in it.	. * 2 . *
+lines containing 3 or more " ; "	( . * ; . * ) { 3 , }
+lines that contain the number " 6 " and " May " and begin with " Mary " .	( . * 6 . * & ( . * May . * & Mary . * ) )
+lines that utilize the number ' 5 '	. * 5 . *
+lines using the word " George " and the number " 1 " .	( . * . * \\b George \\b . * & . * 1 . * . * )
+lines using 5 ' e '	( . * e . * ) { 5 }
+lines that contain 6 or more " b "	( . * b . * ) { 6 }
+lines using 7 instances of ' sw '	. * ( . * sw . * ) { 7 } . *
+lines using at least 3 instances of " ly "	( . * ly . * ) { 3 , }
+lines using 9 instances of ' sw '	. * ( . * sw . * ) { 9 } . *
+lines that contain 4 or more " b "	( . * b . * ) { 4 }
+lines that have a word beginning with th and a number that begins in " 5 "	( . * 5 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 3 instances of ' irl '	. * ( . * irl . * ) { 3 } . *
+lines of 6 characters that end with the letter " s " .	( . ) { 5 } s
+lines using at least 6 instances of " ly "	( . * ly . * ) { 6 , }
+lines using 4 instances of ' fu '	. * ( . * fu . * ) { 4 } . *
+lines where the number ' 4 ' appears	. * 4 . *
+lines using 4 instances of ' irl '	. * ( . * irl . * ) { 4 } . *
+lines that have a word beginning with th and a number that begins in " 7 "	( . * 7 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 1 instances of ' b '	. * ( . * b . * ) { 1 } . *
+lines utilizing the number ' 9 ' .	. * 9 . *
+lines that utilize the number ' 5 ' .	. * 5 . *
+lines utilizing the number ' 3 ' .	. * 3 . *
+lines that contain the number " 9 " and " May " and begin with " Mary " .	( . * 9 . * & ( . * May . * & Mary . * ) )
+lines that use the number ' 7 ' .	. * 7 . *
+lines using 5 instances of ' irl '	. * ( . * irl . * ) { 5 } . *
+lines which contain only the number " 9 " .	9
+lines that end with the number " 9 " .	. * 9
+lines containing 2 or more " ; "	( . * ; . * ) { 2 , }
+lines that contain the number " 5 " and " May " and begin with " Mary " .	( . * 5 . * & ( . * May . * & Mary . * ) )
+lines that utilize the number ' 9 ' .	. * 9 . *
+lines using 8 ' d '	( . * d . * ) { 8 }
+lines containing any number with an ' 6 ' in it.	. * 6 . *
+lines that have a ' 9 ' in them	. * 9 . *
+lines using 2 instances of ' ug '	. * ( . * ug . * ) { 2 } . *
+lines using 7 instances of ' fu '	. * ( . * fu . * ) { 7 } . *
+lines using a 6 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 5 } . *
+lines using 4 instances of ' ug '	. * ( . * ug . * ) { 4 } . *
+lines that use the number ' 6 ' .	. * 6 . *
+lines that have a ' 4 ' in them	. * 4 . *
+lines that have 9 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 9 } & . * \\b Columbia \\b . * )
+lines containing any number with an ' 5 ' in it.	. * 5 . *
+lines using 2 ' d '	( . * d . * ) { 2 }
+lines using at least 8 instances of " ly "	( . * ly . * ) { 8 , }
+lines of 4 characters that end with the letter " s " .	( . ) { 3 } s
+lines using 1 instances of ' sw '	. * ( . * sw . * ) { 1 } . *
+lines using the word " George " and the number " 4 " .	( . * . * \\b George \\b . * & . * 4 . * . * )
+lines using at least 4 ' d '	( . * d . * ) { 4 , }
+lines using a 4 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 3 } . *
+lines that utilize the number ' 6 ' .	. * 6 . *
+lines using at least 9 instances of " ly "	( . * ly . * ) { 9 , }
+lines which contain only the number " 5 " .	5
+lines using a 2 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 1 } . *
+lines that end with the number " 7 " .	. * 7
+lines using a 5 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 4 } . *
+lines containing any number with an ' 9 ' in it.	. * 9 . *
+lines containing any number with an ' 3 ' in it.	. * 3 . *
+lines using a 8 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 7 } . *
+lines that have 4 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 4 } & . * \\b Columbia \\b . * )
+lines that contain 5 or more " b "	( . * b . * ) { 5 }
+lines that have 6 numbers and contain the word " Columbia " .	( ( . * [0-9] . * ) { 6 } & . * \\b Columbia \\b . * )
+lines using 1 ' e '	( . * e . * ) { 1 }
+lines that have a word beginning with th and a number that begins in " 8 "	( . * 8 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 5 instances of ' fu '	. * ( . * fu . * ) { 5 } . *
+lines using a 1 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 0 } . *
+lines that contain the number " 4 " and " May " and begin with " Mary " .	( . * 4 . * & ( . * May . * & Mary . * ) )
+lines using 2 ' e '	( . * e . * ) { 2 }
+lines using 3 ' d '	( . * d . * ) { 3 }
+lines using 9 ' e '	( . * e . * ) { 9 }
+lines containing a 1 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 0 } \\b . *
+lines that have the number " 6 " .	. * 6 . *
+lines that contain 7 or more " b "	( . * b . * ) { 7 }
+lines that utilize the number ' 8 ' .	. * 8 . *
+lines that show the letter " a " and number " 2 " .	( . * 2 . * & . * a . * )
+lines containing 9 letter words starting with " z "	. * \\b z ( ( [A-Z] | [a-z] ) ) { 8 } \\b . *
+lines that utilize the number ' 2 ' .	. * 2 . *
+lines using 8 ' f '	( . * f . * ) { 8 }
+lines using 9 instances of ' b '	. * ( . * b . * ) { 9 } . *
+lines that utilize the number ' 3 ' .	. * 3 . *
+lines utilizing the number ' 2 ' .	. * 2 . *
+lines using 5 ' f '	( . * f . * ) { 5 }
+lines where the number ' 7 ' appears	. * 7 . *
+lines using at least 3 ' d '	( . * d . * ) { 3 , }
+lines which contain only the number " 1 " .	1
+lines using 7 ' f '	( . * f . * ) { 7 }
+lines containing a 5 letter word beginning with ' t '	. * \\b t ( ( [A-Z] | [a-z] ) ) { 4 } \\b . *
+lines using the word " George " and the number " 6 " .	( . * . * \\b George \\b . * & . * 6 . * . * )
+lines that have a ' 6 ' in them	. * 6 . *
+lines using a 9 letter sequence starting with ' n '	. * n ( ( [A-Z] | [a-z] ) ) { 8 } . *
+lines that utilize the number ' 9 '	. * 9 . *
+lines that have a word beginning with th and a number that begins in " 9 "	( . * 9 ( [0-9] ) * . * & . * \\b th ( ( [A-Z] | [a-z] ) ) * \\b . * )
+lines using 1 ' d '	( . * d . * ) { 1 }
