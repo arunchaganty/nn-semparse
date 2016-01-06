@@ -754,14 +754,14 @@ On \atis, we always just pick the top prediction on the beam.
     \newcite{liang11dcs} & & & $91.1$ \\
     \hline
     \textbf{Original Dataset} & & & \\
-    \encdec & - & $7.3$ & $25.7$ \\
+    \encdec & $14.3$ & $7.3$ & $25.7$ \\
     \attn & - & $17.7$ & $76.4$ \\
     \attncopy & $79.5$ & $68.9$ & $85.7$ \\
     \hline
     \textbf{With Data Augmentation} & & & \\
     \encdec & & $7.9$ & $23.2$ \\
     \attn & & $17.7$ & $77.1$ \\
-    \attncopy & $80.9$ & $68.9$ & $87.9$ \\
+    \attncopy & & $68.9$ & $87.9$ \\
     \hline
   \end{tabular}
   \caption{Test accuracy on different datasets.}
@@ -824,9 +824,8 @@ From this plot, we see that data augmentation consistently boosts accuracy
 across all dataset sizes.
 In many cases, the augmented examples prove to be
 almost as helpful as getting new original examples:
-for example,
-and test accuracy using $300$ real and $150$ synthetic examples 
-is greater than that of using $400$ real examples.
+for example, training on $400$ real and $200$ augmented examples
+gets nearly the same accuracy as training on the full set of $600$ examples.
 
 \subsection{Out-of-Domain Augmentation}
 \begin{figure}[t] 
