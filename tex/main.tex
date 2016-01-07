@@ -44,12 +44,12 @@
 % below and set accordingly.
 % \addtolength\titlebox{.5in}    
 
-%\newcommand\pl[1]{\textcolor{red}{[PL: #1]}}
-%\newcommand\rj[1]{\textcolor{blue}{[RJ: #1]}}
+\newcommand\pl[1]{\textcolor{red}{[PL: #1]}}
+\newcommand\rj[1]{\textcolor{blue}{[RJ: #1]}}
 
 % Hide comments, see actual page count
-\newcommand\pl[1]{\iffalse #1 \fi}
-\newcommand\rj[1]{\iffalse #1 \fi}
+%\renewcommand\pl[1]{\iffalse #1 \fi}
+%\renewcommand\rj[1]{\iffalse #1 \fi}
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
@@ -76,12 +76,13 @@
 \begin{abstract}
 Building accurate semantic parsers currently require substantial effort
 with lexicons, grammars, and feature engineering.
-This paper presents a much simpler approach to semantic parsing based on
+This paper presents a much simpler approach to semantic parsing that uses
 recurrent neural networks (RNNs).
 %which has shown promise for many other NLP tasks.
 Vanilla RNNs are insufficient to capture the crisp structural regularities of
 semantic parsing,
-so we propose two mechanisms to address this:
+so we propose two mechanisms to address this.
+\rj{I like period instead of colon}
 First, we introduce a new attention-based copying mechanism that
 allows the parser to generalize to unseen entities.
 Second, we introduce a new data augmentation scheme
@@ -110,13 +111,14 @@ My biggest issue with this figure is that there's no picture of an RNN.}
 % Semantic parsing is useful, but complicated
 Semantic parsing---the precise translation of natural language utterances into 
 logical forms---has many applications,
-including question answering \cite{zelle96geoquery,zettlemoyer05ccg,zettlemoyer07relaxed,liang11dcs,artzi2013weakly,berant2013freebase},
+including question answering \cite{zelle96geoquery,zettlemoyer05ccg,zettlemoyer07relaxed,liang11dcs,berant2013freebase},
 instruction following \cite{artzi2013weakly},
 and regular expression generation \cite{kushman2013regex}.
 Modern semantic parsers \cite{artzi2013uw,berant2013freebase} are complex pieces of software,
-not just requiring hand-crafted features,
-but the definition of lexicons and grammars,
+requiring not just hand-crafted features,
+but also the definition of lexicons and grammars,
 which is both important and fragile.
+\rj{``which are''?  I'm not sure what is being called important and fragile}
 %with a great deal of hand-crafted knowledge baked into their internal structure;
 %Frameworks like CCG \citep{zettlemoyer05ccg} must deal with complex lambda calculus expressions,
 %and systems like SEMPRE \cite{berant2013freebase}
@@ -138,10 +140,13 @@ which is both important and fragile.
 Meanwhile, recurrent neural networks have made swift inroads into 
 many structured prediction tasks in NLP,
 including machine translation
-\cite{sutskever2014sequence,bahdanau2014neural}, 
+\cite{sutskever2014sequence,bahdanau2014neural} and
 syntactic parsing \cite{vinyals2015grammar,dyer2015transition},
 achieving state-of-the-art results with minimal feature engineering.
-So the natural question is, can we leverage RNNs for semantic parsing?
+So the natural question is, 
+%can we leverage RNNs for semantic parsing?
+can we use RNNs to build a semantic parser?  % RJ: IMO this makes the transition to next paragraph easier
+
 %computing convex hulls \cite{vinyals2015pointer}.
 %RNNs are also appealing for their simplicity, as they require 
 %little hand-engineering of features.
@@ -162,18 +167,18 @@ So the natural question is, can we leverage RNNs for semantic parsing?
 %In contrast, semantic parsing datasets often consist of only 
 %hundreds of labeled examples.
 
-There are two major barriers to directly applying RNNs to semantic parsing.
+Two major challenges stand in the way.
 First, semantic parsers must be able to generalize to a large set of 
 domain-specific entities which, due to the limited
 amount of training data, may occur rarely or not at all
 in the training dataset.
-Second, RNNs do not intrinsically have a concept of compositionality;
-in contrast, most semantic parsers have a built-in notion of
+Second, RNNs do not intrinsically have a concept of compositionality.
+While most semantic parsers have a built-in notion of
 hard alignments between fragments of utterances and logical forms
 \cite{zettlemoyer05ccg,berant2013freebase},
-which helps them generalize at test time.
 RNNs can only learn about these crisp structural regularities
 through observations of the data.
+\rj{Hmm, where does floating parser fit on this spectrum?}
 
 %\pl{be careful - I think we need to explain what we mean by 'compositionality'}
 %\pl{in general, can tighten this paragraph;
@@ -186,9 +191,9 @@ through observations of the data.
 In this paper, we present the first (to our knowledge)
 semantic parser that uses a sequence-to-sequence RNN model to generate
 logical forms.  
-Our contributions are two-fold:
+Our contributions are twofold.
 First, we introduce an attention-based copying mechanism 
-that allows our RNN sequence-to-sequence model to generalize to unseen entities.
+that allows our RNN model to generalize to unseen entities.
 Second, to teach the model about compositionality,
 we introduce compositional data augmentation,
 which induces a high-precision grammar from the training data
@@ -211,12 +216,12 @@ and augments the training data with synthetic examples sampled from this grammar
 \begin{framed}
 \footnotesize
 \subsubsection*{\geo}
-Input: ``what is the population of illinois ?''\\
+Input: ``what is the population of indiana ?''\\
 Output: \\
-\texttt{\_answer ( A , ( \_population ( B , A ) , \_const ( B , \_stateid ( illinois ) ) ) )}
+\texttt{\_answer ( A , ( \_population ( B , A ) , \_const ( B , \_stateid ( indiana ) ) ) )}
 
 \subsubsection*{\regex}
-Input: ``lines using ' abc ' after ' def ' ''\\
+Input: ``lines using ` abc ' after ` def ' ''\\
 Output: \texttt{. * def . * abc . *}
 
 \subsubsection*{\atis}
@@ -237,7 +242,7 @@ A linear sequence of tokens might appear to lose the hierarchical structure of a
 %instead of an abstract syntax tree may seem unnatural,
 %but this choice makes it easier to define our RNN model.
 but there is precedent: \newcite{vinyals2015grammar}
-showed that RNNs can reliably predict tree-structured outputs
+showed that an RNN can reliably predict tree-structured outputs
 in a linear fashion.
 Figure~\ref{fig:task} shows example input-output pairs for the different
 datasets used in this paper.
@@ -263,9 +268,9 @@ datasets used in this paper.
 We evaluate our system on three standard semantic parsing datasets:
 \begin{itemize}
   \item \textbf{ATIS} (\atis) contains 
-    natural language queries for an flights database
-    paired with corresponding database queries written in a 
-    lambda calculus-based language.  
+    natural language queries for a flights database
+    paired with corresponding database queries written in
+    lambda calculus.
     We train on $4473$ examples and evaluate on the $448$
     test examples used by 
     \newcite{zettlemoyer07relaxed}.
@@ -330,7 +335,7 @@ At a high level, our system consists of two main modules:
 \begin{enumerate}
   \item \textbf{Encoder Module}.  This module 
     converts the input sequence $x_1, \dotsc, x_m$
-    into a sequence of context-sensitive embeddings
+    into a sequence of \emph{context-sensitive embeddings}
     $b_1, \dotsc, b_m$,
     where each $b_i$ is a real-valued fixed-dimensional vector.
   \item \textbf{Decoder Module}.  This module
@@ -412,9 +417,9 @@ e.g. http://arxiv.org/pdf/1409.0473v6.pdf bottom of page 2.
 Do you think saying ``LSTM unit'' is better?}
 The backward RNN similarly generates hidden states $h_m^{\text{B}}, \dotsc, h_1^{\text{B}}$
 by processing the input sequence in reverse order.
-
-We define $b_i$ to be the concatenation of $h_i^{\text{F}}$ and $h_i^{\text{B}}$,
-and refer it as the \emph{context-dependent embedding} for the $i$-th input word.
+Finally, we define 
+the context-sensitive embedding
+$b_i$ to be the concatenation of $h_i^{\text{F}}$ and $h_i^{\text{B}}$.
 \pl{$\phiin(x_i)$ is notationally pretty clunky; come up with a single letter?}
 \pl{what's $\phi(x_i)$?}
 \rj{is this better?  Or did you have something else in mind?}
@@ -443,6 +448,9 @@ over $\{1, \dotsc, m\}$ with a softmax:
 \begin{align}
   \alpha_{ji} = \frac{\exp(e_{ji})}{\sum_{i=1}^m \exp(e_{ji})}.
 \end{align}
+$\alpha_{ji}$ is known as the attention weight \cite{bahdanau2014neural},
+and can be interpreted as the amount of attention
+paid to the $i$-th input word at time step $j$.
 Then, a context vector $c_j$ is computed as a weighted average of the $b_i$'s:
 \begin{align}
   c_j = \sum_{i=1}^m \alpha_{ji} b_i.
@@ -759,9 +767,9 @@ On \atis, we always just pick the top prediction on the beam.
     \hline
   \end{tabular}
   \caption{Test accuracy on different datasets.}
+  \rj{Note to self: ATIS + attncopy number is with a random initialization, not seeded}
   \label{tab:results}
 \end{table}
-\rj{Note to self: ATIS + attncopy number is with a random initialization, not seeded}
 We compare our system to state-of-art results
 achieved on all three datasets (first group of rows of Table \ref{tab:results}).
 On \geo, we list both \newcite{liang11dcs}

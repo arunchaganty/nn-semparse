@@ -1,5 +1,6 @@
 """Some code to deal with regex data."""
 import collections
+import csv
 import glob
 import json
 import os
@@ -13,6 +14,9 @@ IN_DIR = os.path.join(
 RAW_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/regex/raw')
+CSV_FILE = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    'data/regex/regexp-naacl2013-data.csv')
 OUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/regex/processed')
@@ -92,11 +96,13 @@ def process(filename):
 
 def read_x_to_y():
   x_to_y = {}
-  for basename in ('regex_train_all.tsv', 'regex_test.tsv'):
-    with open(os.path.join(OUT_DIR, basename)) as f:
-      for line in f:
-        x, y = line.strip().split('\t')
-        x_to_y[x] = y
+  with open(CSV_FILE) as f:
+    reader = csv.reader(f, dialect='excel')
+    for row in reader:
+      x, y = row
+      x = x.replace('""', '"')
+      x = x.replace('""', '"')
+      x_to_y[x] = y
   return x_to_y
 
 def write_data(basename, data):
@@ -117,7 +123,7 @@ def process_raw(filename, x_to_y):
     for line in f:
       stage, x_raw, y_raw = line.strip().split('\t')
       x = split_input(x_raw)
-      y = split_regex(y_raw)
+      y = split_regex(x_to_y[x_raw])
       if stage == 'train':
         train_data.append((x, y))
       else:
