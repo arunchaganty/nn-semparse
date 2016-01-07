@@ -44,12 +44,12 @@
 % below and set accordingly.
 % \addtolength\titlebox{.5in}    
 
-\newcommand\pl[1]{\textcolor{red}{[PL: #1]}}
-\newcommand\rj[1]{\textcolor{blue}{[RJ: #1]}}
+%\newcommand\pl[1]{\textcolor{red}{[PL: #1]}}
+%\newcommand\rj[1]{\textcolor{blue}{[RJ: #1]}}
 
 % Hide comments, see actual page count
-%\newcommand\pl[1]{\iffalse #1 \fi}
-%\newcommand\rj[1]{\iffalse #1 \fi}
+\newcommand\pl[1]{\iffalse #1 \fi}
+\newcommand\rj[1]{\iffalse #1 \fi}
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
@@ -204,12 +204,6 @@ and augments the training data with synthetic examples sampled from this grammar
 %say there are two challenges, A, and B.  We tackle A using C and B using D.
 %Make our contributions sound as exciting as the challenges!
 %}
-
-The closest related work of which we are aware is
-by Grefenstette et al.~\shortcite{grefenstette2014deep};
-however, their model was not a sequence-to-sequence model,
-and they had yet to achieve good results.
-\rj{Here-ish?  Need to transition better.  Alternatively, move to discussion?}
 
 \section{Task}
 \begin{figure}[t] 
@@ -473,7 +467,7 @@ output vocabulary words.
 First, the context vector $c_j$ is computed as in the update module.
 The probability of outputting word $w \in \vocabout$ at time $j$ is
 \begin{align}
-  P(y_{j+1} = w \mid x, y_{1:j}) \propto \exp(M_{w}^\top s_j + U_w^\top c_j),
+  P(y_{j+1} = w \mid x, y_{1:j}) \propto \exp(M_{w} s_j + U_w c_j),
 \end{align}
 where $M$ and $U$ are matrices with rows indexed by elements of $\vocabout$.
 
@@ -492,7 +486,7 @@ with probability determined by the amount of attention paid to that input word.
 Formally, we have
 \begin{align}
   P(&y_{j+1} = w \mid x, y_{1:j}) \propto 
-  \\ & \exp(M_{w}^\top s_j + U_w^\top c_j)
+  \\ & \exp(M_{w} s_j + U_w c_j)
   + \sum_{i=1}^m \mathbb{I}[x_i = w] \exp(e_{ji}).
 \end{align}
 We note that our attention-based copying can be seen as a 
@@ -543,7 +537,7 @@ there are often hard alignments between fragments
 of the input and output, and these units can be composed
 with each other in predictable ways.
 \pl{need an example / FIGURE illustrating compositionality - this is too abstract }
-\rj{I'm optimistic that the geo augmentation figure is sufficient?}
+\rj{I'm hoping that the geo augmentation figure is sufficient?}
 We therefore propose a \emph{compositional data augmentation} scheme
 that uses an induced grammar to generate highly structured synthetic examples.
 This procedure begins by identifying \emph{high-precision alignments}
@@ -646,22 +640,22 @@ provides more detail about data augmentation on \geo.
 %\caption{Data augmentation on \regex.}
 %\label{fig:augment-regex}
 %\end{figure}
-The \regex and \atis datasets have 
+The other datasets have
 less compositionality and nesting structure,
 making them less suited for the compositional data augmentation
 described above.
 However, we can still use some high-precision alignment rules
 to perform a simpler form of data augmentation.
-For \regex, we look for quoted strings and integers,
-and generate new examples by
+We do this on \regex by looking for quoted strings and integers.
+We generate new examples by
 swapping quoted strings and integers in one example
 for other quoted strings or integers.
 %See Figure \ref{fig:augment-regex} for more detail.
-Similarly, on \atis, we identify city, airport, and airline,
+%Similarly, on \atis, we identify city, airport, and airline,
 %mentions using a lexicon extracted from the relational database
 %that accompanies the \atis dataset,
-and replace entities in one example with a different entity
-of the same type.
+%and replace entities in one example with a different entity
+%of the same type.
 
 Note that unlike our synthetic examples for \geo, which are biased
 towards being longer than the given examples, these resulting examples
@@ -754,9 +748,9 @@ On \atis, we always just pick the top prediction on the beam.
     \newcite{liang11dcs} & & & $91.1$ \\
     \hline
     \textbf{Original Dataset} & & & \\
-    \encdec & $14.3$ & $7.3$ & $25.7$ \\
+    \encdec & $33.0$ & $7.3$ & $25.7$ \\
     \attn & - & $17.7$ & $76.4$ \\
-    \attncopy & $79.5$ & $68.9$ & $85.7$ \\
+    \attncopy & $76.3$ & $68.9$ & $85.7$ \\
     \hline
     \textbf{With Data Augmentation} & & & \\
     \encdec & & $7.9$ & $23.2$ \\
@@ -767,6 +761,7 @@ On \atis, we always just pick the top prediction on the beam.
   \caption{Test accuracy on different datasets.}
   \label{tab:results}
 \end{table}
+\rj{Note to self: ATIS + attncopy number is with a random initialization, not seeded}
 We compare our system to state-of-art results
 achieved on all three datasets (first group of rows of Table \ref{tab:results}).
 On \geo, we list both \newcite{liang11dcs}
@@ -984,6 +979,14 @@ In this paper, we have presented the first sequence-to-sequence
 model for semantic parsing.  Our model is easy to train
 and gives good accuracy on several semantic parsing
 datasets, when trained with logical form supervision.
+
+The most similar related work of which we are aware is
+by \newcite{grefenstette2014deep},
+who also propose a neural model for semantic parsing.
+Their model was quite different from ours, as
+it was not an RNN sequence-to-sequence model.
+They had also yet to achieve good results.
+\rj{I couldn't find a good place to put it in the intro, so I moved it here}
 
 % Rare words
 Our model includes a novel attention-based copying mechanism

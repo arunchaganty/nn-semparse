@@ -7,10 +7,10 @@ y_aug = c(46.8, 68.2, 78.6, 85.0, 85.4, 87.9)
 plot(x, y_orig, ylim=c(35, 90), col='red', 
      xlab='Number of original training examples', ylab='Accuracy (%)',
      cex=1.5, cex.axis=1.5, cex.lab=1.5)
-lines(x, y_orig, col='red')
+lines(x, y_orig, col='red', lty='dashed')
 points(x, y_aug, col='blue', cex=1.5)
 lines(x, y_aug, col='blue')
 
 legend('bottomright', c('No augmented data', 'With augmented data'),
-       col= c('red', 'blue'), lty=1, cex=1.5)
+       col= c('red', 'blue'), lty=c('dashed', 'solid'), cex=1.5)
 dev.off()
