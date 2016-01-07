@@ -48,8 +48,8 @@
 \newcommand\rj[1]{\textcolor{blue}{[RJ: #1]}}
 
 % Hide comments, see actual page count
-%\renewcommand\pl[1]{\iffalse #1 \fi}
-%\renewcommand\rj[1]{\iffalse #1 \fi}
+\renewcommand\pl[1]{\iffalse #1 \fi}
+\renewcommand\rj[1]{\iffalse #1 \fi}
 
 \newcommand\BibTeX{B{\sc ib}\TeX}
 
@@ -172,7 +172,7 @@ First, semantic parsers must be able to generalize to a large set of
 domain-specific entities which, due to the limited
 amount of training data, may occur rarely or not at all
 in the training dataset.
-Second, semantic parsers understand compositionality:
+Second, semantic parsers must understand compositionality:
 they must be able to recognize
 hard alignments between fragments of utterances and logical forms,
 and know about the predictable ways in which these fragments can be combined.
