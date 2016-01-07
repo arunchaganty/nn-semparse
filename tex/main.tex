@@ -28,14 +28,20 @@
 \newcommand{\catstateid}{\textsc{StateId}\xspace}
 
 %% Mathematical Notation
-%\newcommand{\vocabin}{\mathcal{V}^{\text{(in)}}}
-%\newcommand{\phiin}{\phi^{\text{(in)}}}
-%\newcommand{\vocabout}{\mathcal{V}^{\text{(out)}}}
-%\newcommand{\phiout}{\phi^{\text{(out)}}}
-\newcommand{\vocabin}{\mathcal{V}}
-\newcommand{\phiin}{\phi}
-\newcommand{\vocabout}{\overline{\mathcal{V}}}
-\newcommand{\phiout}{\overline{\phi}}
+\newcommand{\vocabin}{\mathcal{V}^{\text{(in)}}}
+\newcommand{\phiin}{\phi^{\text{(in)}}}
+\newcommand{\vocabout}{\mathcal{V}^{\text{(out)}}}
+\newcommand{\phiout}{\phi^{\text{(out)}}}
+%\newcommand{\vocabin}{\mathcal{V}}
+%\newcommand{\phiin}{\phi}
+%\newcommand{\vocabout}{\overline{\mathcal{V}}}
+%\newcommand{\phiout}{\overline{\phi}}
+
+%% Formatting
+\newcommand\nl[1]{\textit{#1}}
+
+% Other
+\newcommand{\aster}{{\normalsize \textsuperscript{*}}\xspace}
 
 %\naaclfinalcopy % Uncomment this line for the final submission
 \def\naaclpaperid{***} %  Enter the naacl Paper ID here
@@ -74,7 +80,7 @@
 \maketitle
 
 \begin{abstract}
-Building accurate semantic parsers currently require substantial effort
+Building accurate semantic parsers currently requires substantial effort
 with lexicons, grammars, and feature engineering.
 This paper presents a much simpler approach to semantic parsing that uses
 recurrent neural networks (RNNs).
@@ -168,10 +174,8 @@ can we use RNNs to build an accurate semantic parser?  % RJ: IMO this makes the 
 %hundreds of labeled examples.
 
 Two major challenges stand in the way.
-First, semantic parsers must be able to generalize to a large set of 
-domain-specific entities which, due to the limited
-amount of training data, may occur rarely or not at all
-in the training dataset.
+First, semantic parsers must be able to generalize to 
+a large set of entities that may not appear during training.
 Second, semantic parsers must understand compositionality:
 they must be able to recognize
 hard alignments between fragments of utterances and logical forms,
@@ -188,7 +192,7 @@ by observing data.
 %(ii) handle compositionality (need to explain this more, referencing example in Figure 1)}
 
 % RNN model (handle unseen entities?), data augmentation (handle compositionality?)
-In this paper, we present the first (to our knowledge)
+In this paper, we present the first
 semantic parser that uses a sequence-to-sequence RNN model to generate
 logical forms.  
 Our contributions are twofold.
@@ -197,7 +201,7 @@ that allows our RNN model to generalize to unseen entities.
 Second, to teach the model about compositionality,
 we introduce compositional data augmentation,
 which induces a high-precision grammar from the training data
-and augments the training data with synthetic examples sampled from this grammar.
+and augments the training data with new examples sampled from this grammar.
 
 %\pl{
 %Overall good - flows well and well-motivated, generally like the writing style.
@@ -216,18 +220,28 @@ and augments the training data with synthetic examples sampled from this grammar
 \begin{framed}
 \footnotesize
 \subsubsection*{\geo}
-Input: ``what is the population of indiana ?''\\
-Output: \\
-\texttt{\_answer ( A , ( \_population ( B , A ) , \_const ( B , \_stateid ( indiana ) ) ) )}
+\textbf{Input}: \nl{what is the population of iowa ?}\\
+\textbf{Output}:
+
+\quad \texttt{\_answer ( A , ( }
+
+\qquad \texttt{\_population ( B , A ) ,}
+
+\qquad \texttt{\_const ( B , \_stateid ( iowa ) ) ) )}
 
 \subsubsection*{\regex}
-Input: ``lines using ` abc ' after ` def ' ''\\
-Output: \texttt{. * def . * abc . *}
+\textbf{Input}: \nl{lines using ` abc ' after ` def '}\\
+\textbf{Output}: \texttt{. \aster def . \aster abc . \aster}
 
 \subsubsection*{\atis}
-Input: ``can you list all flights from chicago to milwaukee''
-Output: \\
-\texttt{( \_lambda \$0 e ( \_and ( \_flight \$0 ) ( \_from \$0 chicago : \_ci ) ( \_to \$0 milwaukee : \_ci ) ) )}
+\textbf{Input}: \nl{can you list all flights from chicago to milwaukee}
+\textbf{Output}:
+
+\quad \texttt{( \_lambda \$0 e ( \_and ( \_flight \$0 )}
+
+\qquad \texttt{( \_from \$0 chicago : \_ci )}
+
+\qquad \texttt{( \_to \$0 milwaukee : \_ci ) ) )}
 \end{framed}
 \caption{One example from each of our three domains.}
 \label{fig:task}
@@ -269,8 +283,7 @@ We evaluate our system on three standard semantic parsing datasets:
 \begin{itemize}
   \item \textbf{GeoQuery} (\geo) contains
   natural language questions about US geography
-  paired with corresponding database queries written in a Prolog-like
-  query language.
+  paired with corresponding database queries.
   We use the standard split of 600 training examples and 280 test examples
   introduced by \newcite{zettlemoyer05ccg}.
 
@@ -278,16 +291,14 @@ We evaluate our system on three standard semantic parsing datasets:
   contains natural language descriptions of regular expressions
   paired with associated regular expressions.
   Unlike \newcite{kushman2013regex}, 
-  we evaluate
-  on a test set of $164$ examples selected randomly
+  we evaluate on a test set of $164$ examples selected randomly
   from the dataset.
 %  however, to compare with their results, we also evaluate
 %  with 3-fold cross-validation.
 
   \item \textbf{ATIS} (\atis) contains 
     natural language queries for a flights database
-    paired with corresponding database queries written in
-    lambda calculus.
+    paired with corresponding database.
     We train on $4473$ examples and evaluate on the $448$
     test examples used by 
     \newcite{zettlemoyer07relaxed}.
@@ -301,8 +312,6 @@ In this work, we only explore learning from logical forms.
 We therefore do not use any semantic parsing datasets
 that only include denotations,
 such as \textsc{WebQuestions} \cite{berant2013freebase}.
-We discuss the possibility of learning from denotations
-in Section~\ref{sec:discussion}.
 
 %\pl{no intrinsic reason why we can't have denotations;
 %state in a more neutral way}
@@ -352,7 +361,7 @@ At a high level, our system consists of two main modules:
 The decoder itself can be decomposed into four modules:
 \begin{enumerate}
   \item \textbf{Initialization Module}:
-    Takes in the annotations $b_1, \dotsc, b_m$, and
+    Takes in the context-sensitive embeddings $b_1, \dotsc, b_m$, and
     outputs the initial decoder hidden state $s_0$.
   \item \textbf{Attention Module}:
     Takes in $b_1, \dotsc, b_m$ and the current state $s_j$,
@@ -395,9 +404,7 @@ In the next sections, we describe these modules in greater detail.
 
 
 \subsection{Encoder Module}
-The encoder is a bidirectional LSTM \cite{bahdanau2014neural}.
-\rj{Maybe cite the thing bahdanau cites too}
-
+The encoder is a bidirectional RNN \cite{bahdanau2014neural}.
 First, a word embedding function $\phiin$ 
 maps each word $x_i$ to a fixed-dimensional vector.
 These vectors are fed as input to two RNNs: a forward RNN and a backward RNN.
@@ -405,9 +412,9 @@ The forward RNN starts with an initial hidden state $h_0^{\text{F}}$,
 and generates a sequence of hidden states $h_1^{\text{F}}, \dotsc, h_m^{\text{F}}$ by
 repeatedly applying the recurrence 
 \begin{align}
-  h_i^{\text{F}} = f(\phiin(x_i), h_{i-1}^{\text{F}}),
+  h_i^{\text{F}} = \text{LSTM}(\phiin(x_i), h_{i-1}^{\text{F}}).
 \end{align}
-where $f$ has the form of an LSTM unit \cite{hochreiter1997lstm}.
+The recurrence takes the form of an LSTM \cite{hochreiter1997lstm}.
 \pl{technically, does $h_i$ need to include the cell variables?}
 \rj{In this case, yes. I didn't try excluding the cell.}
 \pl{technically, LSTM refers to the entire model, not just one local update}
@@ -432,7 +439,9 @@ The decoder's initial state $s_0$ is
 where $W^{(i)}$ is a parameter matrix.
 
 \subsection{Decoder Attention Module}
-For attention, we use the general content-based scoring function of
+At each time step $j$, and for each word $x_i$ in the input,
+we compute an attention score $e_{ji}$.
+We use the general content-based scoring function of
 \newcite{luong2015translation}:
 \begin{align}
   e_{ji} = s_j^\top W^{(a)} b_i,
@@ -440,9 +449,9 @@ For attention, we use the general content-based scoring function of
 where $W^{(a)}$ is a parameter matrix.
 
 \subsection{Decoder Update Module}
-To update the decoder's hidden state,
-we use the input feeding approach of \newcite{luong2015translation}.
-The scores $e_j$ are converted to a probability distribution 
+Our decoder update step is the same as \newcite{bahdanau2014neural}.
+At each time step $j$, the scores $e_j$ 
+from the attention module are converted to a probability distribution 
 over $\{1, \dotsc, m\}$ with a softmax:
 \begin{align}
   \alpha_{ji} = \frac{\exp(e_{ji})}{\sum_{i=1}^m \exp(e_{ji})}.
@@ -459,9 +468,8 @@ the concatenation of $\phiout(y_{j+1})$ and $c_{j}$,
 where $\phiout$ is another word embedding function.
 Finally, the state is updated according to the recurrence
 \begin{align}
-  s_{j+1} = g(v_{j+1}, s_j),
+  s_{j+1} = \text{LSTM}(v_{j+1}, s_j).
 \end{align}
-where $g$ is an LSTM unit.
 
 \subsection{Decoder Output Module}
 Finally, we describe two decoder output modules: a baseline module, and a
@@ -471,24 +479,32 @@ more sophisticated module that performs attention-based copying.
 \label{sec:baseline-output}
 The baseline output module uses a simple softmax over all
 output vocabulary words.
-First, the context vector $c_j$ is computed as in the update module.
-The probability of outputting word $w \in \vocabout$ at time $j$ is
+At each time step $j$, it first computes the context vector $c_j$ ,
+as in the update module.
+Given $c_j$ and $s_j$, the probability of outputting word $w \in \vocabout$ 
+as the next word $y_{j+1}$ is
 \begin{align}
   P(y_{j+1} = w \mid x, y_{1:j}) \propto \exp(M_{w} s_j + U_w c_j),
 \end{align}
 where $M$ and $U$ are matrices with rows indexed by elements of $\vocabout$.
 
 \subsubsection{Attention-based Copying}
-We improve upon this baseline by proposing a new 
-attention-based copying mechanism.
-This module is motivated by the need for semantic parsers
+One of the main contributions of this paper is a 
+novel attention-based copying mechanism,
+which improves upon the baseline output module.
+This new mechanism is motivated by the need 
 to generalize well to a large set of entity names,
 including ones that were not seen at training time.
 Often times, these entity names
 can be copied directly from the input to the output.
-For example, place names in \geo and \atis can be copied,
-as can quoted strings in \regex (see Figure~\ref{fig:task}).
-Therefore, we allow the network to copy a word directly from input to output,
+For example, in Figure~\ref{fig:task},
+the word ``iowa'' could be copied from the input
+to the output.
+Similarly, other place names in \geo and \atis can be copied,
+as well as quoted strings in \regex.
+
+Our proposed attention-based copying mechanism
+enables the network to copy a word directly from input to output,
 with probability determined by the amount of attention paid to that input word.
 Formally, we have
 \begin{align}
@@ -503,12 +519,13 @@ the only way to generate output is to copy a symbol from the input
 using an attention mechanism.
 
 \subsection{All Models}
-We refer to our full system with attention-based copying as \textbf{\attncopy}.
-We also define two related baselines:
+We define a total of three models (one main model and two baselines):
 \begin{itemize}
-  \item \textbf{\attn}.  The same as \attncopy, except with the baseline 
+  \item \textbf{\attncopy}.  This is our full model with attention-based copying.
+  \item \textbf{\attn}.  The is same as \attncopy, except with the baseline 
     output module.
-  \item \textbf{\encdec}.  An encoder-decoder LSTM model with no attention
+  \item \textbf{\encdec}.  This baseline is an encoder-decoder model 
+    \cite{sutskever2014sequence}
     that uses the baseline decoder output module.  
     This can be thought of as a variant of the \attn model
     where the Decoder Initialization module
@@ -524,94 +541,88 @@ Gradients are computed automatically using Theano \cite{bergstra2010theano}.
 \section{Compositional Data Augmentation}
 The strength of deep learning models lies in their flexibility.
 However, this flexibility also presents a challenge:
-because neural models make fewer a priori assumptions about the task,
+because neural models make fewer assumptions about the task,
 they can be at a disadvantage compared to specialized systems
 that have domain knowledge baked in.
-This challenge is a bigger issue on tasks like semantic parsing
-that have small training datasets, as
-it may be difficult to discover the desired domain knowledge
-from the data alone.
 
 Our solution to this problem is to
-augment the original training datasets with synthetic examples.
+augment our training datasets with new examples
+generated from the original training examples.
 This approach allows us to inject prior knowledge into our system,
-as the synthetic examples can be generated 
+as the new examples can be generated 
 in a way that leverages domain knowledge.
 
 For semantic parsing, one important phenomenon to model is compositionality.
 There are often hard alignments between fragments
 of the input and output, and these units can be composed
 with each other in predictable ways.
-\pl{need an example / FIGURE illustrating compositionality - this is too abstract }
-\rj{I'm hoping that the geo augmentation figure is sufficient?}
 We therefore propose a \emph{compositional data augmentation} scheme
-that uses an induced grammar to generate highly structured synthetic examples.
-This procedure begins by identifying \emph{high-precision alignments}
-between pieces of an utterance and associated logical form.
-First, for each $(x, y)$ pair, there is a trivial alignment that
-matches the entire utterance with the entire logical form.
-Additionally, it is often easy to find smaller pieces that can be aligned,
-such as mentions of the same entity in $x$ and $y$.
-These high-precision alignments allow us to
-induce a simple grammar over pairs of utterances and logical forms
-that can compose aligned fragments from different examples.
-We then generate new examples from this grammar,
-and add these to our original training dataset.
+that uses an induced grammar to generate new, highly structured examples.
+We focus primarily on applying this to the \geo domain.
+More details are shown in Figure~\ref{fig:augment-geo}.
 
-We apply compositional data augmentation primarily to the \geo domain.
-We also apply a less compositional variant to the
-\regex domain.
-
-\subsection{Augmentation for \geo}
 \begin{figure}[t] 
 \small
 \begin{framed}
 \footnotesize
 \subsubsection*{Induced Rules}
-Example 1: ``what is the highest mountain in colorado ?''\\
+Example 1: \nl{what states border illinois ?}\\
 Induced rules:
 
-\quad \catroot $\to$ ``what is the highest mountain in \catstate { }?''
+\quad \catroot $\to$ \nl{what states border \catstate { }?}
 
-\quad \catstateid $\to$ ``colorado''
+\quad \catstate $\to$ \nl{states border \catstateid}
 
-Example 2: ``what states border illinois ?''\\
+\quad \catstateid $\to$ \nl{illinois}
+
+Example 2: \nl{what is the highest mountain in colorado ?}\\
 Induced rules:
 
-\quad \catroot $\to$ ``what states border \catstate { }?''
+\quad \catroot $\to$ \nl{what is the highest mountain in \catstate { }?}
 
-\quad \catstate $\to$ ``states border \catstateid''
-
-\quad \catstateid $\to$ ``illinois''
+\quad \catstateid $\to$ \nl{colorado}
 
 \subsubsection*{New Examples} 
-``what is the highest mountain in states border colorado?'' \\
-``what is the highest mountain in states border illinois?'' \\
-``what states border states border colorado?'' \\
-``what states border states border illinois?''
+\nl{what states border states border illinois?} \\
+\nl{what states border states border colorado?} \\
+\nl{what is the highest mountain in states border illinois?} \\
+\nl{what is the highest mountain in states border colorado?}
 \end{framed}
 \caption{Data augmentation on \geo.  Due to lack of space,
 we only show the grammar over utterances.
 Analogous non-terminals and rules also exist for cities and rivers.}
 \label{fig:augment-geo}
 \end{figure}
-To perform compositional data augmentation on \geo,
-we begin by defining a few high-precision alignment rules.
-We first write some manual rules to convert input queries into noun phrases
-by stripping things like question marks and ``wh'' words.
-We assign types to these phrases based on information in the logical form.
-We also match city, state, and river entity mentions in the input and output
-based on simple string matching.
 
-Using these aligned fragments,
-we define a grammar that can replace individual entity mentions with
+This procedure begins by identifying \emph{high-precision alignments}
+between pieces of an utterance and associated logical form.
+First, for each $(x, y)$ pair, there is a trivial alignment that
+matches the entire utterance with the entire logical form
+(e.g. \nl{what states border illinois ?} aligns to an entire logical form).
+We write some manual rules to convert questions into noun phrases
+by stripping things like question marks and ``wh'' words
+(e.g. to create \nl{states border illinois}).
+Finally, we match entity mentions in the 
+input and output based on simple string matching (e.g. \nl{illinois}).
+
+These high-precision alignments allow us to
+induce a simple grammar over pairs of utterances and logical forms.
+This grammar can replace individual entity mentions with
 other entities of the same type,
 or with entire phrases that evaluate to a set of entities of the same type.
-Figure \ref{fig:augment-geo}
-provides more detail about data augmentation on \geo.
+We then generate new examples from this grammar,
+and add these to our original training dataset.
 
-Note that this procedure generates examples that are on average
+Our augmentation scheme is notable in that it 
+transforms both the inputs and outputs simultaneously.
+In contrast, other data augmentation techniques used in computer vision
+\cite{krizhevsky2012imagenet}
+only transform inputs without changing any output labels.
+
+Our procedure generates examples that are on average
 longer than the examples in the training and test sets.
+Later, we explore in greater detail the ramifications of augmenting the training dataset
+with examples drawn from distributions that are very different from the test distribution.
 \rj{Need to point this out first here, but leave main discussion to experiments section}
 
 \subsection{Augmentation on \regex}
@@ -652,9 +663,8 @@ longer than the examples in the training and test sets.
 %\caption{Data augmentation on \regex.}
 %\label{fig:augment-regex}
 %\end{figure}
-\regex and \atis have
-less compositionality and nesting structure,
-making them less suited for the compositional data augmentation
+\regex and \atis have less nesting structure,
+making them less suited for the compositional data augmentation scheme
 described above.
 However, we can still use high-precision alignment rules
 to perform a simpler form of data augmentation.
@@ -669,8 +679,8 @@ for other quoted strings or integers.
 %and replace entities in one example with a different entity
 %of the same type.
 
-Note that unlike our synthetic examples for \geo, 
-these synthetic examples
+Note that unlike our synthesized examples for \geo, 
+these synthesized examples
 are more like additional (non-independent) samples from the probability distribution
 that generated the training data.
 
@@ -774,7 +784,7 @@ On \atis, we always just pick the top prediction on the beam.
   \rj{Note to self: ATIS + attncopy number is with a random initialization, not seeded}
   \label{tab:results}
 \end{table}
-We compare our system to state-of-art results
+We compare our system to state-of-the-art results
 achieved on all three datasets (first group of rows of Table \ref{tab:results}).
 On \geo, we list both \newcite{liang11dcs}
 and \newcite{kwiatkowski10ccg}.
@@ -785,9 +795,9 @@ We explicitly avoid including such prior knowledge in our system.
 First, we evaluate our system trained on the original dataset alone,
 with no data augmentation.
 Our results are summarized in the second section of Table \ref{tab:results}.
-Note that we are competitive with the state-of-the-art on \regex, 
+Note that we are roughly competitive with the state-of-the-art on \regex, 
 although the numbers are not directly
-comparable as the other work uses a different evaluation metric.
+comparable as the other work evaluates on different data.
 However, we lag behind on \geo and \atis.
 
 Training on the augmented datasets produces results shown in the
@@ -804,7 +814,7 @@ where we performed a less compositional form of data augmentation.
 % after you would expect it to attend to.
 % \subsection{Learning Compositionality via Alignments}
 
-\subsection{Effect of Augmented Data}
+\subsection{Effect of Data Augmentation}
 \begin{figure}[t] 
 \small
 \begin{center} 
@@ -817,21 +827,21 @@ regardless of original dataset size.}
 \end{figure}
 \rj{Rewrote quite a bit here, as I think we maybe shouldn't
   focus so much on directly comparing the value of
-real and augmented examples, at least in this subsection}
+real and synthesized examples, at least in this subsection}
 
 To further measure the effects of compositional data augmentation,
 we trained our system both with and without data augmentation
 on various random subsets of the \geo dataset.
 In Figure~\ref{fig:geo-augment}, we plot test accuracy as a function of
 the number of real training examples.
-When doing data augmentation on $n$ real examples,
-we generated $\frac{n}2$ synthetic examples.
+As a heuristic, when doing data augmentation on $n$ real examples,
+we always generate $\frac{n}2$ new examples.
 
 From this plot, we see that data augmentation consistently boosts accuracy
 across all dataset sizes.
-In many cases, the augmented examples prove to be
-almost as helpful as getting new original examples:
-for example, training on $400$ real and $200$ augmented examples
+In some cases, the synthesized examples prove to be
+almost as helpful as real examples:
+for example, training on $400$ real and $200$ synthesized examples
 gets nearly the same accuracy as training on the full set of $600$ examples.
 
 \subsection{Out-of-Domain Augmentation}
@@ -839,16 +849,19 @@ gets nearly the same accuracy as training on the full set of $600$ examples.
 \small
 \begin{framed}
 \footnotesize
-Depth 2
+\subsubsection*{Depth-2 (same-domain)}
 
-\quad $x$: ``rel:12 of rel:17 of ent:14''
+\textbf{Input}: \nl{rel:12 of rel:17 of ent:14}
 
-\quad $y$: \texttt{( \_rel:12 ( \_rel:17 \_ent:14 ) )}\\
-Depth 4
+\textbf{Output}: \texttt{( \_rel:12 ( \_rel:17 \_ent:14 ) )}
 
-\quad $x$: ``rel:23 of rel:36 of rel:38 of rel:10 of ent:05''
+\subsubsection*{Depth-4 (out-of-domain)}
 
-\quad $y$: \texttt{( \_rel:23 ( \_rel:36 ( \_rel:38 ( \_rel:10 \_ent:05 ) ) ) )}
+\textbf{Input}: \nl{rel:23 of rel:36 of rel:38 of rel:10 of ent:05}
+
+\textbf{Output}: \texttt{( \_rel:23 ( \_rel:36 ( \_rel:38}
+
+\qquad \qquad \quad \texttt{( \_rel:10 \_ent:05 ) ) ) )}
 
 \end{framed}
 \caption{A sample of our artificial data.}
@@ -895,12 +908,16 @@ data augmentation can in fact be most beneficial when the examples generated
 do not match the test distribution.
 
 More specifically, we wish to test two hypotheses.
-First, we hypothesize that iid examples drawn from the test distribution 
-may not help the model as much as iid examples
+First, we hypothesize that i.i.d. examples drawn from the test distribution 
+may not help the model as much as i.i.d. examples
 that are longer than those in the test distribution.
 Second, we hypothesize that 
 a similar claim holds when performing data augmentation,
 which generates examples that are correlated with the initial training set.
+Intuitively, longer examples could be helpful 
+simply because they carry more information content per example,
+or because they encourage the network to learn better alignments between
+input and output tokens.
 
 To investigate the effects of such \emph{out-of-domain} examples,
 we conducted additional experiments on artificial data.
@@ -916,6 +933,9 @@ The model always has access to a small initial training set of $100$ depth-$2$ e
 We then add one of four types of examples to the training set:
 \begin{itemize}
   \item \textbf{Same-domain, independent}: New randomly chosen depth-$2$ examples.
+    \footnote{Technically, these are not completely independent, as we
+    sample these new examples without replacement.  The same applies to the
+  out-of-domain ``independent'' examples.}
   \item \textbf{Out-of-domain, independent}: Randomly chosen depth-$4$ examples.
   \item \textbf{Same-domain, correlated}: Take the given training examples
     and swap out entity mentions for different entity mentions.
@@ -935,10 +955,6 @@ Independent, long, out-of-domain examples are in fact more efficient
 at getting the model to achieve perfect accuracy than independent same-domain examples.
 Additionally, while both data augmentation strategies proved helpful,
 the out-of-domain strategy was the more successful of the two.
-\rj{I'm sort of lying when I say "independent" in this section because
-  what I'm doing is randomly sampling without replacement,
-  as randomly sampling with replacement just seemed silly.
-Is there a better way to phrase this?}
 
 %\subsection{Data Augmentation and Covariate Shift}
 %\begin{table*}[t]
@@ -988,69 +1004,20 @@ Is there a better way to phrase this?}
 
 \section{Discussion and Related Work}
 \label{sec:discussion}
-In this paper, we have presented the first sequence-to-sequence
+In this paper, we have presented the first sequence-to-sequence RNN
 model for semantic parsing.  Our model is easy to train
 and gives good accuracy on several semantic parsing
 datasets, when trained with logical form supervision.
+Furthermore, we propose a compositional data augmentation scheme
+to inject prior knowledge about compositionality into our model.
 
-The most similar related work of which we are aware is
-by \newcite{grefenstette2014deep},
-who also propose a neural model for semantic parsing.
+\newcite{grefenstette2014deep}
+also propose a neural model for semantic parsing.
 Their model was quite different from ours, as
-it was not an RNN sequence-to-sequence model.
-They had also yet to achieve good results.
-\rj{I couldn't find a good place to put it in the intro, so I moved it here}
-
-% Rare words
-Our model includes a novel attention-based copying mechanism
-to deal with unseen words such as entity names.
-\newcite{luong2015rare} also proposed ways of copying
-unknown words for machine translation.
-Their techniques require preprocessing the dataset
-with a separate tool to align words between the input and output,
-which we do not need.
-Furthermore, during training, their method is only activated when the model
-wants to write a rare output word. 
-In contrast, our attention-based copying can be used for 
-both rare and common words,
-so our model can learn when it is best to perform copying.
-
-% Augmentation
-Additionally, we describe a compositional data augmentation approach that 
-further boosts accuracy.
-Data augmentation in general has been shown to help neural networks,
-particularly in the field of computer vision.
-AlexNet \cite{krizhevsky2012imagenet}, 
-which at the time drastically improved
-the state-of-art on ImageNet,
-was trained on augmented data generated by applying various transformations
-to the input images that did not change the output label.
-The data augmentation scheme we propose has a more general flavor,
-as it is not constrained to keep the output label fixed:
-we are able to generate synthetic examples $(x, y)$
-where neither $x$ nor $y$ occur in the training dataset.
-
-Our experiments on artificial data show that
-compositional data augmentation can help the model learn
-even when the new examples look different than the examples seen at test time.  
-Related work has also explored the idea of training on 
-altered or out-of-domain data, often interpreting
-it as a form of regularization.
-Dropout training, which alters the training data
-to encourage better generalization, has
-been shown to be a form of adaptive regularization
-\cite{hinton2012improving,wager2014altitude}.
-\newcite{guu2015traversing} 
-showed that encouraging a knowledge base completion model
-to handle longer path queries helps accuracy on
-short queries, and interpret their method as
-a form of structural regularization.
-
-% Grammar induction
-We used a small set of high-precision manual rules to perform data augmentation.
-It is possible that an automatic grammar induction approach,
-such as that of \newcite{kwiatkowski10ccg},
-could expand the recall of our grammar while keeping precision high.
+it was not an sequence-to-sequence RNN model.
+They had also yet to run any experiments.
+\newcite{mei2016listen} use an RNN model
+to perform a related task of direction following.
 
 % Denotations
 One limitation of our current approach is that it 
@@ -1072,6 +1039,55 @@ on natural language queries instead of SQL.
 similarly replace a database engine with a memory network
 whose memories encode all the relations in the database.
 \newcite{guu2015traversing} learn how to execute simple path queries.
+
+% Rare words
+Our model includes a novel attention-based copying mechanism
+to deal with unseen words such as entity names.
+\newcite{luong2015rare} also proposed ways of copying
+unknown words for machine translation.
+They preprocess the dataset
+with a separate tool to align input and output words,
+which we do not do.
+Furthermore, during training, their method is only activated when the model
+wants to write a rare output word. 
+In contrast, our attention-based copying can be used for 
+both rare and common words,
+so our model can learn when it is best to perform copying.
+
+% Grammar induction
+We used a small set of high-precision manual rules to perform data augmentation.
+It is possible that an automatic grammar induction approach,
+such as that of \newcite{kwiatkowski10ccg},
+could expand the recall of our grammar while keeping precision high.
+
+% Regularization
+Our experiments on artificial data show that
+compositional data augmentation can help the model learn
+even when the new examples look different than the examples seen at test time.  
+Related work has also explored the idea of training on 
+altered or out-of-domain data, often interpreting
+it as a form of regularization.
+Dropout training has been shown to be a form of adaptive regularization
+\cite{hinton2012improving,wager2014altitude}.
+\newcite{guu2015traversing} 
+showed that encouraging a knowledge base completion model
+to handle longer path queries 
+acts as a form of structural regularization.
+
+% Tree-RNNs
+Tree-structured recursive neural networks \cite{socher2012mvrnn,socher2013recursive}
+leverage the structure of a syntactic parse tree
+to compositionally build representations of sentences.
+Their focus on building soft representations
+contrasts with our goal of modeling hard relationships between
+sentences and logical forms.
+
+% Conclude
+Language is a blend of crisp regularities and soft similarities.
+Our work takes RNNs, which excel at modeling soft relationships,
+and attempts to infuse them with an understanding of crisp structure.
+Finding even better ways of modeling both of these phenomena
+simultaneously is an important open challenge.
 
 %\section*{Acknowledgments}
 %Do not number the acknowledgment section.
