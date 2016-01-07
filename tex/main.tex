@@ -93,8 +93,7 @@ First, we introduce a new attention-based copying mechanism that
 allows the parser to generalize to unseen entities.
 Second, we introduce a new data augmentation scheme
 that injects prior knowledge about compositionality into the parser.
-Our system achieves accuracy competitive with state-of-the-art
-on three semantic parsing datasets.
+Our system achieves good accuracy on three semantic parsing datasets.
 %including new state-of-the-art numbers on the \regex domain.
 \end{abstract}
 
@@ -622,7 +621,7 @@ only transform inputs without changing any output labels.
 Our procedure generates examples that are on average
 longer than the examples in the training and test sets.
 Later, we explore in greater detail the ramifications of augmenting the training dataset
-with examples drawn from distributions that are very different from the test distribution.
+with examples drawn from a distribution that is very different from the test distribution.
 \rj{Need to point this out first here, but leave main discussion to experiments section}
 
 \subsection{Augmentation on \regex}
@@ -772,7 +771,7 @@ On \atis, we always just pick the top prediction on the beam.
     \textbf{Original Dataset} & & & \\
     \encdec & $33.0$ & $7.3$ & $25.7$ \\
     \attn & - & $17.7$ & $76.4$ \\
-    \attncopy & $76.3$ & $68.9$ & $85.7$ \\
+    \attncopy & $74.3$ & $68.9$ & $85.7$ \\
     \hline
     \textbf{With Data Augmentation} & & & \\
     \encdec & & $7.9$ & $23.2$ \\
@@ -916,7 +915,7 @@ a similar claim holds when performing data augmentation,
 which generates examples that are correlated with the initial training set.
 Intuitively, longer examples could be helpful 
 simply because they carry more information content per example,
-or because they encourage the network to learn better alignments between
+or because their length forces the network to learn better alignments between
 input and output tokens.
 
 To investigate the effects of such \emph{out-of-domain} examples,
@@ -1078,9 +1077,9 @@ acts as a form of structural regularization.
 Tree-structured recursive neural networks \cite{socher2012mvrnn,socher2013recursive}
 leverage the structure of a syntactic parse tree
 to compositionally build representations of sentences.
-Their focus on building soft representations
+Their focus on soft representations
 contrasts with our goal of modeling hard relationships between
-sentences and logical forms.
+fragments of sentences and logical forms.
 
 % Conclude
 Language is a blend of crisp regularities and soft similarities.

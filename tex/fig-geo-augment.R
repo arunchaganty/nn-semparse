@@ -11,6 +11,6 @@ lines(x, y_orig, col='red', lty='dashed')
 points(x, y_aug, col='blue', cex=1.5)
 lines(x, y_aug, col='blue')
 
-legend('bottomright', c('No augmented data', 'With augmented data'),
+legend('bottomright', c('No data augmentation', 'With data augmentation'),
        col= c('red', 'blue'), lty=c('dashed', 'solid'), cex=1.5)
 dev.off()
