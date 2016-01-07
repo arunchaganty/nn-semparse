@@ -1084,9 +1084,18 @@ fragments of sentences and logical forms.
 % Conclude
 Language is a blend of crisp regularities and soft similarities.
 Our work takes RNNs, which excel at modeling soft relationships,
-and attempts to infuse them with an understanding of crisp structure.
-Finding even better ways of modeling both of these phenomena
-simultaneously is an important open challenge.
+and uses two complementary approaches 
+to infuse them with an understanding of crisp structure.
+First, we alter the model so that it can more easily
+handle a particular type of crisp regularity: words
+that can be copied from input to output.
+Second, we generate synthesized training examples
+to teach the model about ways in which
+smaller fragments of utterances and logical forms
+can be composed to form larger units.
+Understanding the trade-offs between
+these two paradigms---designing new models and 
+generating new data---is an important open challenge.
 
 %\section*{Acknowledgments}
 %Do not number the acknowledgment section.
