@@ -6,6 +6,7 @@ import json
 import math
 import numpy
 import os
+import random
 import re
 import subprocess
 import sys
@@ -204,7 +205,11 @@ def update_model(model, dataset):
     model = get_model(spec)  # Create a new model!
   return model
 
-def preprocess_data(in_vocabulary, out_vocabulary, lexicon, raw):
+def preprocess_data(model, raw):
+  in_vocabulary = model.in_vocabulary
+  out_vocabulary = model.out_vocabulary
+  lexicon = model.lexicon
+
   data = []
   for raw_ex in raw:
     x_str, y_str = raw_ex
@@ -440,12 +445,16 @@ def compare_answers(true_answers, all_derivs):
   else:
     raise ValueError('Unrecognized domain %s' % OPTIONS.domain)
 
-def evaluate(name, model, in_vocabulary, out_vocabulary, lexicon, dataset):
+def evaluate(name, model, dataset):
   """Evaluate the model.
 
   TODO(robinjia): Support dataset mapping x to multiple y.  If so, it treats
   any of those y as acceptable answers.
   """
+  in_vocabulary = model.in_vocabulary
+  out_vocabulary = model.out_vocabulary
+  lexicon = model.lexicon
+
   is_correct_list = []
   tokens_correct_list = []
   x_len_list = []
@@ -572,7 +581,7 @@ def run_server(model, hostname='127.0.0.1', port=9001):
 def load_raw_all():
   if OPTIONS.train_data:
     train_raw = load_dataset(OPTIONS.train_data)
-    if OPTIONS.dev_frac:
+    if OPTIONS.dev_frac > 0.0:
       random.seed(OPTIONS.dev_seed)
       num_dev = int(round(len(train_raw) * OPTIONS.dev_frac))
       random.shuffle(train_raw)
@@ -580,10 +589,10 @@ def load_raw_all():
       train_raw = train_raw[num_dev:]
       print >> sys.stderr, 'Split dataset into %d train, %d dev examples' % (
           len(train_raw), len(dev_raw))
+      if OPTIONS.dev_data:
+        raise ValueError('dev-data and dev-frac conflict')
     else:
       dev_raw = None
-    if OPTIONS.dev_data:
-      raise ValueError('dev-data and dev-frac conflict')
   else:
     train_raw = None
     if OPTIONS.dev_data:
@@ -609,8 +618,6 @@ def init_spec(train_raw):
   if OPTIONS.load_file:
     print >> sys.stderr, 'Loading saved params from %s' % OPTIONS.load_file
     spec = specutil.load(OPTIONS.load_file)
-    in_vocabulary = spec.in_vocabulary
-    out_vocabulary = spec.out_vocabulary
     lexicon = spec.lexicon
   elif OPTIONS.train_data:
     print >> sys.stderr, 'Initializing parameters...'
@@ -625,16 +632,14 @@ def init_spec(train_raw):
 def evaluate_train(model, train_data):
   print >> sys.stderr, 'Evaluating on training data...'
   print 'Training data:'
-  evaluate('train', model, in_vocabulary, out_vocabulary, lexicon, train_data)
+  evaluate('train', model, train_data)
 
 def evaluate_dev(model, dev_raw):
   print >> sys.stderr, 'Evaluating on dev data...'
   dev_model = update_model(model, dev_raw)
-  dev_data = preprocess_data(dev_model.in_vocabulary,
-                             dev_model.out_vocabulary, 
-                             dev_model.lexicon, dev_raw)
+  dev_data = preprocess_data(dev_model, dev_raw)
   print 'Dev data:'
-  evaluate('dev', dev_model, in_vocabulary, out_vocabulary, lexicon, dev_data)
+  evaluate('dev', dev_model, dev_data)
 
 def write_stats():
   if OPTIONS.stats_file:
@@ -650,7 +655,7 @@ def run():
   model = get_model(spec)
 
   if train_raw:
-    train_data = preprocess_data(in_vocabulary, out_vocabulary, lexicon, train_raw)
+    train_data = preprocess_data(model, train_raw)
     model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate)
 
   if OPTIONS.save_file:
