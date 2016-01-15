@@ -13,6 +13,7 @@ import tempfile
 import theano
 
 # Local imports
+import augmentation
 from encoderdecoder import EncoderDecoderModel
 from attention import AttentionModel
 from example import Example
@@ -43,7 +44,9 @@ STATS = {}
 def _parse_args():
   global OPTIONS
   parser = argparse.ArgumentParser(
-      description='Test neural alignment model on toy data.')
+      description='A neural semantic parser.',
+      formatter_class=argparse.RawTextHelpFormatter
+  )
   parser.add_argument('--hidden-size', '-d', type=int,
                       help='Dimension of hidden units')
   parser.add_argument('--input-embedding-dim', '-i', type=int,
@@ -60,6 +63,8 @@ def _parse_args():
                             'If comma-separated list, will run for some epochs, halve learning rate, etc.'))
   parser.add_argument('--learning-rate', '-r', type=float, default=0.1,
                       help='Initial learning rate (default = 0.1).')
+  parser.add_argument('--sgd-variant', default=None,
+                      help='Use a special SGD step size rule (types=[])')
   parser.add_argument('--rnn-type', '-c',
                       help='type of continuous RNN model (options: [%s])' % (
                           ', '.join(specutil.RNN_TYPES)))
@@ -78,11 +83,21 @@ def _parse_args():
                       help='Use 32-bit floats (default is 64-bit/double precision).')
   parser.add_argument('--beam-size', '-k', type=int, default=0,
                       help='Use beam search with given beam size (default is greedy).')
+  parser.add_argument('--domain', default=None,
+                      help='Domain for augmentation and evaluation (options: [geoquery,regex,atis])')
+  parser.add_argument('--augment', '-a',
+                      help=('Options for augmentation.  Expects list of key-int pairs, '
+                            'e.g. "int:100,str:200".  Meaning depends on domain.'))
   parser.add_argument('--train-data', help='Path to training data.')
   parser.add_argument('--dev-data', help='Path to dev data.')
+  parser.add_argument('--dev-frac', type=float, default=0.0,
+                      help='Take this fraction of train data as dev data.')
+  parser.add_argument('--dev-seed', type=int, default=0,
+                      help='RNG seed for the train/dev splits (default = 0)')
+  parser.add_argument('--model-seed', type=int, default=0,
+                      help="RNG seed for the model's initialization and SGD ordering (default = 0)")
   parser.add_argument('--save-file', help='Path to save parameters.')
   parser.add_argument('--load-file', help='Path to load parameters, will ignore other passed arguments.')
-  parser.add_argument('--domain', help='Domain to evaluate (options: [geoquery,regex,atis])')
   parser.add_argument('--stats-file', help='Path to save statistics (JSON format).')
   parser.add_argument('--shell', action='store_true', 
                       help='Start an interactive shell.')
@@ -554,10 +569,43 @@ def run_server(model, hostname='127.0.0.1', port=9001):
 
   bottle.run(app, host=hostname, port=port)
 
-def run():
-  configure_theano()
+def load_raw_all():
   if OPTIONS.train_data:
     train_raw = load_dataset(OPTIONS.train_data)
+    if OPTIONS.dev_frac:
+      random.seed(OPTIONS.dev_seed)
+      num_dev = int(round(len(train_raw) * OPTIONS.dev_frac))
+      random.shuffle(train_raw)
+      dev_raw = train_raw[:num_dev]
+      train_raw = train_raw[num_dev:]
+      print >> sys.stderr, 'Split dataset into %d train, %d dev examples' % (
+          len(train_raw), len(dev_raw))
+    else:
+      dev_raw = None
+    if OPTIONS.dev_data:
+      raise ValueError('dev-data and dev-frac conflict')
+  else:
+    train_raw = None
+    if OPTIONS.dev_data:
+      dev_raw = load_dataset(OPTIONS.dev_data)
+    else:
+      dev_raw = None
+  if train_raw:
+    if OPTIONS.augment:
+      augmenter = augmentation.new(domain, train_raw)
+      aug_requests = [x.split(':') for x in OPTIONS.augment.split(',')]
+      aug_requests = [(x[0], int(x[1])) for x in aug_requests]
+      all_data = [train_raw]
+      for name, num in aug_requests:
+        all_data.append(augmenter.augment(name, num))
+      train_raw = [ex for d in all_data for ex in d]
+  return train_raw, dev_raw
+
+def seed_rng_for_model():
+  random.seed(OPTIONS.model_seed)
+  numpy.random.seed(OPTIONS.model_seed)
+
+def init_spec(train_raw):
   if OPTIONS.load_file:
     print >> sys.stderr, 'Loading saved params from %s' % OPTIONS.load_file
     spec = specutil.load(OPTIONS.load_file)
@@ -572,10 +620,36 @@ def run():
     spec = get_spec(in_vocabulary, out_vocabulary, lexicon)
   else:
     raise Exception('Must either provide parameters to load or training data.')
+  return spec
 
+def evaluate_train(model, train_data):
+  print >> sys.stderr, 'Evaluating on training data...'
+  print 'Training data:'
+  evaluate('train', model, in_vocabulary, out_vocabulary, lexicon, train_data)
+
+def evaluate_dev(model, dev_raw):
+  print >> sys.stderr, 'Evaluating on dev data...'
+  dev_model = update_model(model, dev_raw)
+  dev_data = preprocess_data(dev_model.in_vocabulary,
+                             dev_model.out_vocabulary, 
+                             dev_model.lexicon, dev_raw)
+  print 'Dev data:'
+  evaluate('dev', dev_model, in_vocabulary, out_vocabulary, lexicon, dev_data)
+
+def write_stats():
+  if OPTIONS.stats_file:
+    out = open(OPTIONS.stats_file, 'w')
+    print >>out, json.dumps(STATS)
+    out.close()
+
+def run():
+  configure_theano()
+  train_raw, dev_raw = load_raw_all()
+  seed_rng_for_model()
+  spec = init_spec(train_raw)
   model = get_model(spec)
 
-  if OPTIONS.train_data:
+  if train_raw:
     train_data = preprocess_data(in_vocabulary, out_vocabulary, lexicon, train_raw)
     model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate)
 
@@ -583,25 +657,12 @@ def run():
     print >> sys.stderr, 'Saving parameters...'
     spec.save(OPTIONS.save_file)
 
-  if OPTIONS.train_data:
-    print >> sys.stderr, 'Evaluating on training data...'
-    print 'Training data:'
-    evaluate('train', model, in_vocabulary, out_vocabulary, lexicon, train_data)
+  if train_raw:
+    evaluate_train(model, train_data)
+  if dev_raw:
+    evaluate_dev(model, dev_raw)
 
-  if OPTIONS.dev_data:
-    print >> sys.stderr, 'Evaluating on dev data...'
-    dev_raw = load_dataset(OPTIONS.dev_data)
-    dev_model = update_model(model, dev_raw)
-    dev_data = preprocess_data(dev_model.in_vocabulary,
-                               dev_model.out_vocabulary, 
-                               dev_model.lexicon, dev_raw)
-    print 'Dev data:'
-    evaluate('dev', dev_model, in_vocabulary, out_vocabulary, lexicon, dev_data)
-
-  if OPTIONS.stats_file:
-    out = open(OPTIONS.stats_file, 'w')
-    print >>out, json.dumps(STATS)
-    out.close()
+  write_stats()
 
   if OPTIONS.shell:
     run_shell(model)

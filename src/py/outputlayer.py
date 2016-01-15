@@ -26,7 +26,6 @@ class OutputLayer(object):
     self.create_vars()
 
   def create_vars(self):
-    numpy.random.seed(0)
     self.w_out = theano.shared(
         name='w_out', 
         value=0.1 * numpy.random.uniform(-1.0, 1.0, (self.nw, self.nh)).astype(theano.config.floatX))

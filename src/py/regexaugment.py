@@ -102,9 +102,7 @@ def get_true_vocab(in_data, unk_cutoff):
   vocab = set(w for w in counts if counts[w] > unk_cutoff)
   return vocab
 
-def augment_data(in_data, num_str=0, num_int=0):
-  """Align based on words in quotes and numbers."""
-
+def augment_str(in_data, str_templates, num):
   # Create unknown strings
   def new_unk_replacement():
     s = 'synth:%04d' % new_unk_replacement.cur_unk
@@ -116,7 +114,6 @@ def augment_data(in_data, num_str=0, num_int=0):
   vocab = get_true_vocab(in_data, 1)
   str_augmented_data = set()
   replacements = get_replacements(in_data)
-  str_templates, int_templates = get_templates(in_data)
   while len(str_augmented_data) < num_str:
     x_t, y_t, n = random.sample(str_templates, 1)[0]
     cur_reps = random.sample(replacements, n)
@@ -139,16 +136,21 @@ def augment_data(in_data, num_str=0, num_int=0):
     x_new = x_t % x_reps
     y_new = y_t % y_reps
     str_augmented_data.add((x_new, y_new))
-  str_augmented_data = list(str_augmented_data)
+  return list(str_augmented_data)
  
-  # Ints
+def augment_int(in_data, int_templates, num):
   int_augmented_data = []
   for x_template, y_template, diff in int_templates:
     for i in INTS:
       int_augmented_data.append((x_template % i, y_template % (i + diff)))
   random.shuffle(int_augmented_data)
-  int_augmented_data = int_augmented_data[:num_int]
+  return int_augmented_data[:num_int]
 
+def augment_data(in_data, num_str=0, num_int=0):
+  """Align based on words in quotes and numbers."""
+  str_templates, int_templates = get_templates(in_data)
+  str_augmented = augment_str(in_data, str_templates, num_str)
+  int_augmented = augment_int(in_data, int_templates, num_int)
   return str_augmented_data, int_augmented_data
 
 def write_data(basename, data):

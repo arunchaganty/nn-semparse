@@ -10,8 +10,6 @@ from rnnlayer import RNNLayer
 class VanillaRNNLayer(RNNLayer):
   """A standard vanilla RNN layer."""
   def create_vars(self, create_init_state):
-    random.seed(0)
-
     # Initial state
     if create_init_state:
       self.h0 = theano.shared(

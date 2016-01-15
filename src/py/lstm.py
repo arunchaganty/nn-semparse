@@ -14,8 +14,6 @@ class LSTMLayer(RNNLayer):
   Parameter names follow convention in Richard Socher's CS224D slides.
   """
   def create_vars(self, create_init_state):
-    numpy.random.seed(0)
-
     # Initial state
     # The hidden state must store both c_t, the memory cell, 
     # and h_t, what we normally call the hidden state
