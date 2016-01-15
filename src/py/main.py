@@ -579,6 +579,7 @@ def run_server(model, hostname='127.0.0.1', port=9001):
   bottle.run(app, host=hostname, port=port)
 
 def load_raw_all():
+  # Load train, and dev too if dev-frac was provided
   if OPTIONS.train_data:
     train_raw = load_dataset(OPTIONS.train_data)
     if OPTIONS.dev_frac > 0.0:
@@ -589,25 +590,27 @@ def load_raw_all():
       train_raw = train_raw[num_dev:]
       print >> sys.stderr, 'Split dataset into %d train, %d dev examples' % (
           len(train_raw), len(dev_raw))
-      if OPTIONS.dev_data:
-        raise ValueError('dev-data and dev-frac conflict')
     else:
       dev_raw = None
   else:
     train_raw = None
-    if OPTIONS.dev_data:
-      dev_raw = load_dataset(OPTIONS.dev_data)
-    else:
-      dev_raw = None
-  if train_raw:
-    if OPTIONS.augment:
-      augmenter = augmentation.new(domain, train_raw)
-      aug_requests = [x.split(':') for x in OPTIONS.augment.split(',')]
-      aug_requests = [(x[0], int(x[1])) for x in aug_requests]
-      all_data = [train_raw]
-      for name, num in aug_requests:
-        all_data.append(augmenter.augment(name, num))
-      train_raw = [ex for d in all_data for ex in d]
+
+  # Load dev data from separate file
+  if OPTIONS.dev_data:
+    if dev_raw:
+      raise ValueError('dev-data and dev-frac conflict')
+    dev_raw = load_dataset(OPTIONS.dev_data)
+
+  # Perform augmentation if requested
+  if train_raw and OPTIONS.augment:
+    augmenter = augmentation.new(domain, train_raw)
+    aug_requests = [x.split(':') for x in OPTIONS.augment.split(',')]
+    aug_requests = [(x[0], int(x[1])) for x in aug_requests]
+    all_data = [train_raw]
+    for name, num in aug_requests:
+      all_data.append(augmenter.augment(name, num))
+    train_raw = [ex for d in all_data for ex in d]
+
   return train_raw, dev_raw
 
 def seed_rng_for_model():
