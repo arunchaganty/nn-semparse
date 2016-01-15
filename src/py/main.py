@@ -603,7 +603,7 @@ def load_raw_all():
 
   # Perform augmentation if requested
   if train_raw and OPTIONS.augment:
-    augmenter = augmentation.new(domain, train_raw)
+    augmenter = augmentation.new(OPTIONS.domain, train_raw)
     aug_requests = [x.split(':') for x in OPTIONS.augment.split(',')]
     aug_requests = [(x[0], int(x[1])) for x in aug_requests]
     all_data = [train_raw]

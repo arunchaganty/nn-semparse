@@ -20,10 +20,10 @@ class RegexAugmenter(Augmenter):
   def setup(self):
     self.str_templates, self.int_templates = regexaugment.get_templates(self.dataset)
 
-  def augment_str(num):
+  def augment_str(self, num):
     return regexaugment.augment_str(self.dataset, self.str_templates, num)
 
-  def augment_int(num):
+  def augment_int(self, num):
     return regexaugment.augment_int(self.dataset, self.int_templates, num)
 
   def augment(self, aug_type, num):

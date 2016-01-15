@@ -114,7 +114,7 @@ def augment_str(in_data, str_templates, num):
   vocab = get_true_vocab(in_data, 1)
   str_augmented_data = set()
   replacements = get_replacements(in_data)
-  while len(str_augmented_data) < num_str:
+  while len(str_augmented_data) < num:
     x_t, y_t, n = random.sample(str_templates, 1)[0]
     cur_reps = random.sample(replacements, n)
     for i in range(len(cur_reps)):
@@ -144,7 +144,7 @@ def augment_int(in_data, int_templates, num):
     for i in INTS:
       int_augmented_data.append((x_template % i, y_template % (i + diff)))
   random.shuffle(int_augmented_data)
-  return int_augmented_data[:num_int]
+  return int_augmented_data[:num]
 
 def augment_data(in_data, num_str=0, num_int=0):
   """Align based on words in quotes and numbers."""
