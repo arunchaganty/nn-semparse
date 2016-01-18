@@ -16,7 +16,7 @@ class Spec(object):
   - self.get_local_params(): Get all local parameters (excludes vocabulary).
   """
   def __init__(self, in_vocabulary, out_vocabulary, lexicon, hidden_size,
-               rnn_type='lstm', **kwargs):
+               rnn_type='lstm', step_rule='simple', **kwargs):
     """Initialize.
 
     Args:
@@ -30,6 +30,7 @@ class Spec(object):
     self.lexicon = lexicon
     self.hidden_size = hidden_size
     self.rnn_type = rnn_type
+    self.step_rule = step_rule
     self.create_vars()
     self._process_init_kwargs(**kwargs)
 

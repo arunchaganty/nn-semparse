@@ -64,8 +64,8 @@ def _parse_args():
                             'If comma-separated list, will run for some epochs, halve learning rate, etc.'))
   parser.add_argument('--learning-rate', '-r', type=float, default=0.1,
                       help='Initial learning rate (default = 0.1).')
-  parser.add_argument('--sgd-variant', default=None,
-                      help='Use a special SGD step size rule (types=[])')
+  parser.add_argument('--step-rule', '-s', default='simple',
+                      help='Use a special SGD step size rule (types=[simple, adagrad, rmsprop])')
   parser.add_argument('--rnn-type', '-c',
                       help='type of continuous RNN model (options: [%s])' % (
                           ', '.join(specutil.RNN_TYPES)))
@@ -219,7 +219,7 @@ def preprocess_data(model, raw):
   return data
 
 def get_spec(in_vocabulary, out_vocabulary, lexicon):
-  kwargs = {'rnn_type': OPTIONS.rnn_type}
+  kwargs = {'rnn_type': OPTIONS.rnn_type, 'step_rule': OPTIONS.step_rule}
   if OPTIONS.copy.startswith('attention'):
     if OPTIONS.model == 'attention':
       kwargs['attention_copying'] = OPTIONS.copy

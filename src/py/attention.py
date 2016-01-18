@@ -120,11 +120,26 @@ class AttentionModel(NeuralModel):
 
     # Do the updates here
     updates = []
-    for p, g in zip(self.params, gradients):
-      grad_norm = g.norm(2)
-      clipped_grad = ifelse(grad_norm >= CLIP_THRESH, 
-                            g * CLIP_THRESH / grad_norm, g)
-      updates.append((p, p + eta * clipped_grad))
+    if self.spec.step_rule in ('adagrad', 'rmsprop'):
+      # Adagrad updates
+      for p, g, c in zip(self.params, gradients, self.grad_norm_cache):
+        grad_norm = g.norm(2)
+        clipped_grad = ifelse(grad_norm >= CLIP_THRESH, 
+                              g * CLIP_THRESH / grad_norm, g)
+        if self.spec.step_rule == 'adagrad':
+          new_c = c + clipped_grad ** 2
+        else:  # rmsprop
+          decay_rate = 0.9  # Use fixed decay rate of 0.9
+          new_c = decay_rate * c + (1.0 - decay_rate) * clipped_grad ** 2
+        updates.append((p, p + eta * clipped_grad / T.sqrt(new_c + 1e-4)))
+        updates.append((c, new_c))
+    else:
+      # Simple SGD updates
+      for p, g in zip(self.params, gradients):
+        grad_norm = g.norm(2)
+        clipped_grad = ifelse(grad_norm >= CLIP_THRESH, 
+                              g * CLIP_THRESH / grad_norm, g)
+        updates.append((p, p + eta * clipped_grad))
 
     self._backprop = theano.function(
         inputs=[x, y, eta, cur_lex_entries, y_lex_inds, y_in_x_inds],

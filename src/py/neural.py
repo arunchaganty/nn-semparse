@@ -42,6 +42,13 @@ class NeuralModel(object):
     self.lexicon = spec.lexicon
     self.float_type = float_type
     self.params = spec.get_params()
+    if spec.step_rule in ('adagrad', 'rmsprop'):
+      # Initialize the grad norm cache
+      self.grad_norm_cache = [
+          theano.shared(
+              name='%s_norm_cache' % p.name,
+              value=numpy.zeros_like(p.get_value()))
+          for p in self.params]
     self.all_shared = spec.get_all_shared()
 
     self.setup()
