@@ -385,6 +385,10 @@ def compare_answers_regex(true_answers, all_derivs):
   derivs = []
   is_correct_list = []
   for true_ans, deriv_list in zip(true_answers, all_derivs):
+    if true_ans == ' '.join(deriv_list[0].y_toks):
+      derivs.append(deriv_list[0])
+      is_correct_list.append(True)
+      continue
     for deriv in deriv_list:
       pred_ans = ' '.join(deriv.y_toks)
       msg = subprocess.check_output([
@@ -580,10 +584,10 @@ def run_server(model, hostname='127.0.0.1', port=9001):
 
 def load_raw_all():
   # Load train, and dev too if dev-frac was provided
+  random.seed(OPTIONS.dev_seed)
   if OPTIONS.train_data:
     train_raw = load_dataset(OPTIONS.train_data)
     if OPTIONS.dev_frac > 0.0:
-      random.seed(OPTIONS.dev_seed)
       num_dev = int(round(len(train_raw) * OPTIONS.dev_frac))
       random.shuffle(train_raw)
       dev_raw = train_raw[:num_dev]

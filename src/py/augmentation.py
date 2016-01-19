@@ -1,4 +1,5 @@
 """Module that handles all augmentation."""
+import random
 import sys
 
 import regexaugment
@@ -10,6 +11,16 @@ class Augmenter(object):
 
   def setup(self):
     pass
+
+  def augment_concat(self, num):
+    """Simple augmentation by concatenating two input examples."""
+    aug_data = set()
+    while len(aug_data) < num:
+      (x1, y1), (x2, y2) = random.sample(self.dataset, 2)
+      x_new = '%s <sep> %s' % (x1, x2)
+      y_new = '%s <sep> %s' % (y1, y2)
+      aug_data.add((x_new, y_new))
+    return list(aug_data)
 
   def augment(self, aug_type, num):
     raise NotImplementedError
@@ -34,7 +45,9 @@ class RegexAugmenter(Augmenter):
                                      self.int_templates, num)
 
   def augment(self, aug_type, num):
-    if aug_type == 'str':
+    if aug_type == 'concat':
+      return self.augment_concat(num)
+    elif aug_type == 'str':
       return self.augment_str(num)
     elif aug_type == 'int':
       return self.augment_int(num)
