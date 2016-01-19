@@ -42,19 +42,35 @@ def get_quoted_strs(x):
 
 def get_replacements(in_data):
   """Get all quoted strings actually used."""
-  replacements = set((s, s[2:-2].replace(' ', ' _ '))
-                     for x, y in in_data for s in get_quoted_strs(x))
+  vocab = get_true_vocab(in_data, 1)
+  quot_strs = set(s for x, y in in_data for s in get_quoted_strs(x))
+
+  def mask_unk(s):
+    """Replace rare words with UNK_%d markers."""
+    toks = s.split(' ')
+    new_toks = []
+    unk_dict = {}
+    for t in toks:
+      if t in vocab:
+        new_toks.append(t)
+      else:
+        if t not in unk_dict:
+          unk_dict[t] = len(unk_dict)
+        new_toks.append('UNK_%02d' % unk_dict[t])
+    x_new = ' '.join(new_toks)
+    y_new = x_new[2:-2].replace(' ', ' _ ')
+    return (x_new, y_new)
+
+  replacements = list(set([mask_unk(s) for s in quot_strs]))
   print >> sys.stderr, 'Found %d distinct quoted strings' % len(replacements)
   return replacements
 
-def get_templates(in_data):
+def get_str_templates(in_data):
   str_templates = set()
-  int_templates = set()
   for x, y in in_data:
     x_toks = x.split()
     y_toks = y.split()
 
-    # Handle quoted stuff
     quoted_strs = get_quoted_strs(x)
     if len(quoted_strs) == 0: continue 
     x_new = x
@@ -74,9 +90,14 @@ def get_templates(in_data):
       y_new = re.sub(pattern, lambda m: m.group(1) + replacement_str + m.group(2), y_new)
     if x_new is None: continue
     str_templates.add((x_new, y_new, len(quoted_strs)))
+  print >> sys.stderr, 'Extracted %d string templates' % len(str_templates)  
+  return str_templates
 
-    # Handle ints
-    # For high precision, only handle case where both x and y have 1 int
+def get_int_templates(in_data):
+  int_templates = set()
+  for x, y in in_data:
+    x_toks = x.split()
+    y_toks = y.split()
     x_ints = [i for i in range(len(x_toks)) if x_toks[i].isdigit()]
     y_ints = [i for i in range(len(y_toks)) if y_toks[i].isdigit()]
     if len(x_ints) == 1 and len(y_ints) == 1:
@@ -86,13 +107,8 @@ def get_templates(in_data):
       x_new = ' '.join(swap_in(x_toks, x_ind, '%d'))
       y_new = ' '.join(swap_in(y_toks, y_ind, '%d'))
       int_templates.add((x_new, y_new, diff))
-
-  #for x, y, n in sorted(list(str_templates)):
-  #  print (x, y, n)
-
-  print >> sys.stderr, 'Extracted %d string templates' % len(str_templates)  
   print >> sys.stderr, 'Extracted %d int templates' % len(int_templates)
-  return str_templates, int_templates
+  return int_templates
 
 def get_true_vocab(in_data, unk_cutoff):
   sentences = [x for x, y in in_data]
@@ -102,53 +118,84 @@ def get_true_vocab(in_data, unk_cutoff):
   vocab = set(w for w in counts if counts[w] > unk_cutoff)
   return vocab
 
-def augment_str(in_data, str_templates, num):
-  # Create unknown strings
-  def new_unk_replacement():
-    s = 'synth:%04d' % new_unk_replacement.cur_unk
-    new_unk_replacement.cur_unk += 1
-    return s
-  new_unk_replacement.cur_unk = 0
+def new_unk_replacement():
+  s = 'synth:%04d' % new_unk_replacement.cur_unk
+  new_unk_replacement.cur_unk += 1
+  return s
+new_unk_replacement.cur_unk = 0
 
-  # Strings
-  vocab = get_true_vocab(in_data, 1)
+def replace_all(s, d):
+  for k, v in d.iteritems():
+    s = s.replace(k, v)
+  return s
+
+def sample_one_str(str_templates, replacements):
+  x_t, y_t, n = random.sample(str_templates, 1)[0]
+  cur_reps = random.sample(replacements, n)
+  for i in range(len(cur_reps)):
+    x_r, y_r = cur_reps[i]
+    unks = sorted(list(set(re.findall('UNK_[0-9]+', x_r))))
+    unk_dict = dict((u, new_unk_replacement()) for u in unks)
+    x_new = replace_all(x_r, unk_dict)
+    y_new = replace_all(y_r, unk_dict)
+    cur_reps[i] = (x_new, y_new)
+  x_reps = dict(('w%d' % i, cur_reps[i][0]) for i in range(n))
+  y_reps = dict(('w%d' % i, cur_reps[i][1]) for i in range(n))
+  x_new = x_t % x_reps
+  y_new = y_t % y_reps
+  return (x_new, y_new)
+
+def augment_str(in_data, str_templates, num):
   str_augmented_data = set()
   replacements = get_replacements(in_data)
   while len(str_augmented_data) < num:
-    x_t, y_t, n = random.sample(str_templates, 1)[0]
-    cur_reps = random.sample(replacements, n)
-    for i in range(len(cur_reps)):
-      x_r, y_r = cur_reps[i]
-      x_toks = x_r.split(' ')
-      new_toks = []
-      for t in x_toks:
-        if t in vocab:
-          new_toks.append(t)
-        else:
-          new_toks.append(new_unk_replacement())
-      print new_toks
-      x_new = ' '.join(new_toks)
-      y_new = x_new[2:-2].replace(' ', ' _ ')
-      cur_reps[i] = (x_new, y_new)
-
-    x_reps = dict(('w%d' % i, cur_reps[i][0]) for i in range(n))
-    y_reps = dict(('w%d' % i, cur_reps[i][1]) for i in range(n))
-    x_new = x_t % x_reps
-    y_new = y_t % y_reps
-    str_augmented_data.add((x_new, y_new))
+    str_augmented_data.add(sample_one_str(str_templates, replacements))
   return list(str_augmented_data)
  
-def augment_int(in_data, int_templates, num):
+def augment_int(in_data, int_templates, num=None):
   int_augmented_data = []
   for x_template, y_template, diff in int_templates:
     for i in INTS:
       int_augmented_data.append((x_template % i, y_template % (i + diff)))
   random.shuffle(int_augmented_data)
-  return int_augmented_data[:num]
+  if num:
+    return int_augmented_data[:num]
+  else:
+    return int_augmented_data
+
+def augment_conj(in_data, str_templates, int_templates, num):
+  all_int_data = augment_int(in_data, int_templates)
+  replacements = get_replacements(in_data)
+
+  def sample_sentence():
+    if random.randint(0, len(str_templates) + len(int_templates)) <= len(str_templates):
+      return sample_one_str(str_templates, replacements)
+    else:
+      return random.sample(all_int_data, 1)[0]
+
+  def shorten(x):
+    if x.startswith('lines'):
+      toks = x.split(' ')
+      if toks[1] in ('that', 'where', 'which', 'with'):
+        return ' '.join(toks[1:])
+      elif toks[1].endswith('ing'):
+        toks[1] = toks[1][:-3]
+        return 'that %s' % ' '.join(toks[1:])
+    return 'that are %s' + x
+
+  aug_data = set()
+  while len(aug_data) < num:
+    x1, y1 = sample_sentence()
+    x2, y2 = sample_sentence()
+    x_new = '%s %s' % (x1, shorten(x2))
+    y_new = '( %s ) & ( %s )' % (y1, y2)
+    aug_data.add((x_new, y_new))
+  return list(aug_data)
 
 def augment_data(in_data, num_str=0, num_int=0):
   """Align based on words in quotes and numbers."""
-  str_templates, int_templates = get_templates(in_data)
+  str_templates = get_str_templates(in_data)
+  int_templates = get_int_templates(in_data)
   str_augmented = augment_str(in_data, str_templates, num_str)
   int_augmented = augment_int(in_data, int_templates, num_int)
   return str_augmented_data, int_augmented_data
