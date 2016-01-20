@@ -598,6 +598,7 @@ def load_raw_all():
       dev_raw = None
   else:
     train_raw = None
+    dev_raw = None
 
   # Load dev data from separate file
   if OPTIONS.dev_data:
@@ -617,15 +618,10 @@ def load_raw_all():
 
   return train_raw, dev_raw
 
-def seed_rng_for_model():
-  random.seed(OPTIONS.model_seed)
-  numpy.random.seed(OPTIONS.model_seed)
-
 def init_spec(train_raw):
   if OPTIONS.load_file:
     print >> sys.stderr, 'Loading saved params from %s' % OPTIONS.load_file
     spec = specutil.load(OPTIONS.load_file)
-    lexicon = spec.lexicon
   elif OPTIONS.train_data:
     print >> sys.stderr, 'Initializing parameters...'
     in_vocabulary = get_input_vocabulary(train_raw)
@@ -657,12 +653,14 @@ def write_stats():
 def run():
   configure_theano()
   train_raw, dev_raw = load_raw_all()
-  seed_rng_for_model()
+  random.seed(OPTIONS.model_seed)
+  numpy.random.seed(OPTIONS.model_seed)
   spec = init_spec(train_raw)
   model = get_model(spec)
 
   if train_raw:
     train_data = preprocess_data(model, train_raw)
+    random.seed(OPTIONS.model_seed)
     model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate)
 
   if OPTIONS.save_file:

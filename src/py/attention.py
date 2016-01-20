@@ -131,15 +131,20 @@ class AttentionModel(NeuralModel):
         else:  # rmsprop
           decay_rate = 0.9  # Use fixed decay rate of 0.9
           new_c = decay_rate * c + (1.0 - decay_rate) * clipped_grad ** 2
-        updates.append((p, p + eta * clipped_grad / T.sqrt(new_c + 1e-4)))
-        updates.append((c, new_c))
+        new_p = p + eta * clipped_grad / T.sqrt(new_c + 1e-4)
+        has_non_finite = T.any(T.isnan(new_p) + T.isinf(new_p))
+        updates.append((p, ifelse(has_non_finite, p, new_p)))
+        updates.append((c, ifelse(has_non_finite, c, new_c)))
     else:
       # Simple SGD updates
       for p, g in zip(self.params, gradients):
         grad_norm = g.norm(2)
         clipped_grad = ifelse(grad_norm >= CLIP_THRESH, 
                               g * CLIP_THRESH / grad_norm, g)
-        updates.append((p, p + eta * clipped_grad))
+        new_p = p + eta * clipped_grad
+        has_non_finite = T.any(T.isnan(new_p) + T.isinf(new_p))
+        updates.append((p, ifelse(has_non_finite, p, new_p)))
+        #updates.append((p, new_p))
 
     self._backprop = theano.function(
         inputs=[x, y, eta, cur_lex_entries, y_lex_inds, y_in_x_inds],
