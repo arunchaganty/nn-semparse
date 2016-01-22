@@ -56,9 +56,18 @@ class RegexAugmenter(Augmenter):
     else:
       raise ValueError('Unrecognized augmentation type "%s"' % aug_type)
 
+class AtisAugmenter(Augmenter):
+  def augment(self, aug_type, num):
+    if aug_type == 'concat':
+      return self.augment_concat(num)
+    else:
+      raise ValueError('Unrecognized augmentation type "%s"' % aug_type)
+
 def new(domain, dataset):
   if domain == 'regex':
     return RegexAugmenter(dataset)
+  elif domain == 'atis':
+    return AtisAugmenter(dataset)
   raise ValueError('Unrecognzied domain "%s"' % domain)
 
 def main():
