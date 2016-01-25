@@ -71,49 +71,42 @@ class AttentionModel(NeuralModel):
     """Get the write distribution of the decoder.  Used at test time."""
     annotations = T.matrix('annotations_for_write')
     h_prev = T.vector('h_prev_for_write')
-    cur_lex_entries = T.lvector('cur_lex_entries_for_write')
     h_for_write = self.spec.decoder.get_h_for_write(h_prev)
     scores = self.spec.get_attention_scores(h_for_write, annotations)
     alpha = self.spec.get_alpha(scores)
     c_t = self.spec.get_context(alpha, annotations)
-    write_dist = self.spec.f_write(h_for_write, c_t, cur_lex_entries, scores)
-    self._decoder_write = theano.function(inputs=[annotations, h_prev, cur_lex_entries],
-                                          outputs=[write_dist, c_t, alpha],
-                                          on_unused_input='warn')  # For lexicon
+    write_dist = self.spec.f_write(h_for_write, c_t, scores)
+    self._decoder_write = theano.function(
+        inputs=[annotations, h_prev], outputs=[write_dist, c_t, alpha])
 
   def setup_backprop(self):
     eta = T.scalar('eta_for_backprop')
     x = T.lvector('x_for_backprop')
     y = T.lvector('y_for_backprop')
-    cur_lex_entries = T.lvector('cur_lex_entries_for_backprop')
-    y_lex_inds = T.lmatrix('y_lex_inds_for_backprop')
     y_in_x_inds = T.lmatrix('y_in_x_inds_for_backprop')
     dec_init_state, annotations = self._symb_encoder(x)
 
-    def decoder_recurrence(y_t, cur_y_lex_inds, cur_y_in_x_inds, h_prev,
-                           annotations, cur_lex_entries, *params):
+    def decoder_recurrence(y_t, cur_y_in_x_inds, h_prev, annotations, *params):
       h_for_write = self.spec.decoder.get_h_for_write(h_prev)
       scores = self.spec.get_attention_scores(h_for_write, annotations)
       alpha = self.spec.get_alpha(scores)
       c_t = self.spec.get_context(alpha, annotations)
-      write_dist = self.spec.f_write(h_for_write, c_t, cur_lex_entries, scores)
+      write_dist = self.spec.f_write(h_for_write, c_t, scores)
       base_p_y_t = write_dist[y_t] 
       if self.spec.attention_copying:
         copying_p_y_t = T.dot(
             write_dist[self.out_vocabulary.size():],
             cur_y_in_x_inds)
+        p_y_t = base_p_y_t + copying_p_y_t
       else:
-        copying_p_y_t = T.dot(
-            write_dist[self.out_vocabulary.size():],
-            cur_y_lex_inds)
-      p_y_t = base_p_y_t + copying_p_y_t
+        p_y_t = base_p_y_t
       h_t = self.spec.f_dec(y_t, c_t, h_prev)
       return (h_t, p_y_t)
 
     dec_results, _ = theano.scan(
-        fn=decoder_recurrence, sequences=[y, y_lex_inds, y_in_x_inds],
+        fn=decoder_recurrence, sequences=[y, y_in_x_inds],
         outputs_info=[dec_init_state, None],
-        non_sequences=[annotations, cur_lex_entries] + self.spec.get_all_shared())
+        non_sequences=[annotations] + self.spec.get_all_shared())
     p_y_seq = dec_results[1]
     log_p_y = T.sum(T.log(p_y_seq))
     gradients = T.grad(log_p_y, self.params)
@@ -147,7 +140,7 @@ class AttentionModel(NeuralModel):
         #updates.append((p, new_p))
 
     self._backprop = theano.function(
-        inputs=[x, y, eta, cur_lex_entries, y_lex_inds, y_in_x_inds],
+        inputs=[x, y, eta, y_in_x_inds],
         outputs=[p_y_seq, log_p_y],
         updates=updates)
 
@@ -157,7 +150,7 @@ class AttentionModel(NeuralModel):
     p_y_seq = []  # Should be handy for error analysis
     p = 1
     for i in range(max_len):
-      write_dist, c_t, alpha = self._decoder_write(annotations, h_t, ex.lex_inds)
+      write_dist, c_t, alpha = self._decoder_write(annotations, h_t)
       y_t = numpy.argmax(write_dist)
       p_y_t = write_dist[y_t]
       p_y_seq.append(p_y_t)
@@ -168,12 +161,8 @@ class AttentionModel(NeuralModel):
         y_tok = self.out_vocabulary.get_word(y_t)
       else:
         new_ind = y_t - self.out_vocabulary.size()
-        augmented_x_toks = ex.x_toks + [Vocabulary.END_OF_SENTENCE]
-        if self.spec.attention_copying:
-          y_tok = augmented_x_toks[new_ind]
-        else:
-          lex_entry = ex.lex_entries[new_ind]
-          y_tok = lex_entry[1]
+        augmented_copy_toks = ex.copy_toks + [Vocabulary.END_OF_SENTENCE]
+        y_tok = augmented_copy_toks[new_ind]
         y_t = self.out_vocabulary.get_index(y_tok)
       y_tok_seq.append(y_tok)
       h_t = self._decoder_step(y_t, c_t, h_t)
@@ -200,7 +189,7 @@ class AttentionModel(NeuralModel):
         y_tok_seq = deriv.y_toks
         attention_list = deriv.attention_list
         copy_list = deriv.copy_list
-        write_dist, c_t, alpha = self._decoder_write(annotations, h_t, ex.lex_inds)
+        write_dist, c_t, alpha = self._decoder_write(annotations, h_t)
         sorted_dist = sorted([(p_y_t, y_t) for y_t, p_y_t in enumerate(write_dist)],
                              reverse=True)
         for j in range(beam_size):
@@ -216,12 +205,8 @@ class AttentionModel(NeuralModel):
             do_copy = 0
           else:
             new_ind = y_t - self.out_vocabulary.size()
-            augmented_x_toks = ex.x_toks + [Vocabulary.END_OF_SENTENCE]
-            if self.spec.attention_copying:
-              y_tok = augmented_x_toks[new_ind]
-            else:
-              lex_entry = ex.lex_entries[new_ind]
-              y_tok = lex_entry[1]
+            augmented_copy_toks = ex.copy_toks + [Vocabulary.END_OF_SENTENCE]
+            y_tok = augmented_copy_toks[new_ind]
             y_t = self.out_vocabulary.get_index(y_tok)
             do_copy = 1
           new_h_t = self._decoder_step(y_t, c_t, h_t)

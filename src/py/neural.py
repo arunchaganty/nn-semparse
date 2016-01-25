@@ -75,8 +75,7 @@ class NeuralModel(object):
     """
     print 'x: %s' % ex.x_str
     print 'y: %s' % ex.y_str
-    info = self._backprop(ex.x_inds, ex.y_inds, eta, ex.lex_inds, 
-                          ex.y_lex_inds, ex.y_in_x_inds)
+    info = self._backprop(ex.x_inds, ex.y_inds, eta, ex.y_in_x_inds)
     p_y_seq = info[0]
     log_p_y = info[1]
     objective = -log_p_y
