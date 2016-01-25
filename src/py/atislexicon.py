@@ -12,6 +12,11 @@ from lexicon import Lexicon
 DB_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/atis/db')
+if not os.path.isdir(DB_DIR):
+  # We're on codalab
+  DB_DIR = os.path.join(
+      os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+      'atis-db')
 
 def clean_id(s, id_suffix, strip=None):
   true_id = s.replace(' ', '_')
