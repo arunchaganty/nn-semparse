@@ -14,11 +14,11 @@ import tempfile
 import theano
 
 # Local imports
+import atislexicon
 import augmentation
 from encoderdecoder import EncoderDecoderModel
 from attention import AttentionModel
 from example import Example
-from lexicon import Lexicon
 import spec as specutil
 from vocabulary import GloveVocabulary, RawVocabulary, Vocabulary
 
@@ -55,7 +55,7 @@ def _parse_args():
   parser.add_argument('--output-embedding-dim', '-o', type=int,
                       help='Dimension of output word vectors.')
   parser.add_argument('--copy', '-p', default='none',
-                      help='Way to copy words (options: [none, lexicon, attention, attention-logistic]).')
+                      help='Way to copy words (options: [none, attention, attention-logistic]).')
   parser.add_argument('--unk-cutoff', '-u', type=int, default=0,
                       help='Treat input words with <= this many occurrences as UNK.')
   parser.add_argument('--num-epochs', '-t', default=[],
@@ -86,6 +86,8 @@ def _parse_args():
                       help='Use beam search with given beam size (default is greedy).')
   parser.add_argument('--domain', default=None,
                       help='Domain for augmentation and evaluation (options: [geoquery,regex,atis])')
+  parser.add_argument('-l', '--lexicon', action='store_true',
+                      help='Use a lexicon for copying (should also supply --domain)')
   parser.add_argument('--augment', '-a',
                       help=('Options for augmentation.  Expects list of key-int pairs, '
                             'e.g. "int:100,str:200".  Meaning depends on domain.'))
@@ -167,24 +169,8 @@ def get_output_vocabulary(dataset):
   else:
     return constructor(sentences, OPTIONS.output_embedding_dim)
 
-def get_lexicon(dataset):
-  if OPTIONS.copy == 'lexicon':
-    sentences = [x[0] for x in dataset]
-    # TODO(robinjia): load lexicon entries for test data too
-    return Lexicon.from_sentences(sentences, OPTIONS.hidden_size,
-                                  OPTIONS.unk_cutoff)
-  else:
-    return None
-
 def update_model(model, dataset):
   """Update model for new dataset if fixed word vectors were used."""
-  # Do the lexicon update in-place
-  if model.lexicon:
-    for x, y in dataset:
-      words = x.split(' ')
-      for w in words:
-        model.lexicon.add_entry((w, w))
-
   need_new_model = False
   if OPTIONS.input_vocab_type == 'glove_fixed':
     in_vocabulary = get_input_vocabulary(dataset)
@@ -457,7 +443,6 @@ def evaluate(name, model, dataset):
   """
   in_vocabulary = model.in_vocabulary
   out_vocabulary = model.out_vocabulary
-  lexicon = model.lexicon
 
   is_correct_list = []
   tokens_correct_list = []
@@ -618,6 +603,13 @@ def load_raw_all():
 
   return train_raw, dev_raw
 
+def get_lexicon():
+  if OPTIONS.lexicon:
+    if OPTIONS.domain == 'atis':
+      return atislexicon.get_lexicon()
+    raise Exception('No lexicon for domain %s' % OPTIONS.domain)
+  return None
+
 def init_spec(train_raw):
   if OPTIONS.load_file:
     print >> sys.stderr, 'Loading saved params from %s' % OPTIONS.load_file
@@ -626,7 +618,7 @@ def init_spec(train_raw):
     print >> sys.stderr, 'Initializing parameters...'
     in_vocabulary = get_input_vocabulary(train_raw)
     out_vocabulary = get_output_vocabulary(train_raw)
-    lexicon = get_lexicon(train_raw)
+    lexicon = get_lexicon()
     spec = get_spec(in_vocabulary, out_vocabulary, lexicon)
   else:
     raise Exception('Must either provide parameters to load or training data.')

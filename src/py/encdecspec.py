@@ -15,13 +15,13 @@ class EncoderDecoderSpec(Spec):
     self.decoder = self.create_rnn_layer(
         self.hidden_size, self.out_vocabulary.emb_size,
         self.out_vocabulary.size(), False)
-    self.writer = self.create_output_layer(self.out_vocabulary, self.lexicon, self.hidden_size)
+    self.writer = self.create_output_layer(self.out_vocabulary, self.hidden_size)
 
   def get_local_params(self):
     return self.encoder.params + self.decoder.params + self.writer.params
 
-  def create_output_layer(self, vocab, lexicon, hidden_size):
-    return OutputLayer(vocab, lexicon, hidden_size)
+  def create_output_layer(self, vocab, hidden_size):
+    return OutputLayer(vocab, hidden_size)
 
   def get_init_state(self):
     return self.encoder.get_init_state()
@@ -36,6 +36,6 @@ class EncoderDecoderSpec(Spec):
     input_t = self.out_vocabulary.get_theano_embedding(y_t)
     return self.decoder.step(input_t, h_prev)
 
-  def f_write(self, h_t, cur_lex_entries):
+  def f_write(self, h_t):
     """Gives the softmax output distribution."""
-    return self.writer.write(h_t, cur_lex_entries)
+    return self.writer.write(h_t)

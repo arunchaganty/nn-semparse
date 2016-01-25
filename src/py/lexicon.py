@@ -1,72 +1,104 @@
 """A lexicon maps input substrings to an output token."""
 import collections
+import itertools
+import re
+import sys
 
-class Lexicon(object):
-  """A lexicon object.
+class Lexicon:
+  """A Lexicon class.
 
-  For now, maintains its own embeddings, just like Vocabulary.
-  TODO(robinjia): This will probably change later, as we want
-  to generate the embeddings based on local context.
+  The lexicon stores two types of rules:
+    1. Entries are pairs (name, entity), 
+       where name could be a single word or multi-word phrase.
+    2. Handlers are pairs (regex, func(match) -> entity).
+       regex is checked to see if it matches any span of the input.
+       If so, the function is applied to the match object to yield an entity.
 
-  In this class, an "entry" is a (input, output) 2-tuple.
+  We additionally keep track of:
+    3. Unique words.  If a word |w| appears in exactly one entry (|n|, |e|),
+       then a lower-precision rule maps |w| directly to |e|, even if the
+       entire name |n| is not present.
 
-  TODO(robinjia): enable mapping to a sequence of output tokens.
+  Rules take precedence in the order given: 1, then 2, then 3.
+  Within each block, rules that match larger spans take precedence
+  over ones that match shorter spans.
   """
-  def __init__(self, entries, emb_size, unk_func=None):
-    """Create the lexicon.
+  def __init__(self):
+    self.entries = collections.OrderedDict()
+    self.handlers = []
+    self.unique_word_map = collections.OrderedDict()
+    self.seen_words = set()
 
-    Args:
-      entries: list of (input, output) pairs.
-      emb_size: size of embeddings
-      unk_func: If provided, this function says whether to map entry to UNK embedding.
-    """
-    self.entries = entries
-    self.entry_to_index = {}
-    self.entry_map = collections.defaultdict(list)  # Map input to entry
-    cur_ind = 1
-    for e in entries:
-      self.entry_map[e[0]].append(e)
-      if not unk_func or not unk_func(e):
-        self.entry_to_index[e] = cur_ind
-        cur_ind += 1
-      else:
-        self.entry_to_index[e] = 0  # 0 represents UNK.
-    self.num_embeddings = cur_ind  # Embeddings actually stored in OutputLayer.
+  def add_entries(self, entries):
+    for name, entity in entries:
+      # Update self.entries
+      if name in self.entries:
+        if self.entries[name] != entity:
+          print >> sys.stderr, 'Collision detected: %s -> %s, %s' % (
+              name, self.entries[name], entity)
+          continue
+      self.entries[name] = entity
 
-  def get_entries(self, in_str):
-    if in_str not in self.entry_map: return []
-    return self.entry_map[in_str]
+      # Update self.unique_word_map
+      for w in name.split():
+        if w in self.seen_words:
+          # This word is not unique!
+          if w in self.unique_word_map:
+            del self.unique_word_map[w]
+        else:
+          self.unique_word_map[w] = entity
+          self.seen_words.add(w)
 
-  def size(self):
-    return len(self.entries)
+  def add_handler(self, regex, func):
+    self.handlers.append((regex, func))
 
-  def get_num_embeddings(self):
-    return self.num_embeddings
+  def test_handlers(self, s):
+    """Apply all handlers to a word; for debugging."""
+    entities = []
+    for regex, func in self.handlers:
+      m = re.match(regex, s)
+      if m:
+        entities.append(func(m))
+    print '  %s -> %s' % (s, entities)
 
-  def get_index(self, entry):
-    # Note: indices are NOT unique!  Some indices may map to 0 for UNK
-    return self.entry_to_index[entry]
-
-  def add_entry(self, entry):
-    """Add an entry to the lexicon.  
+  def map_over_sentence(self, words):
+    """Apply unambiguous lexicon rules to an entire sentence.
     
-    Always maps to UNK, since embedding matrix is fixed after lexicon creation.
+    Args:
+      words: A list of words
+    Returns: A list of length len(words), where words[i] maps to retval[i]
     """
-    if entry in self.entry_to_index: return
-    self.entries.append(entry)
-    self.entry_to_index[entry] = 0  # 0 is for UNK
-    self.entry_map[entry[0]].append(entry)
+    entities = ['' for i in range(len(words))]
+    ind_pairs = sorted(list(itertools.combinations(range(len(words) + 1), 2)),
+                       key=lambda x: x[0] - x[1])
 
-  @classmethod
-  def from_sentences(cls, sentences, emb_size, unk_cutoff):
-    """Create a lexicon that just maps every word in a vocabulary to itself."""
-    counts = collections.Counter()
-    words = set()
-    for s in sentences:
-      counts.update(s.split(' '))
-      words.update(s.split(' '))
-    entries = [(w, w) for w in words]
-    lex = cls(entries, emb_size, unk_func=lambda e: counts[e[0]] <= unk_cutoff)
-    print 'Extract lexicon of size %d, %d embeddings' % (
-        lex.size(), lex.get_num_embeddings())
-    return lex
+    # Entries
+    for i, j in ind_pairs:
+      if any(x for x in entities[i:j]): 
+        # Something in this span has already been assinged
+        continue
+      span = ' '.join(words[i:j])
+      if span in self.entries:
+        entity = self.entries[span]
+        for k in range(i, j):
+          entities[k] = entity
+
+    # Handlers
+    for i, j in ind_pairs:
+      if any(x for x in entities[i:j]): continue
+      span = ' '.join(words[i:j])
+      for regex, func in self.handlers:
+        m = re.match(regex, span)
+        if m:
+          entity = func(m)
+          for k in range(i, j):
+            entities[k] = entity
+
+    # Unique words
+    for i in range(len(words)):
+      if entities[i]: continue
+      word = words[i]
+      if word in self.unique_word_map:
+        entities[i] = self.unique_word_map[word]
+
+    return entities

@@ -38,7 +38,7 @@ class AttentionSpec(Spec):
     self.decoder = self.create_rnn_layer(
         self.hidden_size, self.out_vocabulary.emb_size + annotation_size,
         self.out_vocabulary.size(), False)
-    self.writer = self.create_output_layer(self.out_vocabulary, self.lexicon,
+    self.writer = self.create_output_layer(self.out_vocabulary,
                                            self.hidden_size + annotation_size)
 
     self.w_enc_to_dec = theano.shared(
@@ -52,8 +52,8 @@ class AttentionSpec(Spec):
     return (self.fwd_encoder.params + self.bwd_encoder.params + 
             self.decoder.params + self.writer.params + [self.w_enc_to_dec])
 
-  def create_output_layer(self, vocab, lexicon, hidden_size):
-    return OutputLayer(vocab, lexicon, hidden_size)
+  def create_output_layer(self, vocab, hidden_size):
+    return OutputLayer(vocab, hidden_size)
 
   def get_init_fwd_state(self):
     return self.fwd_encoder.get_init_state()
@@ -93,9 +93,9 @@ class AttentionSpec(Spec):
     c_t = T.dot(alpha, annotations)
     return c_t
 
-  def f_write(self, h_t, c_t, cur_lex_entries, scores):
+  def f_write(self, h_t, c_t, scores):
     """Gives the softmax output distribution."""
     input_t = T.concatenate([h_t, c_t])
     if not self.attention_copying:
       scores = None
-    return self.writer.write(input_t, cur_lex_entries, scores)
+    return self.writer.write(input_t, scores)

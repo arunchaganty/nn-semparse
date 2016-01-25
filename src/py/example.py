@@ -7,10 +7,9 @@ class Example(object):
     - self.x_toks, self.y_toks: input/output as list of strings
     - self.input_vocab, self.output_vocab: Vocabulary objects
     - self.x_inds, self.y_inds: input/output as indices in corresponding vocab
-    - self.lex_entries: list of all lexicon entries relevant to this example
-    - self.lex_inds: indices in lexicon corresponding to items
-    - self.y_lex_inds: for each i, a bit vector of length len(self.lex_entries)
-          where j-th bit is true iff lex_entries[j] == y[i].
+    - self.copy_toks: list of length len(x_toks), having tokens that should
+        be generated if copying is performed.
+    - self.y_in_x_inds: ji-th entry is whether copy_toks[i] == y_toks[j].
 
   Treat these objects as read-only.
   """
@@ -39,21 +38,15 @@ class Example(object):
     self.y_inds = output_vocab.sentence_to_indices(y_str)
 
     if lexicon:
-      self.lex_entries = [e for t in self.x_toks for e in lexicon.get_entries(t)]
-      # TODO(robinjia): handle multi-word input lexicon entries
-      self.lex_inds = [lexicon.get_index(e) for e in self.lex_entries]
-
-      self.y_lex_inds = (
-          [[int(e[1] == y_i) for e in self.lex_entries] for y_i in self.y_toks] +
-          [[0] * len(self.lex_entries)])
-          # Add 0's for the EOS tag in y
+      entities = lexicon.map_over_sentence(self.x_str.split(' '))
+      self.copy_toks = [x if x else '<COPY>' for x in entities]
+      if reverse_input:
+        self.copy_toks = self.copy_toks[::-1]
     else:
-      self.lex_entries = []
-      self.lex_inds = []
-      self.y_lex_inds = [[] for i in range(len(self.y_toks)+1)]
+      self.copy_toks = self.x_toks
 
-    self.y_in_x_inds = (
-        [[int(x_tok == y_tok) for x_tok in self.x_toks] + [0] for y_tok in self.y_toks] +
-        [[0] * (len(self.x_toks) + 1)])
-        # Make sure to add EOS tags for both x and y
-
+    self.y_in_x_inds = ([
+        [int(x_tok == y_tok) for x_tok in self.copy_toks] + [0]
+        for y_tok in self.y_toks
+    ] + [[0] * (len(self.x_toks) + 1)])
+    # Make sure to add EOS tags for both x and y

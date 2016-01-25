@@ -32,7 +32,7 @@ def split_logical_form(lf):
   replacements = [
       ('(', ' ( _'),
       (')', ' ) '),
-      (':', ' : _'),
+      (':', ':_'),
   ]
   for r in replacements:
     lf = lf.replace(r[0], r[1])

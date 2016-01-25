@@ -44,19 +44,14 @@ class EncoderDecoderModel(NeuralModel):
   def setup_decoder_write(self):
     """Get the write distribution of the decoder.  Used at test time."""
     h_prev = T.vector('h_prev_for_write')
-    cur_lex_entries = T.lvector('cur_lex_entries_for_write')
     h_for_write = self.spec.decoder.get_h_for_write(h_prev)
-    write_dist = self.spec.f_write(h_for_write, cur_lex_entries)
-    self._decoder_write = theano.function(inputs=[h_prev, cur_lex_entries], 
-                                          outputs=write_dist, 
-                                          on_unused_input='warn')
+    write_dist = self.spec.f_write(h_for_write)
+    self._decoder_write = theano.function(inputs=[h_prev], outputs=write_dist)
 
   def setup_backprop(self):
     eta = T.scalar('eta_for_backprop')
     x = T.lvector('x_for_backprop')
     y = T.lvector('y_for_backprop')
-    cur_lex_entries = T.lvector('cur_lex_entries_for_backprop')
-    y_input_inds = T.lmatrix('y_input_inds_for_backprop')
     y_in_x_inds = T.lmatrix('y_in_x_inds_for_backprop')
     def enc_recurrence(x_t, h_prev, *params):
       return self.spec.f_enc(x_t, h_prev)
@@ -66,19 +61,16 @@ class EncoderDecoderModel(NeuralModel):
                                  non_sequences=self.spec.get_all_shared())
     h_last = enc_results[-1]
     
-    def decoder_recurrence(y_t, cur_y_input_inds, h_prev, cur_lex_entries, *params):
+    def decoder_recurrence(y_t, h_prev, *params):
       h_for_write = self.spec.decoder.get_h_for_write(h_prev)
-      write_dist = self.spec.f_write(h_for_write, cur_lex_entries)
-      p_y_t = write_dist[y_t] + T.dot(
-          write_dist[self.out_vocabulary.size():],
-          cur_y_input_inds)
-
+      write_dist = self.spec.f_write(h_for_write)
+      p_y_t = write_dist[y_t]
       h_t = self.spec.f_dec(y_t, h_prev)
       return (h_t, p_y_t)
     dec_results, _ = theano.scan(
-        fn=decoder_recurrence, sequences=[y, y_input_inds],
+        fn=decoder_recurrence, sequences=[y],
         outputs_info=[h_last, None],
-        non_sequences=[cur_lex_entries] + self.spec.get_all_shared())
+        non_sequences=self.spec.get_all_shared())
     p_y_seq = dec_results[1]
     log_p_y = T.sum(T.log(p_y_seq))
     gradients = T.grad(log_p_y, self.params)
@@ -92,20 +84,9 @@ class EncoderDecoderModel(NeuralModel):
       updates.append((p, p + eta * clipped_grad))
 
     self._backprop = theano.function(
-        inputs=[x, y, eta, cur_lex_entries, y_input_inds, y_in_x_inds],
+        inputs=[x, y, eta, y_in_x_inds],
         outputs=[p_y_seq, log_p_y],
         updates=updates, on_unused_input='warn')
-
-  def get_objective_and_gradients(self, ex):
-    # TODO(robinjia): Only pass x for cur_lex_entries if lexicon is simple.
-    info = self._backprop(ex.x_inds, ex.y_inds, ex.lex_inds, ex.y_lex_inds)
-    p_y_seq = info[0]
-    log_p_y = info[1]
-    gradients_list = info[2:]
-    objective = -log_p_y
-    gradients = dict(itertools.izip(self.params, gradients_list))
-    print 'P(y_i): %s' % p_y_seq
-    return (objective, gradients)
 
   def decode_greedy(self, ex, max_len=100):
     h_t = self._encode(ex.x_inds)
@@ -113,20 +94,14 @@ class EncoderDecoderModel(NeuralModel):
     p_y_seq = []  # Should be handy for error analysis
     p = 1
     for i in range(max_len):
-      write_dist = self._decoder_write(h_t, ex.lex_inds)
+      write_dist = self._decoder_write(h_t)
       y_t = numpy.argmax(write_dist)
       p_y_t = write_dist[y_t]
       p_y_seq.append(p_y_t)
       p *= p_y_t
       if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
         break
-      if y_t < self.out_vocabulary.size():
-        y_tok = self.out_vocabulary.get_word(y_t)
-      else:
-        new_ind = y_t - self.out_vocabulary.size()
-        lex_entry = ex.lex_entries[new_ind]
-        y_tok = lex_entry[1]
-        y_t = self.out_vocabulary.get_index(y_tok)
+      y_tok = self.out_vocabulary.get_word(y_t)
       y_tok_seq.append(y_tok)
       h_t = self._decoder_step(y_t, h_t)
     return [Derivation(ex, p, y_tok_seq)]
@@ -142,7 +117,7 @@ class EncoderDecoderModel(NeuralModel):
         cur_p = deriv.p
         h_t = deriv.hidden_state
         y_tok_seq = deriv.y_toks
-        write_dist = self._decoder_write(h_t, ex.lex_inds)
+        write_dist = self._decoder_write(h_t)
         sorted_dist = sorted([(p_y_t, y_t) for y_t, p_y_t in enumerate(write_dist)],
                              reverse=True)
         for j in range(beam_size):
@@ -151,13 +126,7 @@ class EncoderDecoderModel(NeuralModel):
           if y_t == Vocabulary.END_OF_SENTENCE_INDEX:
             finished.append(Derivation(ex, new_p, y_tok_seq))
             continue
-          if y_t < self.out_vocabulary.size():
-            y_tok = self.out_vocabulary.get_word(y_t)
-          else:
-            new_ind = y_t - self.out_vocabulary.size()
-            lex_entry = ex.lex_entries[new_ind]
-            y_tok = lex_entry[1]
-            y_t = self.out_vocabulary.get_index(y_tok)
+          y_tok = self.out_vocabulary.get_word(y_t)
           new_h_t = self._decoder_step(y_t, h_t)
           new_entry = Derivation(ex, new_p, y_tok_seq + [y_tok],
                                  hidden_state=new_h_t)
