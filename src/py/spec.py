@@ -1,6 +1,6 @@
 """Specifies a particular instance of a model."""
 import numpy
-import pickle
+import dill as pickle
 
 from gru import GRULayer
 from lstm import LSTMLayer

@@ -14,7 +14,7 @@ do
   do
 #ds=2
 #ms=0
-    cl run :src :lib :evaluator :atis :atis-db "OMP_NUM_THREADS=4 THEANO_FLAGS=blas.ldflags=-lopenblas,device=${device},floatX=float32 python src/py/main.py -d $d -i $i -o $i -p attention -u 1 -t 25,5,5 -c lstm -m attention --stats-file stats.json -l --domain atis --dev-frac 0.1 --dev-seed ${ds} --model-seed ${ms} --train-data atis/atis_train.tsv --save-file params" --request-queue jag --request-cpus $num_cpu -n atis_train -d "dev-seed ${ds}, model-seed ${ms}"
+    cl run :src :lib :evaluator :atis :atis-db "OMP_NUM_THREADS=4 THEANO_FLAGS=blas.ldflags=-lopenblas,device=${device},floatX=float32 python src/py/main.py -d $d -i $i -o $i -p attention -u 1 -t 25,5,5 -c lstm -m attention --stats-file stats.json -l --domain atis --dev-frac 0.1 --dev-seed ${ds} --model-seed ${ms} --train-data atis/atis_train.tsv" --request-queue jag --request-cpus $num_cpu -n atis_train -d "dev-seed ${ds}, model-seed ${ms}"
     sleep 1
   done
 done

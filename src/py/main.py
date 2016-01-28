@@ -390,8 +390,7 @@ def compare_answers_regex(true_answers, all_derivs):
       is_correct_list.append(False)
   return derivs, is_correct_list
 
-def atis_normalize_vars(ans):
-  """atis_test uses weird variable names, normalize here."""
+def atis_standardize_varnames(ans):
   toks = ans.split(' ')
   varnames = {}
   new_toks = []
@@ -406,15 +405,68 @@ def atis_normalize_vars(ans):
         new_toks.append(new_varname)
     else:
       new_toks.append(t)
-  ret = ' '.join(new_toks)
+  lf = ' '.join(new_toks)
+  return lf
+
+def to_lisp_tree(expr):
+  toks = expr.split(' ')
+  def recurse(i):
+    if toks[i] == '(':
+      subtrees = []
+      j = i+1
+      while True:
+        subtree, j = recurse(j)
+        subtrees.append(subtree)
+        if toks[j] == ')':
+          return subtrees, j + 1
+    else:
+      return toks[i], i+1
+
+  try:
+    lisp_tree, final_ind = recurse(0)
+    return lisp_tree
+  except Exception as e:
+    print >> sys.stderr, 'Failed to convert "%s" to lisp tree' % expr
+    print e
+    return None
+
+def atis_sort_args(ans):
+  lisp_tree = to_lisp_tree(ans)
+  if lisp_tree is None: return ans
+
+  # Post-order traversal, sorting as we go
+  def recurse(node):
+    if isinstance(node, str): return
+    for child in node:
+      recurse(child)
+    if node[0] in ('_and', '_or'):
+      node[1:] = sorted(node[1:], key=lambda x: str(x))
+  recurse(lisp_tree)
+
+  def tree_to_str(node):
+    if isinstance(node, str):
+      return node
+    else:
+      return '( %s )' % ' '.join(tree_to_str(child) for child in node)
+  return tree_to_str(lisp_tree)
+
+def atis_normalize(ans):
+  """Perform some normalization of ATIS logical forms
+
+  1. Standardize variable names, since atis_test uses different convention.
+  2. Sort arguments to commutative operators such as _and() and _or().
+  3. Balance parentheses.
+  """
+  lf = atis_standardize_varnames(ans)
   # Balance parentheses
   # In particular, atis_test gold lf's have unbalanced parens...
-  num_left_paren = sum(1 for c in ret if c == '(')
-  num_right_paren = sum(1 for c in ret if c == ')')
+  num_left_paren = sum(1 for c in lf if c == '(')
+  num_right_paren = sum(1 for c in lf if c == ')')
   diff = num_left_paren - num_right_paren
   if diff > 0:
-    ret = ret + ' )' * diff
-  return ret
+    lf = lf + ' )' * diff
+  lf = atis_sort_args(lf)
+  return lf
 
 def compare_answers_atis(true_answers, all_derivs):
   derivs = [x[0] for x in all_derivs]
@@ -422,7 +474,7 @@ def compare_answers_atis(true_answers, all_derivs):
   is_correct_list = []
   for true_ans, pred_ans in zip(true_answers, pred_answers):
     is_correct_list.append(
-        atis_normalize_vars(true_ans) == atis_normalize_vars(pred_ans))
+        atis_normalize(true_ans) == atis_normalize(pred_ans))
   return derivs, is_correct_list
 
 def compare_answers(true_answers, all_derivs):

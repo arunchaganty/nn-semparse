@@ -40,7 +40,7 @@ class Lexicon:
       self.entries[name] = entity
 
       # Update self.unique_word_map
-      for w in name.split():
+      for w in name.split(' '):
         if w in self.seen_words:
           # This word is not unique!
           if w in self.unique_word_map:

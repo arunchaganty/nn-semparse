@@ -59,6 +59,10 @@ def handle_times(lex):
                   lambda m: '%d%02d:_ti' % (int(m.group(1)) % 12, int(m.group(2))))
   lex.add_handler('([0-9]{1,2})([0-9]{2})pm$', 
                   lambda m: '%d%02d:_ti' % (int(m.group(1)) % 12 + 12, int(m.group(2))))
+  lex.add_handler("([0-9]{1,2}) o'clock am$",
+                  lambda m: '%d00:_ti' % (int(m.group(1)) % 12))
+  lex.add_handler("([0-9]{1,2}) o'clock pm$",
+                  lambda m: '%d00:_ti' % (int(m.group(1)) % 12 + 12))
 
 def handle_flight_numbers(lex):
   lex.add_handler('[0-9]{2,}$', lambda m: '%d:_fn' % int(m.group(0)))
@@ -72,17 +76,21 @@ def get_lexicon():
       for s in ('monday', 'tuesday', 'wednesday', 'thursday', 
                 'friday', 'saturday', 'sunday')
   ]
-  DATE_NUMBERS = [('%d' % i, '%d:_dn' % i) for i in range(1, 32)]
+  # For dates
+  WORD_NUMBERS = [('one', '1:_dn'), ('two', '2:_dn'), ('three', '3:_dn'), ('four', '4:_dn'), ('five', '5:_dn'), ('six', '6:_dn'), ('seven', '7:_dn'), ('eight', '8:_dn'), ('nine', '9:_dn'), ('ten', '10:_dn'), ('eleven', '11:_dn'), ('twelve', '12:_dn'), ('thirteen', '13:_dn'), ('fourteen', '14:_dn'), ('fifteen', '15:_dn'), ('sixteen', '16:_dn'), ('seventeen', '17:_dn'), ('eighteen', '18:_dn'), ('nineteen', '19:_dn'), ('twenty', '20:_dn'), ('twenty one', '21:_dn'), ('twenty two', '22:_dn'), ('twenty three', '23:_dn'), ('twenty four', '24:_dn'), ('twenty five', '25:_dn'), ('twenty six', '26:_dn'), ('twenty seven', '27:_dn'), ('twenty eight', '28:_dn'), ('twenty nine', '29:_dn'), ('thirty', '30:_dn'), ('thirty one', '31:_dn')]
+  ORDINAL_NUMBERS = [('second', '2:_dn'), ('third', '3:_dn'), ('fourth', '4:_dn'), ('fifth', '5:_dn'), ('sixth', '6:_dn'), ('seventh', '7:_dn'), ('eighth', '8:_dn'), ('ninth', '9:_dn'), ('tenth', '10:_dn'), ('eleventh', '11:_dn'), ('twelfth', '12:_dn'), ('thirteenth', '13:_dn'), ('fourteenth', '14:_dn'), ('fifteenth', '15:_dn'), ('sixteenth', '16:_dn'), ('seventeenth', '17:_dn'), ('eighteenth', '18:_dn'), ('nineteenth', '19:_dn'), ('twentieth', '20:_dn'), ('twenty first', '21:_dn'), ('twenty second', '22:_dn'), ('twenty third', '23:_dn'), ('twenty fourth', '24:_dn'), ('twenty fifth', '25:_dn'), ('twenty sixth', '26:_dn'), ('twenty seventh', '27:_dn'), ('twenty eighth', '28:_dn'), ('twenty ninth', '29:_dn'), ('thirtieth', '30:_dn'), ('thirty first', '31:_dn')]  # Prefer first class to "first = 1"
   MEALS = [(m, '%s:_me' % m) for m in ('breakfast', 'lunch', 'dinner', 'snack')]
 
   lex = Lexicon()
   lex.add_entries(read_db('CITY.TAB', 1, 1, '_ci', strip_id=['.']))
   lex.add_entries(DAYS_OF_WEEK)
+  lex.add_entries([(x + 's', y) for x, y in DAYS_OF_WEEK])  # Handle "on tuesdays"
   lex.add_entries(read_db('AIRLINE.TAB', 0, 1, '_al',
                           strip_name=[', inc.', ', ltd.']))
   handle_times(lex)
   lex.add_entries(read_db('INTERVAL.TAB', 0, 0, '_pd'))
-  lex.add_entries(DAYS_OF_WEEK)
+  lex.add_entries(WORD_NUMBERS)
+  lex.add_entries(ORDINAL_NUMBERS)
   lex.add_entries(read_db('MONTH.TAB', 1, 1, '_mn'))
   lex.add_entries(read_db('AIRPORT.TAB', 0, 1, '_ap',
                           strip_name=[], split_name=['/']))
@@ -148,6 +156,8 @@ if __name__ == '__main__':
   lex.test_handlers('832pm')
   lex.test_handlers('904pm')
   lex.test_handlers('1204pm')
+  lex.test_handlers("8 o'clock am")
+  lex.test_handlers("8 o'clock pm")
   lex.test_handlers('21')
   lex.test_handlers('4341')
   lex.test_handlers('4341 dollars')
