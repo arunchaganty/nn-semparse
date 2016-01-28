@@ -161,6 +161,8 @@ if __name__ == '__main__':
   lex.test_handlers('21')
   lex.test_handlers('4341')
   lex.test_handlers('4341 dollars')
+  lex.test_map('unk:1234:chicago')
+  lex.test_map('unk:23456:11pm')
 
   with open('data/atis/processed/atis_train.tsv') as f:
     for line in f:

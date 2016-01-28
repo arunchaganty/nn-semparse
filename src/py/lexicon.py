@@ -61,6 +61,11 @@ class Lexicon:
         entities.append(func(m))
     print '  %s -> %s' % (s, entities)
 
+  def test_map(self, s):
+    words = s.split(' ')
+    entities = self.map_over_sentence(words)
+    print '  %s -> %s' % (s, entities)
+
   def map_over_sentence(self, words):
     """Apply unambiguous lexicon rules to an entire sentence.
     
@@ -71,6 +76,15 @@ class Lexicon:
     entities = ['' for i in range(len(words))]
     ind_pairs = sorted(list(itertools.combinations(range(len(words) + 1), 2)),
                        key=lambda x: x[0] - x[1])
+
+    # Strip unk:%04d identifiers
+    def strip_unk(w):
+      m = re.match('^unk:[0-9]{4,}:(.*)$', w)
+      if m:
+        return m.group(1)
+      else:
+        return w
+    words = [strip_unk(w) for w in words]
 
     # Entries
     for i, j in ind_pairs:

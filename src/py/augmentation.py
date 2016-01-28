@@ -1,26 +1,58 @@
 """Module that handles all augmentation."""
+import collections
 import random
 import sys
 
 import regexaugment
 
 class Augmenter(object):
-  def __init__(self, dataset):
+  def __init__(self, dataset, unk_cutoff=1):
     self.dataset = dataset
+
+    # Set up UNK processing
+    self.unk_cutoff = unk_cutoff
+    self.next_unk = 1
+    sentences = [x for x, y in self.dataset]
+    counts = collections.Counter()
+    for s in sentences:
+      counts.update(s.split(' '))
+    self.vocab = set(w for w in counts if counts[w] > unk_cutoff)
+
+    # Do other setup
     self.setup()
 
   def setup(self):
     pass
 
+  def _mask_unk(self, x):
+    """Mask UNK words, replace with an UNK token."""
+    toks = x.split(' ')
+    new_toks = []
+    unk_dict = {}
+    for t in toks:
+      if t in self.vocab:
+        new_toks.append(t)
+      else:
+        if t not in unk_dict:
+          unk_dict[t] = 'unk:%04d:%s' % (self.next_unk, t)
+          self.next_unk += 1
+        new_toks.append(unk_dict[t])
+    x_new = ' '.join(new_toks)
+    return x_new
+
   def augment_concat(self, num):
     """Simple augmentation by concatenating two input examples."""
-    aug_data = set()
+    aug_data = []
+    aug_set = set()
     while len(aug_data) < num:
       (x1, y1), (x2, y2) = random.sample(self.dataset, 2)
+      x1, x2 = self._mask_unk(x1), self._mask_unk(x2)
       x_new = '%s <sep> %s' % (x1, x2)
       y_new = '%s <sep> %s' % (y1, y2)
-      aug_data.add((x_new, y_new))
-    return list(aug_data)
+      if (x_new, y_new) not in aug_set:
+        aug_data.append((x_new, y_new))
+        aug_set.add((x_new, y_new))
+    return aug_data
 
   def augment(self, aug_type, num):
     raise NotImplementedError
