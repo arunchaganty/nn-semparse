@@ -11,7 +11,10 @@ whose code can be downloaded [here](http://cs.stanford.edu/~pliang/papers/softwa
 
 # Dependencies
 * Python 2.7
+  * [numpy](http://www.numpy.org/)
   * [Theano](http://deeplearning.net/software/theano/)
+  * [bottle](http://bottlepy.org/docs/dev/index.html)
+  * [dill](https://pypi.python.org/pypi/dill)
 * Java 7
   * [automaton](http://mvnrepository.com/artifact/dk.brics.automaton/automaton/1.11-8)
 * Scala 2.9.0.1
