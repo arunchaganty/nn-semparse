@@ -1,3 +1,6 @@
+lib/
+refdb/
+
 #Compiled files
 classes/
 *.jar

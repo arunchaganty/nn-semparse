@@ -70,7 +70,7 @@ def handle_flight_numbers(lex):
 def handle_dollars(lex):
   lex.add_handler('([0-9]+) dollars$', lambda m: '%d:_do' % int(m.group(1)))
 
-def get_lexicon():
+def get_manual_lexicon():
   DAYS_OF_WEEK = [
       (s, '%s:_da' % s) 
       for s in ('monday', 'tuesday', 'wednesday', 'thursday', 
@@ -134,6 +134,22 @@ def print_aligned(a, b, indent=0):
   prefix = ' ' * indent
   print '%s%s' % (prefix, ' '.join(a_toks))
   print '%s%s' % (prefix, ' '.join(b_toks))
+
+def parse_entry(line):
+  """Parse an entry from the CCG lexicon."""
+  return tuple(line.strip().split(' :- NP : '))
+
+def get_ccg_lexicon():
+  lexicon = Lexicon()
+  filename = os.path.join(DB_DIR, 'lexicon.txt')
+  with open(filename) as f:
+    entries = [tuple(line.strip().split(' :- NP : ')) for line in f]
+  lexicon.add_entries(entries)
+  return lexicon
+
+def get_lexicon():
+  return get_ccg_lexicon()
+  #return get_manual_lexicon()
 
 if __name__ == '__main__':
   # Print out the lexicon
