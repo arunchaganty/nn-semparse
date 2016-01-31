@@ -3,6 +3,7 @@ import collections
 import random
 import sys
 
+import atisaugment
 import regexaugment
 
 class Augmenter(object):
@@ -89,9 +90,21 @@ class RegexAugmenter(Augmenter):
       raise ValueError('Unrecognized augmentation type "%s"' % aug_type)
 
 class AtisAugmenter(Augmenter):
+  def setup(self):
+    self.templates, self.replacements = atisaugment.get_templates_and_replacements(self.dataset)
+
+  def augment_single(self, num):
+    return atisaugment.augment_single(self.templates, self.replacements, num)
+  def augment_double(self, num):
+    return atisaugment.augment_double(self.templates, self.replacements, num)
+
   def augment(self, aug_type, num):
     if aug_type == 'concat':
       return self.augment_concat(num)
+    elif aug_type == 'single':
+      return self.augment_single(num)
+    elif aug_type == 'double':
+      return self.augment_double(num)
     else:
       raise ValueError('Unrecognized augmentation type "%s"' % aug_type)
 

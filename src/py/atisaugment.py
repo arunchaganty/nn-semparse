@@ -10,6 +10,8 @@ import random
 import re
 import sys
 
+import atislexicon
+
 IN_FILE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/atis/processed/atis_train.tsv')
@@ -20,92 +22,89 @@ OUT_DIR = os.path.join(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
     'data/atis/processed-augmented')
 
-def read_examples(filename):
-  with open(filename) as f:
-    data = [tuple(line.strip().split('\t')) for line in f]
-  print 'Read %d examples' % len(data)
-  return data
-
-def clean_id(s, id_suffix):
-  true_id = s.replace(' ', '_')
-  return '%s : %s' % (true_id, id_suffix)
-
-def clean_name(s):
-  if s.endswith(', inc.') or s.endswith(', ltd.'): 
-    s = s[:-6]
-  s = s.replace('/', ' ')
-  return s
-
-def read_db(basename, id_col, name_col, id_suffix):
-  filename = os.path.join(DB_DIR, basename)
-  data = []  # Pairs of (name, id)
-  with open(filename) as f:
-    for line in f:
-      row = [s[1:-1] for s in re.findall('"[^"]*"', line.strip())]
-      cur_name = clean_name(row[name_col].lower())
-      cur_id = clean_id(row[id_col].lower(), id_suffix)
-      data.append((cur_name, cur_id))
-  return data
-
-def get_replacements():
-  replacements = {}
-  replacements['city'] = read_db('CITY.TAB', 1, 1, '_ci')
-  replacements['airport'] = read_db('AIRPORT.TAB', 0, 1, '_ap')
-  replacements['airline'] = read_db('AIRLINE.TAB', 0, 1, '_al')
-  for k in replacements:
-    print >> sys.stderr, 'Found %d replacements of type %s' % (len(replacements[k]), k)
-  return replacements
-
-def get_templates(in_data, replacements):
+def get_templates_and_replacements(data):
+  lex = atislexicon.get_lexicon()
   templates = []
-  for x, y in in_data:
-    x_new = x
-    y_new = y
-    r_types = []
-    for r_type in replacements:
-      for x_rep, y_rep in replacements[r_type]:
-        if x_rep in x and y_rep in y:
-          x_new = x_new.replace(x_rep, '%(w' + str(len(r_types)) + ')s')
-          y_new = y_new.replace(y_rep, '%(w' + str(len(r_types)) + ')s')
-          r_types.append(r_type)
-    if x_new != x:
-      templates.append((x_new, y_new, r_types))
-  return templates
+  replacements = collections.defaultdict(set)
 
-def augment_data(in_data, num):
-  replacements = get_replacements()
-  templates = get_templates(in_data, replacements)
-  augmented_data = set()
+  for x, y in data:
+    x_toks = x.split(' ')
+    y_toks = y.split(' ')
+    lex_items = lex.map_over_sentence(x_toks, return_entries=True)
+    lex_ents = [x[1] for x in lex_items]
+    x_holes = []
+    y_holes = []
+    reptypes = []
+    for (i, j), ent in lex_items:
+      # Make sure this entity occurs exactly once in lexicon entries
+      # and in the logical form
+      if lex_ents.count(ent) != 1: continue
+      if y_toks.count(ent) != 1: continue
 
-  while len(augmented_data) < num:
-    template = random.sample(templates, 1)[0]
-    x_t, y_t, r_types = template
-    cur_reps = [random.sample(replacements[r_type], 1)[0] for r_type in r_types]
-    x_reps = dict(('w%d' % i, cur_reps[i][0]) for i in range(len(r_types)))
-    y_reps = dict(('w%d' % i, cur_reps[i][1]) for i in range(len(r_types)))
-    x_new = x_t % x_reps
-    y_new = y_t % y_reps
-    augmented_data.add((x_new, y_new))
-  return list(augmented_data)
+      # Add the replacement rule
+      x_span = ' '.join(x_toks[i:j])
+      ent_type = ent.split(':')[1]
+      replacements[ent_type].add((x_span, ent))
 
-def write_data(basename, data):
-  out_path = os.path.join(OUT_DIR, basename)
-  with open(out_path, 'w') as f:
-    for x, y in data:
-      print >>f, '%s\t%s' % (x, y)
+      # Update the template
+      x_holes.append((i, j))
+      y_holes.append(y_toks.index(ent))
+      reptypes.append(ent_type)
 
-def process(filename):
-  random.seed(1)
-  print >> sys.stderr, 'Processing %s' % filename
-  basename = os.path.basename(filename)
-  in_data = read_examples(filename)
-  augmented_data = augment_data(in_data, 4000)
+    # Generate the template
+    if len(x_holes) == 0: continue
+    x_new_toks = list(x_toks)
+    y_new_toks = list(y_toks)
+    for count, ((i, j), y_ind) in enumerate(zip(x_holes, y_holes)):
+      fmt_str = '%(w' + str(count) + ')s'
+      x_new_toks[i] = fmt_str
+      for k in range(i+1, j):
+        x_new_toks[k] = None
+      y_new_toks[y_ind] = fmt_str
+    x_t = ' '.join(t for t in x_new_toks if t is not None)
+    y_t = ' '.join(y_new_toks)
+    templates.append((x_t, y_t, reptypes))
 
-  write_data('atis_train_augment2k.tsv', in_data + augmented_data[:2000])
-  write_data('atis_train_augment4k.tsv', in_data + augmented_data[:4000])
+  # Print results
+#  for t in replacements:
+#    print '%s:' % t
+#    for x in replacements[t]:
+#      print '  %s' % str(x)
+#  for x_t, y_t, reps in templates:
+#    print '%s -> %s (%s)' % (x_t, y_t, reps)
+
+  return templates, replacements
+
+def sample_sentence(templates, replacements):
+  x_t, y_t, replist = random.sample(templates, 1)[0]
+  cur_reps = [random.sample(replacements[t], 1)[0] for t in replist]
+  x_reps = dict(('w%d' % i, cur_reps[i][0]) for i in range(len(replist)))
+  y_reps = dict(('w%d' % i, cur_reps[i][1]) for i in range(len(replist)))
+  x_new = x_t % x_reps
+  y_new = y_t % y_reps
+  return (x_new, y_new)
+
+def augment_single(templates, replacements, num):
+  aug_data = set()
+  while len(aug_data) < num:
+    x, y = sample_sentence(templates, replacements)
+    aug_data.add((x, y))
+  return list(aug_data)
+
+def augment_double(templates, replacements, num):
+  """For now, just do a concatenation."""
+  aug_data = set()
+  while len(aug_data) < num:
+    x1, y1 = sample_sentence(templates, replacements)
+    x2, y2 = sample_sentence(templates, replacements)
+    x_new = '%s <sep> %s' % (x1, x2)
+    y_new = '%s <sep> %s' % (y1, y2)
+    aug_data.add((x_new, y_new))
+  return list(aug_data)
 
 def main():
-  process(IN_FILE)
+  print 'main() does nothing right now'
+  pass
 
 if __name__ == '__main__':
   main()

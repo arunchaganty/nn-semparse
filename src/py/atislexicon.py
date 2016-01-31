@@ -142,8 +142,12 @@ def parse_entry(line):
 def get_ccg_lexicon():
   lexicon = Lexicon()
   filename = os.path.join(DB_DIR, 'lexicon.txt')
+  entries = []
   with open(filename) as f:
-    entries = [tuple(line.strip().split(' :- NP : ')) for line in f]
+    for line in f:
+      x, y = line.strip().split(' :- NP : ')
+      y = y.replace(':', ':_')
+      entries.append((x, y))
   lexicon.add_entries(entries)
   return lexicon
 

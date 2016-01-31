@@ -66,16 +66,19 @@ class Lexicon:
     entities = self.map_over_sentence(words)
     print '  %s -> %s' % (s, entities)
 
-  def map_over_sentence(self, words):
+  def map_over_sentence(self, words, return_entries=False):
     """Apply unambiguous lexicon rules to an entire sentence.
     
     Args:
       words: A list of words
-    Returns: A list of length len(words), where words[i] maps to retval[i]
+      return_entries: if True, return a list (span_inds, entity) pairs instead.
+    Returns: 
+      A list of length len(words), where words[i] maps to retval[i]
     """
     entities = ['' for i in range(len(words))]
     ind_pairs = sorted(list(itertools.combinations(range(len(words) + 1), 2)),
                        key=lambda x: x[0] - x[1])
+    ret_entries = []
 
     # Strip unk:%04d identifiers
     def strip_unk(w):
@@ -96,6 +99,7 @@ class Lexicon:
         entity = self.entries[span]
         for k in range(i, j):
           entities[k] = entity
+        ret_entries.append(((i, j), entity))
 
     # Handlers
     for i, j in ind_pairs:
@@ -107,12 +111,17 @@ class Lexicon:
           entity = func(m)
           for k in range(i, j):
             entities[k] = entity
+          ret_entries.append(((i, j), entity))
 
     # Unique words
     for i in range(len(words)):
       if entities[i]: continue
       word = words[i]
       if word in self.unique_word_map:
-        entities[i] = self.unique_word_map[word]
+        entity = self.unique_word_map[word]
+        entities[i] = entity
+        ret_entries.append(((i, i+1), entity))
 
+    if return_entries:
+      return ret_entries
     return entities
