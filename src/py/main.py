@@ -20,7 +20,7 @@ from encoderdecoder import EncoderDecoderModel
 from attention import AttentionModel
 from example import Example
 import spec as specutil
-from vocabulary import GloveVocabulary, RawVocabulary, Vocabulary
+from vocabulary import Vocabulary
 
 MODELS = collections.OrderedDict([
     ('encoderdecoder', EncoderDecoderModel),
@@ -28,12 +28,10 @@ MODELS = collections.OrderedDict([
 ])
 
 VOCAB_TYPES = collections.OrderedDict([
-    ('raw', lambda s, e, **kwargs: RawVocabulary.from_sentences(
+    ('raw', lambda s, e, **kwargs: Vocabulary.from_sentences(
         s, e, **kwargs)), 
-    ('glove_fixed', lambda s, e, **kwargs: GloveVocabulary.from_sentences(
-        s, e, hold_fixed=True, **kwargs)),
-    ('glove_not_fixed', lambda s, e, **kwargs: GloveVocabulary.from_sentences(
-        s, e, hold_fixed=False, **kwargs))
+    ('glove', lambda s, e, **kwargs: Vocabulary.from_sentences(
+        s, e, use_glove=True, **kwargs))
 ])
 
 # Global options
@@ -65,7 +63,7 @@ def _parse_args():
   parser.add_argument('--learning-rate', '-r', type=float, default=0.1,
                       help='Initial learning rate (default = 0.1).')
   parser.add_argument('--step-rule', '-s', default='simple',
-                      help='Use a special SGD step size rule (types=[simple, adagrad, rmsprop])')
+                      help='Use a special SGD step size rule (types=[simple, adagrad, rmsprop,nesterov])')
   parser.add_argument('--rnn-type', '-c',
                       help='type of continuous RNN model (options: [%s])' % (
                           ', '.join(specutil.RNN_TYPES)))
@@ -170,7 +168,10 @@ def get_output_vocabulary(dataset):
     return constructor(sentences, OPTIONS.output_embedding_dim)
 
 def update_model(model, dataset):
-  """Update model for new dataset if fixed word vectors were used."""
+  """Update model for new dataset if fixed word vectors were used.
+  
+  Note: glove_fixed has been removed for now.
+  """
   need_new_model = False
   if OPTIONS.input_vocab_type == 'glove_fixed':
     in_vocabulary = get_input_vocabulary(dataset)

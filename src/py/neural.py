@@ -11,6 +11,7 @@ from theano import tensor as T
 import time
 
 CLIP_THRESH = 3.0  # Clip gradient if norm is larger than this
+NESTEROV_MU = 0.95  # mu for Nesterov momentum
 
 class NeuralModel(object):
   """A generic continuous neural sequence-to-sequence model.
@@ -42,11 +43,12 @@ class NeuralModel(object):
     self.lexicon = spec.lexicon
     self.float_type = float_type
     self.params = spec.get_params()
-    if spec.step_rule in ('adagrad', 'rmsprop'):
-      # Initialize the grad norm cache
-      self.grad_norm_cache = [
+    if spec.step_rule in ('adagrad', 'rmsprop', 'nesterov'):
+      # Initialize the cache for grad norms (adagrad, rmsprop) 
+      # or velocity (Nesterov momentum)
+      self.grad_cache = [
           theano.shared(
-              name='%s_norm_cache' % p.name,
+              name='%s_grad_cache' % p.name,
               value=numpy.zeros_like(p.get_value()))
           for p in self.params]
     self.all_shared = spec.get_all_shared()

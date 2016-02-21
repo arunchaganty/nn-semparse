@@ -13,7 +13,7 @@ import sys
 
 from attnspec import AttentionSpec
 from derivation import Derivation
-from neural import NeuralModel, CLIP_THRESH
+from neural import NeuralModel, CLIP_THRESH, NESTEROV_MU
 from vocabulary import Vocabulary
 
 class AttentionModel(NeuralModel):
@@ -115,7 +115,7 @@ class AttentionModel(NeuralModel):
     updates = []
     if self.spec.step_rule in ('adagrad', 'rmsprop'):
       # Adagrad updates
-      for p, g, c in zip(self.params, gradients, self.grad_norm_cache):
+      for p, g, c in zip(self.params, gradients, self.grad_cache):
         grad_norm = g.norm(2)
         clipped_grad = ifelse(grad_norm >= CLIP_THRESH, 
                               g * CLIP_THRESH / grad_norm, g)
@@ -128,6 +128,18 @@ class AttentionModel(NeuralModel):
         has_non_finite = T.any(T.isnan(new_p) + T.isinf(new_p))
         updates.append((p, ifelse(has_non_finite, p, new_p)))
         updates.append((c, ifelse(has_non_finite, c, new_c)))
+    elif self.spec.step_rule == 'nesterov':
+      # Nesterov momentum
+      for p, g, v in zip(self.params, gradients, self.grad_cache):
+        grad_norm = g.norm(2)
+        clipped_grad = ifelse(grad_norm >= CLIP_THRESH, 
+                              g * CLIP_THRESH / grad_norm, g)
+        new_v = NESTEROV_MU * v + eta * clipped_grad
+        new_p = p - NESTEROV_MU * v + (1 + NESTEROV_MU) * new_v
+        has_non_finite = (T.any(T.isnan(new_p) + T.isinf(new_p)) +
+                          T.any(T.isnan(new_v) + T.isinf(new_v)))
+        updates.append((p, ifelse(has_non_finite, p, new_p)))
+        updates.append((v, ifelse(has_non_finite, v, new_v)))
     else:
       # Simple SGD updates
       for p, g in zip(self.params, gradients):

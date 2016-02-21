@@ -39,18 +39,10 @@ class Spec(object):
     pass
 
   def set_in_vocabulary(self, in_vocabulary):
-    # TODO: make this work
-    raise NotImplementedError
-    #self.in_vocabulary = in_vocabulary
-    #self.de_in = embedding_dim = in_vocabulary.emb_size
-    #self.nw_in = in_vocabulary.size()
+    self.in_vocabulary = in_vocabulary
 
   def set_out_vocabulary(self, out_vocabulary):
-    # TODO: make this work
-    raise NotImplementedError
-    #self.out_vocabulary = out_vocabulary
-    #self.de_out = embeddoutg_dim = out_vocabulary.emb_size
-    #self.nw_out = out_vocabulary.size()
+    self.out_vocabulary = out_vocabulary
 
   def create_vars(self):
     raise NotImplementedError

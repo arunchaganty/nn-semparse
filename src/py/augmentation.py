@@ -4,6 +4,7 @@ import random
 import sys
 
 import atisaugment
+import geoaugment
 import regexaugment
 
 class Augmenter(object):
@@ -58,6 +59,17 @@ class Augmenter(object):
   def augment(self, aug_type, num):
     raise NotImplementedError
 
+class GeoAugmenter(Augmenter):
+  """Augmentation for geoquery.
+
+  Recognized augmentatino types: ['pcfg'].
+  """
+  def augment(self, aug_type, num):
+    if aug_type == 'pcfg':
+      return geoaugment.sample_pcfg(self.dataset, num)
+    else:
+      raise ValueError('Unrecognized augmentation type "%s"' % aug_type)
+
 class RegexAugmenter(Augmenter):
   """Augmentation for regex
 
@@ -109,7 +121,9 @@ class AtisAugmenter(Augmenter):
       raise ValueError('Unrecognized augmentation type "%s"' % aug_type)
 
 def new(domain, dataset):
-  if domain == 'regex':
+  if domain == 'geoquery':
+    return GeoAugmenter(dataset)
+  elif domain == 'regex':
     return RegexAugmenter(dataset)
   elif domain == 'atis':
     return AtisAugmenter(dataset)
