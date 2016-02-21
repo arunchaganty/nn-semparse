@@ -20,6 +20,8 @@ public class Regex implements Runnable {
       return a;
     } catch (Exception e) {
       e.printStackTrace();
+    } catch (OutOfMemoryError e) {
+      e.printStackTrace();
     }
     return null;
   }
