@@ -4,6 +4,14 @@ import itertools
 import re
 import sys
 
+def strip_unk(w):
+  # Strip unk:%06d identifiers
+  m = re.match('^unk:[0-9]{6,}:(.*)$', w)
+  if m:
+    return m.group(1)
+  else:
+    return w
+
 class Lexicon:
   """A Lexicon class.
 
@@ -79,15 +87,7 @@ class Lexicon:
     ind_pairs = sorted(list(itertools.combinations(range(len(words) + 1), 2)),
                        key=lambda x: x[0] - x[1])
     ret_entries = []
-
-    # Strip unk:%04d identifiers
-    def strip_unk(w):
-      m = re.match('^unk:[0-9]{4,}:(.*)$', w)
-      if m:
-        return m.group(1)
-      else:
-        return w
-    words = [strip_unk(w) for w in words]
+    words = [strip_unk(w) for w in words]  # Strip unk:%06d stuff
 
     # Entries
     for i, j in ind_pairs:

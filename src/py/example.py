@@ -1,4 +1,6 @@
 """A single example in a dataset."""
+import lexicon
+
 class Example(object):
   """A single example in a dataset.
 
@@ -13,7 +15,7 @@ class Example(object):
 
   Treat these objects as read-only.
   """
-  def __init__(self, x_str, y_str, input_vocab, output_vocab, lexicon,
+  def __init__(self, x_str, y_str, input_vocab, output_vocab, lex,
                reverse_input=False):
     """Create an Example object.
     
@@ -37,13 +39,13 @@ class Example(object):
       self.x_inds = self.x_inds[::-1]
     self.y_inds = output_vocab.sentence_to_indices(y_str)
 
-    if lexicon:
-      entities = lexicon.map_over_sentence(self.x_str.split(' '))
+    if lex:
+      entities = lex.map_over_sentence(self.x_str.split(' '))
       self.copy_toks = [x if x else '<COPY>' for x in entities]
       if reverse_input:
         self.copy_toks = self.copy_toks[::-1]
     else:
-      self.copy_toks = self.x_toks
+      self.copy_toks = [lexicon.strip_unk(w) for w in self.x_toks]
 
     self.y_in_x_inds = ([
         [int(x_tok == y_tok) for x_tok in self.copy_toks] + [0]
