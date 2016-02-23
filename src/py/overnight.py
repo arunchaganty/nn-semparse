@@ -38,7 +38,7 @@ def process(filename):
   with open(filename) as f:
     for line in f:
       if next_is_lf:
-        y = line.strip()
+        y = split_lf(line.strip())
         data.append((x, y))
         next_is_lf = False
       elif line.startswith('  (utterance'):
