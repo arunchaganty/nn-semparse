@@ -97,7 +97,8 @@ def _parse_args():
                       help='RNG seed for the train/dev splits (default = 0)')
   parser.add_argument('--model-seed', type=int, default=0,
                       help="RNG seed for the model's initialization and SGD ordering (default = 0)")
-  parser.add_argument('--save-file', help='Path to save parameters.')
+  parser.add_argument('--no-train', action='store_true', help="Avoid training")
+  parser.add_argument('--save-file', default='out.params', help='Path to save parameters.')
   parser.add_argument('--load-file', help='Path to load parameters, will ignore other passed arguments.')
   parser.add_argument('--stats-file', help='Path to save statistics (JSON format).')
   parser.add_argument('--shell', action='store_true', 
@@ -110,6 +111,13 @@ def _parse_args():
                       help='Run Theano in fast compile mode.')
   parser.add_argument('--theano-profile', action='store_true',
                       help='Turn on profiling in Theano.')
+  parser.add_argument('--input', type=argparse.FileType('r'), 
+                        default=sys.stdin,
+                      help='File to read as input')
+  parser.add_argument('--output', type=argparse.FileType('w'), 
+                        default=sys.stdout,
+                      help='File to read as input')
+
   if len(sys.argv) == 1:
     parser.print_help()
     sys.exit(1)
@@ -132,7 +140,6 @@ def _parse_args():
     print >> sys.stderr, 'Error: output_vocab_type must be in %s' % (
         ', '.join(VOCAB_TYPES))
     sys.exit(1)
-
 
 def configure_theano():
   if OPTIONS.theano_fast_compile:
@@ -546,7 +553,8 @@ def run_shell(model):
     print ''
     print 'Result:'
     preds = decode(model, example)
-    for prob, y_toks in preds[:10]:
+    for pred in preds[:10]:
+      prob, y_toks = pred.p, pred.y_toks
       y_str = ' '.join(y_toks)
       print '  [p=%f] %s' % (prob, y_str)
     print ''
@@ -708,9 +716,10 @@ def run():
     random.seed(OPTIONS.model_seed)
     model.train(train_data, T=OPTIONS.num_epochs, eta=OPTIONS.learning_rate)
 
-  if OPTIONS.save_file:
-    print >> sys.stderr, 'Saving parameters...'
-    spec.save(OPTIONS.save_file)
+    if OPTIONS.save_file:
+      print >> sys.stderr, 'Saving parameters...'
+      spec.save(OPTIONS.save_file)
+      model.save(OPTIONS.save_model_file)
 
   if train_raw:
     evaluate_train(model, train_data)
@@ -724,9 +733,37 @@ def run():
   elif OPTIONS.server:
     run_server(model, hostname=OPTIONS.hostname, port=OPTIONS.port)
 
+def run_eval():
+  import csv
+  assert OPTIONS.load_file is not None
+  assert OPTIONS.input is not None
+  train_raw = load_dataset(OPTIONS.train_data)
+  random.seed(OPTIONS.model_seed)
+  numpy.random.seed(OPTIONS.model_seed)
+  spec = init_spec(train_raw)
+  model = get_model(spec)
+
+  reader = csv.reader(OPTIONS.input, delimiter='\t')
+  writer = csv.writer(OPTIONS.output, delimiter='\t')
+  header = next(reader)
+  #assert header == ['id', 'input']
+  writer.writerow(['id','input', 'output', 'score'])
+  for id, input in reader:
+      s = input.strip()
+      example = Example(s, '', model.in_vocabulary, model.out_vocabulary,
+                          model.lexicon, reverse_input=OPTIONS.reverse_input)
+
+      deriv = decode(model, example)[0]
+      output = " ".join(deriv.y_toks).strip()
+      score = deriv.p
+      writer.writerow([id, input, output, score])
+
 def main():
   _parse_args()
-  run()
+  if OPTIONS.no_train:
+      run_eval()
+  else:
+      run()
 
 if __name__ == '__main__':
   main()
